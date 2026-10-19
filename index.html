@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Optilogist | Distribution &amp; Fleet Management</title>
+  <meta name="description" content="Optilogist connects requisitions, transport planning, own and vendor fleets, gate and weighbridge, and quality control in one system.">
+  <link rel="icon" href="favicon.ico?v=2" sizes="32x32">
+  <link rel="icon" href="static/img/brand/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="static/img/brand/apple-touch-icon.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/base.css">
+  <link rel="stylesheet" href="static/css/landing.css">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <a href="#faq" data-i18n="top.help">Help Center</a>
+      <a href="#contact" data-i18n="top.contact">Contact Us</a>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="brand" href="#">
+        <img class="brand__mark" src="static/img/brand/mark-light.svg" alt="" width="32" height="32">
+        Optilogist
+      </a>
+      <button class="nav__toggle" aria-expanded="false" aria-controls="nav-menu" data-i18n="nav.menu">Menu</button>
+      <nav id="nav-menu" class="nav__menu" aria-label="Main">
+        <div class="nav__links">
+          <a href="#platform" data-i18n="nav.platform">Platform</a>
+          <div class="nav__dd">
+            <button type="button" class="link nav__ddbtn" aria-expanded="false" aria-controls="mega-features"><span data-i18n="nav.features">Features</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="mega" id="mega-features" hidden>
+              <div class="mega__card">
+                <div class="mega__body">
+                  <div>
+                    <div class="mega__head"><span class="mega__label" data-i18n="mega.features">Features</span><a class="mega__all" href="#platform"><span data-i18n="mega.all">View all</span> <span class="arrow">&rarr;</span></a></div>
+                    <ul class="mega__grid">
+                <li><a href="features/requisitions.html"><b data-i18n="ft.req">Requisitions</b><span data-i18n="ft.req.d">Raise finished-goods and port shipment requests</span></a></li>
+                <li><a href="features/transport-requests.html"><b data-i18n="ft.tr">Transport Requests</b><span data-i18n="ft.tr.d">Split demand by source and get it approved</span></a></li>
+                <li><a href="#platform"><b data-i18n="ft.to">Transport Orders</b><span data-i18n="ft.to.d">Plan each load on your own fleet or a vendor's</span></a></li>
+                <li><a href="#fleet"><b data-i18n="ft.fleet">Fleet &amp; Drivers</b><span data-i18n="ft.fleet.d">Vehicle status, checklists, attendance and leave</span></a></li>
+                <li><a href="#fleet"><b data-i18n="ft.vendor">Vendor Bidding</b><span data-i18n="ft.vendor.d">Assign contract vendors or run timed bids</span></a></li>
+                <li><a href="#yard"><b data-i18n="ft.gate">Gate &amp; Weighbridge</b><span data-i18n="ft.gate.d">Gate-in, scale-in, queue tokens and gate-out</span></a></li>
+                <li><a href="#yard"><b data-i18n="ft.cc">Command Center &amp; Loading</b><span data-i18n="ft.cc.d">Assign bays and record load and unload times</span></a></li>
+                <li><a href="#yard"><b data-i18n="ft.qc">Quality Control</b><span data-i18n="ft.qc.d">Sample, decide and resample before unloading</span></a></li>
+                <li><a href="#track"><b data-i18n="ft.gps">Live GPS &amp; Geofencing</b><span data-i18n="ft.gps.d">Live map, site arrivals and dwell time</span></a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div class="mega__head"><span class="mega__label" data-i18n="mega.explore">Explore</span></div>
+                    <ul class="mega__links">
+                <li><a href="#platform"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M7.5 6H15a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h7.5"/></svg><span data-i18n="foot.l1">How it works</span></a></li>
+                <li><a href="#roles"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5a6.5 6.5 0 0 1 3.5 5.5"/></svg><span data-i18n="roles.eyebrow">Built for every team</span></a></li>
+                <li><a href="#vendors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18h2"/></svg><span data-i18n="apps.2t">Vendor app</span></a></li>
+                <li><a href="demo/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5l5.5 3.5-5.5 3.5z"/></svg><span data-i18n="cta.demo">Live Demo</span></a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="mega__foot"><a href="#faq" data-i18n="top.help">Help Center</a><span>|</span><a href="#contact" data-i18n="top.contact">Contact Us</a><span>|</span><a href="#plans" data-i18n="nav.plans">Plans</a></div>
+              </div>
+            </div>
+          </div>
+          <a href="#roles" data-i18n="nav.solutions">Solutions</a>
+          <a href="#vendors" data-i18n="nav.vendors">For Vendors</a>
+          <a href="#plans" data-i18n="nav.plans">Plans</a>
+        </div>
+        <div class="nav__actions">
+          <div class="lang" role="group" aria-label="Language">
+            <button type="button" data-lang="en" aria-pressed="true">EN</button>
+            <button type="button" data-lang="bn" aria-pressed="false">বাংলা</button>
+          </div>
+          <button type="button" class="link js-login" data-i18n="nav.login">Log in</button>
+          <a class="btn btn--primary btn--sm" href="demo/index.html" data-i18n="cta.demo">Live Demo</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- 1. HERO -->
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow" data-i18n="hero.eyebrow">Distribution &amp; Fleet Management</p>
+        <h1 class="hero__title" data-i18n="hero.title">Every load, from request to delivery, in one system.</h1>
+        <p class="hero__lead" data-i18n="hero.lead">Optilogist connects requisitions, transport planning, own and vendor fleets, gate and weighbridge, and quality control, so every team works from the same live record instead of Excel, WhatsApp and paper challans.</p>
+        <div class="actions">
+          <a class="btn btn--primary" href="demo/index.html"><span data-i18n="cta.demo">Live Demo</span> <span class="arrow">&rarr;</span></a>
+          <button type="button" class="btn btn--ghost js-login" data-i18n="cta.login">Log in to your workspace</button>
+        </div>
+        <p class="hero__vendor"><a class="btn-text" href="#vendors"><span data-i18n="hero.vendor">Are you a transport vendor? Join the network</span> <span class="arrow">&rarr;</span></a></p>
+        <div class="chips">
+          <span data-i18n="chip.1">Own + vendor fleet</span>
+          <span data-i18n="chip.2">Gate, weighbridge &amp; QC</span>
+          <span data-i18n="chip.3">Live GPS &amp; geofencing</span>
+          <span data-i18n="chip.4">Role-based access</span>
+          <span data-i18n="chip.5">Full audit trail</span>
+          <span data-i18n="chip.6">Built for Bangladesh operations</span>
+        </div>
+
+        <!-- Product preview: replace with real screenshots later -->
+        <div class="showcase" aria-label="Example transport order in Optilogist">
+          <div class="to">
+            <div class="to__head">
+              <div>
+                <div class="to__id">TO-FG-20261007-0142</div>
+                <div class="to__route" data-i18n="demo.route">Gazipur Feed Mill → Bogura Depot</div>
+              </div>
+              <span class="tag tag--info" data-i18n="demo.lane">FG outbound</span>
+            </div>
+            <ol class="steps-line">
+              <li class="done"><span class="dot"></span><span data-i18n="st.assigned">Assigned</span><small>08:10</small></li>
+              <li class="done"><span class="dot"></span><span data-i18n="st.toSource">Driving towards source</span><small>08:35</small></li>
+              <li class="done"><span class="dot"></span><span data-i18n="st.atSource">At source · loading completed</span><small>10:52</small></li>
+              <li class="now"><span class="dot"></span><span data-i18n="st.toDest">Driving towards destination</span><small data-i18n="demo.eta">ETA 16:40</small></li>
+              <li class="todo"><span class="dot"></span><span data-i18n="st.atDest">At destination · unloading</span><small></small></li>
+              <li class="todo"><span class="dot"></span><span data-i18n="st.closed">Closed</span><small></small></li>
+            </ol>
+            <div class="facts">
+              <div class="fact"><small data-i18n="f.vehicle">Vehicle</small><b>DM-TA 14-8821</b></div>
+              <div class="fact"><small data-i18n="f.driver">Driver</small><b data-i18n="demo.driver">Karim</b></div>
+              <div class="fact"><small data-i18n="f.load">Load</small><b>12.5 MT</b></div>
+              <div class="fact"><small data-i18n="f.fleet">Fleet</small><b data-i18n="demo.own">Own fleet</b></div>
+            </div>
+          </div>
+          <div class="mapbox" aria-hidden="true">
+            <svg viewBox="0 0 400 340" preserveAspectRatio="xMidYMid slice">
+              <path d="M0 80 C120 60 200 120 400 90" stroke="#E5E7EB" stroke-width="14" fill="none"/>
+              <path d="M40 340 C90 220 160 200 210 150 S330 60 380 0" stroke="#E5E7EB" stroke-width="10" fill="none"/>
+              <path d="M0 250 C140 270 260 230 400 260" stroke="#EEF0F3" stroke-width="8" fill="none"/>
+              <circle cx="300" cy="80" r="34" fill="rgba(91,101,220,.12)" stroke="#5B65DC" stroke-dasharray="4 4"/>
+              <circle cx="300" cy="80" r="5" fill="#5B65DC"/>
+              <circle cx="90" cy="270" r="34" fill="rgba(91,101,220,.12)" stroke="#5B65DC" stroke-dasharray="4 4"/>
+              <circle cx="90" cy="270" r="5" fill="#5B65DC"/>
+              <path d="M90 270 C130 220 170 200 210 160 S270 100 300 80" stroke="#5B65DC" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <path d="M90 270 C130 220 170 200 200 170" stroke="#5B65DC" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="1 0"/>
+              <circle cx="200" cy="170" r="11" fill="#fff" stroke="#5B65DC" stroke-width="3"/>
+              <circle cx="200" cy="170" r="4" fill="#5B65DC"/>
+            </svg>
+            <span class="map-label" style="left:58%;top:13%" data-i18n="demo.dest">Bogura Depot</span>
+            <span class="map-label" style="left:10%;top:66%" data-i18n="demo.src">Gazipur Feed Mill</span>
+            <div class="map-card"><b data-i18n="demo.live">Live · 54 km/h</b><span class="muted" data-i18n="demo.left">Left source geofence 10:58</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. REPLACE THE PATCHWORK -->
+    <section class="section section--gray">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="swap.eyebrow">Why Optilogist</p>
+          <h2 data-i18n="swap.title">Replace the patchwork</h2>
+          <p data-i18n="swap.lead">Transport, distribution, yard and QC teams usually run on separate tools and phone calls. Optilogist gives every load one record that everyone can see.</p>
+        </div>
+        <div class="swap">
+          <div class="swap__col">
+            <h3 data-i18n="swap.before">Today</h3>
+            <ul>
+              <li data-i18n="swap.b1">Requisitions and approvals in Excel sheets and email</li>
+              <li data-i18n="swap.b2">Vendors and drivers coordinated over WhatsApp</li>
+              <li data-i18n="swap.b3">Paper challans, gate registers and weighbridge slips</li>
+              <li data-i18n="swap.b4">Phone calls to find out where a truck is</li>
+              <li data-i18n="swap.b5">Quality disputes with no evidence trail</li>
+            </ul>
+          </div>
+          <div class="swap__arrow" aria-hidden="true">&rarr;</div>
+          <div class="swap__col swap__col--good">
+            <h3 data-i18n="swap.after">With Optilogist</h3>
+            <ul>
+              <li data-i18n="swap.a1">Requisitions, approvals and transport orders in one workflow</li>
+              <li data-i18n="swap.a2">Own fleet and vendors assigned or bid from the same screen</li>
+              <li data-i18n="swap.a3">Every gate, weight and bay entry timestamped against the order</li>
+              <li data-i18n="swap.a4">Live GPS with automatic arrival and departure at each site</li>
+              <li data-i18n="swap.a5">QC samples, photos and decisions recorded before unloading</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. FACTS -->
+    <section class="section">
+      <div class="container">
+        <h2 class="center" style="font-size:clamp(1.8rem,3.5vw,2.4rem);margin-bottom:3rem" data-i18n="stats.title">One record for every load, across every team.</h2>
+        <div class="stats">
+          <div><p class="stat">1</p><p data-i18n="stats.1">live record per load, from requisition to gate-out</p></div>
+          <div><p class="stat">8</p><p data-i18n="stats.2">yard checkpoints, from gate-in to gate-out</p></div>
+          <div><p class="stat">20+</p><p data-i18n="stats.3">operational roles, each seeing only their own work</p></div>
+          <div><p class="stat">2</p><p data-i18n="stats.4">fleet models, own and vendor, in one plan</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. THE FLOW -->
+    <section id="platform" class="section section--gray">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="flow.eyebrow">How it works</p>
+          <h2 data-i18n="flow.title">Follow a load through Optilogist</h2>
+          <p data-i18n="flow.lead">Each step is done by the right team, and the system checks the rules before the load moves on.</p>
+        </div>
+
+        <div class="flow__tabs" role="tablist" aria-label="Workflow steps">
+          <button class="flow__tab" role="tab" id="ft-1" aria-controls="fp-1" aria-selected="true"><span class="flow__num">1</span><span data-i18n="flow.t1">Requisition</span></button>
+          <button class="flow__tab" role="tab" id="ft-2" aria-controls="fp-2" aria-selected="false" tabindex="-1"><span class="flow__num">2</span><span data-i18n="flow.t2">Transport request</span></button>
+          <button class="flow__tab" role="tab" id="ft-3" aria-controls="fp-3" aria-selected="false" tabindex="-1"><span class="flow__num">3</span><span data-i18n="flow.t3">Transport order</span></button>
+          <button class="flow__tab" role="tab" id="ft-4" aria-controls="fp-4" aria-selected="false" tabindex="-1"><span class="flow__num">4</span><span data-i18n="flow.t4">Assign &amp; dispatch</span></button>
+          <button class="flow__tab" role="tab" id="ft-5" aria-controls="fp-5" aria-selected="false" tabindex="-1"><span class="flow__num">5</span><span data-i18n="flow.t5">Gate &amp; weighbridge</span></button>
+          <button class="flow__tab" role="tab" id="ft-6" aria-controls="fp-6" aria-selected="false" tabindex="-1"><span class="flow__num">6</span><span data-i18n="flow.t6">Bay &amp; loading</span></button>
+          <button class="flow__tab" role="tab" id="ft-7" aria-controls="fp-7" aria-selected="false" tabindex="-1"><span class="flow__num">7</span><span data-i18n="flow.t7">Quality control</span></button>
+          <button class="flow__tab" role="tab" id="ft-8" aria-controls="fp-8" aria-selected="false" tabindex="-1"><span class="flow__num">8</span><span data-i18n="flow.t8">Close</span></button>
+        </div>
+
+        <div class="flow__panel" role="tabpanel" id="fp-1" aria-labelledby="ft-1">
+          <div>
+            <div class="who"><span data-i18n="r.depot">Depot Officer</span><span data-i18n="r.feedmill">Feed Mill Officer</span><span data-i18n="r.commercial">Commercial Officer</span></div>
+            <h3 data-i18n="flow.p1.h">Raise the demand</h3>
+            <ul class="checks">
+              <li data-i18n="flow.p1.1">Depots and feed mills raise finished-goods requisitions with several product lines</li>
+              <li data-i18n="flow.p1.2">Commercial registers port shipments with BL, LC, vessel, container and C&amp;F agent</li>
+              <li data-i18n="flow.p1.3">Total weight is calculated from the product master automatically</li>
+              <li data-i18n="flow.p1.4">The site's capacity snapshot is shown before you submit</li>
+            </ul>
+          </div>
+          <div class="media">
+            <div class="mini">
+              <div class="mini__title"><span class="mono">PR-FG-20261007-0031</span><span class="tag tag--ok" data-i18n="s.submitted">Submitted</span></div>
+              <div class="mini__row"><span data-i18n="m.broiler">Broiler Starter Feed</span><b>400 bags</b></div>
+              <div class="mini__row"><span data-i18n="m.layer">Layer Grower Feed</span><b>250 bags</b></div>
+              <div class="mini__row"><span data-i18n="m.total">Total weight</span><b>32.5 MT</b></div>
+              <div class="mini__row"><span data-i18n="m.urgency">Urgency</span><span class="tag tag--warn" data-i18n="m.high">High</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow__panel" role="tabpanel" id="fp-2" aria-labelledby="ft-2" hidden>
+          <div>
+            <div class="who"><span data-i18n="r.do">Distribution Officer</span><span data-i18n="r.dm">Distribution Manager</span><span data-i18n="r.po">Procurement Officer</span></div>
+            <h3 data-i18n="flow.p2.h">Plan where it comes from</h3>
+            <ul class="checks">
+              <li data-i18n="flow.p2.1">Split one requisition into several transport requests, each from a different source site</li>
+              <li data-i18n="flow.p2.2">The system blocks allocations above the requested quantity</li>
+              <li data-i18n="flow.p2.3">Distribution Manager approves, approves with changes, or rejects with a reason</li>
+              <li data-i18n="flow.p2.4">Port shipments get a destination breakdown plan from Procurement</li>
+            </ul>
+          </div>
+          <div class="media">
+            <div class="mini">
+              <div class="mini__title"><span data-i18n="m.alloc">Allocation</span><span class="mono">32.5 MT</span></div>
+              <div class="mini__row"><span>TR-FG-…-0118 · Gazipur</span><b>20 MT</b></div>
+              <div class="mini__row"><span>TR-FG-…-0119 · Mymensingh</span><b>12.5 MT</b></div>
+              <div class="mini__row"><span data-i18n="m.remaining">Remaining</span><b>0 MT</b></div>
+              <div style="margin-top:.6rem"><small class="muted" data-i18n="m.destcap">Destination capacity after transfer</small><div class="bar"><i class="warn" style="width:84%"></i></div><small class="muted" data-i18n="m.warn84">84% · above 80% warning</small></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow__panel" role="tabpanel" id="fp-3" aria-labelledby="ft-3" hidden>
+          <div>
+            <div class="who"><span data-i18n="r.tp">Transport Planner</span></div>
+            <h3 data-i18n="flow.p3.h">Turn it into transport orders</h3>
+            <ul class="checks">
+              <li data-i18n="flow.p3.1">Set the number and type of vehicles, and C&amp;F clearance for port loads</li>
+              <li data-i18n="flow.p3.2">Split the quantity across several transport orders</li>
+              <li data-i18n="flow.p3.3">Choose own fleet or vendor fleet for each order, with available counts shown</li>
+              <li data-i18n="flow.p3.4">Set planned arrival and departure windows at source and destination</li>
+            </ul>
+          </div>
+          <div class="media">
+            <div class="mini">
+              <div class="mini__title"><span data-i18n="m.fleetav">Fleet availability</span><span class="muted" data-i18n="m.covered">Covered Truck</span></div>
+              <div class="mini__row"><span data-i18n="m.ownfree">Own fleet available</span><b>6</b></div>
+              <div class="mini__row"><span data-i18n="m.vendfree">Contractual vendors</span><b>3</b></div>
+              <div class="mini__row"><span>TO-0142 · 12.5 MT</span><span class="tag tag--ok" data-i18n="demo.own">Own fleet</span></div>
+              <div class="mini__row"><span>TO-0143 · 20 MT</span><span class="tag tag--info" data-i18n="m.vendor">Vendor fleet</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow__panel" role="tabpanel" id="fp-4" aria-labelledby="ft-4" hidden>
+          <div>
+            <div class="who"><span data-i18n="r.tp">Transport Planner</span><span data-i18n="r.tdo">Transport Distribution Officer</span><span data-i18n="r.ds">Driver Supervisor</span><span data-i18n="r.vendor">Vendor</span></div>
+            <h3 data-i18n="flow.p4.h">Put a truck and driver on it</h3>
+            <ul class="checks">
+              <li data-i18n="flow.p4.1">Own fleet: assign vehicle, driver and helpers; drivers on leave or vehicles under maintenance can't be picked</li>
+              <li data-i18n="flow.p4.2">Contractual vendors are assigned directly at the agreed rate</li>
+              <li data-i18n="flow.p4.3">Non-contractual vendors bid within a set window; award one or more winners</li>
+              <li data-i18n="flow.p4.4">Driver Supervisor runs a 7-section vehicle checklist before dispatch</li>
+            </ul>
+          </div>
+          <div class="media">
+            <div class="mini">
+              <div class="mini__title"><span data-i18n="m.checklist">Pre-dispatch checklist</span><span class="mono">DM-TA 14-8821</span></div>
+              <div class="mini__row"><span data-i18n="m.engine">Engine</span><span class="tag tag--ok">OK</span></div>
+              <div class="mini__row"><span data-i18n="m.brakes">Chassis</span><span class="tag tag--ok">OK</span></div>
+              <div class="mini__row"><span data-i18n="m.electric">Electric</span><span class="tag tag--alert" data-i18n="m.issue">Issue</span></div>
+              <div class="mini__row"><span data-i18n="m.result">Result</span><span class="tag tag--warn" data-i18n="m.maint">Sent to maintenance</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow__panel" role="tabpanel" id="fp-5" aria-labelledby="ft-5" hidden>
+          <div>
+            <div class="who"><span data-i18n="r.gate">Gateman</span><span data-i18n="r.scale">Scaling Operator</span></div>
+            <h3 data-i18n="flow.p5.h">Check in at the yard</h3>
+            <ul class="checks">
+              <li data-i18n="flow.p5.1">Gate-in against the transport order; vehicle, driver and products load automatically</li>
+              <li data-i18n="flow.p5.2">Dealer or supplier trucks without an order get one created on the spot from their DO or PO</li>
+              <li data-i18n="flow.p5.3">Scale-in weight entry and a printable queue token</li>
+              <li data-i18n="flow.p5.4">The vehicle joins the Command Center queue in the same step</li>
+            </ul>
+          </div>
+          <div class="media">
+            <div class="mini">
+              <div class="mini__title"><span data-i18n="m.token">Queue token</span><span class="mono">PC-0457</span></div>
+              <div class="mini__row"><span data-i18n="f.vehicle">Vehicle</span><b>DM-TA 14-8821</b></div>
+              <div class="mini__row"><span data-i18n="m.gatein">Gate-in</span><b>10:02</b></div>
+              <div class="mini__row"><span data-i18n="m.scalein">Scale-in</span><b>7.4 MT (7,400 kg)</b></div>
+              <div class="mini__row"><span data-i18n="m.serial">Queue serial</span><b>#12</b></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow__panel" role="tabpanel" id="fp-6" aria-labelledby="ft-6" hidden>
+          <div>
+            <div class="who"><span data-i18n="r.cc">Command Center Officer</span><span data-i18n="r.load">Loading / Unloading Personnel</span></div>
+            <h3 data-i18n="flow.p6.h">Assign a bay and load</h3>
+            <ul class="checks">
+              <li data-i18n="flow.p6.1">Command Center sees every scaled-in vehicle waiting at the site</li>
+              <li data-i18n="flow.p6.2">Source stock is checked before a loading bay is assigned</li>
+              <li data-i18n="flow.p6.3">Loading crews record start, end, quantity and seal number</li>
+              <li data-i18n="flow.p6.4">Loaded weight is calculated per product line as they enter it</li>
+            </ul>
+          </div>
+          <div class="media">
+            <div class="mini">
+              <div class="mini__title"><span data-i18n="m.queue">Waiting queue</span><span class="muted">Gazipur</span></div>
+              <div class="mini__row"><span>#12 · DM-TA 14-8821</span><span class="tag tag--ok" data-i18n="m.bay3">Bay 3</span></div>
+              <div class="mini__row"><span>#13 · CTG-DA 11-2093</span><span class="tag tag--warn" data-i18n="m.qcpend">QC pending</span></div>
+              <div class="mini__row"><span>#14 · DM-SHA 07-5510</span><span class="tag tag--info" data-i18n="m.waiting">Waiting</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow__panel" role="tabpanel" id="fp-7" aria-labelledby="ft-7" hidden>
+          <div>
+            <div class="who"><span data-i18n="r.qc">QC Inspector</span><span data-i18n="r.lab">QA Lab Technician</span></div>
+            <h3 data-i18n="flow.p7.h">Check quality before unloading</h3>
+            <ul class="checks">
+              <li data-i18n="flow.p7.1">Raw-material trucks are flagged for QC after scale-in</li>
+              <li data-i18n="flow.p7.2">Inspectors record samples from top, middle and bottom, with photos</li>
+              <li data-i18n="flow.p7.3">Pass, Fail or Auto-pass; a fail blocks unloading, scale-out and gate-out</li>
+              <li data-i18n="flow.p7.4">Re-sample or override to fail while unloading is in progress</li>
+            </ul>
+          </div>
+          <div class="media">
+            <div class="mini">
+              <div class="mini__title"><span data-i18n="m.sample">QC sample · Maize</span><span class="mono">TO-RM-…-0088</span></div>
+              <div class="mini__row"><span data-i18n="m.top">Top</span><b>13.1% moisture</b></div>
+              <div class="mini__row"><span data-i18n="m.mid">Middle</span><b>13.4% moisture</b></div>
+              <div class="mini__row"><span data-i18n="m.bottom">Bottom</span><b>13.6% moisture</b></div>
+              <div class="mini__row"><span data-i18n="m.decision">Decision</span><span class="tag tag--ok" data-i18n="m.pass">QC Pass</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow__panel" role="tabpanel" id="fp-8" aria-labelledby="ft-8" hidden>
+          <div>
+            <div class="who"><span data-i18n="r.scale">Scaling Operator</span><span data-i18n="r.gate">Gateman</span><span data-i18n="r.tp">Transport Planner</span></div>
+            <h3 data-i18n="flow.p8.h">Close it with the right checks</h3>
+            <ul class="checks">
+              <li data-i18n="flow.p8.1">Scale-out calculates net weight and prints a gate pass</li>
+              <li data-i18n="flow.p8.2">Gate-out is allowed only when loading or unloading, scale-out and QC are done</li>
+              <li data-i18n="flow.p8.3">Source stock is reduced at scale-out; destination stock rises only after QC Pass</li>
+              <li data-i18n="flow.p8.4">Planners see which orders are blocked from closing, and why</li>
+            </ul>
+          </div>
+          <div class="media">
+            <div class="mini">
+              <div class="mini__title"><span data-i18n="m.closure">Closure checklist</span><span class="tag tag--info" data-i18n="m.rmin">RM inbound</span></div>
+              <div class="mini__row"><span data-i18n="m.unloaded">Unloading completed</span><span class="tag tag--ok">✓</span></div>
+              <div class="mini__row"><span data-i18n="m.qcpass">QC passed</span><span class="tag tag--ok">✓</span></div>
+              <div class="mini__row"><span data-i18n="m.scaleout">Scale-out</span><span class="tag tag--ok">✓</span></div>
+              <div class="mini__row"><span data-i18n="m.gateout">Gate-out</span><span class="tag tag--warn" data-i18n="m.pending">Pending</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5a. PILLAR: PLAN -->
+    <section id="plan" class="pillar">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="p1.eyebrow">Requisition &amp; planning</p>
+          <h2 data-i18n="p1.title">Plan with real stock and capacity</h2>
+          <p data-i18n="p1.lead">Every site (depot, feed mill, warehouse, factory or port) shows its stock and free space, so nobody approves a transfer the destination can't hold.</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="media">
+              <div class="mini">
+                <div class="mini__title"><span data-i18n="demo.dest">Bogura Depot</span><span class="tag tag--warn" data-i18n="m.at84">84% projected</span></div>
+                <div class="mini__row"><span data-i18n="m.totalcap">Total capacity</span><b>500 MT</b></div>
+                <div class="mini__row"><span data-i18n="m.current">Current stock</span><b>360 MT</b></div>
+                <div class="mini__row"><span data-i18n="m.reserved">Reserved</span><b>40 MT</b></div>
+                <div class="mini__row"><span data-i18n="m.transit">In transit</span><b>60 MT</b></div>
+              </div>
+            </div>
+            <a class="btn btn--sm btn--float" href="#plans"><span data-i18n="cta.explore">Explore</span> <span class="arrow">&rarr;</span></a>
+            <p data-i18n="p1.c1"><b>Site stock &amp; capacity.</b> Current, reserved and in-transit stock, with warnings at 80% and 90%.</p>
+          </article>
+          <article class="card">
+            <div class="media">
+              <div class="mini">
+                <div class="mini__title"><span data-i18n="m.port">Port shipment</span><span class="mono">PS-PORT-…-0007</span></div>
+                <div class="mini__row"><span>BL / LC</span><b>BL-55821 / LC-0921</b></div>
+                <div class="mini__row"><span data-i18n="m.vessel">Vessel</span><b>MV Karnaphuli</b></div>
+                <div class="mini__row"><span data-i18n="m.eta2">ETA at port</span><b>12 Oct</b></div>
+                <div class="mini__row"><span data-i18n="m.split">Destination split</span><b data-i18n="m.split3">3 sites</b></div>
+              </div>
+            </div>
+            <a class="btn btn--sm btn--float" href="#plans"><span data-i18n="cta.explore">Explore</span> <span class="arrow">&rarr;</span></a>
+            <p data-i18n="p1.c2"><b>Port &amp; import shipments.</b> Register LC shipments and split raw material across destination sites.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5b. PILLAR: FLEET -->
+    <section id="fleet" class="pillar">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="p2.eyebrow">Own &amp; vendor fleet</p>
+          <h2 data-i18n="p2.title">Use your trucks first, then the market</h2>
+          <p data-i18n="p2.lead">Decide per transport order whether it runs on your own fleet or a vendor's. Vendors on contract are assigned directly; others compete in a timed bid.</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="media">
+              <div class="mini">
+                <div class="mini__title"><span data-i18n="m.ownfleet">Own fleet</span><span class="muted" data-i18n="m.today">Today</span></div>
+                <div class="mini__row"><span>DM-TA 14-8821</span><span class="tag tag--info" data-i18n="m.intransit">In transit</span></div>
+                <div class="mini__row"><span>DM-GA 11-2345</span><span class="tag tag--ok" data-i18n="m.noto">No active TO</span></div>
+                <div class="mini__row"><span>DM-HA 03-4470</span><span class="tag tag--info" data-i18n="m.scheduled">Scheduled</span></div>
+                <div class="mini__row"><span>DM-GA 27-0912</span><span class="tag tag--alert" data-i18n="m.undermaint">Under maintenance</span></div>
+              </div>
+            </div>
+            <a class="btn btn--sm btn--float" href="#plans"><span data-i18n="cta.explore">Explore</span> <span class="arrow">&rarr;</span></a>
+            <p data-i18n="p2.c1"><b>Own fleet planning.</b> Vehicle status, capacity fit and driver availability checked before you assign.</p>
+          </article>
+          <article class="card">
+            <div class="media">
+              <div class="mini">
+                <div class="mini__title"><span data-i18n="m.bids">Bids · TO-0143</span><span class="tag tag--warn" data-i18n="m.closes">Closes in 3h</span></div>
+                <div class="mini__row"><span>Vendor A · 2 trucks</span><b>Tk 18,500</b></div>
+                <div class="mini__row"><span>Vendor B · 1 truck</span><b>Tk 19,200</b></div>
+                <div class="mini__row"><span>Vendor C · 3 trucks</span><b>Tk 20,000</b></div>
+                <div class="mini__row"><span data-i18n="m.lowest">Lowest bid</span><span class="tag tag--ok">Tk 18,500</span></div>
+              </div>
+            </div>
+            <a class="btn btn--sm btn--float" href="#vendors"><span data-i18n="cta.explore">Explore</span> <span class="arrow">&rarr;</span></a>
+            <p data-i18n="p2.c2"><b>Vendor bidding.</b> Compare rates and vehicle counts side by side, then award one or more vendors.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5c. PILLAR: YARD + QC -->
+    <section id="yard" class="pillar">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="p3.eyebrow">Yard operations &amp; QC</p>
+          <h2 data-i18n="p3.title">Run the yard without paper</h2>
+          <p data-i18n="p3.lead">Gate, weighbridge, Command Center, loading crews and QC inspectors all work on the same order. Nothing leaves the yard until the checks are done.</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="media">
+              <div class="mini">
+                <div class="mini__title"><span data-i18n="m.timeline">Yard timeline</span><span class="mono">TO-0142</span></div>
+                <div class="mini__row"><span data-i18n="m.gatein">Gate-in</span><b>10:02</b></div>
+                <div class="mini__row"><span data-i18n="m.scalein">Scale-in</span><b>10:09</b></div>
+                <div class="mini__row"><span data-i18n="m.loading">Loading (Bay 3)</span><b>10:15 – 10:44</b></div>
+                <div class="mini__row"><span data-i18n="m.scaleout">Scale-out</span><b>10:49</b></div>
+              </div>
+            </div>
+            <a class="btn btn--sm btn--float" href="#plans"><span data-i18n="cta.explore">Explore</span> <span class="arrow">&rarr;</span></a>
+            <p data-i18n="p3.c1"><b>Gate to gate.</b> Every checkpoint is timestamped, so turnaround and bottlenecks are visible.</p>
+          </article>
+          <article class="card">
+            <div class="media">
+              <div class="mini">
+                <div class="mini__title"><span data-i18n="m.qcq">QC queue</span><span class="muted" data-i18n="m.rm">Raw material</span></div>
+                <div class="mini__row"><span>Maize · CTG-DA 11-2093</span><span class="tag tag--warn" data-i18n="m.sampling">Sampling</span></div>
+                <div class="mini__row"><span>Soybean meal · DM-SHA 07-5510</span><span class="tag tag--ok" data-i18n="m.pass">QC Pass</span></div>
+                <div class="mini__row"><span>Rice polish · DM-NA 19-4021</span><span class="tag tag--alert" data-i18n="m.fail">QC Fail</span></div>
+              </div>
+            </div>
+            <a class="btn btn--sm btn--float" href="#plans"><span data-i18n="cta.explore">Explore</span> <span class="arrow">&rarr;</span></a>
+            <p data-i18n="p3.c2"><b>Quality control.</b> Samples, photos and decisions are recorded against the truck, with evidence for any dispute.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5d. PILLAR: TRACK -->
+    <section id="track" class="pillar" style="padding-bottom:5.5rem">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="p4.eyebrow">Live GPS &amp; geofencing</p>
+          <h2 data-i18n="p4.title">Know where every truck is, without a phone call</h2>
+          <p data-i18n="p4.lead">Connect your GPS provider and see your fleet on one map. Arrival and departure at each site are logged automatically.</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="media">
+              <div class="mini">
+                <div class="mini__title"><span data-i18n="m.livemap">Live map</span><span class="muted" data-i18n="m.refresh">Updated 30s ago</span></div>
+                <div class="mini__row"><span>DM-TA 14-8821</span><span class="tag tag--ok">54 km/h</span></div>
+                <div class="mini__row"><span>DM-HA 03-4470</span><span class="tag tag--info" data-i18n="m.stopped">Stopped</span></div>
+                <div class="mini__row"><span>DM-GA 11-2345</span><span class="tag tag--alert" data-i18n="m.lost">Signal lost · last known</span></div>
+              </div>
+            </div>
+            <a class="btn btn--sm btn--float" href="#plans"><span data-i18n="cta.explore">Explore</span> <span class="arrow">&rarr;</span></a>
+            <p data-i18n="p4.c1"><b>Live GPS.</b> Speed, trail, follow mode and an honest "last known" position when the signal drops.</p>
+          </article>
+          <article class="card">
+            <div class="media">
+              <div class="mini">
+                <div class="mini__title"><span data-i18n="m.dwell">Dwell time · Source</span><span class="mono">TO-0142</span></div>
+                <div class="mini__row"><span data-i18n="m.planned">Planned</span><b>45 min</b></div>
+                <div class="mini__row"><span data-i18n="m.gatetime">Gate (gate-in to gate-out)</span><b>52 min</b></div>
+                <div class="mini__row"><span data-i18n="m.geo">Geofence (GPS)</span><b>58 min</b></div>
+                <div class="mini__row"><span data-i18n="m.over">Over plan</span><span class="tag tag--warn">+13 min</span></div>
+              </div>
+            </div>
+            <a class="btn btn--sm btn--float" href="#plans"><span data-i18n="cta.explore">Explore</span> <span class="arrow">&rarr;</span></a>
+            <p data-i18n="p4.c2"><b>Geofences &amp; dwell time.</b> Compare planned, gate and GPS time at each site to find delays.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. ROLES -->
+    <section id="roles" class="section section--gray">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="roles.eyebrow">Built for every team</p>
+          <h2 data-i18n="roles.title">Each person sees their own work</h2>
+          <p data-i18n="roles.lead">Optilogist ships with ready-made roles. Menus, queues and actions follow the role, and local roles only see their own site.</p>
+        </div>
+        <div class="roles__tabs" role="tablist" aria-label="Teams">
+          <button class="roles__tab" role="tab" id="rt-1" aria-controls="rp-1" aria-selected="true" data-i18n="roles.t1">Requesters</button>
+          <button class="roles__tab" role="tab" id="rt-2" aria-controls="rp-2" aria-selected="false" tabindex="-1" data-i18n="roles.t2">Distribution &amp; Procurement</button>
+          <button class="roles__tab" role="tab" id="rt-3" aria-controls="rp-3" aria-selected="false" tabindex="-1" data-i18n="roles.t3">Transport</button>
+          <button class="roles__tab" role="tab" id="rt-4" aria-controls="rp-4" aria-selected="false" tabindex="-1" data-i18n="roles.t4">Yard &amp; QC</button>
+          <button class="roles__tab" role="tab" id="rt-5" aria-controls="rp-5" aria-selected="false" tabindex="-1" data-i18n="roles.t5">Fleet &amp; Drivers</button>
+          <button class="roles__tab" role="tab" id="rt-6" aria-controls="rp-6" aria-selected="false" tabindex="-1" data-i18n="roles.t6">Admins</button>
+        </div>
+        <div class="roles__panel" role="tabpanel" id="rp-1" aria-labelledby="rt-1">
+          <blockquote data-i18n="roles.q1">"Raise a requisition and see your site's capacity before you submit."</blockquote>
+          <div><div class="who"><span data-i18n="r.depot">Depot Officer</span><span data-i18n="r.feedmill">Feed Mill Officer</span><span data-i18n="r.commercial">Commercial Officer</span></div>
+            <ul class="checks"><li data-i18n="roles.r1a">Finished-goods requisitions with several product lines</li><li data-i18n="roles.r1b">Port shipment registration with LC details and arrival notice</li><li data-i18n="roles.r1c">Track status from draft to fully allocated</li></ul></div>
+        </div>
+        <div class="roles__panel" role="tabpanel" id="rp-2" aria-labelledby="rt-2" hidden>
+          <blockquote data-i18n="roles.q2">"Split demand across source sites and approve with capacity in view."</blockquote>
+          <div><div class="who"><span data-i18n="r.do">Distribution Officer</span><span data-i18n="r.dm">Distribution Manager</span><span data-i18n="r.po">Procurement Officer</span></div>
+            <ul class="checks"><li data-i18n="roles.r2a">Create transport requests from requisitions, partial or full</li><li data-i18n="roles.r2b">Approve, modify with remarks, or reject</li><li data-i18n="roles.r2c">Destination breakdown plans for port shipments</li></ul></div>
+        </div>
+        <div class="roles__panel" role="tabpanel" id="rp-3" aria-labelledby="rt-3" hidden>
+          <blockquote data-i18n="roles.q3">"Choose own or vendor fleet for each order, then assign or run a bid."</blockquote>
+          <div><div class="who"><span data-i18n="r.tp">Transport Planner</span><span data-i18n="r.tdo">Transport Distribution Officer</span></div>
+            <ul class="checks"><li data-i18n="roles.r3a">Transport order creation with quantity split</li><li data-i18n="roles.r3b">Vehicle, driver and helper assignment with availability checks</li><li data-i18n="roles.r3c">Vendor assignment and bidding, plus the live GPS map</li></ul></div>
+        </div>
+        <div class="roles__panel" role="tabpanel" id="rp-4" aria-labelledby="rt-4" hidden>
+          <blockquote data-i18n="roles.q4">"Every gate, weight, bay and sample is timestamped against the order."</blockquote>
+          <div><div class="who"><span data-i18n="r.gate">Gateman</span><span data-i18n="r.scale">Scaling Operator</span><span data-i18n="r.cc">Command Center Officer</span><span data-i18n="r.load">Loading / Unloading Personnel</span><span data-i18n="r.qc">QC Inspector</span><span data-i18n="r.lab">QA Lab Technician</span></div>
+            <ul class="checks"><li data-i18n="roles.r4a">Gate-in, gate-out and on-the-spot orders for dealers and suppliers</li><li data-i18n="roles.r4b">Weighbridge entries, queue tokens and gate passes</li><li data-i18n="roles.r4c">Bay assignment, loading records and QC decisions</li></ul></div>
+        </div>
+        <div class="roles__panel" role="tabpanel" id="rp-5" aria-labelledby="rt-5" hidden>
+          <blockquote data-i18n="roles.q5">"Inspect before dispatch, and keep drivers' availability up to date."</blockquote>
+          <div><div class="who"><span data-i18n="r.ds">Driver Supervisor</span><span data-i18n="r.driver">Driver</span><span data-i18n="r.helper">Helper</span></div>
+            <ul class="checks"><li data-i18n="roles.r5a">Pre-dispatch vehicle checklist and a maintenance queue</li><li data-i18n="roles.r5b">Driver attendance and leave, so unavailable drivers can't be assigned</li><li data-i18n="roles.r5c">Drivers see their trips and update milestones from their phone</li></ul></div>
+        </div>
+        <div class="roles__panel" role="tabpanel" id="rp-6" aria-labelledby="rt-6" hidden>
+          <blockquote data-i18n="roles.q6">"Set up sites, users and master data once, and see who did what."</blockquote>
+          <div><div class="who"><span data-i18n="r.tsa">Tenant Super Admin</span><span data-i18n="r.ta">Tenant Admin</span><span data-i18n="r.poi">Site Admin</span></div>
+            <ul class="checks"><li data-i18n="roles.r6a">Invite users by email or phone, with roles and sites</li><li data-i18n="roles.r6b">Master data with CSV bulk upload and inline editing</li><li data-i18n="roles.r6c">A searchable audit log that can't be edited</li></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. APPS -->
+    <section class="section">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="apps.eyebrow">Web &amp; mobile</p>
+          <h2 data-i18n="apps.title">An interface for every place work happens</h2>
+        </div>
+        <div class="grid grid--4">
+          <div class="tile"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span><h3 data-i18n="apps.1t">Web portal</h3><p data-i18n="apps.1">For planning, distribution, procurement, admin and yard teams.</p></div>
+          <div class="tile"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg></span><h3 data-i18n="apps.2t">Vendor app</h3><p data-i18n="apps.2">Android and iOS. Join organizations, bid, submit trucks and drivers, track orders.</p></div>
+          <div class="tile"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/></svg></span><h3 data-i18n="apps.3t">Driver interface</h3><p data-i18n="apps.3">Assigned trips, route details and milestone updates on the phone.</p></div>
+          <div class="tile"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6L5 18a2 2 0 0 0 1.8 3h10.4A2 2 0 0 0 19 18l-5-9V3"/></svg></span><h3 data-i18n="apps.4t">QC mobile interface</h3><p data-i18n="apps.4">Inspection, sampling and photo evidence from the yard.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. INDUSTRIES -->
+    <section class="section section--gray">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="ind.eyebrow">Industries</p>
+          <h2 data-i18n="ind.title">Made for multi-site supply chains</h2>
+        </div>
+        <div class="grid grid--4">
+          <div class="tile"><h3 data-i18n="ind.1t">Feed mills &amp; agro</h3><p data-i18n="ind.1">Feed mills, hatcheries, farms and depots, with raw-material QC built in.</p></div>
+          <div class="tile"><h3 data-i18n="ind.2t">Manufacturing</h3><p data-i18n="ind.2">Finished goods moving from factories to depots and warehouses.</p></div>
+          <div class="tile"><h3 data-i18n="ind.3t">FMCG distribution</h3><p data-i18n="ind.3">High-volume daily transfers with dealer pickups at the gate.</p></div>
+          <div class="tile"><h3 data-i18n="ind.4t">Port &amp; import logistics</h3><p data-i18n="ind.4">LC shipments from port to several destination sites.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. VENDORS -->
+    <section id="vendors" class="section">
+      <div class="container vendor">
+        <div>
+          <p class="eyebrow" data-i18n="ven.eyebrow">For transport vendors</p>
+          <h2 data-i18n="ven.title">Get more loads from the companies you work with</h2>
+          <p class="muted" data-i18n="ven.lead">Register once in the Optilogist vendor app, join the organizations you serve, and receive transport orders or bid invitations directly.</p>
+          <ol class="vsteps">
+            <li><div><b data-i18n="ven.s1t">Register</b><span data-i18n="ven.s1">Company details, trade license, BIN and TIN.</span></div></li>
+            <li><div><b data-i18n="ven.s2t">Join an organization</b><span data-i18n="ven.s2">Send a request; the organization approves you as contractual or bidding vendor.</span></div></li>
+            <li><div><b data-i18n="ven.s3t">Bid or get assigned</b><span data-i18n="ven.s3">Submit your rate and available trucks before the window closes.</span></div></li>
+            <li><div><b data-i18n="ven.s4t">Run the trip</b><span data-i18n="ven.s4">Add your truck and driver, then follow the order status live.</span></div></li>
+          </ol>
+          <a class="btn btn--primary" href="#contact"><span data-i18n="ven.cta">Join as a vendor</span> <span class="arrow">&rarr;</span></a>
+        </div>
+        <div class="phone" aria-hidden="true">
+          <div class="phone__title" data-i18n="ven.open">Open bids</div>
+          <div class="bid"><b>Gazipur → Bogura</b><span class="muted" data-i18n="ven.b1">2 × Covered Truck · 20 MT</span><div style="margin-top:.35rem"><span class="tag tag--warn" data-i18n="m.closes">Closes in 3h</span></div></div>
+          <div class="bid"><b>Chattogram Port → Gazipur</b><span class="muted" data-i18n="ven.b2">3 × Open Truck · 36 MT</span><div style="margin-top:.35rem"><span class="tag tag--ok" data-i18n="ven.submitted">Bid submitted</span></div></div>
+          <div class="bid"><b>Mymensingh → Sylhet</b><span class="muted" data-i18n="ven.b3">1 × Delivery Van · 4 MT</span><div style="margin-top:.35rem"><span class="tag tag--info" data-i18n="ven.won">Won · add truck</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. SECURITY -->
+    <section class="section section--dark">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="sec.eyebrow">Security &amp; control</p>
+          <h2 data-i18n="sec.title">Your data stays yours</h2>
+          <p data-i18n="sec.lead">Each organization runs in its own isolated workspace, with access rules enforced on every screen and every request.</p>
+        </div>
+        <div class="grid grid--3">
+          <div class="tile"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span><h3 data-i18n="sec.1t">Isolated workspaces</h3><p data-i18n="sec.1">A separate database schema and login address for every organization.</p></div>
+          <div class="tile"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><h3 data-i18n="sec.2t">Two-step sign-in</h3><p data-i18n="sec.2">One-time codes by email or SMS for admins and invited users.</p></div>
+          <div class="tile"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg></span><h3 data-i18n="sec.3t">Role-based access</h3><p data-i18n="sec.3">Menus, buttons, data and API calls follow the user's role and site.</p></div>
+          <div class="tile"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg></span><h3 data-i18n="sec.4t">Approval rules</h3><p data-i18n="sec.4">Nobody approves their own request, and approved requests are locked.</p></div>
+          <div class="tile"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span><h3 data-i18n="sec.5t">Audit trail</h3><p data-i18n="sec.5">Who did what, as which role, with old and new values. Records can't be edited.</p></div>
+          <div class="tile"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg></span><h3 data-i18n="sec.6t">Clean master data</h3><p data-i18n="sec.6">Only active vehicles, drivers and sites appear in dropdowns; records in use can't be deleted.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. COMING SOON -->
+    <section class="section">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="soon.eyebrow">On the roadmap</p>
+          <h2 data-i18n="soon.title">Coming soon</h2>
+          <p data-i18n="soon.lead">These features are planned for upcoming releases and are not available yet.</p>
+        </div>
+        <div class="grid grid--3">
+          <div class="tile tile--soon"><h3><span data-i18n="soon.1t">Trip costing</span><span class="soon" data-i18n="soon.badge">Coming soon</span></h3><p data-i18n="soon.1">Cost sheet per trip, cost per km, own vs vendor comparison.</p></div>
+          <div class="tile tile--soon"><h3><span data-i18n="soon.2t">Fuel management</span><span class="soon" data-i18n="soon.badge">Coming soon</span></h3><p data-i18n="soon.2">Fuel entries with receipts and odometer photos, efficiency per vehicle.</p></div>
+          <div class="tile tile--soon"><h3><span data-i18n="soon.3t">Dispatch calendar</span><span class="soon" data-i18n="soon.badge">Coming soon</span></h3><p data-i18n="soon.3">Daily, weekly and monthly views of transport orders by vehicle.</p></div>
+          <div class="tile tile--soon"><h3><span data-i18n="soon.4t">Multi-order trips</span><span class="soon" data-i18n="soon.badge">Coming soon</span></h3><p data-i18n="soon.4">One vehicle running several transport orders in sequence.</p></div>
+          <div class="tile tile--soon"><h3><span data-i18n="soon.5t">Vendor invoicing &amp; claims</span><span class="soon" data-i18n="soon.badge">Coming soon</span></h3><p data-i18n="soon.5">Consolidated invoices and expense claims from vendors.</p></div>
+          <div class="tile tile--soon"><h3><span data-i18n="soon.6t">Workshop &amp; maintenance</span><span class="soon" data-i18n="soon.badge">Coming soon</span></h3><p data-i18n="soon.6">Workshop jobs, repair costs, downtime and distance-based service reminders.</p></div>
+          <div class="tile tile--soon"><h3><span data-i18n="soon.7t">Reports &amp; dashboards</span><span class="soon" data-i18n="soon.badge">Coming soon</span></h3><p data-i18n="soon.7">Trip, turnaround, vendor, fleet utilization and cost reports.</p></div>
+          <div class="tile tile--soon"><h3><span data-i18n="soon.8t">Alerts &amp; notifications</span><span class="soon" data-i18n="soon.badge">Coming soon</span></h3><p data-i18n="soon.8">Role-based alerts for order, loading, QC and incident events.</p></div>
+          <div class="tile tile--soon"><h3><span data-i18n="soon.9t">Bangla in the app</span><span class="soon" data-i18n="soon.badge">Coming soon</span></h3><p data-i18n="soon.9">Switch the web portal and mobile apps between English and Bangla.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. PLANS -->
+    <section id="plans" class="section section--gray">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="plans.eyebrow">Plans</p>
+          <h2 data-i18n="plans.title">Start small, grow with your network</h2>
+          <p data-i18n="plans.lead">Plans are sized by users and trips per month. Explore everything in the live demo first, no sign-up needed.</p>
+        </div>
+        <div class="plans">
+          <div class="plan">
+            <h3>Basic</h3><p class="muted" data-i18n="plans.b">For a single site getting started.</p>
+            <div class="plan__limits"><div><b>5</b><small data-i18n="plans.users">users</small></div><div><b>100</b><small data-i18n="plans.trips">trips / month</small></div></div>
+            <ul><li data-i18n="plans.b1">Transport requests &amp; orders</li><li data-i18n="plans.b2">Fleet basics</li><li data-i18n="plans.b3">Live GPS tracking</li></ul>
+            <a class="btn btn--ghost" href="demo/index.html" data-i18n="cta.demo">Live Demo</a>
+          </div>
+          <div class="plan plan--pick">
+            <h3>Starter</h3><p class="muted" data-i18n="plans.s">For teams working with vendors.</p>
+            <div class="plan__limits"><div><b>15</b><small data-i18n="plans.users">users</small></div><div><b>500</b><small data-i18n="plans.trips">trips / month</small></div></div>
+            <ul><li data-i18n="plans.s1">Everything in Basic</li><li data-i18n="plans.s2">Vendor portal &amp; bidding</li><li data-i18n="plans.s3">QC module</li></ul>
+            <a class="btn btn--primary" href="demo/index.html" data-i18n="cta.demo">Live Demo</a>
+          </div>
+          <div class="plan">
+            <h3>Growth</h3><p class="muted" data-i18n="plans.g">For multi-site operations.</p>
+            <div class="plan__limits"><div><b>50</b><small data-i18n="plans.users">users</small></div><div><b>2,000</b><small data-i18n="plans.trips">trips / month</small></div></div>
+            <ul><li data-i18n="plans.g1">Everything in Starter</li><li data-i18n="plans.g2">Product requisitions</li><li><span data-i18n="plans.g3">Analytics</span> <span class="soon" data-i18n="soon.badge">Coming soon</span></li><li><span data-i18n="plans.g4">Cost management</span> <span class="soon" data-i18n="soon.badge">Coming soon</span></li></ul>
+            <a class="btn btn--ghost" href="demo/index.html" data-i18n="cta.demo">Live Demo</a>
+          </div>
+          <div class="plan">
+            <h3>Enterprise</h3><p class="muted" data-i18n="plans.e">For large networks with custom needs.</p>
+            <div class="plan__limits"><div><b>∞</b><small data-i18n="plans.users">users</small></div><div><b>∞</b><small data-i18n="plans.trips">trips / month</small></div></div>
+            <ul><li data-i18n="plans.e1">All features</li><li data-i18n="plans.e2">White-label</li><li><span data-i18n="plans.e3">ERP integration</span> <span class="soon" data-i18n="soon.badge">Coming soon</span></li></ul>
+            <a class="btn btn--ghost" href="#contact" data-i18n="cta.sales">Contact sales</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. FAQ -->
+    <section id="faq" class="section">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow">FAQ</p>
+          <h2 data-i18n="faq.title">Common questions</h2>
+        </div>
+        <div class="faq">
+          <details><summary data-i18n="faq.q1">Does Optilogist replace our ERP or warehouse system?</summary><p data-i18n="faq.a1">No. Optilogist manages transport, yard and QC operations. It tracks total capacity per site, not bin-level inventory, and works alongside your ERP.</p></details>
+          <details><summary data-i18n="faq.q2">Do we need to buy GPS devices from you?</summary><p data-i18n="faq.a2">No. Optilogist connects to your existing GPS or vehicle tracking provider and matches each vehicle by its device ID.</p></details>
+          <details><summary data-i18n="faq.q3">Can we bring our existing vehicles, drivers and sites?</summary><p data-i18n="faq.a3">Yes. Every master list (vehicles, drivers, helpers, sites, products, dealers, suppliers) can be uploaded by CSV using a ready-made template.</p></details>
+          <details><summary data-i18n="faq.q4">How do our transport vendors join?</summary><p data-i18n="faq.a4">Vendors register in the Optilogist vendor app and request to join your organization. You approve them as contractual or bidding vendors.</p></details>
+          <details><summary data-i18n="faq.q5">How do drivers and yard staff get access?</summary><p data-i18n="faq.a5">Your admin invites them by email or phone. They receive a link and a one-time code, then set their own password.</p></details>
+          <details><summary data-i18n="faq.q6">Is the app available in Bangla?</summary><p data-i18n="faq.a6">This website is available in Bangla today. Bangla in the web portal and mobile apps is coming soon.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14. FINAL CTA -->
+    <section id="contact" class="cta">
+      <div class="container">
+        <p class="eyebrow" data-i18n="cta.eyebrow">Ready to get started?</p>
+        <h2 data-i18n="cta.title">Put every load on one record</h2>
+        <p class="muted" data-i18n="cta.lead">Open the live demo and follow a load from requisition to gate-out. No sign-up needed.</p>
+        <div class="actions" style="margin-top:2rem">
+          <a class="btn btn--primary" href="demo/index.html"><span data-i18n="cta.demo">Live Demo</span> <span class="arrow">&rarr;</span></a>
+          <button type="button" class="btn btn--ghost js-login" data-i18n="nav.login">Log in</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__about">
+          <a class="brand" href="#">
+            <img class="brand__mark" src="static/img/brand/mark-light.svg" alt="" width="32" height="32">
+            Optilogist
+          </a>
+          <p data-i18n="foot.about">Distribution and fleet management for multi-site supply chains.</p>
+        </div>
+        <div>
+          <h3 data-i18n="nav.platform">Platform</h3>
+          <ul>
+            <li><a href="#platform" data-i18n="foot.l1">How it works</a></li>
+            <li><a href="#plan" data-i18n="foot.l2">Requisition &amp; planning</a></li>
+            <li><a href="#fleet" data-i18n="foot.l3">Own &amp; vendor fleet</a></li>
+            <li><a href="#yard" data-i18n="foot.l4">Yard &amp; QC</a></li>
+            <li><a href="#track" data-i18n="foot.l5">Live GPS</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="nav.solutions">Solutions</h3>
+          <ul>
+            <li><a href="#roles" data-i18n="roles.t2">Distribution &amp; Procurement</a></li>
+            <li><a href="#roles" data-i18n="roles.t3">Transport</a></li>
+            <li><a href="#roles" data-i18n="roles.t4">Yard &amp; QC</a></li>
+            <li><a href="#roles" data-i18n="roles.t5">Fleet &amp; Drivers</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="nav.vendors">For Vendors</h3>
+          <ul>
+            <li><a href="#vendors" data-i18n="ven.cta">Join as a vendor</a></li>
+            <li><a href="#vendors" data-i18n="apps.2t">Vendor app</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="foot.company">Company</h3>
+          <ul>
+            <li><a href="#plans" data-i18n="nav.plans">Plans</a></li>
+            <li><a href="#faq" data-i18n="top.help">Help Center</a></li>
+            <li><a href="#contact" data-i18n="top.contact">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; <span id="year"></span> Optilogist</span>
+        <span><a href="#" data-i18n="foot.privacy">Privacy</a><a href="#" data-i18n="foot.terms">Terms</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WORKSPACE LOGIN DIALOG -->
+  <dialog id="login-dialog" aria-labelledby="login-title">
+    <form method="dialog" id="login-form">
+      <button class="dialog__close" value="cancel" aria-label="Close" formnovalidate>&times;</button>
+      <h2 id="login-title" data-i18n="login.title">Log in to your workspace</h2>
+      <p class="muted" data-i18n="login.lead">Every organization has its own Optilogist address.</p>
+      <label for="workspace" style="font-weight:600;font-size:.9rem" data-i18n="login.label">Workspace name</label>
+      <div class="field">
+        <input id="workspace" name="workspace" autocomplete="organization" required pattern="[A-Za-z0-9-]+" placeholder="yourcompany" data-i18n-ph="login.ph">
+        <span class="js-domain"></span>
+      </div>
+      <button class="btn btn--primary" style="width:100%" value="go" data-i18n="login.go">Continue</button>
+      <p class="dialog__note" data-i18n="login.note">Got an invite? Use the link in your email or SMS to set your password first.</p>
+    </form>
+  </dialog>
+
+  <script src="static/js/landing-i18n-bn.js"></script>
+  <script src="static/js/landing.js"></script>
+</body>
+</html>

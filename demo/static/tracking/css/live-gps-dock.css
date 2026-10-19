@@ -1,0 +1,239 @@
+/* Live GPS — bottom dock panel. Requires live-gps-tokens.css */
+
+.live-gps-dock-wrap {
+  --dock-edge-x: 12px;
+  --dock-w-vehicle: 380px;
+  position: absolute;
+  left: var(--dock-edge-x);
+  bottom: var(--dock-edge-x);
+  z-index: 500;
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  pointer-events: none;
+  box-sizing: border-box;
+  width: max-content;
+  max-width: min(
+    var(--dock-w-vehicle),
+    calc(100vw - var(--dock-edge-x) * 2 - 16px)
+  );
+  transition:
+    opacity var(--lg-panel-layout-duration) var(--lg-panel-layout-ease),
+    visibility var(--lg-panel-layout-duration) var(--lg-panel-layout-ease),
+    transform var(--lg-panel-layout-duration) var(--lg-panel-layout-ease),
+    bottom var(--lg-panel-layout-duration) var(--lg-panel-layout-ease);
+}
+
+.live-gps-dock-wrap.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.live-gps-dock {
+  pointer-events: none;
+}
+
+.live-gps-dock__cards {
+  pointer-events: auto;
+  width: var(--dock-w-vehicle);
+  max-width: 100%;
+}
+
+.live-gps-panel {
+  pointer-events: auto;
+  border-radius: var(--lg-radius-lg);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.live-gps-panel__head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--lg-hairline);
+  min-height: 30px;
+}
+
+.live-gps-panel__head-title {
+  flex: 1;
+  min-width: 0;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--lg-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--lg-font);
+  letter-spacing: -0.01em;
+}
+
+.live-gps-panel__head .live-gps-obj__dot {
+  flex-shrink: 0;
+}
+
+.live-gps-dock__head-speed {
+  flex-shrink: 0;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--lg-ink-2);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+
+.live-gps-dock__collapse {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin-left: 2px;
+}
+
+.live-gps-dock__collapse .live-gps-bi {
+  transition: transform 0.2s ease;
+}
+
+.live-gps-panel--vehicle.live-gps-panel--collapsed .live-gps-dock__collapse .live-gps-bi {
+  transform: rotate(-90deg);
+}
+
+.live-gps-panel--vehicle.live-gps-panel--collapsed .live-gps-panel__head {
+  border-bottom: none;
+}
+
+.live-gps-panel--vehicle.live-gps-panel--collapsed .live-gps-panel__body {
+  display: none;
+}
+
+.live-gps-panel__ico {
+  flex-shrink: 0;
+  color: var(--lg-accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.live-gps-panel__ico .live-gps-bi {
+  font-size: 14px;
+}
+
+.live-gps-panel__body {
+  padding: 2px 12px 8px;
+  flex: 1;
+  min-height: 0;
+}
+
+.live-gps-panel--vehicle .live-gps-panel__body {
+  overflow: visible;
+}
+
+.live-gps-panel--vehicle .live-gps-panel__row--address {
+  min-height: calc(11px * 1.35 * 2 + 10px);
+}
+
+.live-gps-panel__row--geofence .live-gps-panel__row-value {
+  font-weight: 600;
+}
+
+.live-gps-panel__row--geofence[hidden] {
+  display: none !important;
+}
+
+.live-gps-panel__row--geofence.is-inside .live-gps-panel__row-value {
+  color: #16a34a;
+}
+
+.live-gps-panel--vehicle .live-gps-panel__row--address .live-gps-panel__row-value > span:first-child {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+  min-height: calc(11px * 1.35 * 2);
+}
+
+.live-gps-panel--vehicle .live-gps-panel__row--driver .live-gps-panel__row-value {
+  font-weight: 600;
+  color: var(--lg-ink);
+}
+
+.live-gps-panel__row {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 6px;
+  align-items: start;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--lg-hairline);
+  font-size: 11px;
+  line-height: 1.35;
+  color: var(--lg-ink-2);
+}
+
+.live-gps-panel__row:last-child {
+  border-bottom: none;
+}
+
+.live-gps-panel__row-label {
+  font-weight: 600;
+  color: var(--lg-ink-3);
+}
+
+.live-gps-panel__row-value {
+  min-width: 0;
+  word-break: break-word;
+  color: var(--lg-ink);
+}
+
+.live-gps-panel__row--address .live-gps-panel__row-value {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.live-gps-panel__eye {
+  border: none;
+  background: none;
+  padding: 0;
+  color: #94a3b8;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-size: 12px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  html.live-gps-active .live-gps-shell {
+    left: 0;
+  }
+  .live-gps-dock-wrap {
+    --dock-edge-x: 8px;
+    --dock-w-vehicle: min(340px, calc(100vw - 24px));
+  }
+  .live-gps-dock__cards {
+    width: 100%;
+  }
+  .live-gps-objects { width: 260px; }
+}
+
+/* Dark mode — dock details */
+[data-theme="dark"] .live-gps-panel__eye {
+  color: var(--lg-ink-3);
+}
+
+[data-theme="dark"] .live-gps-panel__eye:hover {
+  color: var(--lg-ink);
+}

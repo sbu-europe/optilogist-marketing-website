@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+
+<html lang="en-us" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="static/demo/demo-shim.css?v=mv5a1jhl">
+<script src="static/demo/api-data.js?v=mv5a1jhl"></script>
+<script src="static/demo/demo-shim.js?v=mv5a1jhl"></script>
+<script src="static/demo/master-seed.js?v=mv5a1jhl"></script>
+<script src="static/demo/master-crud.js?v=mv5a1jhl"></script>
+<title>Live GPS</title>
+<link rel="stylesheet" href="static/admin/css/base.css">
+
+
+  <link rel="stylesheet" href="static/admin/css/nav_sidebar.css">
+  <script src="static/admin/js/nav_sidebar.js" defer></script>
+
+
+
+
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+
+
+<link rel="icon" href="favicon.ico?v=2" sizes="32x32">
+<link rel="icon" href="static/brand/optilogist/svg/favicon.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="static/brand/optilogist/png/apple-touch-icon.png?v=2">
+<link rel="stylesheet" href="static/admin/css/custom.css">
+
+<script>
+  (function(){
+    var t = localStorage.getItem('dfms-admin-theme');
+    if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+    // Keep native date/time picker icons visible: match DFMS theme, not OS preference alone.
+    document.documentElement.style.colorScheme = t === 'dark' ? 'dark' : 'light';
+
+    var collapsed = localStorage.getItem('dfms-sidebar-collapsed') === 'true';
+    var mobile    = window.innerWidth < 768;
+    if (collapsed && !mobile) {
+      document.documentElement.setAttribute('data-sidebar-collapsed', 'true');
+    }
+  })();
+</script>
+
+<script src="static/admin/js/dfms_theme.js" defer></script>
+
+<script src="static/admin/js/dfms_sidebar.js" defer></script>
+
+<script src="static/admin/js/dfms_actions.js" defer></script>
+
+<script src="static/js/password_toggle.js" defer></script>
+
+<script src="static/admin/js/dfms_timepicker.js" defer></script>
+
+<script src="static/admin/js/dfms_labels.js" defer></script>
+
+
+<script>document.documentElement.classList.add('live-gps-active');</script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0&display=block" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<link rel="stylesheet" href="static/tracking/css/live-gps-tokens.css">
+<link rel="stylesheet" href="static/tracking/css/live-gps-base.css">
+<link rel="stylesheet" href="static/tracking/css/live-gps-panel.css">
+<link rel="stylesheet" href="static/tracking/css/live-gps-history.css">
+<link rel="stylesheet" href="static/tracking/css/live-gps-markers.css">
+<link rel="stylesheet" href="static/tracking/css/live-gps-modals.css">
+<link rel="stylesheet" href="static/tracking/css/live-gps-dock.css">
+<script id="live-gps-config" type="application/json">{"truckMarkerUrl": "static/tracking/truck_marker.png?v=1", "refreshIntervalSeconds": 10, "i18n": {"actions": "Actions", "address": "Address", "angle": "Angle", "close": "Close", "close_follow": "Close follow", "collapse_chart": "Collapse chart", "command_failed": "Command failed.", "command_sent": "Command sent", "custom_command_sent": "Custom command sent", "destination": "Destination", "details": "Details", "open_transport_order": "Open transport order", "open_to": "Open TO", "transport_order": "Transport order", "origin_depot": "Origin depot", "drag_to_move": "Drag to move", "drive": "Drive", "drive_end": "Drive end", "drive_start": "Drive start", "driver": "Driver", "duration": "Duration", "engine_hours": "Engine hours", "engine_resume_command_sent": "Engine resume command sent", "engine_stop_command_sent": "Engine stop command sent", "expand_chart": "Expand chart", "failed_to_load": "Failed to load", "failed_to_load_history": "Failed to load history.", "follow": "Follow", "follow_vehicle": "Follow vehicle", "recenter_follow": "Recenter \u0026 follow", "fr": "Fr", "geofence": "Geofence", "inside_geofence": "Inside Geofence", "geofence_inside": "Inside", "geofence_entered": "Entered geofence", "geofence_exited": "Exited geofence", "hide_details": "Hide details", "hide_vehicle_list": "Hide vehicle list", "last_hour": "Last hour", "loading": "Loading\u2026", "loading_address": "Loading address\u2026", "mo": "Mo", "model": "Model", "network_error": "Network error", "network_error_while_sending_command": "Network error while sending command.", "no_active_trips_with_gps_data": "No active trips with GPS data.", "no_fleet_vehicles": "No fleet vehicles.", "no_trip": "No active trip", "no_trip_order": "No trip order", "trip": "Trip", "trip_status": "Trip status", "to_status": "TO status", "no_active_to": "No active TO", "filter_status": "Filter by TO status", "filter_vehicle_status": "Filter by vehicle status", "vehicle_status": "Vehicle status", "filter_status_all": "All statuses", "filter_all": "All", "clear_filters": "Clear filters", "no_map_position": "No GPS position", "no_gt06_devices_available": "No GT06 devices available", "no_history_for_this_period": "No history for this period.", "no_tos_in_period": "No transport orders for this vehicle in the selected period.", "no_history_in_period": "No trips or no active TO periods in the selected range.", "no_gps_for_to": "No GPS data for this transport order in the selected period.", "no_gps_for_no_active_to": "No GPS data for this no active TO period.", "no_active_to_period": "No active TO", "no_active_to_periods_found_one": "1 no active TO period", "no_active_to_periods_found_many": "{n} no active TO periods", "no_active_to_movement_hint": "Vehicle movement tracked", "timeline_found": "{trips} trips, {idle} no active TO periods", "back_to_timeline": "Back to timeline", "transport_orders": "Transport orders", "back_to_to_list": "Back to transport orders", "select_to_for_history": "Select a transport order and date, then Show history.", "to_number": "TO number", "no_signal": "no signal", "no_recent_signal": "No recent signal", "no_vehicles_match_your_search": "No vehicles match your search.", "outside_geofence": "Outside geofence", "overspeed": "Overspeed", "open_in_maps": "Open in maps", "parked": "Parked", "parking_end": "Parking end", "parking_start": "Parking start", "pause": "Pause", "plate": "Plate", "play": "Play", "position": "Position", "protocol": "Protocol", "route_length": "Route length", "sa": "Sa", "see_more": "See more", "select_date": "Select date", "range_from": "From", "range_to": "To", "show_history": "Show history", "trips_found_one": "1 trip found", "trips_found_many": "{n} trips found", "points_short": "pts", "send_command": "Send command", "sending_command_to_device": "Sending command to device\u2026", "show_details": "Show details", "show_history_last_hour": "Show history last hour", "show_history_today": "Show history today", "show_history_yesterday": "Show history yesterday", "show_to": "Show TO", "show_vehicle": "Show vehicle", "vehicle_planning": "Vehicle Planning", "show_vehicle_list": "Show vehicle list", "source": "Source", "speed": "Speed", "speed_limit": "Speed limit", "stale_feed": "stale feed", "stop_duration": "Stop duration", "stop_end": "Stop end", "stop_start": "Stop start", "stopped": "Stopped", "su": "Su", "th": "Th", "time": "Time", "today": "Today", "top_speed": "Top speed", "trip_end": "Trip end", "trip_start": "Trip start", "tu": "Tu", "unassigned": "Unassigned", "updated": "Updated", "we": "We", "yesterday": "Yesterday"}, "urls": {"liveMap": "/api/v1/tracking/live-map/", "geofenceEvents": "/api/v1/tracking/geofence-events/", "deviceCommand": "/api/v1/tracking/device-command/", "historySummary": "/api/v1/tracking/vehicle-history-summary/", "vehicleHistory": "/api/v1/tracking/vehicle-history/", "vehicleToHistory": "/api/v1/tracking/vehicle-to-history/", "vehicleIdleSummary": "/api/v1/tracking/vehicle-idle-summary/", "vehicleIdleHistory": "/api/v1/tracking/vehicle-idle-history/", "adminTransportOrderChange": "/admin/transport/transportorder/{id}/change/", "adminVehicleChange": "/admin/master_data/vehicle/{id}/change/", "adminVehiclePlanning": "/admin/transport/vehicle-planning/{id}/"}}</script>
+<script>
+  window.LIVE_GPS_CONFIG = JSON.parse(document.getElementById('live-gps-config').textContent);
+</script>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/admin/css/responsive.css">
+    
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+<body class=""
+  data-admin-utc-offset="21600">
+<a href="#content-start" class="skip-to-content-link">Skip to main content</a>
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    
+      <header id="header">
+        <div id="branding">
+        
+        </div>
+        
+
+<div id="dfms-topbar-tools">
+
+  
+  <button
+    id="dfms-sidebar-toggle"
+    class="dfms-content-toggle"
+    aria-label="Toggle sidebar"
+    title="Collapse sidebar"
+    type="button"
+  >
+    <i class="bi bi-list"></i>
+  </button>
+
+  
+  <div style="flex:1;"></div>
+
+  
+  <div class="dfms-topbar-right">
+
+    
+    <button
+      id="dfms-theme-toggle"
+      class="dfms-topbar-icon-btn"
+      title="Switch theme"
+      aria-label="Switch theme"
+      type="button"
+    >
+      <i class="toggle-icon bi bi-moon"></i>
+    </button>
+
+    
+    
+    
+    <div class="dfms-user-menu" id="dfms-user-menu">
+      <button
+        class="dfms-user-avatar-btn"
+        aria-haspopup="true"
+        aria-expanded="false"
+        aria-controls="dfms-user-dropdown"
+        type="button"
+        id="dfms-user-avatar-btn"
+      >
+        
+        <span class="dfms-avatar" aria-hidden="true"> DA </span>
+        <span class="dfms-user-name">Demo Admin</span>
+        <i class="bi bi-chevron-down dfms-user-chevron"></i>
+      </button>
+
+      
+      <div class="dfms-user-dropdown dfms-user-dropdown--with-poi" id="dfms-user-dropdown" role="menu" aria-labelledby="dfms-user-avatar-btn">
+
+        
+        <div class="dfms-dropdown-header">
+          <div class="dfms-dropdown-header__avatar"> DA </div>
+          <div class="dfms-dropdown-header__info">
+            <span class="dfms-dropdown-name">Demo Admin</span>
+            
+            <span class="dfms-dropdown-email">admin@example.com</span>
+            
+            
+              
+              
+              <span class="dfms-dropdown-meta">
+                <i class="bi bi-person-badge"></i>
+                Tenant Admin
+              </span>
+              
+              
+            
+            
+            <span class="dfms-dropdown-meta">
+              <i class="bi bi-diagram-3"></i>
+              Administration (tenant admin)
+            </span>
+            
+            
+            
+            <span class="dfms-dropdown-meta dfms-dropdown-meta--poi-warn">
+              <i class="bi bi-exclamation-circle"></i>
+              No site selected
+            </span>
+            
+            
+            
+            
+            <span class="dfms-dropdown-meta">
+              <i class="bi bi-building"></i>
+              Demo Agro Ltd
+            </span>
+            
+            
+          </div>
+        </div>
+
+        
+
+
+        
+
+<div class="dfms-dropdown-divider"></div>
+<div class="dfms-dropdown-poi" id="dfms-poi-profile">
+  <form
+    method="post"
+    action="#" data-demo-form="1"
+    id="dfms-poi-switcher-form"
+    class="dfms-dropdown-poi__form"
+  >
+    <input type="hidden" name="csrfmiddlewaretoken" value="demo">
+    <input type="hidden" name="next" value="/admin/tracking/live-gps/">
+
+    <div class="dfms-dropdown-poi__field">
+      <label for="dfms-poi-select" class="dfms-dropdown-poi__label">
+        <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
+        Working site
+        
+        <span class="dfms-badge dfms-badge--warning dfms-dropdown-poi__badge">Required</span>
+        
+      </label>
+
+      <div class="dfms-dropdown-poi__select-wrap">
+        <i class="bi bi-building dfms-dropdown-poi__select-icon" aria-hidden="true"></i>
+        <select
+          name="poi_id"
+          id="dfms-poi-select"
+          class="dfms-dropdown-poi__select"
+          aria-label="Select working site"
+          onchange="this.form.submit()"
+        >
+          <option value="" selected>
+            Select a site…
+          </option>
+          
+          <option
+            value="6f1c2c64-97d6-4d2a-9768-9f13b2129737"
+            
+          >Barishal Aquaculture Site</option>
+          
+          <option
+            value="1dd0e4ae-98dd-4d1c-8673-1b330130cfc1"
+            
+          >Barishal Green Field Farm</option>
+          
+          <option
+            value="3f8e8b11-b539-4595-90cf-bccea625b61b"
+            
+          >Barishal Production Unit</option>
+          
+          <option
+            value="1dd20b37-df96-46aa-b27a-92dd38053fe7"
+            
+          >Bhola Vendor Office</option>
+          
+          <option
+            value="2e5b71e9-d800-4fce-a921-a09dcd6e3758"
+            
+          >Bhola Waste Management Unit</option>
+          
+          <option
+            value="b267f13b-8731-44d5-b045-59613974ef7a"
+            
+          >Bhaluka Hub</option>
+          
+          <option
+            value="521b59c5-95cc-433d-9fc0-71658c3c17de"
+            
+          >Bhola Hub</option>
+          
+          <option
+            value="4019a94e-c5c2-4f80-b643-adfc7c1dd1ce"
+            
+          >Chittagong Hub</option>
+          
+          <option
+            value="5a77b607-c6b7-4e3b-a277-1534fe7e6a4e"
+            
+          >Chittagong Hub</option>
+          
+          <option
+            value="314c4410-eef7-41d9-a44d-4dbeb909f8ea"
+            
+          >Chottogram Hub</option>
+          
+        </select>
+        <i class="bi bi-chevron-down dfms-dropdown-poi__select-chevron" aria-hidden="true"></i>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="dfms-dropdown-divider"></div>
+
+
+
+        
+        
+        <a href="#" data-demo-missing="1" class="dfms-dropdown-item" role="menuitem">
+          <i class="bi bi-key"></i>
+          Change password
+        </a>
+        
+
+        <div class="dfms-dropdown-divider"></div>
+
+        <form id="logout-form" method="post" action="#" data-demo-form="1">
+          <input type="hidden" name="csrfmiddlewaretoken" value="demo">
+          <button type="submit" class="dfms-dropdown-item dfms-dropdown-item--danger" role="menuitem">
+            <i class="bi bi-box-arrow-right"></i>
+            Log out
+          </button>
+        </form>
+        <script>
+        (function () {
+          var form = document.getElementById("logout-form");
+          if (!form) return;
+          form.addEventListener("submit", function () {
+            var match = document.cookie.split("; ").find(function (row) {
+              return row.indexOf("csrftoken=") === 0;
+            });
+            if (!match) return;
+            var token = decodeURIComponent(match.split("=").slice(1).join("="));
+            var input = form.querySelector('input[name="csrfmiddlewaretoken"]');
+            if (token && input) input.value = token;
+          });
+        })();
+        </script>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+        
+      </header>
+    
+    <!-- END Header -->
+    
+    
+
+    <div class="main" id="main">
+      
+        
+  
+
+<nav id="dfms-nav-sidebar" class="dfms-nav-sidebar" aria-label="Sidebar">
+
+  
+  <div class="dfms-sidebar-brand">
+    <a href="admin.html" class="dfms-sidebar-brand-link" aria-label="Home">
+      <div class="dfms-sidebar-logo-mark">
+        
+
+<span class="dfms-brand-mark" aria-hidden="true">
+  <img
+    class="dfms-brand-mark__img dfms-brand-mark__img--light"
+    src="static/brand/optilogist/svg/mark-light.svg"
+    alt=""
+    width="32"
+    height="32"
+    decoding="async"
+  >
+  <img
+    class="dfms-brand-mark__img dfms-brand-mark__img--dark"
+    src="static/brand/optilogist/svg/mark-dark.svg"
+    alt=""
+    width="32"
+    height="32"
+    decoding="async"
+  >
+</span>
+
+      </div>
+      <div class="dfms-sidebar-brand-text">
+        <span class="dfms-sidebar-brand-name">Optilogist</span>
+        <span class="dfms-sidebar-brand-sub">Demo Agro Ltd Admin</span>
+      </div>
+    </a>
+    
+    <button
+      type="button"
+      id="dfms-sidebar-close"
+      class="dfms-sidebar-close"
+      aria-label="Close menu"
+      title="Close menu"
+    >
+      <i class="bi bi-x-lg" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  
+  <div class="dfms-nav-search">
+    <i class="bi bi-search dfms-nav-search-icon"></i>
+    <input
+      type="search"
+      id="dfms-nav-filter"
+      class="dfms-nav-filter-input"
+      placeholder="Filter…"
+      aria-label="Filter navigation items"
+      autocomplete="off"
+    >
+  </div>
+
+  
+  <div class="dfms-nav-body" id="dfms-nav-body">
+
+    
+    
+    
+      
+        <div class="dfms-nav-group" data-app="portal-overview">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-overview"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-speedometer2"></i>
+            </span>
+            <span class="dfms-nav-group-label">Overview</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="dashboard">
+                <a href="admin.html" class="dfms-nav-link" data-nav-id="dashboard">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Dashboard</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-requisition">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-requisition"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-clipboard-check"></i>
+            </span>
+            <span class="dfms-nav-group-label">Requisition</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="finished goods">
+                <a href="admin_requisitions_productrequisition.html" class="dfms-nav-link" data-nav-id="requisition_fg">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Finished Goods</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-port-shipments">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-port-shipments"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-box-seam"></i>
+            </span>
+            <span class="dfms-nav-group-label">Port Shipments</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="port shipments">
+                <a href="admin_requisitions_portshipmentproxy.html" class="dfms-nav-link" data-nav-id="port_shipments">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Port Shipments</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-distribution">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-distribution"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-arrow-right-circle"></i>
+            </span>
+            <span class="dfms-nav-group-label">Distribution</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="product requisitions">
+                <a href="admin_requisitions_productrequisition_pr_type_FINISHED_GOODS.html" class="dfms-nav-link" data-nav-id="distribution_pr_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Product requisitions</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="transport requests">
+                <a href="admin_requisitions_transportrequisition_tr_type_FG.html" class="dfms-nav-link" data-nav-id="distribution_transport_requests">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Transport requests</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-procurement">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-procurement"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-box-arrow-in-right"></i>
+            </span>
+            <span class="dfms-nav-group-label">Procurement</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="port shipments">
+                <a href="admin_requisitions_portshipmentproxy.html" class="dfms-nav-link" data-nav-id="procurement_port_shipments">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Port Shipments</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="transport requests">
+                <a href="admin_requisitions_transportrequisition_tr_type_PORT_CONSIGNMENT.html" class="dfms-nav-link" data-nav-id="procurement_transport_requests">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Transport requests</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group dfms-nav-group--active" data-app="portal-transport">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-transport"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-truck"></i>
+            </span>
+            <span class="dfms-nav-group-label">Transport</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item dfms-nav-item--active" data-label="live gps">
+                <a href="admin_tracking_live_gps.html" class="dfms-nav-link" data-nav-id="live_gps" aria-current="page">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Live GPS</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="transport requests">
+                <a href="admin_requisitions_transportrequisition.html" class="dfms-nav-link" data-nav-id="transport_requests">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Transport requests</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="transport orders">
+                <a href="admin_transport_transportorder.html" class="dfms-nav-link" data-nav-id="transport_orders">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Transport orders</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="vehicle planning">
+                <a href="admin_transport_vehicle_planning.html" class="dfms-nav-link" data-nav-id="vehicle_planning">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicle planning</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="bids management">
+                <a href="admin_vendors_biddingsession.html" class="dfms-nav-link" data-nav-id="bids_management">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Bids management</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-master-data">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-master-data"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-database"></i>
+            </span>
+            <span class="dfms-nav-group-label">Master Data</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="points of interest">
+                <a href="admin_master_data_poi.html" class="dfms-nav-link" data-nav-id="pois">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Points of Interest</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="loading/unloading points">
+                <a href="admin_master_data_loadingunloadingpoint.html" class="dfms-nav-link" data-nav-id="loading_unloading_points">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Loading/Unloading Points</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="vehicle brands">
+                <a href="admin_master_data_brand.html" class="dfms-nav-link" data-nav-id="vehicle_brands">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicle Brands</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="vehicles">
+                <a href="admin_master_data_vehicle.html" class="dfms-nav-link" data-nav-id="vehicles">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicles</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="helpers">
+                <a href="admin_users_helper.html" class="dfms-nav-link" data-nav-id="helpers">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Helpers</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="dealers">
+                <a href="admin_master_data_dealer.html" class="dfms-nav-link" data-nav-id="dealers">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Dealers</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="suppliers">
+                <a href="admin_master_data_supplier.html" class="dfms-nav-link" data-nav-id="suppliers">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Suppliers</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="product categories">
+                <a href="admin_master_data_productcategory.html" class="dfms-nav-link" data-nav-id="product_categories">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Product Categories</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="product sub-category">
+                <a href="admin_master_data_productsubcategory.html" class="dfms-nav-link" data-nav-id="product_sub_categories">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Product Sub-category</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="products">
+                <a href="admin_master_data_product.html" class="dfms-nav-link" data-nav-id="products">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Products</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-gate">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-gate"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-door-open"></i>
+            </span>
+            <span class="dfms-nav-group-label">Gate</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="vehicle entry (gate-in)">
+                <a href="admin_operations_gatein_add.html" class="dfms-nav-link" data-nav-id="gate_in">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicle Entry (Gate-In)</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="vehicle exit (gate-out)">
+                <a href="admin_operations_gateout_add.html" class="dfms-nav-link" data-nav-id="gate_out">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicle Exit (Gate-Out)</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="active visits">
+                <a href="admin_operations_gatevisitsession_status_exact_active.html" class="dfms-nav-link" data-nav-id="gate_active_visits">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Active Visits</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="visit history">
+                <a href="admin_operations_gatevisitsession.html" class="dfms-nav-link" data-nav-id="gate_visit_history">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Visit History</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="on-demand to">
+                <a href="admin_operations_gateondemandtorequest.html" class="dfms-nav-link" data-nav-id="gate_on_demand_to">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">On-Demand TO</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-command-center">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-command-center"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-speedometer2"></i>
+            </span>
+            <span class="dfms-nav-group-label">Command Center</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="queue">
+                <a href="admin_operations_queueentry_status_exact_waiting.html" class="dfms-nav-link" data-nav-id="cc_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Queue</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="bay assignments">
+                <a href="admin_operations_bayassignment.html" class="dfms-nav-link" data-nav-id="cc_bay_assignments">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Bay Assignments</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="waiting serials">
+                <a href="admin_operations_waitingserial.html" class="dfms-nav-link" data-nav-id="cc_waiting_serials">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Waiting Serials</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-loading">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-loading"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-box-arrow-up"></i>
+            </span>
+            <span class="dfms-nav-group-label">Loading</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="load events">
+                <a href="admin_operations_loadevent.html" class="dfms-nav-link" data-nav-id="ld_load_events">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Load Events</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="start loading">
+                <a href="admin_operations_loadevent_add.html" class="dfms-nav-link" data-nav-id="ld_new_load_event">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Start Loading</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-unloading">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-unloading"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-box-arrow-down"></i>
+            </span>
+            <span class="dfms-nav-group-label">Unloading</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="unload events">
+                <a href="admin_operations_unloadevent.html" class="dfms-nav-link" data-nav-id="ld_unload_events">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Unload Events</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="start unloading">
+                <a href="admin_operations_unloadevent_add.html" class="dfms-nav-link" data-nav-id="ld_new_unload_event">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Start Unloading</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-qc-checkpoint">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-qc-checkpoint"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-clipboard2-pulse"></i>
+            </span>
+            <span class="dfms-nav-group-label">QC Checkpoint</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="qc queue">
+                <a href="admin_quality_qcqueuetransportorder.html" class="dfms-nav-link" data-nav-id="qc_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">QC Queue</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-scaling">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-scaling"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-speedometer"></i>
+            </span>
+            <span class="dfms-nav-group-label">Scaling</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="scale-in">
+                <a href="admin_operations_scalein_add.html" class="dfms-nav-link" data-nav-id="scale_in">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Scale-In</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="scale-out">
+                <a href="admin_operations_scaleout_add.html" class="dfms-nav-link" data-nav-id="scale_out">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Scale-Out</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="queue tokens">
+                <a href="admin_operations_queuetoken.html" class="dfms-nav-link" data-nav-id="queue_tokens">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Queue Tokens</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="gate passes">
+                <a href="admin_operations_scaleout.html" class="dfms-nav-link" data-nav-id="gate_passes_scaling">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Gate Passes</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-fleet-operations">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-fleet-operations"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-clipboard2-check"></i>
+            </span>
+            <span class="dfms-nav-group-label">Fleet operations</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="dispatch queue">
+                <a href="admin_fleet_supervisor_vehicleinspection_dispatch_queue.html" class="dfms-nav-link" data-nav-id="fleet_dispatch_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Dispatch queue</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="under maintenance">
+                <a href="admin_fleet_supervisor_vehicleinspection_maintenance_queue.html" class="dfms-nav-link" data-nav-id="fleet_maintenance_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Under Maintenance</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="inspection records">
+                <a href="admin_fleet_supervisor_vehicleinspection.html" class="dfms-nav-link" data-nav-id="fleet_inspection_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Inspection records</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-driver-management">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-driver-management"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-person-badge"></i>
+            </span>
+            <span class="dfms-nav-group-label">Driver Management</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="driver attendance">
+                <a href="admin_fleet_supervisor_driverattendance.html" class="dfms-nav-link" data-nav-id="fleet_attendance">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Driver Attendance</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="driver leave management">
+                <a href="admin_fleet_supervisor_driverleave.html" class="dfms-nav-link" data-nav-id="fleet_leave">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Driver Leave Management</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-trips">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-trips"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-phone"></i>
+            </span>
+            <span class="dfms-nav-group-label">Trips</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="my trips">
+                <a href="admin_transport_drivertransportorder_assigned_driver_me.html" class="dfms-nav-link" data-nav-id="driver_my_tos">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">My Trips</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="pod records">
+                <a href="admin_transport_proofofdelivery.html" class="dfms-nav-link" data-nav-id="driver_pod_records">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">POD Records</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-vendors">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-vendors"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-building"></i>
+            </span>
+            <span class="dfms-nav-group-label">Vendors</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="vendors">
+                <a href="vendors.html" class="dfms-nav-link" data-nav-id="vendors">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vendors</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-users-access">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-users-access"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-people"></i>
+            </span>
+            <span class="dfms-nav-group-label">Users &amp; Access</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="users">
+                <a href="admin_users_user.html" class="dfms-nav-link" data-nav-id="users">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Users</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="drivers">
+                <a href="admin_users_driver.html" class="dfms-nav-link" data-nav-id="drivers">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Drivers</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="audit logs">
+                <a href="admin_audit_auditlog.html" class="dfms-nav-link" data-nav-id="audit_logs">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Audit Logs</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+    
+
+    
+    
+    
+
+  </div>
+
+  
+  <div class="dfms-nav-footer">
+    <span class="dfms-nav-footer-text">Optilogist</span>
+  </div>
+
+</nav>
+
+
+      
+      <main id="content-start" class="content" tabindex="-1">
+        
+          
+        
+        <!-- Content -->
+        <div id="content" class="colM">
+          
+          
+          
+          
+<div id="content-main" class="live-gps-page">
+  <div class="live-gps-shell">
+    
+<div id="live-gps-map"></div>
+
+    <div class="live-gps-toolbar" id="live-gps-status">Loading…</div>
+
+
+<div class="live-gps-objects" id="live-gps-objects">
+      <div class="live-gps-objects__head" title="Drag to move">
+        <div class="live-gps-tabs" role="tablist" aria-label="Panel view">
+          <button type="button" class="live-gps-tab is-active" id="live-gps-tab-fleet" role="tab" aria-selected="true">
+            Fleet
+            <span class="live-gps-objects__head-count" id="live-gps-count">(0)</span>
+          </button>
+          <button type="button" class="live-gps-tab" id="live-gps-tab-history" role="tab" aria-selected="false">
+            History
+          </button>
+        </div>
+        <button type="button" class="live-gps-objects__toggle live-gps-ui-btn" id="objects-collapse" title="Hide vehicle list" aria-label="Hide vehicle list" aria-expanded="true" aria-controls="live-gps-list">
+          <i class="bi bi-chevron-down live-gps-bi live-gps-bi--sm" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="live-gps-objects__toolbar">
+        <div class="live-gps-objects__search">
+          <i class="bi bi-search live-gps-objects__search-ico live-gps-bi" aria-hidden="true"></i>
+          <input
+            type="search"
+            class="live-gps-objects__search-input"
+            id="live-gps-objects-search"
+            placeholder="Search registration or TO…"
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </div>
+        <div class="live-gps-objects__filters">
+          <div class="live-gps-objects__filter-wrap">
+            <button
+              type="button"
+              class="live-gps-objects__filter-btn live-gps-ui-btn"
+              id="live-gps-status-filter-btn"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="live-gps-status-filter-menu"
+              title="Filter by TO status"
+            >
+              <i class="bi bi-sliders live-gps-bi live-gps-bi--sm" aria-hidden="true"></i>
+              <span class="live-gps-objects__filter-label">Filter by TO status</span>
+            </button>
+            <div
+              class="live-gps-objects__filter-menu"
+              id="live-gps-status-filter-menu"
+              role="menu"
+              hidden
+            ></div>
+          </div>
+          <div class="live-gps-objects__filter-wrap">
+            <button
+              type="button"
+              class="live-gps-objects__filter-btn live-gps-ui-btn"
+              id="live-gps-vehicle-status-filter-btn"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="live-gps-vehicle-status-filter-menu"
+              title="Filter by vehicle status"
+            >
+              <i class="bi bi-truck-front-fill live-gps-bi live-gps-bi--sm" aria-hidden="true"></i>
+              <span class="live-gps-objects__filter-label">Filter by vehicle status</span>
+            </button>
+            <div
+              class="live-gps-objects__filter-menu"
+              id="live-gps-vehicle-status-filter-menu"
+              role="menu"
+              hidden
+            ></div>
+          </div>
+        </div>
+      </div>
+      <div class="live-gps-objects__list" id="live-gps-list">
+        <div class="live-gps-empty">Loading…</div>
+      </div>
+
+      <div id="live-gps-history-modal" class="live-gps-history-modal is-hidden" aria-hidden="true">
+        <div class="live-gps-history-modal__scroll" id="live-gps-history-modal-body">
+          <div class="live-gps-history-modal__form">
+            <div class="live-gps-history-modal__field">
+              <label for="live-gps-history-device-trigger">Device</label>
+              <div class="live-gps-history-device-field" id="live-gps-history-device-field">
+                <button
+                  type="button"
+                  class="live-gps-history-device-field__trigger"
+                  id="live-gps-history-device-trigger"
+                  aria-haspopup="listbox"
+                  aria-expanded="false"
+                  aria-controls="live-gps-history-device-menu"
+                ></button>
+                <select id="live-gps-history-device" class="live-gps-history-device-field__native" tabindex="-1" aria-hidden="true"></select>
+                <div class="live-gps-history-device-field__menu" id="live-gps-history-device-menu" role="listbox" hidden></div>
+              </div>
+            </div>
+            <div class="live-gps-history-modal__field">
+              <label>Date range</label>
+              <div class="live-gps-history-presets" id="live-gps-history-presets">
+                <button type="button" class="live-gps-history-preset" data-range="last_hour">Last hour</button>
+                <button type="button" class="live-gps-history-preset" data-range="today">Today</button>
+                <button type="button" class="live-gps-history-preset" data-range="yesterday">Yesterday</button>
+              </div>
+              <div class="live-gps-history-range-inline">
+                <button type="button" class="live-gps-history-range-box" id="live-gps-history-from-box">
+                  <span class="live-gps-history-range-box__label">From</span>
+                  <span class="live-gps-history-range-box__date" id="live-gps-history-from-date">Select date</span>
+                  <span class="live-gps-history-range-box__time" id="live-gps-history-from-time"></span>
+                </button>
+                <button type="button" class="live-gps-history-range-box" id="live-gps-history-to-box">
+                  <span class="live-gps-history-range-box__label">To</span>
+                  <span class="live-gps-history-range-box__date" id="live-gps-history-to-date">Select date</span>
+                  <span class="live-gps-history-range-box__time" id="live-gps-history-to-time"></span>
+                </button>
+              </div>
+            </div>
+            <div class="live-gps-history-modal__actions">
+              <button type="button" class="live-gps-history-modal__show" id="live-gps-history-show">
+                <i class="bi bi-clock-history live-gps-bi live-gps-bi--sm" aria-hidden="true"></i>
+                Show history
+              </button>
+            </div>
+          </div>
+          <div class="live-gps-history-modal__list-wrap" id="live-gps-history-list-wrap">
+            <div class="live-gps-history-results-head is-hidden" id="live-gps-history-results-head" hidden>
+              <span class="live-gps-history-results-head__count" id="live-gps-history-results-count"></span>
+              <button type="button" class="live-gps-history-results-head__download" id="live-gps-history-download" disabled title="Export CSV" aria-label="Export CSV"><i class="bi bi-download live-gps-bi live-gps-bi--sm" aria-hidden="true"></i></button>
+            </div>
+            <div class="live-gps-history-to-card is-hidden" id="live-gps-history-to-toolbar">
+              <div class="live-gps-history-to-card__actions">
+                <button
+                  type="button"
+                  class="live-gps-history-to-back"
+                  id="live-gps-history-to-back"
+                  title="Back to transport orders"
+                  aria-label="Back to transport orders"
+                >
+                  <i class="bi bi-arrow-left live-gps-bi live-gps-bi--sm" aria-hidden="true"></i>
+                </button>
+                <a
+                  href="#"
+                  class="live-gps-history-open-to is-hidden"
+                  id="live-gps-history-open-to"
+                  aria-label="Open TO"
+                >
+                  <span class="live-gps-history-open-to__label">Open TO</span>
+                  <i class="bi bi-box-arrow-up-right live-gps-bi live-gps-bi--sm" aria-hidden="true"></i>
+                </a>
+              </div>
+              <div class="live-gps-history-to-card__id">
+                <span class="live-gps-history-to-card__eyebrow" id="live-gps-history-to-toolbar-eyebrow"></span>
+                <span class="live-gps-history-to-card__to-number" id="live-gps-history-to-toolbar-title"></span>
+                <span class="live-gps-history-to-card__idle-meta is-hidden" id="live-gps-history-to-toolbar-subtitle"></span>
+              </div>
+              <div class="live-gps-history-to-card__stats is-hidden" id="live-gps-history-to-toolbar-stats" aria-hidden="true">
+                <div class="live-gps-history-to-card__stat">
+                  <span class="live-gps-history-to-card__stat-label">Started</span>
+                  <span class="live-gps-history-to-card__stat-value" id="live-gps-history-to-stat-start">—</span>
+                </div>
+                <div class="live-gps-history-to-card__stat">
+                  <span class="live-gps-history-to-card__stat-label">Duration</span>
+                  <span class="live-gps-history-to-card__stat-value" id="live-gps-history-to-stat-duration">—</span>
+                </div>
+                <div class="live-gps-history-to-card__stat">
+                  <span class="live-gps-history-to-card__stat-label">Distance</span>
+                  <span class="live-gps-history-to-card__stat-value" id="live-gps-history-to-stat-distance">—</span>
+                </div>
+              </div>
+              <div class="live-gps-history-to-card__route is-hidden" id="live-gps-history-to-toolbar-rail" aria-hidden="true">
+                <div class="live-gps-history-to-card__codes">
+                  <span class="live-gps-history-to-card__dot live-gps-history-to-card__dot--origin" aria-hidden="true"></span>
+                  <span class="live-gps-history-to-card__code" id="live-gps-history-to-origin-name"></span>
+                  <i class="bi bi-arrow-right live-gps-history-to-card__arrow" aria-hidden="true"></i>
+                  <span class="live-gps-history-to-card__code live-gps-history-to-card__code--dest" id="live-gps-history-to-dest-name"></span>
+                  <span class="live-gps-history-to-card__dot live-gps-history-to-card__dot--dest" aria-hidden="true"></span>
+                </div>
+              </div>
+            </div>
+            <div class="live-gps-history-modal__list" id="live-gps-history-activity-list">
+              <div class="live-gps-history-modal__empty">Select a transport order and date, then Show history.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<div class="live-gps-dock-wrap" id="live-gps-dock-wrap">
+  <div class="live-gps-dock" id="live-gps-detail">
+    <div class="live-gps-dock__cards">
+      <section class="live-gps-panel live-gps-panel--vehicle" id="live-gps-dock-panel">
+        <div class="live-gps-panel__head">
+          <span class="live-gps-panel__ico" aria-hidden="true">
+            <i class="bi bi-truck-front-fill live-gps-bi live-gps-bi--sm"></i>
+          </span>
+          <span class="live-gps-panel__head-title" id="detail-reg">—</span>
+          <span class="live-gps-obj__dot" id="detail-movement-dot"></span>
+          <span class="live-gps-dock__head-speed" id="detail-speed-head">—</span>
+          <button type="button" class="live-gps-dock__collapse live-gps-ui-btn" id="dock-panel-collapse" title="Hide details" aria-label="Hide details" aria-expanded="true" aria-controls="live-gps-dock-body">
+            <i class="bi bi-chevron-down live-gps-bi live-gps-bi--sm" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="live-gps-panel__body" id="live-gps-dock-body">
+          <div class="live-gps-panel__row live-gps-panel__row--driver">
+            <span class="live-gps-panel__row-label">Driver</span>
+            <span class="live-gps-panel__row-value" id="detail-driver">—</span>
+          </div>
+          <div class="live-gps-panel__row live-gps-panel__row--address">
+            <span class="live-gps-panel__row-label">Address</span>
+            <span class="live-gps-panel__row-value">
+              <span id="detail-address">—</span>
+              <button type="button" class="live-gps-panel__eye" id="detail-address-map" title="Open in maps" aria-label="Open in maps"><i class="bi bi-eye-fill live-gps-bi live-gps-bi--sm" aria-hidden="true"></i></button>
+            </span>
+          </div>
+          <div class="live-gps-panel__row live-gps-panel__row--geofence" id="live-gps-dock-geofence-row" hidden>
+            <span class="live-gps-panel__row-label">Geofence</span>
+            <span class="live-gps-panel__row-value" id="detail-geofence"></span>
+          </div>
+          <div class="live-gps-panel__row">
+            <span class="live-gps-panel__row-label">Time</span>
+            <span class="live-gps-panel__row-value" id="detail-time">—</span>
+          </div>
+          <div class="live-gps-panel__row">
+            <span class="live-gps-panel__row-label">Stop duration</span>
+            <span class="live-gps-panel__row-value" id="detail-stop">—</span>
+          </div>
+          <span id="detail-trip" class="live-gps-sr-only" aria-hidden="true">—</span>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<div id="live-gps-obj-menu" class="live-gps-obj-menu" role="menu" hidden></div>
+
+
+<div id="live-gps-date-modal" class="live-gps-date-modal is-hidden" aria-hidden="true">
+      <div class="live-gps-date-modal__backdrop" id="live-gps-date-modal-backdrop"></div>
+      <div class="live-gps-date-modal__dialog" role="dialog" aria-labelledby="live-gps-date-modal-title">
+        <div class="live-gps-date-modal__header">
+          <span class="live-gps-date-modal__header-ico" aria-hidden="true">
+            <i class="bi bi-calendar-event-fill live-gps-bi live-gps-bi--md"></i>
+          </span>
+          <span class="live-gps-date-modal__header-title" id="live-gps-date-modal-title">Select date</span>
+          <button type="button" class="live-gps-date-modal__close" id="live-gps-date-modal-close" aria-label="Close"><i class="bi bi-x-lg live-gps-bi live-gps-bi--sm" aria-hidden="true"></i></button>
+        </div>
+        <div class="live-gps-date-modal__body">
+          <aside class="live-gps-date-modal__presets" id="live-gps-date-modal-presets">
+            <button type="button" class="live-gps-date-modal__preset" data-preset="today">Today</button>
+            <button type="button" class="live-gps-date-modal__preset" data-preset="yesterday">Yesterday</button>
+            <button type="button" class="live-gps-date-modal__preset" data-preset="before_2_days">Before 2 days</button>
+            <button type="button" class="live-gps-date-modal__preset" data-preset="before_3_days">Before 3 days</button>
+            <button type="button" class="live-gps-date-modal__preset" data-preset="this_week">This week</button>
+            <button type="button" class="live-gps-date-modal__preset" data-preset="last_week">Last week</button>
+            <button type="button" class="live-gps-date-modal__preset" data-preset="this_month">This month</button>
+            <button type="button" class="live-gps-date-modal__preset" data-preset="last_month">Last month</button>
+          </aside>
+          <div class="live-gps-date-modal__calendars">
+            <div class="live-gps-date-modal__cal-nav">
+              <button type="button" class="live-gps-date-modal__nav" id="live-gps-history-cal-prev" aria-label="Previous month"><i class="bi bi-chevron-left live-gps-bi live-gps-bi--md" aria-hidden="true"></i></button>
+              <div class="live-gps-date-modal__dual">
+                <div class="live-gps-date-modal__month">
+                  <div class="live-gps-date-modal__month-title" id="live-gps-history-cal-title-left"></div>
+                  <div class="live-gps-date-modal__weekdays" id="live-gps-history-cal-weekdays-left"></div>
+                  <div class="live-gps-date-modal__grid" id="live-gps-history-cal-grid-left"></div>
+                </div>
+                <div class="live-gps-date-modal__month">
+                  <div class="live-gps-date-modal__month-title" id="live-gps-history-cal-title-right"></div>
+                  <div class="live-gps-date-modal__weekdays" id="live-gps-history-cal-weekdays-right"></div>
+                  <div class="live-gps-date-modal__grid" id="live-gps-history-cal-grid-right"></div>
+                </div>
+              </div>
+              <button type="button" class="live-gps-date-modal__nav" id="live-gps-history-cal-next" aria-label="Next month"><i class="bi bi-chevron-right live-gps-bi live-gps-bi--md" aria-hidden="true"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="live-gps-date-modal__footer">
+          <div class="live-gps-date-modal__inputs">
+            <div class="live-gps-date-modal__row">
+              <label for="live-gps-history-date-from">From</label>
+              <input type="text" id="live-gps-history-date-from" placeholder="DD-MM-YYYY" autocomplete="off" />
+              <input type="text" id="live-gps-history-time-from" placeholder="12:00 AM" autocomplete="off" />
+            </div>
+            <div class="live-gps-date-modal__row">
+              <label for="live-gps-history-date-to">To</label>
+              <input type="text" id="live-gps-history-date-to" placeholder="DD-MM-YYYY" autocomplete="off" />
+              <input type="text" id="live-gps-history-time-to" placeholder="11:59 PM" autocomplete="off" />
+            </div>
+          </div>
+          <div class="live-gps-date-modal__actions">
+            <button type="button" class="live-gps-date-modal__cancel" id="live-gps-date-modal-cancel">Cancel</button>
+            <button type="button" class="live-gps-date-modal__set" id="live-gps-date-modal-set">Set date</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<div id="live-gps-command-modal" class="live-gps-command-modal is-hidden" aria-hidden="true">
+      <div class="live-gps-command-modal__backdrop" id="live-gps-command-modal-backdrop"></div>
+      <div class="live-gps-command-modal__dialog" role="dialog" aria-labelledby="live-gps-command-modal-title">
+        <div class="live-gps-command-modal__header">
+          <span class="live-gps-command-modal__header-ico" aria-hidden="true">
+            <i class="bi bi-send-fill live-gps-bi live-gps-bi--md"></i>
+          </span>
+          <span class="live-gps-command-modal__title" id="live-gps-command-modal-title">Send command</span>
+          <button type="button" class="live-gps-command-modal__close" id="live-gps-command-modal-close" aria-label="Close"><i class="bi bi-x-lg live-gps-bi live-gps-bi--sm" aria-hidden="true"></i></button>
+        </div>
+        <div class="live-gps-command-modal__body">
+          <div class="live-gps-command-modal__field">
+            <label>Connection</label>
+            <div class="live-gps-command-modal__radios" role="radiogroup" aria-label="Connection">
+              <label class="live-gps-command-modal__radio">
+                <input type="radio" name="live-gps-command-connection" value="gprs" checked />
+                <span>GPRS</span>
+              </label>
+              <label class="live-gps-command-modal__radio">
+                <input type="radio" name="live-gps-command-connection" value="sms" />
+                <span>SMS</span>
+              </label>
+            </div>
+          </div>
+          <div class="live-gps-command-modal__sms-notice" id="live-gps-command-sms-notice" hidden>
+            If you want to send SMS commands, please enable the SMS Gateway first
+            <strong>SMS gateway</strong>
+          </div>
+          <div id="live-gps-command-gprs-panel">
+            <label class="live-gps-command-modal__check">
+              <input type="checkbox" id="live-gps-command-auto-send" />
+              <span>Auto-send when online</span>
+            </label>
+            <div class="live-gps-command-modal__field">
+              <label for="live-gps-command-fleet">Fleet</label>
+              <select id="live-gps-command-fleet"></select>
+            </div>
+            <div class="live-gps-command-modal__field">
+              <label for="live-gps-command-type">Type</label>
+              <select id="live-gps-command-type">
+                <option value="">Select type…</option>
+                <option value="engine_resume">Engine Resume</option>
+                <option value="engine_stop">Engine Stop</option>
+                <option value="custom">Custom command</option>
+              </select>
+            </div>
+            <div class="live-gps-command-modal__custom" id="live-gps-command-custom">
+              <div class="live-gps-command-modal__field">
+                <label for="live-gps-command-message">Message</label>
+                <textarea id="live-gps-command-message" placeholder="Insert message…"></textarea>
+              </div>
+              <div class="live-gps-command-modal__hints">
+                <div>RAW command (only text commands are supported)</div>
+                <div>You can use these variables: [%IMEI%] — the selected device IMEI</div>
+              </div>
+            </div>
+            <div class="live-gps-command-modal__warn" id="live-gps-command-modal-warn" hidden>
+              Vehicle must be below 20 km/h before engine stop or resume commands.
+            </div>
+          </div>
+          <div class="live-gps-command-modal__status" id="live-gps-command-modal-status"></div>
+        </div>
+        <div class="live-gps-command-modal__footer">
+          <button type="button" class="live-gps-command-modal__btn live-gps-command-modal__btn--cancel" id="live-gps-command-cancel">Cancel</button>
+          <button type="button" class="live-gps-command-modal__btn live-gps-command-modal__btn--send" id="live-gps-command-send" disabled>Send command</button>
+        </div>
+      </div>
+    </div>
+
+
+<div id="live-gps-history" class="live-gps-history is-hidden" aria-hidden="true">
+      <div class="live-gps-history__head">
+        <div>
+          <div class="live-gps-history__title"><i class="bi bi-clock-history live-gps-bi live-gps-bi--sm" aria-hidden="true"></i>History</div>
+          <div class="live-gps-history__subtitle" id="live-gps-history-subtitle">—</div>
+        </div>
+        <div class="live-gps-history__head-actions">
+          <button type="button" class="live-gps-history__collapse" id="live-gps-history-collapse" aria-expanded="true" title="Collapse chart" aria-label="Collapse chart"><i class="bi bi-chevron-down live-gps-bi live-gps-bi--sm" aria-hidden="true"></i></button>
+          <button type="button" class="live-gps-history__close" id="live-gps-history-close" aria-label="Close history"><i class="bi bi-x-lg live-gps-bi live-gps-bi--sm" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <div class="live-gps-history__compact" id="live-gps-history-compact">
+        <div class="live-gps-history__playback">
+          <button type="button" class="live-gps-history__play-btn" id="live-gps-history-play-compact" title="Play" aria-label="Play"><i class="bi bi-play-fill live-gps-bi live-gps-bi--sm" aria-hidden="true"></i></button>
+          <button type="button" class="live-gps-history__play-btn" id="live-gps-history-stop-compact" title="Stop" aria-label="Stop"><i class="bi bi-stop-fill live-gps-bi live-gps-bi--sm" aria-hidden="true"></i></button>
+          <button type="button" class="live-gps-history__play-btn live-gps-history__speed-btn" id="live-gps-history-speed-compact" title="Playback speed" aria-label="Playback speed">1x</button>
+        </div>
+        <div class="live-gps-history__readout" id="live-gps-history-readout-compact">
+          <span class="live-gps-history__readout-val" id="live-gps-history-readout-val-compact">—</span>
+          <span class="live-gps-history__readout-time" id="live-gps-history-readout-time-compact">—</span>
+        </div>
+      </div>
+      <div class="live-gps-history__body" id="live-gps-history-body">
+        <div class="live-gps-history__controls">
+          <div class="live-gps-history__playback">
+            <button type="button" class="live-gps-history__play-btn" id="live-gps-history-play" title="Play" aria-label="Play"><i class="bi bi-play-fill live-gps-bi live-gps-bi--sm" aria-hidden="true"></i></button>
+            <button type="button" class="live-gps-history__play-btn" id="live-gps-history-stop" title="Stop" aria-label="Stop"><i class="bi bi-stop-fill live-gps-bi live-gps-bi--sm" aria-hidden="true"></i></button>
+            <button type="button" class="live-gps-history__play-btn live-gps-history__speed-btn" id="live-gps-history-speed" title="Playback speed" aria-label="Playback speed">1x</button>
+          </div>
+          <div class="live-gps-history__readout" id="live-gps-history-readout">
+            <span class="live-gps-history__readout-val" id="live-gps-history-readout-val">—</span>
+            <span class="live-gps-history__readout-time" id="live-gps-history-readout-time">—</span>
+          </div>
+          <div class="live-gps-history__zoom" role="group" aria-label="Chart zoom">
+            <button type="button" class="live-gps-history__zoom-btn" id="live-gps-history-zoom-in" title="Zoom in" aria-label="Zoom in"><i class="bi bi-zoom-in live-gps-bi live-gps-bi--sm" aria-hidden="true"></i></button>
+            <button type="button" class="live-gps-history__zoom-btn" id="live-gps-history-zoom-out" title="Zoom out" aria-label="Zoom out"><i class="bi bi-zoom-out live-gps-bi live-gps-bi--sm" aria-hidden="true"></i></button>
+            <button type="button" class="live-gps-history__zoom-btn" id="live-gps-history-zoom-reset" title="Reset zoom" aria-label="Reset zoom"><i class="bi bi-arrow-counterclockwise live-gps-bi live-gps-bi--sm" aria-hidden="true"></i></button>
+          </div>
+        </div>
+        <div class="live-gps-history__chart-wrap" id="live-gps-history-chart-wrap">
+          <canvas id="live-gps-history-canvas"></canvas>
+          <div class="live-gps-history__empty is-hidden" id="live-gps-history-empty">No history data for this period.</div>
+        </div>
+        <div class="live-gps-history__seek-row">
+          <div class="live-gps-history__seek">
+            <span class="live-gps-history__seek-edge" id="live-gps-history-seek-start">—</span>
+            <div class="live-gps-history__seek-track" id="live-gps-history-seek-track">
+              <div class="live-gps-history__seek-rail"></div>
+              <div class="live-gps-history__seek-fill" id="live-gps-history-seek-fill"></div>
+              <button type="button" class="live-gps-history__seek-thumb" id="live-gps-history-seek-thumb" aria-label="Scrub history"></button>
+            </div>
+            <span class="live-gps-history__seek-edge live-gps-history__seek-edge--end" id="live-gps-history-seek-end">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<div id="live-gps-follow-stack" class="live-gps-follow-stack" aria-live="polite"></div>
+
+
+  </div>
+</div>
+
+<script src="static/tracking/js/utils.js"></script>
+<script src="static/tracking/js/poi-type-icons.js"></script>
+<script src="static/tracking/js/live-gps-app.js"></script>
+
+          
+          <br class="clear">
+        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
+      </main>
+    </div>
+</div>
+<!-- END Container -->
+
+<!-- SVGs -->
+<svg xmlns="http://www.w3.org/2000/svg" class="base-svgs">
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"/></symbol>
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"/></symbol>
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></symbol>
+</svg>
+<!-- END SVGs -->
+</body>
+</html>

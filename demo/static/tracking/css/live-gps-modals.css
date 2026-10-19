@@ -1,0 +1,1073 @@
+/* Live GPS — menus, modals, follow panel, popups. Requires live-gps-tokens.css */
+
+.live-gps-obj-menu {
+  position: fixed;
+  z-index: 1200;
+  min-width: 232px;
+  border-radius: var(--lg-radius-md);
+  padding: 5px;
+  overflow: visible;
+}
+
+.live-gps-obj-menu[hidden] {
+  display: none;
+}
+
+.live-gps-obj-menu__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  border: none;
+  background: transparent;
+  text-align: left;
+  padding: 9px 12px;
+  font-size: 13px;
+  color: var(--lg-ink);
+  cursor: pointer;
+  border-radius: var(--lg-radius-sm);
+  font-family: var(--lg-font);
+  font-weight: 500;
+  transition: background 0.12s ease;
+}
+
+.live-gps-obj-menu__item:hover:not(:disabled):not(.live-gps-obj-menu__item--link) {
+  background: var(--lg-accent);
+  color: #fff;
+}
+
+.live-gps-obj-menu__item:disabled, .live-gps-obj-menu__item--disabled {
+  color: var(--lg-ink-3);
+  cursor: default;
+}
+
+.live-gps-obj-menu__item--link {
+  color: var(--lg-accent);
+  text-decoration: none;
+}
+
+.live-gps-obj-menu__item--link .live-gps-obj-menu__ico {
+  color: var(--lg-accent);
+}
+
+.live-gps-obj-menu__item--link:hover:not(.live-gps-obj-menu__item--disabled) {
+  background: rgba(10, 132, 255, 0.1);
+  color: var(--lg-accent-strong);
+  text-decoration: underline;
+}
+
+.live-gps-obj-menu__item--link:hover:not(.live-gps-obj-menu__item--disabled) .live-gps-obj-menu__ico {
+  color: var(--lg-accent-strong);
+}
+
+.live-gps-obj-menu__ico {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--lg-ink-3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.live-gps-obj-menu__ico .live-gps-bi {
+  font-size: 14px;
+}
+
+.live-gps-obj-menu__sep {
+  height: 1px;
+  background: var(--lg-hairline);
+  margin: 4px 8px;
+}
+
+.live-gps-date-modal {
+  position: absolute;
+  inset: 0;
+  z-index: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  pointer-events: none;
+}
+
+.live-gps-date-modal.is-hidden {
+  display: none;
+}
+
+.live-gps-date-modal:not(.is-hidden) {
+  pointer-events: auto;
+}
+
+.live-gps-date-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.3);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+
+.live-gps-date-modal.is-open .live-gps-date-modal__backdrop {
+  opacity: 1;
+}
+
+.live-gps-date-modal__dialog {
+  position: relative;
+  z-index: 1;
+  width: min(720px, calc(100% - 24px));
+  background: var(--lg-surface-strong);
+  border-radius: var(--lg-radius-lg);
+  box-shadow: var(--lg-shadow-lg);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(12px) scale(0.98);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.live-gps-date-modal.is-open .live-gps-date-modal__dialog {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.live-gps-date-modal__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--lg-hairline);
+}
+
+.live-gps-date-modal__header-ico {
+  color: var(--lg-accent);
+  display: inline-flex;
+}
+
+.live-gps-date-modal__header-title {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--lg-ink);
+  font-family: var(--lg-font);
+  letter-spacing: -0.01em;
+}
+
+.live-gps-date-modal__close {
+  border: none;
+  background: transparent;
+  color: var(--lg-ink-3);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 2px 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.live-gps-date-modal__close:hover {
+  color: var(--lg-ink);
+}
+
+.live-gps-date-modal__body {
+  display: flex;
+  min-height: 280px;
+}
+
+.live-gps-date-modal__presets {
+  width: 118px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--lg-hairline);
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.live-gps-date-modal__preset {
+  border: none;
+  background: transparent;
+  text-align: left;
+  padding: 8px 14px;
+  font-size: 13px;
+  color: var(--lg-ink-2);
+  cursor: pointer;
+  font-family: var(--lg-font);
+  border-radius: 0 999px 999px 0;
+  margin-right: 8px;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.live-gps-date-modal__preset:hover, .live-gps-date-modal__preset.is-active {
+  background: var(--lg-accent-soft);
+  color: var(--lg-accent-strong);
+  font-weight: 600;
+}
+
+.live-gps-date-modal__calendars {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 10px 12px;
+}
+
+.live-gps-date-modal__cal-nav {
+  display: grid;
+  grid-template-columns: 28px 1fr 28px;
+  align-items: start;
+  gap: 4px;
+}
+
+.live-gps-date-modal__nav {
+  border: none;
+  background: transparent;
+  color: var(--lg-ink-3);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 8px 0;
+  margin-top: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.live-gps-date-modal__nav:hover {
+  color: var(--lg-accent);
+}
+
+.live-gps-date-modal__dual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.live-gps-date-modal__month-title {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--lg-ink);
+  padding: 6px 0 8px;
+}
+
+.live-gps-date-modal__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 4px;
+}
+
+.live-gps-date-modal__weekday {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--lg-ink-3);
+  text-align: center;
+  padding: 2px 0;
+}
+
+.live-gps-date-modal__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.live-gps-date-modal__day {
+  border: none;
+  background: transparent;
+  color: var(--lg-ink-2);
+  font-size: 12px;
+  font-weight: 500;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  margin: 1px auto;
+  width: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.live-gps-date-modal__day:hover:not(:disabled) {
+  background: var(--lg-accent-soft);
+  color: var(--lg-accent-strong);
+}
+
+.live-gps-date-modal__day--outside {
+  visibility: hidden; pointer-events: none;
+}
+
+.live-gps-date-modal__day--disabled {
+  color: var(--lg-ink-3);
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.live-gps-date-modal__day--in-range::before {
+  content: "";
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  top: 0;
+  bottom: 0;
+  background: var(--lg-accent-soft);
+  z-index: -1;
+  border-radius: 0;
+}
+
+.live-gps-date-modal__day--range-start::before {
+  left: 50%;
+  border-radius: 16px 0 0 16px;
+}
+
+.live-gps-date-modal__day--range-end::before {
+  right: 50%;
+  border-radius: 0 16px 16px 0;
+}
+
+.live-gps-date-modal__day--range-start.live-gps-date-modal__day--range-end::before {
+  left: 0;
+  right: 0;
+  border-radius: 16px;
+}
+
+.live-gps-date-modal__day--selected, .live-gps-date-modal__day--range-start, .live-gps-date-modal__day--range-end {
+  background: var(--lg-accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+.live-gps-date-modal__day--selected:hover:not(:disabled), .live-gps-date-modal__day--range-start:hover:not(:disabled), .live-gps-date-modal__day--range-end:hover:not(:disabled) {
+  background: var(--lg-accent-strong);
+  color: #fff;
+}
+
+.live-gps-date-modal__footer {
+  border-top: 1px solid var(--lg-hairline);
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.live-gps-date-modal__inputs {
+  flex: 1;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.live-gps-date-modal__row {
+  display: grid;
+  grid-template-columns: 42px 1fr 1fr;
+  gap: 8px;
+  align-items: center;
+}
+
+.live-gps-date-modal__row label {
+  font-size: 12px;
+  color: var(--lg-ink-3);
+  font-weight: 500;
+}
+
+.live-gps-date-modal__row input {
+  box-sizing: border-box;
+  border: 1px solid var(--lg-hairline);
+  border-radius: var(--lg-radius-sm);
+  padding: 8px 10px;
+  font-size: 13px;
+  color: var(--lg-ink);
+  background: var(--lg-surface-strong);
+  width: 100%;
+  font-family: var(--lg-font);
+}
+
+.live-gps-date-modal__row input:focus {
+  outline: none;
+  border-color: var(--lg-accent);
+  box-shadow: 0 0 0 2.5px var(--lg-accent-soft);
+}
+
+.live-gps-date-modal__actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.live-gps-date-modal__cancel {
+  border: 1px solid var(--lg-hairline);
+  background: transparent;
+  color: var(--lg-ink-2);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 9px 18px;
+  cursor: pointer;
+  font-family: var(--lg-font);
+}
+
+.live-gps-date-modal__cancel:hover {
+  background: var(--lg-muted-fill);
+  color: var(--lg-ink);
+}
+
+.live-gps-date-modal__set {
+  border: none;
+  background: var(--lg-accent);
+  color: #fff;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 9px 18px;
+  cursor: pointer;
+  font-family: var(--lg-font);
+  box-shadow: 0 4px 14px rgba(10, 132, 255, 0.35);
+}
+
+.live-gps-date-modal__set:hover {
+  background: var(--lg-accent-strong);
+}
+
+.live-gps-command-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 12000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.live-gps-command-modal.is-hidden {
+  display: none;
+}
+
+.live-gps-command-modal:not(.is-hidden) {
+  pointer-events: auto;
+}
+
+.live-gps-command-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.42);
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+.live-gps-command-modal.is-open .live-gps-command-modal__backdrop {
+  opacity: 1;
+}
+
+.live-gps-command-modal__dialog {
+  position: relative;
+  width: min(520px, calc(100vw - 32px));
+  background: var(--lg-surface-strong);
+  color: var(--lg-ink);
+  border-radius: 14px;
+  box-shadow: var(--lg-shadow-lg);
+  transform: translateY(8px) scale(0.98);
+  opacity: 0;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 48px);
+  border: 1px solid var(--lg-surface-border);
+}
+
+.live-gps-command-modal.is-open .live-gps-command-modal__dialog {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.live-gps-command-modal__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--lg-hairline);
+  flex-shrink: 0;
+}
+
+.live-gps-command-modal__title {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--lg-ink);
+}
+
+.live-gps-command-modal__close {
+  border: none;
+  background: transparent;
+  color: var(--lg-ink-3);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.live-gps-command-modal__close:hover {
+  color: var(--lg-ink);
+  background: var(--lg-muted-fill);
+}
+
+.live-gps-command-modal__body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+}
+
+.live-gps-command-modal__field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--lg-ink-2);
+  margin-bottom: 6px;
+}
+
+.live-gps-command-modal__field select, .live-gps-command-modal__field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--lg-card-border);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--lg-ink);
+  background: var(--lg-card-bg);
+}
+
+.live-gps-command-modal__field select {
+  min-height: 42px;
+  line-height: 1.5;
+  padding: 11px 36px 11px 12px;
+  appearance: auto;
+}
+
+.live-gps-command-modal__field textarea {
+  padding: 9px 10px;
+  min-height: 88px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.live-gps-command-modal__field select:focus, .live-gps-command-modal__field textarea:focus {
+  outline: none;
+  border-color: var(--lg-accent);
+  box-shadow: 0 0 0 2.5px var(--lg-accent-soft);
+}
+
+.live-gps-command-modal__sms-notice {
+  font-size: 14px;
+  color: #9f1239;
+  background: #fdf2f8;
+  border: 1px solid #fbcfe8;
+  border-radius: 10px;
+  padding: 14px 16px;
+  line-height: 1.5;
+}
+
+.live-gps-command-modal__sms-notice strong {
+  font-weight: 700;
+  color: #9f1239;
+}
+
+#live-gps-command-gprs-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.live-gps-command-modal__radios {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.live-gps-command-modal__radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--lg-ink-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.live-gps-command-modal__check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--lg-ink-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.live-gps-command-modal__custom {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.live-gps-command-modal__custom.is-visible {
+  display: flex;
+}
+
+.live-gps-command-modal__hints {
+  font-size: 12px;
+  color: var(--lg-ink-3);
+  line-height: 1.45;
+}
+
+.live-gps-command-modal__warn {
+  font-size: 12px;
+  color: #b45309;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.live-gps-command-modal__status {
+  font-size: 13px;
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: none;
+}
+
+.live-gps-command-modal__status.is-visible {
+  display: block;
+}
+
+.live-gps-command-modal__status--info {
+  color: #1d4ed8;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+}
+
+.live-gps-command-modal__status--ok {
+  color: #047857;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+}
+
+.live-gps-command-modal__status--error {
+  color: #b91c1c;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+}
+
+.live-gps-command-modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 12px 16px 16px;
+  border-top: 1px solid var(--lg-hairline);
+  flex-shrink: 0;
+}
+
+.live-gps-command-modal__btn {
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 9px 18px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.live-gps-command-modal__btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.live-gps-follow-stack {
+  position: absolute;
+  inset: 0;
+  z-index: 610;
+  pointer-events: none;
+}
+
+.live-gps-follow-stack .live-gps-follow {
+  pointer-events: auto;
+}
+
+.live-gps-follow {
+  position: absolute;
+  top: 72px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 611;
+  width: min(420px, calc(100% - 24px));
+  border-radius: var(--lg-radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.live-gps-follow__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--lg-hairline);
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+
+.live-gps-follow--dragging .live-gps-follow__head {
+  cursor: grabbing;
+}
+
+.live-gps-follow__head-title {
+  flex: 1;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--lg-ink);
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.01em;
+}
+
+.live-gps-follow__head-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.live-gps-follow__head-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  border-radius: 999px;
+  color: var(--lg-ink-3);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.live-gps-follow__head-btn:hover {
+  background: var(--lg-muted-fill);
+  color: var(--lg-ink);
+}
+
+.live-gps-follow__map {
+  position: relative;
+  z-index: 0;
+  height: 280px;
+  min-height: 280px;
+  width: 100%;
+  background: var(--lg-shell-bg);
+  --live-gps-follow-popup-max-h: 248px;
+  --live-gps-popup-viewport-h: 200px;
+}
+
+.leaflet-popup.live-gps-popup-wrap .leaflet-popup-content-wrapper {
+  border-radius: var(--lg-radius-lg);
+  padding: 0;
+  box-shadow: var(--lg-shadow-lg);
+  overflow: hidden;
+  box-sizing: border-box;
+  height: auto;
+  background: var(--lg-surface-strong);
+  -webkit-backdrop-filter: blur(22px) saturate(1.9);
+  backdrop-filter: blur(22px) saturate(1.9);
+}
+
+.leaflet-popup.live-gps-popup-wrap .leaflet-popup-content {
+  margin: 0;
+  width: 380px;
+  max-width: min(380px, calc(100vw - 48px));
+  height: auto;
+  box-sizing: border-box;
+}
+
+.live-gps-follow__map .leaflet-popup.live-gps-popup-wrap .leaflet-popup-content {
+  width: 340px;
+  max-width: min(340px, calc(100vw - 48px));
+}
+
+.leaflet-popup.live-gps-popup-wrap .leaflet-popup-tip {
+  background: var(--lg-surface-strong);
+}
+
+.leaflet-popup.live-gps-popup-wrap .leaflet-popup-tip-container {
+  width: 20px;
+  height: 11px;
+  margin-top: -3px;
+}
+
+.live-gps-popup {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  overflow: hidden;
+  font-size: 13px;
+  color: var(--lg-ink-2);
+  box-sizing: border-box;
+  font-family: var(--lg-font);
+}
+
+.live-gps-popup__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--lg-hairline);
+  gap: 8px;
+  background: transparent;
+}
+
+.live-gps-popup__title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--lg-ink);
+  min-width: 0;
+  flex: 1;
+  letter-spacing: -0.01em;
+}
+
+.live-gps-popup__title span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.live-gps-popup__nav-icon {
+  color: var(--lg-accent);
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.live-gps-popup__actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.live-gps-popup__tab {
+  color: var(--lg-ink-3);
+  font-size: 14px;
+  padding: 2px 4px;
+  border-bottom: 2px solid transparent;
+  display: inline-flex;
+  align-items: center;
+}
+
+.live-gps-popup__tab--active {
+  color: var(--lg-accent);
+  border-bottom-color: var(--lg-accent);
+}
+
+.live-gps-popup__close {
+  border: none;
+  border-radius: 999px;
+  width: 22px;
+  height: 22px;
+  line-height: 1;
+  text-align: center;
+  background: var(--lg-muted-fill);
+  cursor: pointer;
+  color: var(--lg-ink-3);
+  font-size: 14px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.live-gps-popup__viewport {
+  flex: 0 0 auto;
+  max-height: var(--live-gps-popup-viewport-h, 220px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 116, 139, 0.7) rgba(226, 232, 240, 0.55);
+  scrollbar-gutter: stable;
+}
+
+.live-gps-popup__viewport::-webkit-scrollbar {
+  width: 6px;
+}
+
+.live-gps-popup__viewport::-webkit-scrollbar-track {
+  background: rgba(226, 232, 240, 0.55);
+  border-radius: 999px;
+  margin: 4px 2px;
+}
+
+.live-gps-popup__viewport::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.7);
+  border-radius: 999px;
+  min-height: 28px;
+}
+
+.live-gps-popup__viewport::-webkit-scrollbar-thumb:hover {
+  background: rgba(71, 85, 105, 0.85);
+}
+
+.live-gps-popup__body {
+  padding: 12px 14px 4px;
+}
+
+.live-gps-popup__body > .live-gps-popup__row:last-child {
+  margin-bottom: 0;
+}
+
+.live-gps-popup__row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  line-height: 1.45;
+}
+
+.live-gps-popup__row strong {
+  flex: 0 0 100px;
+  font-weight: 600;
+  color: var(--lg-ink-3);
+}
+
+.live-gps-popup__row span, .live-gps-popup__row a {
+  flex: 1;
+  color: var(--lg-ink);
+  word-break: break-word;
+}
+
+.live-gps-popup__address-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  flex: 1;
+}
+
+.live-gps-popup__eye {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--lg-ink-3);
+  padding: 0;
+  font-size: 14px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+}
+
+.live-gps-popup__position-link {
+  color: var(--lg-accent);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.live-gps-obj-menu__item:hover:not(:disabled):not(.live-gps-obj-menu__item--link) .live-gps-obj-menu__ico {
+  color: #fff;
+}
+
+.live-gps-popup__position-link:hover {
+  text-decoration: underline;
+}
+
+.live-gps-command-modal__header-ico {
+  color: var(--lg-accent, #0a84ff);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.live-gps-command-modal__radio input {
+  accent-color: var(--lg-accent, #0a84ff);
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.live-gps-command-modal__check input {
+  accent-color: var(--lg-accent, #0a84ff);
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.live-gps-command-modal__btn--cancel {
+  border-color: var(--lg-accent, #0a84ff);
+  background: var(--lg-card-bg);
+  color: var(--lg-accent, #0a84ff);
+}
+
+.live-gps-command-modal__btn--cancel:hover:not(:disabled) {
+  background: var(--lg-accent-soft, rgba(10, 132, 255, 0.1));
+}
+
+.live-gps-command-modal__btn--send {
+  background: var(--lg-accent, #0a84ff);
+  color: #fff;
+  border-color: var(--lg-accent, #0a84ff);
+  font-family: var(--lg-font, inherit);
+  letter-spacing: -0.01em;
+  box-shadow: 0 4px 14px rgba(10, 132, 255, 0.35);
+  transition: background 0.15s ease;
+}
+
+.live-gps-command-modal__btn--send:hover:not(:disabled) {
+  background: var(--lg-accent-strong, #0064d2);
+}
+
+.live-gps-popup__close:hover {
+  background: rgba(0, 0, 0, 0.12);
+  color: var(--lg-ink);
+}
+
+/* Dark mode — menus, modals, popups */
+[data-theme="dark"] .live-gps-obj-menu__item:disabled,
+[data-theme="dark"] .live-gps-obj-menu__item--disabled {
+  color: var(--lg-ink-3);
+}
+
+[data-theme="dark"] .live-gps-obj-menu__ico {
+  color: var(--lg-ink-3);
+}
+
+[data-theme="dark"] .live-gps-obj-menu__item--link:hover:not(.live-gps-obj-menu__item--disabled) {
+  background: var(--lg-accent-soft);
+}
+
+[data-theme="dark"] .live-gps-popup__close:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--lg-ink);
+}
+
+[data-theme="dark"] .live-gps-command-modal__btn--cancel {
+  background: var(--lg-card-bg);
+  color: var(--lg-accent);
+}
+
+[data-theme="dark"] .live-gps-date-modal__dialog,
+[data-theme="dark"] .live-gps-command-modal__dialog {
+  color: var(--lg-ink);
+}
+
+[data-theme="dark"] .live-gps-date-modal input,
+[data-theme="dark"] .live-gps-command-modal input,
+[data-theme="dark"] .live-gps-command-modal select,
+[data-theme="dark"] .live-gps-command-modal textarea {
+  background: var(--lg-muted-fill);
+  border-color: var(--lg-card-border);
+  color: var(--lg-ink);
+}

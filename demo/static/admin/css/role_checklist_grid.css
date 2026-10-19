@@ -1,0 +1,106 @@
+/* TUM-06 — Roles checklist (InviteUserForm / UserAdminForm)
+   Django 5's CheckboxSelectMultiple renders <div id="id_role"><div>...
+   </div>...</div> (no <ul>/<li>). Two-column grid for unchecked roles.
+   A checked local role spans the full row; its Select2 chips stack
+   underneath the checkbox (not beside it, not inside the <label>). */
+
+.field-role #id_role {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 32px;
+  align-items: start;
+}
+
+.field-role #id_role > div {
+  padding: 4px 0;
+  min-width: 0;
+  overflow: visible;
+}
+
+.field-role #id_role > div.dfms-role-has-sites {
+  grid-column: 1 / -1;
+  padding: 10px 12px 12px;
+  background: var(--dfms-grey-50, #F9FAFB);
+  border: 1px solid var(--dfms-grey-200, #E5E7EB);
+  border-radius: var(--dfms-radius-sm, 4px);
+}
+
+.field-role #id_role > div:not(.dfms-role-has-sites) .form-row {
+  display: none !important;
+}
+
+/* Django renders poi_role_* as fieldset rows; hide until JS moves them
+   under the matching role checkbox. After the move they are no longer
+   direct children of .aligned. */
+.aligned > .form-row[class*="field-poi_role_"] {
+  display: none !important;
+}
+
+.field-role #id_role > div > label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+/* Reset Django .aligned / .flex-container so the nested Sites picker
+   is a full-width block under the role name, not a side-by-side gutter. */
+.field-role #id_role > div.dfms-role-has-sites .form-row,
+.aligned .field-role #id_role > div.dfms-role-has-sites .form-row,
+body.change-form .aligned .field-role #id_role > div.dfms-role-has-sites .form-row {
+  display: block !important;
+  float: none !important;
+  clear: both;
+  margin: 8px 0 0 24px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: visible !important;
+  width: auto !important;
+  max-width: none !important;
+}
+
+.field-role #id_role > div .form-row .flex-container {
+  display: block !important;
+  width: 100%;
+  max-width: 36rem;
+}
+
+.field-role #id_role > div .form-row label,
+.aligned .field-role #id_role > div .form-row label,
+body.change-form .aligned .field-role #id_role > div .form-row label {
+  display: none !important;
+  float: none !important;
+  width: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.field-role #id_role > div select.dfms-poi-multiselect,
+select.dfms-poi-multiselect {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.field-role #id_role > div .select2-container,
+.field-operational_poi .select2-container {
+  width: 100% !important;
+  max-width: 36rem;
+}
+
+.field-role #id_role > div .select2-container .select2-selection--multiple,
+.field-operational_poi .select2-container .select2-selection--multiple {
+  min-height: 36px;
+  border-radius: var(--dfms-radius-sm, 4px);
+}
+
+@media (max-width: 600px) {
+  .field-role #id_role {
+    grid-template-columns: 1fr;
+  }
+
+  .field-role #id_role > div .form-row {
+    margin-left: 0 !important;
+  }
+}

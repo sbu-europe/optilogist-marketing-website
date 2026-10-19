@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" data-title-bn="রিকুইজিশন | Optilogist">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Requisitions | Optilogist</title>
+  <meta name="description" content="Raise finished-goods requisitions and register port shipments in Optilogist, with product details filled in for you and the destination's capacity shown before you submit.">
+  <link rel="icon" href="../favicon.ico?v=2" sizes="32x32">
+  <link rel="icon" href="../static/img/brand/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../static/img/brand/apple-touch-icon.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/base.css">
+  <link rel="stylesheet" href="../static/css/landing.css">
+  <link rel="stylesheet" href="../static/css/feature.css">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <a href="../index.html#faq" data-i18n="top.help">Help Center</a>
+      <a href="../index.html#contact" data-i18n="top.contact">Contact Us</a>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="brand" href="../index.html">
+        <img class="brand__mark" src="../static/img/brand/mark-light.svg" alt="" width="32" height="32">
+        Optilogist
+      </a>
+      <button class="nav__toggle" aria-expanded="false" aria-controls="nav-menu" data-i18n="nav.menu">Menu</button>
+      <nav id="nav-menu" class="nav__menu" aria-label="Main">
+        <div class="nav__links">
+          <a href="../index.html#platform" data-i18n="nav.platform">Platform</a>
+          <div class="nav__dd">
+            <button type="button" class="link nav__ddbtn is-current" aria-expanded="false" aria-controls="mega-features"><span data-i18n="nav.features">Features</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="mega" id="mega-features" hidden>
+              <div class="mega__card">
+                <div class="mega__body">
+                  <div>
+                    <div class="mega__head"><span class="mega__label" data-i18n="mega.features">Features</span><a class="mega__all" href="../index.html#platform"><span data-i18n="mega.all">View all</span> <span class="arrow">&rarr;</span></a></div>
+                    <ul class="mega__grid">
+                <li><a href="../features/requisitions.html" aria-current="page"><b data-i18n="ft.req">Requisitions</b><span data-i18n="ft.req.d">Raise finished-goods and port shipment requests</span></a></li>
+                <li><a href="../features/transport-requests.html"><b data-i18n="ft.tr">Transport Requests</b><span data-i18n="ft.tr.d">Split demand by source and get it approved</span></a></li>
+                <li><a href="../index.html#platform"><b data-i18n="ft.to">Transport Orders</b><span data-i18n="ft.to.d">Plan each load on your own fleet or a vendor's</span></a></li>
+                <li><a href="../index.html#fleet"><b data-i18n="ft.fleet">Fleet &amp; Drivers</b><span data-i18n="ft.fleet.d">Vehicle status, checklists, attendance and leave</span></a></li>
+                <li><a href="../index.html#fleet"><b data-i18n="ft.vendor">Vendor Bidding</b><span data-i18n="ft.vendor.d">Assign contract vendors or run timed bids</span></a></li>
+                <li><a href="../index.html#yard"><b data-i18n="ft.gate">Gate &amp; Weighbridge</b><span data-i18n="ft.gate.d">Gate-in, scale-in, queue tokens and gate-out</span></a></li>
+                <li><a href="../index.html#yard"><b data-i18n="ft.cc">Command Center &amp; Loading</b><span data-i18n="ft.cc.d">Assign bays and record load and unload times</span></a></li>
+                <li><a href="../index.html#yard"><b data-i18n="ft.qc">Quality Control</b><span data-i18n="ft.qc.d">Sample, decide and resample before unloading</span></a></li>
+                <li><a href="../index.html#track"><b data-i18n="ft.gps">Live GPS &amp; Geofencing</b><span data-i18n="ft.gps.d">Live map, site arrivals and dwell time</span></a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div class="mega__head"><span class="mega__label" data-i18n="mega.explore">Explore</span></div>
+                    <ul class="mega__links">
+                <li><a href="../index.html#platform"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M7.5 6H15a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h7.5"/></svg><span data-i18n="foot.l1">How it works</span></a></li>
+                <li><a href="../index.html#roles"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5a6.5 6.5 0 0 1 3.5 5.5"/></svg><span data-i18n="roles.eyebrow">Built for every team</span></a></li>
+                <li><a href="../index.html#vendors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18h2"/></svg><span data-i18n="apps.2t">Vendor app</span></a></li>
+                <li><a href="../demo/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5l5.5 3.5-5.5 3.5z"/></svg><span data-i18n="cta.demo">Live Demo</span></a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="mega__foot"><a href="../index.html#faq" data-i18n="top.help">Help Center</a><span>|</span><a href="../index.html#contact" data-i18n="top.contact">Contact Us</a><span>|</span><a href="../index.html#plans" data-i18n="nav.plans">Plans</a></div>
+              </div>
+            </div>
+          </div>
+          <a href="../index.html#roles" data-i18n="nav.solutions">Solutions</a>
+          <a href="../index.html#vendors" data-i18n="nav.vendors">For Vendors</a>
+          <a href="../index.html#plans" data-i18n="nav.plans">Plans</a>
+        </div>
+        <div class="nav__actions">
+          <div class="lang" role="group" aria-label="Language">
+            <button type="button" data-lang="en" aria-pressed="true">EN</button>
+            <button type="button" data-lang="bn" aria-pressed="false">বাংলা</button>
+          </div>
+          <button type="button" class="link js-login" data-i18n="nav.login">Log in</button>
+          <a class="btn btn--primary btn--sm" href="../demo/index.html" data-i18n="cta.demo">Live Demo</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- 1. HERO -->
+    <section class="fhero">
+      <div class="container">
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="../index.html" data-i18n="rq.home">Home</a></li>
+            <li><a href="../index.html#platform" data-i18n="nav.features">Features</a></li>
+            <li><span aria-current="page" data-i18n="ft.req">Requisitions</span></li>
+          </ol>
+        </nav>
+        <div class="fhero__grid">
+          <div>
+            <p class="eyebrow" data-i18n="rq.eyebrow">Requisitions</p>
+            <h1 data-i18n="rq.title">Start every load with a requisition everyone can see</h1>
+            <p class="fhero__lead" data-i18n="rq.lead">Depots and feed mills request finished goods, and the commercial team registers port shipments. Product details fill themselves in, and the destination's capacity is shown before anyone submits.</p>
+            <div class="actions">
+              <a class="btn btn--primary" href="../demo/index.html"><span data-i18n="cta.demo">Live Demo</span> <span class="arrow">&rarr;</span></a>
+              <button type="button" class="btn btn--ghost js-login" data-i18n="cta.login">Log in to your workspace</button>
+            </div>
+            <div class="fhero__roles" aria-label="Used by">
+              <span data-i18n="r.depot">Depot Officer</span><span data-i18n="r.feedmill">Feed Mill Officer</span><span data-i18n="r.commercial">Commercial Officer</span><span data-i18n="rq.r.dist">Distribution</span><span data-i18n="rq.r.proc">Procurement</span>
+            </div>
+          </div>
+
+          <div class="window" aria-label="Example finished-goods requisition">
+            <div class="window__bar"><i></i><i></i><i></i><span data-i18n="rq.w.title">New finished-goods requisition</span></div>
+            <div class="window__body">
+              <div class="window__head"><b class="mono">PR-FG-20261014-0042</b><span class="tag tag--info" data-i18n="rq.s.draft">Draft</span></div>
+              <div class="kv">
+                <div><small data-i18n="rq.k.dest">Destination</small><b data-i18n="demo.dest">Bogura Depot</b></div>
+                <div><small data-i18n="rq.k.date">Preferred delivery</small><b>16 Oct · 09:00</b></div>
+                <div><small data-i18n="m.urgency">Urgency</small><b><span class="tag tag--warn" data-i18n="m.high">High</span></b></div>
+              </div>
+              <table class="lines">
+                <thead><tr><th data-i18n="rq.t.product">Product</th><th data-i18n="rq.t.packing">Packing</th><th class="num" data-i18n="rq.t.qty">Quantity</th><th class="num" data-i18n="rq.t.weight">Weight</th></tr></thead>
+                <tbody>
+                  <tr><td><span data-i18n="m.broiler">Broiler Starter Feed</span><small class="mono">FG-BSF-50</small></td><td data-i18n="rq.t.bag">Bag · 50 kg</td><td class="num" data-i18n="rq.t.q1">400 bags</td><td class="num">20,000 kg</td></tr>
+                  <tr><td><span data-i18n="m.layer">Layer Grower Feed</span><small class="mono">FG-LGF-50</small></td><td data-i18n="rq.t.bag">Bag · 50 kg</td><td class="num" data-i18n="rq.t.q2">250 bags</td><td class="num">12,500 kg</td></tr>
+                </tbody>
+                <tfoot><tr><td colspan="3" data-i18n="m.total">Total weight</td><td class="num">32,500 kg</td></tr></tfoot>
+              </table>
+              <div class="capbox">
+                <b data-i18n="rq.cap.title">Bogura Depot capacity</b><span class="tag tag--warn" data-i18n="m.at84">84% projected</span>
+                <div class="bar"><i class="warn" style="width:84%"></i></div>
+                <small data-i18n="rq.cap.line">388 of 500 MT in stock · 112 MT free</small>
+              </div>
+              <div class="window__actions"><span data-i18n="rq.a.draft">Save as draft</span><span data-i18n="rq.a.submit">Submit requisition</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. HIGHLIGHTS -->
+    <section class="section section--gray fhl">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="rq.hl.eyebrow">What you get</p>
+          <h2 data-i18n="rq.hl.title">One place for every stock request</h2>
+        </div>
+        <div class="grid grid--3">
+          <article class="tile">
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3h8l1 3H7z"/><rect x="4" y="6" width="16" height="15" rx="2"/><path d="M8 11h8M8 15h5"/></svg></div>
+            <h3 data-i18n="rq.hl.1t">Finished-goods requisitions</h3>
+            <p data-i18n="rq.hl.1d">Depot and feed mill officers request several products in one requisition, for the date and urgency they need.</p>
+          </article>
+          <article class="tile">
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17h18l-2 4H5z"/><path d="M5 17V9h6v8M11 12h6v5"/><path d="M8 9V5"/></svg></div>
+            <h3 data-i18n="rq.hl.2t">Port shipments</h3>
+            <p data-i18n="rq.hl.2d">Commercial officers register LC imports with the BL, vessel, containers and arrival notice in one record.</p>
+          </article>
+          <article class="tile">
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M6 21V10M12 21V4M18 21v-7"/></svg></div>
+            <h3 data-i18n="rq.hl.3t">Capacity before you submit</h3>
+            <p data-i18n="rq.hl.3d">See the destination's free space and projected use while you plan, so a request never surprises the site receiving it.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. DETAIL ROWS -->
+    <section class="section">
+      <div class="container frows">
+
+        <div class="frow">
+          <div>
+            <p class="eyebrow" data-i18n="rq.d1.eyebrow">Product lines</p>
+            <h2 data-i18n="rq.d1.title">Enter an item code, the rest fills itself in</h2>
+            <p data-i18n="rq.d1.lead">Every line is taken from your product master, so names, units and weights are the same across sites and teams.</p>
+            <ul class="checks">
+              <li data-i18n="rq.d1.1">Name, category, sub-category, packing and unit of measure filled from the item code</li>
+              <li data-i18n="rq.d1.2">Total weight calculated from quantity and weight per unit</li>
+              <li data-i18n="rq.d1.3">Urgency set to Normal, High or Critical</li>
+              <li data-i18n="rq.d1.4">Destination site and preferred delivery date and time on every requisition</li>
+            </ul>
+          </div>
+          <div class="media">
+            <div class="mini">
+              <div class="mini__title"><span data-i18n="rq.m1.title">Item code lookup</span><span class="mono">FG-BSF-50</span></div>
+              <div class="mini__row"><span data-i18n="rq.m1.name">Product</span><b data-i18n="m.broiler">Broiler Starter Feed</b></div>
+              <div class="mini__row"><span data-i18n="rq.m1.cat">Category</span><b data-i18n="rq.m1.catv">Finished goods · Poultry feed</b></div>
+              <div class="mini__row"><span data-i18n="rq.m1.uom">Unit</span><b data-i18n="rq.t.bag">Bag · 50 kg</b></div>
+              <div class="mini__row"><span data-i18n="rq.m1.qty">400 bags</span><b>20,000 kg</b></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="frow frow--flip">
+          <div>
+            <p class="eyebrow" data-i18n="rq.d2.eyebrow">Port shipments</p>
+            <h2 data-i18n="rq.d2.title">Document each import once</h2>
+            <p data-i18n="rq.d2.lead">The commercial team records the shipment as soon as the LC is open. Procurement plans the onward transport from the same record.</p>
+            <ul class="checks">
+              <li data-i18n="rq.d2.1">BL and LC numbers, vessel, voyage, ETA, C&amp;F agent and point of loading</li>
+              <li data-i18n="rq.d2.2">Container numbers kept as a simple list, one per row</li>
+              <li data-i18n="rq.d2.3">Raw-material cargo lines with the arrival notice and other documents attached</li>
+              <li data-i18n="rq.d2.4">Procurement sees every submitted shipment, read-only, and creates transport requests from it</li>
+            </ul>
+          </div>
+          <div class="media">
+            <div class="mini">
+              <div class="mini__title"><span data-i18n="m.port">Port shipment</span><span class="mono">PS-PORT-20261009-0007</span></div>
+              <div class="mini__row"><span>BL / LC</span><b>BL-55821 / LC-0921</b></div>
+              <div class="mini__row"><span data-i18n="m.vessel">Vessel</span><b>MV Karnaphuli</b></div>
+              <div class="mini__row"><span data-i18n="m.eta2">ETA at port</span><b>12 Oct</b></div>
+              <div class="mini__row"><span data-i18n="rq.m2.cont">Containers</span><b>3</b></div>
+              <div class="mini__row"><span data-i18n="rq.m2.cargo">Raw-material cargo</span><b data-i18n="rq.m2.cargov">Maize, soybean meal</b></div>
+              <div class="mini__row"><span data-i18n="rq.m2.doc">Arrival notice</span><span class="tag tag--ok" data-i18n="rq.m2.att">Attached</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="frow">
+          <div>
+            <p class="eyebrow" data-i18n="rq.d3.eyebrow">Site capacity</p>
+            <h2 data-i18n="rq.d3.title">Know the destination can take it</h2>
+            <p data-i18n="rq.d3.lead">When you pick the destination, Optilogist shows how full that site is and how full it will be once this load arrives.</p>
+            <ul class="checks">
+              <li data-i18n="rq.d3.1">Total capacity, current stock and free capacity, in metric tons</li>
+              <li data-i18n="rq.d3.2">Projected use after this requisition</li>
+              <li data-i18n="rq.d3.3">A warning above the site's threshold, 80% by default and adjustable per site</li>
+              <li data-i18n="rq.d3.4">For information only: the warning never blocks a requisition</li>
+            </ul>
+          </div>
+          <div class="media">
+            <div class="mini">
+              <div class="mini__title"><span data-i18n="demo.dest">Bogura Depot</span><span class="tag tag--warn" data-i18n="m.at84">84% projected</span></div>
+              <div class="mini__row"><span data-i18n="m.totalcap">Total capacity</span><b>500 MT</b></div>
+              <div class="mini__row"><span data-i18n="m.current">Current stock</span><b>388 MT</b></div>
+              <div class="mini__row"><span data-i18n="rq.m3.free">Free capacity</span><b>112 MT</b></div>
+              <div class="mini__row"><span data-i18n="rq.m3.this">This requisition</span><b>32.5 MT</b></div>
+              <div class="bar"><i class="warn" style="width:84%"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="frow frow--flip">
+          <div>
+            <p class="eyebrow" data-i18n="rq.d4.eyebrow">Status &amp; handover</p>
+            <h2 data-i18n="rq.d4.title">From draft to transport planning, without chasing</h2>
+            <p data-i18n="rq.d4.lead">Everyone can see where a requisition stands, and Distribution picks it up as soon as it is submitted.</p>
+            <ul class="checks">
+              <li data-i18n="rq.d4.1">Save as a draft and submit when ready; a submitted requisition is locked, except its urgency</li>
+              <li data-i18n="rq.d4.2">It moves to In progress when Distribution creates the first transport request</li>
+              <li data-i18n="rq.d4.3">Split into several transport requests, never more than was requested</li>
+              <li data-i18n="rq.d4.4">Cancel with a reason, as long as no transport request is active</li>
+            </ul>
+          </div>
+          <div class="media">
+            <div class="mini">
+              <div class="mini__title"><span class="mono">PR-FG-20261014-0042</span><span class="tag tag--info" data-i18n="rq.s.inprog">In progress</span></div>
+              <ol class="status-steps">
+                <li class="done"><span class="dot"></span><span data-i18n="rq.s.draft">Draft</span><small>09:12</small></li>
+                <li class="done"><span class="dot"></span><span data-i18n="s.submitted">Submitted</span><small>09:30</small></li>
+                <li class="now"><span class="dot"></span><span data-i18n="rq.s.inprog2">In progress · 1 transport request</span><small>11:05</small></li>
+              </ol>
+              <div class="mini__row"><span data-i18n="rq.m4.rem">Allocated to transport requests</span><b data-i18n="rq.m4.remv">20 of 32.5 MT</b></div>
+              <div class="bar"><i style="width:62%"></i></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. WHO USES IT -->
+    <section class="section section--gray">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="rq.who.eyebrow">Who uses it</p>
+          <h2 data-i18n="rq.who.title">Each team sees its own part</h2>
+        </div>
+        <div class="grid grid--3">
+          <article class="tile">
+            <h3 data-i18n="rq.who.1t">Depot, feed mill and commercial officers</h3>
+            <p data-i18n="rq.who.1d">Raise requisitions and port shipments, and follow their own requests through to planning.</p>
+          </article>
+          <article class="tile">
+            <h3 data-i18n="rq.who.2t">Distribution</h3>
+            <p data-i18n="rq.who.2d">Sees every submitted finished-goods requisition with the quantity still to allocate, and turns it into transport requests.</p>
+          </article>
+          <article class="tile">
+            <h3 data-i18n="rq.who.3t">Procurement</h3>
+            <p data-i18n="rq.who.3d">Sees every submitted port shipment and plans where the raw material goes, site by site.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. RELATED FEATURES -->
+    <section class="section related">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="rq.rel.eyebrow">Keep exploring</p>
+          <h2 data-i18n="rq.rel.title">What happens next</h2>
+        </div>
+        <div class="grid grid--3">
+          <a class="tile" href="transport-requests.html">
+            <h3 data-i18n="ft.tr">Transport Requests</h3>
+            <p data-i18n="ft.tr.d">Split demand by source and get it approved</p>
+            <span class="btn-text"><span data-i18n="cta.explore">Explore</span> <span class="arrow">&rarr;</span></span>
+          </a>
+          <a class="tile" href="../index.html#platform">
+            <h3 data-i18n="ft.to">Transport Orders</h3>
+            <p data-i18n="ft.to.d">Plan each load on your own fleet or a vendor's</p>
+            <span class="btn-text"><span data-i18n="cta.explore">Explore</span> <span class="arrow">&rarr;</span></span>
+          </a>
+          <a class="tile" href="../index.html#track">
+            <h3 data-i18n="ft.gps">Live GPS &amp; Geofencing</h3>
+            <p data-i18n="ft.gps.d">Live map, site arrivals and dwell time</p>
+            <span class="btn-text"><span data-i18n="cta.explore">Explore</span> <span class="arrow">&rarr;</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. FINAL CTA -->
+    <section id="contact" class="cta">
+      <div class="container">
+        <p class="eyebrow" data-i18n="cta.eyebrow">Ready to get started?</p>
+        <h2 data-i18n="cta.title">Put every load on one record</h2>
+        <p class="muted" data-i18n="cta.lead">Open the live demo and follow a load from requisition to gate-out. No sign-up needed.</p>
+        <div class="actions" style="margin-top:2rem">
+          <a class="btn btn--primary" href="../demo/index.html"><span data-i18n="cta.demo">Live Demo</span> <span class="arrow">&rarr;</span></a>
+          <button type="button" class="btn btn--ghost js-login" data-i18n="nav.login">Log in</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__about">
+          <a class="brand" href="../index.html">
+            <img class="brand__mark" src="../static/img/brand/mark-light.svg" alt="" width="32" height="32">
+            Optilogist
+          </a>
+          <p data-i18n="foot.about">Distribution and fleet management for multi-site supply chains.</p>
+        </div>
+        <div>
+          <h3 data-i18n="nav.platform">Platform</h3>
+          <ul>
+            <li><a href="../index.html#platform" data-i18n="foot.l1">How it works</a></li>
+            <li><a href="../index.html#plan" data-i18n="foot.l2">Requisition &amp; planning</a></li>
+            <li><a href="../index.html#fleet" data-i18n="foot.l3">Own &amp; vendor fleet</a></li>
+            <li><a href="../index.html#yard" data-i18n="foot.l4">Yard &amp; QC</a></li>
+            <li><a href="../index.html#track" data-i18n="foot.l5">Live GPS</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="nav.solutions">Solutions</h3>
+          <ul>
+            <li><a href="../index.html#roles" data-i18n="roles.t2">Distribution &amp; Procurement</a></li>
+            <li><a href="../index.html#roles" data-i18n="roles.t3">Transport</a></li>
+            <li><a href="../index.html#roles" data-i18n="roles.t4">Yard &amp; QC</a></li>
+            <li><a href="../index.html#roles" data-i18n="roles.t5">Fleet &amp; Drivers</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="nav.vendors">For Vendors</h3>
+          <ul>
+            <li><a href="../index.html#vendors" data-i18n="ven.cta">Join as a vendor</a></li>
+            <li><a href="../index.html#vendors" data-i18n="apps.2t">Vendor app</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="foot.company">Company</h3>
+          <ul>
+            <li><a href="../index.html#plans" data-i18n="nav.plans">Plans</a></li>
+            <li><a href="../index.html#faq" data-i18n="top.help">Help Center</a></li>
+            <li><a href="../index.html#contact" data-i18n="top.contact">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; <span id="year"></span> Optilogist</span>
+        <span><a href="#" data-i18n="foot.privacy">Privacy</a><a href="#" data-i18n="foot.terms">Terms</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WORKSPACE LOGIN DIALOG -->
+  <dialog id="login-dialog" aria-labelledby="login-title">
+    <form method="dialog" id="login-form">
+      <button class="dialog__close" value="cancel" aria-label="Close" formnovalidate>&times;</button>
+      <h2 id="login-title" data-i18n="login.title">Log in to your workspace</h2>
+      <p class="muted" data-i18n="login.lead">Every organization has its own Optilogist address.</p>
+      <label for="workspace" style="font-weight:600;font-size:.9rem" data-i18n="login.label">Workspace name</label>
+      <div class="field">
+        <input id="workspace" name="workspace" autocomplete="organization" required pattern="[A-Za-z0-9-]+" placeholder="yourcompany" data-i18n-ph="login.ph">
+        <span class="js-domain"></span>
+      </div>
+      <button class="btn btn--primary" style="width:100%" value="go" data-i18n="login.go">Continue</button>
+      <p class="dialog__note" data-i18n="login.note">Got an invite? Use the link in your email or SMS to set your password first.</p>
+    </form>
+  </dialog>
+
+  <script src="../static/js/landing-i18n-bn.js"></script>
+  <script src="../static/js/feature-requisitions-bn.js"></script>
+  <script src="../static/js/landing.js"></script>
+</body>
+</html>

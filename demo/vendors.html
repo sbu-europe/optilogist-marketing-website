@@ -1,0 +1,2985 @@
+<!DOCTYPE html>
+
+<html lang="en-us" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="static/demo/demo-shim.css?v=mv5a1jhl">
+<script src="static/demo/api-data.js?v=mv5a1jhl"></script>
+<script src="static/demo/demo-shim.js?v=mv5a1jhl"></script>
+<script src="static/demo/master-seed.js?v=mv5a1jhl"></script>
+<script src="static/demo/master-crud.js?v=mv5a1jhl"></script>
+<title>Vendors</title>
+<link rel="stylesheet" href="static/admin/css/base.css">
+
+
+  <link rel="stylesheet" href="static/admin/css/nav_sidebar.css">
+  <script src="static/admin/js/nav_sidebar.js" defer></script>
+
+
+
+
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+
+
+<link rel="icon" href="favicon.ico?v=2" sizes="32x32">
+<link rel="icon" href="static/brand/optilogist/svg/favicon.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="static/brand/optilogist/png/apple-touch-icon.png?v=2">
+<link rel="stylesheet" href="static/admin/css/custom.css">
+
+<script>
+  (function(){
+    var t = localStorage.getItem('dfms-admin-theme');
+    if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+    // Keep native date/time picker icons visible: match DFMS theme, not OS preference alone.
+    document.documentElement.style.colorScheme = t === 'dark' ? 'dark' : 'light';
+
+    var collapsed = localStorage.getItem('dfms-sidebar-collapsed') === 'true';
+    var mobile    = window.innerWidth < 768;
+    if (collapsed && !mobile) {
+      document.documentElement.setAttribute('data-sidebar-collapsed', 'true');
+    }
+  })();
+</script>
+
+<script src="static/admin/js/dfms_theme.js" defer></script>
+
+<script src="static/admin/js/dfms_sidebar.js" defer></script>
+
+<script src="static/admin/js/dfms_actions.js" defer></script>
+
+<script src="static/js/password_toggle.js" defer></script>
+
+<script src="static/admin/js/dfms_timepicker.js" defer></script>
+
+<script src="static/admin/js/dfms_labels.js" defer></script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script src="static/js/portal_auth.js"></script>
+<style>
+  .vm-vendors { max-width: none; width: 100%; }
+  .vm-vendors__lead {
+    color: var(--body-quiet-color);
+    font-size: 13px;
+    margin: 0 0 1rem;
+  }
+  .vm-vendors .results {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+  }
+  .vm-vendors #result_list {
+    overflow: visible;
+    min-width: 1020px;
+    table-layout: auto;
+  }
+  .vm-vendors #result_list th,
+  .vm-vendors #result_list td {
+    max-width: none;
+  }
+  .vm-vendors #result_list td .dfms-badge {
+    white-space: nowrap;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .vm-panel {
+    background: var(--dfms-card-bg, var(--body-bg));
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .vm-panel table.adminlist { width: 100%; }
+  .vm-row-link {
+    cursor: pointer;
+  }
+  .vm-row-link:hover td {
+    background: var(--dfms-row-hover, rgba(91, 101, 220, 0.06));
+  }
+  .vm-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .vm-alert {
+    border-radius: var(--dfms-radius-sm);
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    padding: 10px 16px;
+  }
+  .vm-alert--error {
+    background: var(--dfms-danger-bg);
+    border-left: 4px solid var(--dfms-danger);
+    color: var(--dfms-danger);
+  }
+  .vm-alert--success {
+    background: var(--dfms-success-bg);
+    border-left: 4px solid var(--dfms-success);
+    color: var(--dfms-success);
+  }
+  .vm-overlay {
+    align-items: center;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    inset: 0;
+    justify-content: center;
+    position: fixed;
+    z-index: 10000;
+  }
+  .vm-overlay--elevated {
+    z-index: 10001;
+  }
+  .vm-dialog {
+    background: var(--dfms-card-bg, var(--body-bg));
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 2rem);
+    max-width: 680px;
+    overflow: hidden;
+    padding: 0;
+    width: calc(100% - 2rem);
+  }
+  .vm-dialog--sm {
+    max-width: 480px;
+  }
+  .vm-dialog__body {
+    overflow-y: auto;
+    padding: 1.15rem 1.25rem 0.25rem;
+  }
+  .vm-dialog__field {
+    margin-bottom: 0.85rem;
+  }
+  .vm-dialog__field .vm-profile__label {
+    margin-bottom: 0.4rem;
+  }
+  .vm-dialog__field textarea {
+    display: block;
+    min-height: 96px;
+    resize: vertical;
+  }
+  .vm-dialog__head {
+    align-items: flex-start;
+    display: flex;
+    gap: 0.75rem;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .vm-dialog__head-main {
+    min-width: 0;
+  }
+  .vm-dialog h2 {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin: 0 0 0.35rem;
+    text-transform: uppercase;
+    color: var(--body-quiet-color);
+  }
+  .vm-dialog__title {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0 0 0.25rem;
+    word-break: break-word;
+  }
+  .vm-dialog__code {
+    color: var(--body-quiet-color);
+    font-size: 12px;
+  }
+  .vm-dialog__badges {
+    align-items: center;
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    justify-content: flex-end;
+  }
+  .vm-dialog__section {
+    margin-bottom: 1rem;
+  }
+  .vm-dialog__section-title {
+    color: var(--body-quiet-color);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin: 0 0 0.55rem;
+    text-transform: uppercase;
+  }
+  .vm-profile {
+    display: grid;
+    gap: 0.65rem 1rem;
+    grid-template-columns: 1fr 1fr;
+  }
+  .vm-profile__item {
+    min-width: 0;
+  }
+  .vm-profile__item--full {
+    grid-column: 1 / -1;
+  }
+  .vm-profile__label {
+    color: var(--body-quiet-color);
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+  }
+  .vm-profile__value {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.35;
+    word-break: break-word;
+  }
+  .vm-profile__value--muted {
+    color: var(--body-quiet-color);
+    font-weight: 400;
+  }
+  .vm-docs {
+    margin: 0;
+  }
+  .vm-docs__list {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: 1fr 1fr;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .vm-docs__item {
+    align-items: center;
+    background: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    display: flex;
+    gap: 0.65rem;
+    min-width: 0;
+    padding: 0.65rem 0.75rem;
+  }
+  .vm-docs__icon {
+    align-items: center;
+    background: rgba(91, 101, 220, 0.12);
+    border-radius: 7px;
+    color: var(--link-fg, #5b65dc);
+    display: inline-flex;
+    flex-shrink: 0;
+    font-size: 15px;
+    height: 32px;
+    justify-content: center;
+    width: 32px;
+  }
+  .vm-docs__meta {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.1rem;
+    min-width: 0;
+  }
+  .vm-docs__label {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .vm-docs__hint {
+    color: var(--body-quiet-color);
+    font-size: 11px;
+  }
+  .vm-docs__empty {
+    color: var(--body-quiet-color);
+    font-size: 13px;
+    margin: 0;
+  }
+  .vm-docs__link {
+    align-items: center;
+    color: var(--link-fg, #5b65dc);
+    display: inline-flex;
+    flex-shrink: 0;
+    font-size: 12px;
+    font-weight: 600;
+    gap: 0.25rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .vm-docs__link:hover {
+    text-decoration: underline;
+  }
+  .vm-dialog textarea {
+    background: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--body-fg);
+    font-size: 13px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem 0.65rem;
+  }
+  .vm-dialog input, .vm-dialog select {
+    background: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--body-fg);
+    font-size: 13px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem 0.65rem;
+  }
+  .vm-help {
+    color: var(--body-quiet-color);
+    font-size: 12px;
+    margin: 8px 2px 0;
+  }
+  .vm-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  .vm-grid .full { grid-column: 1 / -1; }
+  .vm-dialog__actions {
+    align-items: center;
+    background: var(--dfms-card-bg, var(--body-bg));
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    margin-top: 0;
+    padding: 0.85rem 1.25rem 1rem;
+  }
+  @media (max-width: 640px) {
+    .vm-docs__list,
+    .vm-profile,
+    .vm-grid {
+      grid-template-columns: 1fr;
+    }
+    .vm-dialog__head {
+      flex-direction: column;
+    }
+    .vm-dialog__badges {
+      justify-content: flex-start;
+    }
+  }
+  .vm-vendors .dfms-selection-toolbar {
+    margin: 0 0 10px;
+    border-radius: 8px;
+  }
+  .vm-vendors .dfms-toolbar-actions .dfms-btn-approve,
+  .vm-vendors .dfms-toolbar-actions .dfms-btn-modify,
+  .vm-vendors .dfms-toolbar-actions .dfms-btn-reject {
+    height: 30px;
+    padding: 0 12px;
+    font-size: 12px;
+  }
+  .vm-vendors #result_list td.action-checkbox {
+    cursor: default;
+  }
+  .vm-vendors .dfms-pagination-parent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 0;
+  }
+  .vm-vendors .dfms-pagination-numbers .paginator {
+    margin: 0;
+  }
+  .vm-vendors .dfms-pagination-controls {
+    display: inline-flex;
+    align-items: center;
+  }
+  .vm-vendors .per-page-selector {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+  }
+  .vm-vendors .per-page-selector__label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--dfms-grey-700, #334155);
+  }
+  .vm-vendors .per-page-selector__select {
+    min-width: 78px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--dfms-grey-300, #cbd5e1);
+    border-radius: 8px;
+    font-size: 13px;
+    background: var(--dfms-input-bg);
+    color: var(--dfms-grey-900);
+  }
+  .vm-vendors .per-page-selector__select:focus {
+    outline: none;
+    border-color: var(--dfms-primary, #5B65DC);
+    box-shadow: 0 0 0 3px rgba(91, 101, 220, 0.16);
+  }
+  .vm-vendors #changelist .paginator {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .vm-vendors .paginator a {
+    cursor: pointer;
+    text-decoration: none;
+  }
+  [x-cloak] { display: none !important; }
+</style>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/admin/css/responsive.css">
+    
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+<body class=""
+  data-admin-utc-offset="21600">
+<a href="#content-start" class="skip-to-content-link">Skip to main content</a>
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    
+      <header id="header">
+        <div id="branding">
+        
+        </div>
+        
+
+<div id="dfms-topbar-tools">
+
+  
+  <button
+    id="dfms-sidebar-toggle"
+    class="dfms-content-toggle"
+    aria-label="Toggle sidebar"
+    title="Collapse sidebar"
+    type="button"
+  >
+    <i class="bi bi-list"></i>
+  </button>
+
+  
+  <div style="flex:1;"></div>
+
+  
+  <div class="dfms-topbar-right">
+
+    
+    <button
+      id="dfms-theme-toggle"
+      class="dfms-topbar-icon-btn"
+      title="Switch theme"
+      aria-label="Switch theme"
+      type="button"
+    >
+      <i class="toggle-icon bi bi-moon"></i>
+    </button>
+
+    
+    
+    
+    <div class="dfms-user-menu" id="dfms-user-menu">
+      <button
+        class="dfms-user-avatar-btn"
+        aria-haspopup="true"
+        aria-expanded="false"
+        aria-controls="dfms-user-dropdown"
+        type="button"
+        id="dfms-user-avatar-btn"
+      >
+        
+        <span class="dfms-avatar" aria-hidden="true"> DA </span>
+        <span class="dfms-user-name">Demo Admin</span>
+        <i class="bi bi-chevron-down dfms-user-chevron"></i>
+      </button>
+
+      
+      <div class="dfms-user-dropdown dfms-user-dropdown--with-poi" id="dfms-user-dropdown" role="menu" aria-labelledby="dfms-user-avatar-btn">
+
+        
+        <div class="dfms-dropdown-header">
+          <div class="dfms-dropdown-header__avatar"> DA </div>
+          <div class="dfms-dropdown-header__info">
+            <span class="dfms-dropdown-name">Demo Admin</span>
+            
+            <span class="dfms-dropdown-email">admin@example.com</span>
+            
+            
+              
+              
+              <span class="dfms-dropdown-meta">
+                <i class="bi bi-person-badge"></i>
+                Tenant Admin
+              </span>
+              
+              
+            
+            
+            <span class="dfms-dropdown-meta">
+              <i class="bi bi-diagram-3"></i>
+              Administration (tenant admin)
+            </span>
+            
+            
+            
+            <span class="dfms-dropdown-meta dfms-dropdown-meta--poi-warn">
+              <i class="bi bi-exclamation-circle"></i>
+              No site selected
+            </span>
+            
+            
+            
+            
+            <span class="dfms-dropdown-meta">
+              <i class="bi bi-building"></i>
+              Demo Agro Ltd
+            </span>
+            
+            
+          </div>
+        </div>
+
+        
+
+
+        
+
+<div class="dfms-dropdown-divider"></div>
+<div class="dfms-dropdown-poi" id="dfms-poi-profile">
+  <form
+    method="post"
+    action="#" data-demo-form="1"
+    id="dfms-poi-switcher-form"
+    class="dfms-dropdown-poi__form"
+  >
+    <input type="hidden" name="csrfmiddlewaretoken" value="demo">
+    <input type="hidden" name="next" value="/vendors/">
+
+    <div class="dfms-dropdown-poi__field">
+      <label for="dfms-poi-select" class="dfms-dropdown-poi__label">
+        <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
+        Working site
+        
+        <span class="dfms-badge dfms-badge--warning dfms-dropdown-poi__badge">Required</span>
+        
+      </label>
+
+      <div class="dfms-dropdown-poi__select-wrap">
+        <i class="bi bi-building dfms-dropdown-poi__select-icon" aria-hidden="true"></i>
+        <select
+          name="poi_id"
+          id="dfms-poi-select"
+          class="dfms-dropdown-poi__select"
+          aria-label="Select working site"
+          onchange="this.form.submit()"
+        >
+          <option value="" selected>
+            Select a site…
+          </option>
+          
+          <option
+            value="6f1c2c64-97d6-4d2a-9768-9f13b2129737"
+            
+          >Barishal Aquaculture Site</option>
+          
+          <option
+            value="1dd0e4ae-98dd-4d1c-8673-1b330130cfc1"
+            
+          >Barishal Green Field Farm</option>
+          
+          <option
+            value="3f8e8b11-b539-4595-90cf-bccea625b61b"
+            
+          >Barishal Production Unit</option>
+          
+          <option
+            value="1dd20b37-df96-46aa-b27a-92dd38053fe7"
+            
+          >Bhola Vendor Office</option>
+          
+          <option
+            value="2e5b71e9-d800-4fce-a921-a09dcd6e3758"
+            
+          >Bhola Waste Management Unit</option>
+          
+          <option
+            value="b267f13b-8731-44d5-b045-59613974ef7a"
+            
+          >Bhaluka Hub</option>
+          
+          <option
+            value="521b59c5-95cc-433d-9fc0-71658c3c17de"
+            
+          >Bhola Hub</option>
+          
+          <option
+            value="4019a94e-c5c2-4f80-b643-adfc7c1dd1ce"
+            
+          >Chittagong Hub</option>
+          
+          <option
+            value="5a77b607-c6b7-4e3b-a277-1534fe7e6a4e"
+            
+          >Chittagong Hub</option>
+          
+          <option
+            value="314c4410-eef7-41d9-a44d-4dbeb909f8ea"
+            
+          >Chottogram Hub</option>
+          
+        </select>
+        <i class="bi bi-chevron-down dfms-dropdown-poi__select-chevron" aria-hidden="true"></i>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="dfms-dropdown-divider"></div>
+
+
+
+        
+        
+        <a href="#" data-demo-missing="1" class="dfms-dropdown-item" role="menuitem">
+          <i class="bi bi-key"></i>
+          Change password
+        </a>
+        
+
+        <div class="dfms-dropdown-divider"></div>
+
+        <form id="logout-form" method="post" action="#" data-demo-form="1">
+          <input type="hidden" name="csrfmiddlewaretoken" value="demo">
+          <button type="submit" class="dfms-dropdown-item dfms-dropdown-item--danger" role="menuitem">
+            <i class="bi bi-box-arrow-right"></i>
+            Log out
+          </button>
+        </form>
+        <script>
+        (function () {
+          var form = document.getElementById("logout-form");
+          if (!form) return;
+          form.addEventListener("submit", function () {
+            var match = document.cookie.split("; ").find(function (row) {
+              return row.indexOf("csrftoken=") === 0;
+            });
+            if (!match) return;
+            var token = decodeURIComponent(match.split("=").slice(1).join("="));
+            var input = form.querySelector('input[name="csrfmiddlewaretoken"]');
+            if (token && input) input.value = token;
+          });
+        })();
+        </script>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+        
+      </header>
+    
+    <!-- END Header -->
+    
+    
+
+    <div class="main" id="main">
+      
+        
+  
+
+<nav id="dfms-nav-sidebar" class="dfms-nav-sidebar" aria-label="Sidebar">
+
+  
+  <div class="dfms-sidebar-brand">
+    <a href="admin.html" class="dfms-sidebar-brand-link" aria-label="Home">
+      <div class="dfms-sidebar-logo-mark">
+        
+
+<span class="dfms-brand-mark" aria-hidden="true">
+  <img
+    class="dfms-brand-mark__img dfms-brand-mark__img--light"
+    src="static/brand/optilogist/svg/mark-light.svg"
+    alt=""
+    width="32"
+    height="32"
+    decoding="async"
+  >
+  <img
+    class="dfms-brand-mark__img dfms-brand-mark__img--dark"
+    src="static/brand/optilogist/svg/mark-dark.svg"
+    alt=""
+    width="32"
+    height="32"
+    decoding="async"
+  >
+</span>
+
+      </div>
+      <div class="dfms-sidebar-brand-text">
+        <span class="dfms-sidebar-brand-name">Optilogist</span>
+        <span class="dfms-sidebar-brand-sub">Demo Agro Ltd Admin</span>
+      </div>
+    </a>
+    
+    <button
+      type="button"
+      id="dfms-sidebar-close"
+      class="dfms-sidebar-close"
+      aria-label="Close menu"
+      title="Close menu"
+    >
+      <i class="bi bi-x-lg" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  
+  <div class="dfms-nav-search">
+    <i class="bi bi-search dfms-nav-search-icon"></i>
+    <input
+      type="search"
+      id="dfms-nav-filter"
+      class="dfms-nav-filter-input"
+      placeholder="Filter…"
+      aria-label="Filter navigation items"
+      autocomplete="off"
+    >
+  </div>
+
+  
+  <div class="dfms-nav-body" id="dfms-nav-body">
+
+    
+    
+    
+      
+        <div class="dfms-nav-group" data-app="portal-overview">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-overview"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-speedometer2"></i>
+            </span>
+            <span class="dfms-nav-group-label">Overview</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="dashboard">
+                <a href="admin.html" class="dfms-nav-link" data-nav-id="dashboard">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Dashboard</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-requisition">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-requisition"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-clipboard-check"></i>
+            </span>
+            <span class="dfms-nav-group-label">Requisition</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="finished goods">
+                <a href="admin_requisitions_productrequisition.html" class="dfms-nav-link" data-nav-id="requisition_fg">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Finished Goods</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-port-shipments">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-port-shipments"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-box-seam"></i>
+            </span>
+            <span class="dfms-nav-group-label">Port Shipments</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="port shipments">
+                <a href="admin_requisitions_portshipmentproxy.html" class="dfms-nav-link" data-nav-id="port_shipments">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Port Shipments</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-distribution">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-distribution"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-arrow-right-circle"></i>
+            </span>
+            <span class="dfms-nav-group-label">Distribution</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="product requisitions">
+                <a href="admin_requisitions_productrequisition_pr_type_FINISHED_GOODS.html" class="dfms-nav-link" data-nav-id="distribution_pr_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Product requisitions</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="transport requests">
+                <a href="admin_requisitions_transportrequisition_tr_type_FG.html" class="dfms-nav-link" data-nav-id="distribution_transport_requests">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Transport requests</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-procurement">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-procurement"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-box-arrow-in-right"></i>
+            </span>
+            <span class="dfms-nav-group-label">Procurement</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="port shipments">
+                <a href="admin_requisitions_portshipmentproxy.html" class="dfms-nav-link" data-nav-id="procurement_port_shipments">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Port Shipments</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="transport requests">
+                <a href="admin_requisitions_transportrequisition_tr_type_PORT_CONSIGNMENT.html" class="dfms-nav-link" data-nav-id="procurement_transport_requests">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Transport requests</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-transport">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-transport"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-truck"></i>
+            </span>
+            <span class="dfms-nav-group-label">Transport</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="live gps">
+                <a href="admin_tracking_live_gps.html" class="dfms-nav-link" data-nav-id="live_gps">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Live GPS</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="transport requests">
+                <a href="admin_requisitions_transportrequisition.html" class="dfms-nav-link" data-nav-id="transport_requests">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Transport requests</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="transport orders">
+                <a href="admin_transport_transportorder.html" class="dfms-nav-link" data-nav-id="transport_orders">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Transport orders</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="vehicle planning">
+                <a href="admin_transport_vehicle_planning.html" class="dfms-nav-link" data-nav-id="vehicle_planning">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicle planning</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="bids management">
+                <a href="admin_vendors_biddingsession.html" class="dfms-nav-link" data-nav-id="bids_management">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Bids management</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-master-data">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-master-data"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-database"></i>
+            </span>
+            <span class="dfms-nav-group-label">Master Data</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="points of interest">
+                <a href="admin_master_data_poi.html" class="dfms-nav-link" data-nav-id="pois">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Points of Interest</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="loading/unloading points">
+                <a href="admin_master_data_loadingunloadingpoint.html" class="dfms-nav-link" data-nav-id="loading_unloading_points">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Loading/Unloading Points</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="vehicle brands">
+                <a href="admin_master_data_brand.html" class="dfms-nav-link" data-nav-id="vehicle_brands">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicle Brands</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="vehicles">
+                <a href="admin_master_data_vehicle.html" class="dfms-nav-link" data-nav-id="vehicles">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicles</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="helpers">
+                <a href="admin_users_helper.html" class="dfms-nav-link" data-nav-id="helpers">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Helpers</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="dealers">
+                <a href="admin_master_data_dealer.html" class="dfms-nav-link" data-nav-id="dealers">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Dealers</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="suppliers">
+                <a href="admin_master_data_supplier.html" class="dfms-nav-link" data-nav-id="suppliers">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Suppliers</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="product categories">
+                <a href="admin_master_data_productcategory.html" class="dfms-nav-link" data-nav-id="product_categories">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Product Categories</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="product sub-category">
+                <a href="admin_master_data_productsubcategory.html" class="dfms-nav-link" data-nav-id="product_sub_categories">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Product Sub-category</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="products">
+                <a href="admin_master_data_product.html" class="dfms-nav-link" data-nav-id="products">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Products</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-gate">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-gate"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-door-open"></i>
+            </span>
+            <span class="dfms-nav-group-label">Gate</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="vehicle entry (gate-in)">
+                <a href="admin_operations_gatein_add.html" class="dfms-nav-link" data-nav-id="gate_in">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicle Entry (Gate-In)</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="vehicle exit (gate-out)">
+                <a href="admin_operations_gateout_add.html" class="dfms-nav-link" data-nav-id="gate_out">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicle Exit (Gate-Out)</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="active visits">
+                <a href="admin_operations_gatevisitsession_status_exact_active.html" class="dfms-nav-link" data-nav-id="gate_active_visits">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Active Visits</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="visit history">
+                <a href="admin_operations_gatevisitsession.html" class="dfms-nav-link" data-nav-id="gate_visit_history">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Visit History</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="on-demand to">
+                <a href="admin_operations_gateondemandtorequest.html" class="dfms-nav-link" data-nav-id="gate_on_demand_to">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">On-Demand TO</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-command-center">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-command-center"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-speedometer2"></i>
+            </span>
+            <span class="dfms-nav-group-label">Command Center</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="queue">
+                <a href="admin_operations_queueentry_status_exact_waiting.html" class="dfms-nav-link" data-nav-id="cc_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Queue</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="bay assignments">
+                <a href="admin_operations_bayassignment.html" class="dfms-nav-link" data-nav-id="cc_bay_assignments">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Bay Assignments</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="waiting serials">
+                <a href="admin_operations_waitingserial.html" class="dfms-nav-link" data-nav-id="cc_waiting_serials">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Waiting Serials</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-loading">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-loading"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-box-arrow-up"></i>
+            </span>
+            <span class="dfms-nav-group-label">Loading</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="load events">
+                <a href="admin_operations_loadevent.html" class="dfms-nav-link" data-nav-id="ld_load_events">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Load Events</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="start loading">
+                <a href="admin_operations_loadevent_add.html" class="dfms-nav-link" data-nav-id="ld_new_load_event">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Start Loading</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-unloading">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-unloading"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-box-arrow-down"></i>
+            </span>
+            <span class="dfms-nav-group-label">Unloading</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="unload events">
+                <a href="admin_operations_unloadevent.html" class="dfms-nav-link" data-nav-id="ld_unload_events">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Unload Events</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="start unloading">
+                <a href="admin_operations_unloadevent_add.html" class="dfms-nav-link" data-nav-id="ld_new_unload_event">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Start Unloading</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-qc-checkpoint">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-qc-checkpoint"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-clipboard2-pulse"></i>
+            </span>
+            <span class="dfms-nav-group-label">QC Checkpoint</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="qc queue">
+                <a href="admin_quality_qcqueuetransportorder.html" class="dfms-nav-link" data-nav-id="qc_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">QC Queue</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-scaling">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-scaling"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-speedometer"></i>
+            </span>
+            <span class="dfms-nav-group-label">Scaling</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="scale-in">
+                <a href="admin_operations_scalein_add.html" class="dfms-nav-link" data-nav-id="scale_in">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Scale-In</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="scale-out">
+                <a href="admin_operations_scaleout_add.html" class="dfms-nav-link" data-nav-id="scale_out">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Scale-Out</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="queue tokens">
+                <a href="admin_operations_queuetoken.html" class="dfms-nav-link" data-nav-id="queue_tokens">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Queue Tokens</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="gate passes">
+                <a href="admin_operations_scaleout.html" class="dfms-nav-link" data-nav-id="gate_passes_scaling">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Gate Passes</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-fleet-operations">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-fleet-operations"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-clipboard2-check"></i>
+            </span>
+            <span class="dfms-nav-group-label">Fleet operations</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="dispatch queue">
+                <a href="admin_fleet_supervisor_vehicleinspection_dispatch_queue.html" class="dfms-nav-link" data-nav-id="fleet_dispatch_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Dispatch queue</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="under maintenance">
+                <a href="admin_fleet_supervisor_vehicleinspection_maintenance_queue.html" class="dfms-nav-link" data-nav-id="fleet_maintenance_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Under Maintenance</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="inspection records">
+                <a href="admin_fleet_supervisor_vehicleinspection.html" class="dfms-nav-link" data-nav-id="fleet_inspection_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Inspection records</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-driver-management">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-driver-management"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-person-badge"></i>
+            </span>
+            <span class="dfms-nav-group-label">Driver Management</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="driver attendance">
+                <a href="admin_fleet_supervisor_driverattendance.html" class="dfms-nav-link" data-nav-id="fleet_attendance">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Driver Attendance</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="driver leave management">
+                <a href="admin_fleet_supervisor_driverleave.html" class="dfms-nav-link" data-nav-id="fleet_leave">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Driver Leave Management</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-trips">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-trips"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-phone"></i>
+            </span>
+            <span class="dfms-nav-group-label">Trips</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="my trips">
+                <a href="admin_transport_drivertransportorder_assigned_driver_me.html" class="dfms-nav-link" data-nav-id="driver_my_tos">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">My Trips</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="pod records">
+                <a href="admin_transport_proofofdelivery.html" class="dfms-nav-link" data-nav-id="driver_pod_records">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">POD Records</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group dfms-nav-group--active" data-app="portal-vendors">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-vendors"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-building"></i>
+            </span>
+            <span class="dfms-nav-group-label">Vendors</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item dfms-nav-item--active" data-label="vendors">
+                <a href="vendors.html" class="dfms-nav-link" data-nav-id="vendors" aria-current="page">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vendors</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-users-access">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-users-access"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-people"></i>
+            </span>
+            <span class="dfms-nav-group-label">Users &amp; Access</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="users">
+                <a href="admin_users_user.html" class="dfms-nav-link" data-nav-id="users">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Users</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="drivers">
+                <a href="admin_users_driver.html" class="dfms-nav-link" data-nav-id="drivers">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Drivers</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="audit logs">
+                <a href="admin_audit_auditlog.html" class="dfms-nav-link" data-nav-id="audit_logs">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Audit Logs</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+    
+
+    
+    
+    
+
+  </div>
+
+  
+  <div class="dfms-nav-footer">
+    <span class="dfms-nav-footer-text">Optilogist</span>
+  </div>
+
+</nav>
+
+
+      
+      <main id="content-start" class="content" tabindex="-1">
+        
+          
+        
+        <!-- Content -->
+        <div id="content" class="colM">
+          
+  
+  <nav aria-label="Breadcrumbs" class="dfms-breadcrumbs">
+    
+      <div class="breadcrumbs">
+        <a href="admin.html">Home</a>
+         &rsaquo; Vendors
+      </div>
+    
+  </nav>
+  
+
+          
+          
+          
+<div class="content vm-vendors" x-data="vendorsPage()" x-init="init()" x-cloak>
+  <div style="margin-bottom: 14px;">
+    <h1 style="margin: 0 0 6px; font-size: 20px; font-weight: 700;">Vendors</h1>
+    <p class="vm-vendors__lead">
+      
+      Review vendor join requests and manage vendors for this tenant. Vendor type is set once at approval. Suspend and reactivate apply to this tenant only and do not affect the vendor on other tenants.
+      
+    </p>
+  </div>
+
+  <div class="vm-alert vm-alert--error" x-show="error" x-text="error"></div>
+  <div class="vm-alert vm-alert--success" x-show="success" x-text="success"></div>
+
+  <div id="changelist" class="module filtered">
+    <div id="toolbar">
+      <form id="changelist-search" method="get" x-on:submit.prevent="onSearchSubmit()">
+        <div class="dfms-search-wrap">
+          <i class="bi bi-search dfms-search-icon"></i>
+          <input
+            type="text"
+            name="q"
+            x-model="q"
+            id="searchbar"
+            class="dfms-search-input"
+            placeholder="Search…"
+            autocomplete="off"
+            spellcheck="false"
+          >
+          <a
+            x-show="q"
+            href="#"
+            class="dfms-search-clear"
+            title="Clear search"
+            aria-label="Clear search"
+            x-on:click.prevent="clearSearch()"
+          ><i class="bi bi-x"></i></a>
+          <input type="submit" value="Search" class="dfms-search-submit">
+        </div>
+        <span class="dfms-search-count" x-text="resultCountText()"></span>
+      </form>
+    </div>
+
+    <div style="display:flex; gap:16px; align-items:flex-start;">
+      <div style="flex:1; min-width:0;">
+        <div
+          class="dfms-selection-toolbar"
+          id="dfms-selection-toolbar"
+          x-show="canManage && selectedIds.length > 0"
+          x-cloak
+        >
+          <span class="dfms-selection-count">
+            <span class="dfms-selection-count-badge" x-text="selectedIds.length">0</span>
+            <span x-text="selectedIds.length">0</span>
+            selected
+          </span>
+          <div class="dfms-toolbar-actions">
+            <button
+              type="button"
+              class="dfms-btn-approve"
+              :disabled="loading || !canBulkApprove()"
+              x-show="canBulkApprove()"
+              x-on:click="bulkApprove('contractual')"
+            >
+              <i class="bi bi-check-circle"></i> Approve — Contractual
+            </button>
+            <button
+              type="button"
+              class="dfms-btn-modify"
+              :disabled="loading || !canBulkApprove()"
+              x-show="canBulkApprove()"
+              x-on:click="bulkApprove('non_contractual')"
+            >
+              <i class="bi bi-check2-all"></i> Approve — Non-Contractual
+            </button>
+            <button
+              type="button"
+              class="dfms-btn-reject"
+              :disabled="loading || !canBulkReject()"
+              x-show="canBulkReject()"
+              x-on:click="openBulkReject()"
+            >
+              <i class="bi bi-x-octagon"></i> Reject
+            </button>
+            <button
+              type="button"
+              class="dfms-toolbar-action-btn dfms-toolbar-action-btn--danger"
+              :disabled="loading || !canBulkSuspend()"
+              x-show="canBulkSuspend()"
+              x-on:click="bulkSuspend()"
+            >
+              <i class="bi bi-pause-circle"></i> Suspend
+            </button>
+            <button
+              type="button"
+              class="dfms-btn-approve"
+              :disabled="loading || !canBulkReactivate()"
+              x-show="canBulkReactivate()"
+              x-on:click="bulkReactivate()"
+            >
+              <i class="bi bi-arrow-counterclockwise"></i> Reactivate
+            </button>
+          </div>
+          <button type="button" class="dfms-clear-selection" x-on:click="clearSelection()">
+            <i class="bi bi-x"></i>
+            Clear
+          </button>
+        </div>
+
+        <div class="results">
+          <table id="result_list">
+            <thead>
+              <tr>
+                <th scope="col" class="action-checkbox-column" x-show="canManage">
+                  <input
+                    type="checkbox"
+                    id="action-toggle"
+                    title="Select all"
+                    :checked="allSelectableSelected()"
+                    :indeterminate.prop="someSelectableSelected() && !allSelectableSelected()"
+                    x-on:click="toggleSelectAll($event.target.checked)"
+                  >
+                </th>
+                <th scope="col"><div class="text"><span>Vendor Code</span></div></th>
+                <th scope="col"><div class="text"><span>Company Name</span></div></th>
+                <th scope="col"><div class="text"><span>Contact Person</span></div></th>
+                <th scope="col"><div class="text"><span>Email</span></div></th>
+                <th scope="col"><div class="text"><span>Phone</span></div></th>
+                <th scope="col"><div class="text"><span>Join status</span></div></th>
+                <th scope="col"><div class="text"><span>Platform account</span></div></th>
+                <th scope="col"><div class="text"><span>Type</span></div></th>
+                <th scope="col"><div class="text"><span>Created at</span></div></th>
+              </tr>
+            </thead>
+            <tbody id="vm-vendors-tbody">
+              
+              <tr class="vm-row-link" data-membership-id="e1dbc12f-1841-4d81-8590-78949d1b7f92" data-status="approved">
+                <td class="action-checkbox"  x-show="canManage">
+                  
+                    
+                  <input type="checkbox" class="action-select" value="e1dbc12f-1841-4d81-8590-78949d1b7f92" data-status="approved">
+                    
+                  
+                </td>
+                <td><a href="#" onclick="return false;">VND-20260821-P6KCKP</a></td>
+                <td>Padma Transport</td>
+                <td>Sumaiya Kabir</td>
+                <td>user25@example.com</td>
+                <td>01213345565</td>
+                <td>
+                  <span class="dfms-badge dfms-badge--approved">
+                    Approved
+                  </span>
+                </td>
+                <td>
+                  <span class="dfms-badge dfms-badge--active">
+                    Active
+                  </span>
+                </td>
+                <td>
+                  <span class="dfms-badge dfms-badge--approved">
+                    Contractual
+                  </span>
+                </td>
+                <td class="quiet">2026-08-21T08:51:15.084285+00:00</td>
+              </tr>
+              
+              <tr class="vm-row-link" data-membership-id="a612b387-9b95-471d-a57f-5694e531aa5a" data-status="approved">
+                <td class="action-checkbox"  x-show="canManage">
+                  
+                    
+                  <input type="checkbox" class="action-select" value="a612b387-9b95-471d-a57f-5694e531aa5a" data-status="approved">
+                    
+                  
+                </td>
+                <td><a href="#" onclick="return false;">VND-20260821-KBH62O</a></td>
+                <td>Meghna Logistics</td>
+                <td>Mitu Siddique</td>
+                <td>user29@example.com</td>
+                <td>01700100042</td>
+                <td>
+                  <span class="dfms-badge dfms-badge--approved">
+                    Approved
+                  </span>
+                </td>
+                <td>
+                  <span class="dfms-badge dfms-badge--active">
+                    Active
+                  </span>
+                </td>
+                <td>
+                  <span class="dfms-badge dfms-badge--submitted">
+                    Non-Contractual
+                  </span>
+                </td>
+                <td class="quiet">2026-08-21T08:42:12.924487+00:00</td>
+              </tr>
+              
+              <tr class="vm-row-link" data-membership-id="39713577-cb63-4caf-bad5-4a7b1e1851ff" data-status="approved">
+                <td class="action-checkbox"  x-show="canManage">
+                  
+                    
+                  <input type="checkbox" class="action-select" value="39713577-cb63-4caf-bad5-4a7b1e1851ff" data-status="approved">
+                    
+                  
+                </td>
+                <td><a href="#" onclick="return false;">VND-20260820-TTCISN</a></td>
+                <td>Jamuna Carriers</td>
+                <td>Rina Akter</td>
+                <td>user28@example.com</td>
+                <td>01700100045</td>
+                <td>
+                  <span class="dfms-badge dfms-badge--approved">
+                    Approved
+                  </span>
+                </td>
+                <td>
+                  <span class="dfms-badge dfms-badge--active">
+                    Active
+                  </span>
+                </td>
+                <td>
+                  <span class="dfms-badge dfms-badge--submitted">
+                    Non-Contractual
+                  </span>
+                </td>
+                <td class="quiet">2026-08-20T15:24:02.453875+00:00</td>
+              </tr>
+              
+              <tr class="vm-row-link" data-membership-id="1c326e76-e710-488b-b076-de5ca22a66b3" data-status="approved">
+                <td class="action-checkbox"  x-show="canManage">
+                  
+                    
+                  <input type="checkbox" class="action-select" value="1c326e76-e710-488b-b076-de5ca22a66b3" data-status="approved">
+                    
+                  
+                </td>
+                <td><a href="#" onclick="return false;">VND-20260819-82OOYJ</a></td>
+                <td>Karnaphuli Movers</td>
+                <td>Jamuna Carriers</td>
+                <td>user26@example.com</td>
+                <td>01700100044</td>
+                <td>
+                  <span class="dfms-badge dfms-badge--approved">
+                    Approved
+                  </span>
+                </td>
+                <td>
+                  <span class="dfms-badge dfms-badge--active">
+                    Active
+                  </span>
+                </td>
+                <td>
+                  <span class="dfms-badge dfms-badge--submitted">
+                    Non-Contractual
+                  </span>
+                </td>
+                <td class="quiet">2026-08-19T13:38:51.364467+00:00</td>
+              </tr>
+              
+              <tr class="vm-row-link" data-membership-id="c1f770ea-1ef2-449e-83f5-75067256351b" data-status="approved">
+                <td class="action-checkbox"  x-show="canManage">
+                  
+                    
+                  <input type="checkbox" class="action-select" value="c1f770ea-1ef2-449e-83f5-75067256351b" data-status="approved">
+                    
+                  
+                </td>
+                <td><a href="#" onclick="return false;">VND-20260819-Y2KNW5</a></td>
+                <td>Teesta Trucking</td>
+                <td>Rubel Kabir</td>
+                <td>admin@example.com</td>
+                <td>01700100043</td>
+                <td>
+                  <span class="dfms-badge dfms-badge--approved">
+                    Approved
+                  </span>
+                </td>
+                <td>
+                  <span class="dfms-badge dfms-badge--active">
+                    Active
+                  </span>
+                </td>
+                <td>
+                  <span class="dfms-badge dfms-badge--approved">
+                    Contractual
+                  </span>
+                </td>
+                <td class="quiet">2026-08-19T12:54:20.027636+00:00</td>
+              </tr>
+              
+              <tr class="vm-row-link" data-membership-id="e58ff4d5-54c7-4c37-a978-30f0765ca1a4" data-status="approved">
+                <td class="action-checkbox"  x-show="canManage">
+                  
+                    
+                  <input type="checkbox" class="action-select" value="e58ff4d5-54c7-4c37-a978-30f0765ca1a4" data-status="approved">
+                    
+                  
+                </td>
+                <td><a href="#" onclick="return false;">VND-20260818-SA1JZE</a></td>
+                <td>Surma Freight Lines</td>
+                <td>Nusrat Karim</td>
+                <td>user21@example.com</td>
+                <td>01700100046</td>
+                <td>
+                  <span class="dfms-badge dfms-badge--approved">
+                    Approved
+                  </span>
+                </td>
+                <td>
+                  <span class="dfms-badge dfms-badge--active">
+                    Active
+                  </span>
+                </td>
+                <td>
+                  <span class="dfms-badge dfms-badge--approved">
+                    Contractual
+                  </span>
+                </td>
+                <td class="quiet">2026-08-18T15:29:40.513662+00:00</td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+
+        <div class="dfms-pagination-parent">
+          <div class="dfms-pagination-numbers">
+            <p class="paginator">
+              <span class="dfms-paginator-meta" x-text="paginatorMetaText()"></span>
+              <span class="dfms-paginator-nav" x-show="totalPages > 1">
+                <template x-if="page <= 1">
+                  <span class="disabled dfms-page-prev">‹ Prev</span>
+                </template>
+                <template x-if="page > 1">
+                  <a href="#" class="dfms-page-prev" x-on:click.prevent="goToPage(page - 1)">‹ Prev</a>
+                </template>
+                <template x-for="item in pageItems()" :key="item.key">
+                  <span>
+                    <span class="dfms-page-ellipsis" x-show="item.type === 'ellipsis'">…</span>
+                    <span class="this-page" x-show="item.type === 'page' && item.n === page" x-text="item.n"></span>
+                    <a href="#" x-show="item.type === 'page' && item.n !== page"
+                       x-on:click.prevent="goToPage(item.n)" x-text="item.n"></a>
+                  </span>
+                </template>
+                <template x-if="page >= totalPages">
+                  <span class="disabled dfms-page-next">Next ›</span>
+                </template>
+                <template x-if="page < totalPages">
+                  <a href="#" class="dfms-page-next" x-on:click.prevent="goToPage(page + 1)">Next ›</a>
+                </template>
+              </span>
+            </p>
+          </div>
+          <div class="dfms-pagination-controls">
+            <div class="per-page-selector">
+              <label for="per-page-select" class="per-page-selector__label">
+                Rows per page:
+              </label>
+              <select
+                id="per-page-select"
+                class="per-page-selector__select"
+                x-model.number="perPage"
+                x-on:change="onPerPageChange()"
+              >
+                
+                <option value="15">15</option>
+                
+                <option value="25">25</option>
+                
+                <option value="50">50</option>
+                
+                <option value="100">100</option>
+                
+                <option value="200">200</option>
+                
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="vm-help" x-text="filterHelpText()"></div>
+      </div>
+
+      <div id="changelist-filter" style="width:260px;">
+        <h2>Filter</h2>
+        <h3>By status</h3>
+        <ul>
+          <li :class="{selected: statusFilter==='all'}"><a href="#" x-on:click.prevent="setStatus('all')">All</a></li>
+          <li :class="{selected: statusFilter==='pending'}"><a href="#" x-on:click.prevent="setStatus('pending')">Pending</a></li>
+          <li :class="{selected: statusFilter==='approved'}"><a href="#" x-on:click.prevent="setStatus('approved')">Approved</a></li>
+          <li :class="{selected: statusFilter==='suspended'}"><a href="#" x-on:click.prevent="setStatus('suspended')">Suspended</a></li>
+          <li :class="{selected: statusFilter==='rejected'}"><a href="#" x-on:click.prevent="setStatus('rejected')">Rejected</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="vm-overlay vm-overlay--elevated"
+    x-show="rejectOpen"
+    x-cloak
+    x-on:keydown.escape.window="if (rejectOpen) closeReject()"
+  >
+    <div class="vm-dialog vm-dialog--sm" x-on:click.outside="closeReject()">
+      <div class="vm-dialog__body">
+        <div class="vm-dialog__head">
+          <div class="vm-dialog__head-main">
+            <h2>Rejection</h2>
+            <p class="vm-dialog__title" x-show="!rejectBulk">Reject join request</p>
+            <p class="vm-dialog__title" x-show="rejectBulk">Reject join requests</p>
+            <p class="vm-dialog__code" x-show="!rejectBulk" x-text="selected?.company_name || '—'"></p>
+            <p class="vm-dialog__code" x-show="rejectBulk">
+              <span x-text="selectedIds.length"></span> vendors selected
+            </p>
+          </div>
+        </div>
+        <div class="vm-dialog__section">
+          <div class="vm-dialog__field">
+            <label class="vm-profile__label" for="rejectRemarks">Remarks (required)</label>
+            <textarea
+              id="rejectRemarks"
+              rows="4"
+              x-model="rejectRemarks"
+              placeholder="Reason for rejection"
+            ></textarea>
+            <p class="vm-help">Explain why this join request is being rejected. Minimum 3 characters.</p>
+          </div>
+        </div>
+      </div>
+      <div class="vm-dialog__actions">
+        <button type="button" class="dfms-btn-secondary dfms-btn-cancel" x-on:click="closeReject()">
+          Cancel
+        </button>
+        <button type="button" class="dfms-btn-reject" :disabled="loading" x-on:click="confirmReject()">
+          <i class="bi bi-x-octagon"></i> Reject
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="vm-overlay" x-show="vendorOpen" x-cloak x-on:keydown.escape.window="if (vendorOpen && !rejectOpen) closeVendor()">
+    <div class="vm-dialog" x-on:click.outside="closeVendor()">
+      <div class="vm-dialog__body">
+        <div class="vm-dialog__head">
+          <div class="vm-dialog__head-main">
+            <h2>Vendor details</h2>
+            <p class="vm-dialog__title" x-text="vendorForm.company_name || selected?.company_name || '—'"></p>
+            <code class="vm-dialog__code" x-text="selected?.vendor_code"></code>
+          </div>
+          <div class="vm-dialog__badges">
+            <span class="dfms-badge" :class="statusBadgeModifier(selected?.status || '')"
+                  x-text="formatStatus(selected?.status || '')"></span>
+            <span class="dfms-badge" :class="platformStatusBadgeModifier(selected || {})"
+                  x-text="formatPlatformStatus(selected || {})"></span>
+            <span class="dfms-badge" x-show="selected?.status === 'approved' || selected?.status === 'suspended'"
+                  :class="vendorTypeBadgeModifier(vendorType)"
+                  x-text="formatVendorType(vendorType)"></span>
+          </div>
+        </div>
+
+        <div class="vm-dialog__section">
+          <h3 class="vm-dialog__section-title">Contact</h3>
+
+          <div class="vm-profile" x-show="!canManage || selected?.status === 'pending' || selected?.status === 'rejected'">
+            <div class="vm-profile__item">
+              <span class="vm-profile__label">Contact person</span>
+              <div class="vm-profile__value" x-text="vendorForm.contact_person || '—'"></div>
+            </div>
+            <div class="vm-profile__item">
+              <span class="vm-profile__label">Phone</span>
+              <div class="vm-profile__value" x-text="vendorForm.phone || '—'"></div>
+            </div>
+            <div class="vm-profile__item">
+              <span class="vm-profile__label">Email</span>
+              <div class="vm-profile__value" x-text="vendorForm.email || '—'"></div>
+            </div>
+            <div class="vm-profile__item">
+              <span class="vm-profile__label">Address</span>
+              <div class="vm-profile__value"
+                   :class="{ 'vm-profile__value--muted': !vendorForm.address }"
+                   x-text="vendorForm.address || 'Not provided'"></div>
+            </div>
+            <div class="vm-profile__item" x-show="!canManage && (selected?.status === 'approved' || selected?.status === 'suspended')">
+              <span class="vm-profile__label">Company name</span>
+              <div class="vm-profile__value" x-text="vendorForm.company_name || '—'"></div>
+            </div>
+          </div>
+
+          <div class="vm-grid" x-show="canManage && (selected?.status === 'approved' || selected?.status === 'suspended')">
+            <div>
+              <label class="quiet">Company name</label>
+              <input type="text" x-model="vendorForm.company_name">
+            </div>
+            <div>
+              <label class="quiet">Contact person</label>
+              <input type="text" x-model="vendorForm.contact_person">
+            </div>
+            <div>
+              <label class="quiet">Email</label>
+              <input type="email" x-model="vendorForm.email">
+            </div>
+            <div>
+              <label class="quiet">Phone</label>
+              <input type="text" x-model="vendorForm.phone">
+            </div>
+            <div class="full">
+              <label class="quiet">Address</label>
+              <textarea rows="2" x-model="vendorForm.address"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="vm-dialog__section vm-docs">
+          <h3 class="vm-dialog__section-title">Compliance documents</h3>
+          <p class="vm-docs__empty" x-show="vendorLoaded && !vendorDocuments.length">
+            No documents uploaded.
+          </p>
+          <ul class="vm-docs__list" x-show="vendorDocuments.length">
+            <template x-for="doc in vendorDocuments" :key="doc.id">
+              <li class="vm-docs__item">
+                <span class="vm-docs__icon" aria-hidden="true">
+                  <i class="bi" :class="documentIcon(doc)"></i>
+                </span>
+                <div class="vm-docs__meta">
+                  <span class="vm-docs__label" x-text="formatDocumentType(doc)"></span>
+                  <span class="vm-docs__hint"
+                        x-text="doc.expiry_date ? ('Expiry: ' + doc.expiry_date) : (doc.is_verified ? 'Verified' : 'Uploaded')"></span>
+                </div>
+                <a class="vm-docs__link"
+                   x-show="doc.file_url"
+                   :href="doc.file_url"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                  View
+                  <i class="bi bi-box-arrow-up-right"></i>
+                </a>
+                <span class="vm-docs__hint" x-show="!doc.file_url">Unavailable</span>
+              </li>
+            </template>
+          </ul>
+        </div>
+      </div>
+
+      <div class="vm-dialog__actions">
+        <template x-if="canManage && selected?.status === 'pending' && !selected?.vendor_account_deleted">
+          <div class="vm-actions" style="margin-right: auto;">
+            <button type="button" class="dfms-btn-approve" :disabled="loading"
+                    x-on:click="approve(selected.id, 'contractual')">
+              <i class="bi bi-check-circle"></i> Approve — Contractual
+            </button>
+            <button type="button" class="dfms-btn-modify" :disabled="loading"
+                    x-on:click="approve(selected.id, 'non_contractual')">
+              <i class="bi bi-check2-all"></i> Approve — Non-Contractual
+            </button>
+            <button type="button" class="dfms-btn-reject" :disabled="loading"
+                    x-on:click="openReject(selected)">
+              <i class="bi bi-x-octagon"></i> Reject
+            </button>
+          </div>
+        </template>
+        <template x-if="canManage && selected?.status === 'approved' && !selected?.vendor_account_deleted">
+          <div class="vm-actions" style="margin-right: auto;">
+            <button type="button" class="dfms-btn-reject" :disabled="loading"
+                    x-on:click="suspendMembership()">
+              <i class="bi bi-pause-circle"></i> Suspend for this tenant
+            </button>
+          </div>
+        </template>
+        <template x-if="canManage && selected?.status === 'suspended'">
+          <div class="vm-actions" style="margin-right: auto;">
+            <button type="button" class="dfms-btn-approve" :disabled="loading"
+                    x-on:click="reactivateMembership()">
+              <i class="bi bi-arrow-counterclockwise"></i> Reactivate for this tenant
+            </button>
+          </div>
+        </template>
+        <button type="button" class="dfms-btn-secondary dfms-btn-cancel" x-on:click="closeVendor()">
+          Close
+        </button>
+        <button type="button" class="dfms-btn-modify" :disabled="loading" x-on:click="saveVendor()"
+                x-show="canManage && (selected?.status === 'approved' || selected?.status === 'suspended')">
+          <i class="bi bi-save"></i> Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function vendorsPage() {
+  return {
+    canManage: true,
+    error: '',
+    success: '',
+    loading: false,
+    statusFilter: 'all',
+    q: '',
+    page: 1,
+    perPage: 25,
+    totalCount: 6,
+    totalPages: 1,
+    rows: [
+      
+      {
+        id: 'e1dbc12f\u002D1841\u002D4d81\u002D8590\u002D78949d1b7f92',
+        vendor_code: 'VND\u002D20260821\u002DP6KCKP',
+        company_name: 'Padma Transport',
+        contact_person: 'Sumaiya Kabir',
+        email: 'user25@example.com',
+        phone: '01213345565',
+        status: 'approved',
+        vendor_platform_status: 'active',
+        vendor_account_deleted: false,
+        vendor_type: 'contractual',
+        requested_at: '2026\u002D08\u002D21T08:51:15.084285+00:00',
+      },
+      
+      {
+        id: 'a612b387\u002D9b95\u002D471d\u002Da57f\u002D5694e531aa5a',
+        vendor_code: 'VND\u002D20260821\u002DKBH62O',
+        company_name: 'Meghna Logistics',
+        contact_person: 'Mitu Siddique',
+        email: 'user29@example.com',
+        phone: '01700100042',
+        status: 'approved',
+        vendor_platform_status: 'active',
+        vendor_account_deleted: false,
+        vendor_type: 'non_contractual',
+        requested_at: '2026\u002D08\u002D21T08:42:12.924487+00:00',
+      },
+      
+      {
+        id: '39713577\u002Dcb63\u002D4caf\u002Dbad5\u002D4a7b1e1851ff',
+        vendor_code: 'VND\u002D20260820\u002DTTCISN',
+        company_name: 'Jamuna Carriers',
+        contact_person: 'Rina Akter',
+        email: 'user28@example.com',
+        phone: '01700100045',
+        status: 'approved',
+        vendor_platform_status: 'active',
+        vendor_account_deleted: false,
+        vendor_type: 'non_contractual',
+        requested_at: '2026\u002D08\u002D20T15:24:02.453875+00:00',
+      },
+      
+      {
+        id: '1c326e76\u002De710\u002D488b\u002Db076\u002Dde5ca22a66b3',
+        vendor_code: 'VND\u002D20260819\u002D82OOYJ',
+        company_name: 'Karnaphuli Movers',
+        contact_person: 'Jamuna Carriers',
+        email: 'user26@example.com',
+        phone: '01700100044',
+        status: 'approved',
+        vendor_platform_status: 'active',
+        vendor_account_deleted: false,
+        vendor_type: 'non_contractual',
+        requested_at: '2026\u002D08\u002D19T13:38:51.364467+00:00',
+      },
+      
+      {
+        id: 'c1f770ea\u002D1ef2\u002D449e\u002D83f5\u002D75067256351b',
+        vendor_code: 'VND\u002D20260819\u002DY2KNW5',
+        company_name: 'Teesta Trucking',
+        contact_person: 'Rubel Kabir',
+        email: 'admin@example.com',
+        phone: '01700100043',
+        status: 'approved',
+        vendor_platform_status: 'active',
+        vendor_account_deleted: false,
+        vendor_type: 'contractual',
+        requested_at: '2026\u002D08\u002D19T12:54:20.027636+00:00',
+      },
+      
+      {
+        id: 'e58ff4d5\u002D54c7\u002D4c37\u002Da978\u002D30f0765ca1a4',
+        vendor_code: 'VND\u002D20260818\u002DSA1JZE',
+        company_name: 'Surma Freight Lines',
+        contact_person: 'Nusrat Karim',
+        email: 'user21@example.com',
+        phone: '01700100046',
+        status: 'approved',
+        vendor_platform_status: 'active',
+        vendor_account_deleted: false,
+        vendor_type: 'contractual',
+        requested_at: '2026\u002D08\u002D18T15:29:40.513662+00:00',
+      }
+      
+    ],
+    loaded: true,
+    selected: null,
+    selectedIds: [],
+    rejectRemarks: '',
+    rejectOpen: false,
+    rejectBulk: false,
+    vendorOpen: false,
+    vendorLoaded: false,
+    vendorType: '',
+    vendorDocuments: [],
+    vendorForm: {
+      company_name: '',
+      contact_person: '',
+      email: '',
+      phone: '',
+      address: '',
+    },
+
+    fetchOpts() {
+      return typeof dfmsFetchOptions === 'function' ? dfmsFetchOptions() : { credentials: 'same-origin' };
+    },
+
+    apiFetch(url, extra) {
+      if (typeof dfmsAuthenticatedFetch === 'function') {
+        return dfmsAuthenticatedFetch(url, extra);
+      }
+      return fetch(url, this.fetchOpts(extra));
+    },
+
+    async handleAuthFailure(res) {
+      if (res.status !== 401) return false;
+      localStorage.removeItem('dfms_access');
+      localStorage.removeItem('dfms_refresh');
+      window.location.href = '/admin/login/?next=' + encodeURIComponent(window.location.pathname + window.location.search);
+      return true;
+    },
+
+    apiErrorDetail(data) {
+      if (!data) return 'Request failed.';
+      if (data.error && data.error.message) return data.error.message;
+      if (typeof data.detail === 'string') return data.detail;
+      if (Array.isArray(data.vendor_type)) return data.vendor_type.join(' ');
+      if (Array.isArray(data.ids)) return data.ids.join(' ');
+      if (Array.isArray(data.remarks)) return data.remarks.join(' ');
+      if (Array.isArray(data.failed) && data.failed.length) {
+        const first = data.failed[0];
+        return (first && first.detail) ? first.detail : 'Bulk action failed.';
+      }
+      return JSON.stringify(data);
+    },
+
+    formatStatus(s) {
+      return {
+        pending: 'Pending',
+        approved: 'Approved',
+        suspended: 'Suspended',
+        rejected: 'Rejected',
+      }[s] || s;
+    },
+
+    formatPlatformStatus(row) {
+      if (row.vendor_account_deleted) return 'Deleted';
+      const s = (row.vendor_platform_status || '').toLowerCase();
+      if (s === 'active') return 'Active';
+      if (s === 'pending') return 'Pending';
+      if (s === 'suspended') return 'Suspended';
+      if (s === 'deleted') return 'Deleted';
+      return s ? s.charAt(0).toUpperCase() + s.slice(1) : '—';
+    },
+
+    formatDocumentType(doc) {
+      const key = (doc && (doc.document_type || doc.doc_type) || '').toLowerCase();
+      return {
+        trade_license: 'Trade License',
+        bin: 'BIN',
+        tin: 'TIN',
+        truck_association: 'Truck Association',
+        tax_certificate: 'Tax Certificate',
+        bank_statement: 'Bank Statement',
+        insurance: 'Insurance',
+        other: 'Other',
+      }[key] || (key ? key.replace(/_/g, ' ') : 'Document');
+    },
+
+    documentIcon(doc) {
+      const key = (doc && (doc.document_type || doc.doc_type) || '').toLowerCase();
+      return {
+        trade_license: 'bi-file-earmark-text',
+        bin: 'bi-file-earmark-check',
+        tin: 'bi-file-earmark-ruled',
+        truck_association: 'bi-truck',
+        tax_certificate: 'bi-receipt',
+        bank_statement: 'bi-bank',
+        insurance: 'bi-shield-check',
+        other: 'bi-file-earmark',
+      }[key] || 'bi-file-earmark';
+    },
+
+    latestDocuments(docs) {
+      const list = Array.isArray(docs) ? docs.slice() : [];
+      list.sort((a, b) => String(b.created_at || '').localeCompare(String(a.created_at || '')));
+      const seen = new Set();
+      const latest = [];
+      for (const doc of list) {
+        const key = (doc.document_type || doc.doc_type || doc.id || '').toLowerCase();
+        if (!key || seen.has(key)) continue;
+        seen.add(key);
+        latest.push(doc);
+      }
+      const order = ['trade_license', 'bin', 'tin', 'truck_association'];
+      latest.sort((a, b) => {
+        const ka = (a.document_type || a.doc_type || '').toLowerCase();
+        const kb = (b.document_type || b.doc_type || '').toLowerCase();
+        const ia = order.indexOf(ka);
+        const ib = order.indexOf(kb);
+        return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+      });
+      return latest;
+    },
+
+    platformStatusBadgeModifier(row) {
+      if (row.vendor_account_deleted) return 'dfms-badge--cancelled';
+      const s = (row.vendor_platform_status || '').toLowerCase();
+      if (s === 'active') return 'dfms-badge--active';
+      if (s === 'suspended' || s === 'deleted') return 'dfms-badge--suspended';
+      return 'dfms-badge--neutral';
+    },
+
+    formatVendorType(t) {
+      if (!t) return '—';
+      if (t === 'contractual') return 'Contractual';
+      if (t === 'non_contractual') return 'Non-Contractual';
+      return t;
+    },
+
+    formatVendorTypeDetail(t) {
+      if (!t) return '—';
+      if (t === 'contractual') return 'Contractual (Fixed Rate)';
+      if (t === 'non_contractual') return 'Non-Contractual';
+      return t;
+    },
+
+    statusBadgeModifier(s) {
+      if (s === 'approved') return 'dfms-badge--approved';
+      if (s === 'suspended') return 'dfms-badge--suspended';
+      if (s === 'rejected') return 'dfms-badge--rejected';
+      return 'dfms-badge--pending-approval';
+    },
+
+    vendorTypeBadgeModifier(t) {
+      if (t === 'contractual') return 'dfms-badge--approved';
+      if (t === 'non_contractual') return 'dfms-badge--submitted';
+      return 'dfms-badge--neutral';
+    },
+
+    formatDate(iso) {
+      if (!iso) return '—';
+      try { return new Date(iso).toLocaleString(); } catch (e) { return iso; }
+    },
+
+    formatRequestedDecided(row) {
+      if (!row) return '—';
+      const a = this.formatDate(row.requested_at);
+      const b = this.formatDate(row.decided_at);
+      if (row.status === 'pending') return 'Requested: ' + a;
+      return 'Decided: ' + b;
+    },
+
+    filterHelpText() {
+      const map = {
+        pending: 'Pending join requests for this tenant.',
+        approved: 'Active vendors for this tenant (click to edit or suspend).',
+        suspended: 'Vendors suspended for this tenant only (click to reactivate).',
+        rejected: 'Rejected join requests for this tenant.',
+        all: 'All vendor memberships for this tenant.',
+      };
+      return map[this.statusFilter] || '';
+    },
+
+    resultCountText() {
+      const n = this.totalCount || 0;
+      return n === 1 ? '1 result' : (n + ' results');
+    },
+
+    paginatorMetaText() {
+      const n = this.totalCount || 0;
+      if (n === 0) return '0 vendors';
+      if (n === 1) return '1 vendor';
+      return n + ' vendors';
+    },
+
+    pageItems() {
+      const total = this.totalPages || 1;
+      const current = this.page || 1;
+      const items = [];
+      const pushPage = (n) => items.push({ type: 'page', n: n, key: 'p' + n });
+      const pushEllipsis = (key) => items.push({ type: 'ellipsis', key: key });
+
+      if (total <= 10) {
+        for (let i = 1; i <= total; i++) pushPage(i);
+        return items;
+      }
+
+      const ON_EACH_SIDE = 2;
+      const ON_ENDS = 1;
+      const pages = new Set();
+      for (let i = 1; i <= ON_ENDS; i++) pages.add(i);
+      for (let i = total - ON_ENDS + 1; i <= total; i++) {
+        if (i >= 1) pages.add(i);
+      }
+      for (let i = current - ON_EACH_SIDE; i <= current + ON_EACH_SIDE; i++) {
+        if (i >= 1 && i <= total) pages.add(i);
+      }
+      const sorted = [...pages].sort((a, b) => a - b);
+      let prev = 0;
+      sorted.forEach((n) => {
+        if (prev && n - prev > 1) pushEllipsis('e' + prev + '-' + n);
+        pushPage(n);
+        prev = n;
+      });
+      return items;
+    },
+
+    isSelectableStatus(status) {
+      return status === 'pending' || status === 'approved' || status === 'suspended';
+    },
+
+    selectableRows() {
+      if (!this.canManage) return [];
+      return (this.rows || []).filter((row) => this.isSelectableStatus(row.status) && !row.vendor_account_deleted);
+    },
+
+    selectedRows() {
+      const idSet = new Set(this.selectedIds);
+      return (this.rows || []).filter((row) => idSet.has(row.id));
+    },
+
+    selectedStatuses() {
+      return [...new Set(this.selectedRows().map((row) => row.status))];
+    },
+
+    canBulkApprove() {
+      if (!this.canManage) return false;
+      const statuses = this.selectedStatuses();
+      return this.selectedIds.length > 0 && statuses.length === 1 && statuses[0] === 'pending';
+    },
+
+    canBulkReject() {
+      return this.canBulkApprove();
+    },
+
+    canBulkSuspend() {
+      if (!this.canManage) return false;
+      const statuses = this.selectedStatuses();
+      return this.selectedIds.length > 0 && statuses.length === 1 && statuses[0] === 'approved';
+    },
+
+    canBulkReactivate() {
+      if (!this.canManage) return false;
+      const statuses = this.selectedStatuses();
+      return this.selectedIds.length > 0 && statuses.length === 1 && statuses[0] === 'suspended';
+    },
+
+    allSelectableSelected() {
+      const selectable = this.selectableRows();
+      return selectable.length > 0 && selectable.every((row) => this.selectedIds.includes(row.id));
+    },
+
+    someSelectableSelected() {
+      return this.selectableRows().some((row) => this.selectedIds.includes(row.id));
+    },
+
+    clearSelection() {
+      this.selectedIds = [];
+      this.syncCheckboxDom();
+    },
+
+    toggleSelectAll(checked) {
+      if (checked) {
+        this.selectedIds = this.selectableRows().map((row) => row.id);
+      } else {
+        this.selectedIds = [];
+      }
+      this.syncCheckboxDom();
+    },
+
+    toggleRowSelected(id, checked) {
+      if (checked) {
+        if (!this.selectedIds.includes(id)) this.selectedIds = [...this.selectedIds, id];
+      } else {
+        this.selectedIds = this.selectedIds.filter((item) => item !== id);
+      }
+      this.syncRowSelectedClass(id, checked);
+    },
+
+    syncRowSelectedClass(id, checked) {
+      const tr = document.querySelector('#vm-vendors-tbody tr[data-membership-id="' + id + '"]');
+      if (!tr) return;
+      tr.classList.toggle('selected', !!checked);
+    },
+
+    syncCheckboxDom() {
+      document.querySelectorAll('#vm-vendors-tbody input.action-select').forEach((cb) => {
+        const checked = this.selectedIds.includes(cb.value);
+        cb.checked = checked;
+        const tr = cb.closest('tr');
+        if (tr) tr.classList.toggle('selected', checked);
+      });
+    },
+
+    pruneSelection() {
+      const valid = new Set(this.selectableRows().map((row) => row.id));
+      this.selectedIds = this.selectedIds.filter((id) => valid.has(id));
+    },
+
+    bulkSummary(data, actionLabel) {
+      const ok = data.succeeded_count || 0;
+      const fail = data.failed_count || 0;
+      if (fail === 0) return actionLabel + ': ' + ok + ' vendor(s).';
+      const firstFail = (data.failed && data.failed[0] && data.failed[0].detail) ? data.failed[0].detail : 'Unknown error';
+      return actionLabel + ': ' + ok + ' succeeded, ' + fail + ' failed. ' + firstFail;
+    },
+
+    async runBulk(url, payload, successLabel) {
+      this.error = '';
+      this.success = '';
+      this.loading = true;
+      const res = await this.apiFetch(url, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      });
+      this.loading = false;
+      if (await this.handleAuthFailure(res)) return false;
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok && !(res.status === 207)) {
+        this.error = this.apiErrorDetail(data) || (successLabel + ' failed.');
+        return false;
+      }
+      const msg = this.bulkSummary(data, successLabel);
+      if ((data.failed_count || 0) > 0 && (data.succeeded_count || 0) > 0) {
+        this.error = msg;
+      } else if ((data.failed_count || 0) > 0) {
+        this.error = msg;
+      } else {
+        this.success = msg;
+      }
+      this.clearSelection();
+      await this.loadRows(false);
+      return true;
+    },
+
+    async bulkApprove(vendorType) {
+      if (!this.canBulkApprove()) {
+        this.error = 'Select only pending join requests to approve.';
+        return;
+      }
+      const label = vendorType === 'contractual'
+        ? 'Approved as Contractual'
+        : 'Approved as Non-Contractual';
+      await this.runBulk(
+        '/api/v1/tenant/vendors/join-requests/bulk-approve/',
+        { ids: this.selectedIds, vendor_type: vendorType },
+        label
+      );
+    },
+
+    openBulkReject() {
+      if (!this.canBulkReject()) {
+        this.error = 'Select only pending join requests to reject.';
+        return;
+      }
+      this.rejectBulk = true;
+      this.rejectRemarks = '';
+      this.rejectOpen = true;
+    },
+
+    closeReject() {
+      this.rejectOpen = false;
+      this.rejectBulk = false;
+      this.rejectRemarks = '';
+    },
+
+    async bulkSuspend() {
+      if (!this.canBulkSuspend()) {
+        this.error = 'Select only approved vendors to suspend.';
+        return;
+      }
+      if (!window.confirm('Suspend ' + this.selectedIds.length + ' vendor(s) for this tenant?')) return;
+      await this.runBulk(
+        '/api/v1/tenant/vendors/bulk-suspend/',
+        { ids: this.selectedIds },
+        'Suspended'
+      );
+    },
+
+    async bulkReactivate() {
+      if (!this.canBulkReactivate()) {
+        this.error = 'Select only suspended vendors to reactivate.';
+        return;
+      }
+      if (!window.confirm('Reactivate ' + this.selectedIds.length + ' vendor(s) for this tenant?')) return;
+      await this.runBulk(
+        '/api/v1/tenant/vendors/bulk-reactivate/',
+        { ids: this.selectedIds },
+        'Reactivated'
+      );
+    },
+
+    async init() {
+      if (typeof dfmsEnsurePortalJwt === 'function') {
+        const authed = await dfmsEnsurePortalJwt();
+        if (!authed) {
+          window.location.href = '/admin/login/?next=' + encodeURIComponent(window.location.pathname + window.location.search);
+          return;
+        }
+      }
+      const tbody = document.getElementById('vm-vendors-tbody');
+      if (tbody) {
+        tbody.addEventListener('click', (evt) => {
+          if (evt.target.closest('td.action-checkbox') || evt.target.classList.contains('action-select')) {
+            return;
+          }
+          const tr = evt.target.closest('tr.vm-row-link');
+          if (!tr) return;
+          const row = this.rows.find((item) => item.id === tr.dataset.membershipId);
+          if (row) this.openVendor(row, evt);
+        });
+        tbody.addEventListener('change', (evt) => {
+          const cb = evt.target;
+          if (!cb.classList || !cb.classList.contains('action-select')) return;
+          this.toggleRowSelected(cb.value, cb.checked);
+        });
+      }
+      const params = new URLSearchParams(window.location.search);
+      const t = params.get('tab');
+      const status = params.get('status');
+      const q = params.get('q');
+      const p = params.get('p');
+      const perPage = params.get('per_page');
+      if (t === 'approved') this.statusFilter = 'approved';
+      if (t === 'requests') this.statusFilter = 'pending';
+      if (status) this.statusFilter = status;
+      if (q) this.q = q;
+      if (p) {
+        const parsed = parseInt(p, 10);
+        if (!Number.isNaN(parsed) && parsed > 0) this.page = parsed;
+      }
+      if (perPage) {
+        const parsedPer = parseInt(perPage, 10);
+        if (!Number.isNaN(parsedPer)) this.perPage = parsedPer;
+      }
+      if (t || status || q || p || perPage) {
+        await this.loadRows(false);
+      } else {
+        this.renderRows();
+      }
+    },
+
+    escapeHtml(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/"/g, '&quot;');
+    },
+
+    renderRows() {
+      const tbody = document.getElementById('vm-vendors-tbody');
+      if (!tbody) return;
+      this.pruneSelection();
+      if (!this.loaded) {
+        tbody.innerHTML = '<tr><td colspan="10">Loading…</td></tr>';
+        return;
+      }
+      if (!this.rows.length) {
+        tbody.innerHTML = '<tr class="vm-empty-row"><td colspan="10">No vendors found.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = this.rows.map((row) => {
+        const checked = this.selectedIds.includes(row.id);
+        const selectable = this.canManage && this.isSelectableStatus(row.status) && !row.vendor_account_deleted;
+        const checkboxCell = this.canManage
+          ? ('<td class="action-checkbox">' + (selectable
+              ? ('<input type="checkbox" class="action-select" value="' + this.escapeHtml(row.id)
+                 + '" data-status="' + this.escapeHtml(row.status) + '"'
+                 + (checked ? ' checked' : '') + '>')
+              : '') + '</td>')
+          : '';
+        return ''
+          + '<tr class="vm-row-link' + (checked ? ' selected' : '') + '" data-membership-id="'
+          + this.escapeHtml(row.id) + '" data-status="' + this.escapeHtml(row.status) + '">'
+          + checkboxCell
+          + '<td><a href="#" onclick="return false;">' + this.escapeHtml(row.vendor_code) + '</a></td>'
+          + '<td>' + this.escapeHtml(row.company_name) + '</td>'
+          + '<td>' + this.escapeHtml(row.contact_person || '—') + '</td>'
+          + '<td>' + this.escapeHtml(row.email || '—') + '</td>'
+          + '<td>' + this.escapeHtml(row.phone || '—') + '</td>'
+          + '<td><span class="dfms-badge ' + this.statusBadgeModifier(row.status) + '">' + this.escapeHtml(this.formatStatus(row.status)) + '</span></td>'
+          + '<td><span class="dfms-badge ' + this.platformStatusBadgeModifier(row) + '">' + this.escapeHtml(this.formatPlatformStatus(row)) + '</span></td>'
+          + '<td><span class="dfms-badge ' + this.vendorTypeBadgeModifier(row.vendor_type) + '">' + this.escapeHtml(this.formatVendorType(row.vendor_type)) + '</span></td>'
+          + '<td class="quiet">' + this.escapeHtml(this.formatDate(row.requested_at)) + '</td>'
+          + '</tr>';
+      }).join('');
+    },
+
+    listUrl() {
+      const url = new URL('/api/v1/tenant/vendors/', window.location.origin);
+      if (this.statusFilter && this.statusFilter !== 'all') {
+        url.searchParams.set('status', this.statusFilter);
+      } else {
+        url.searchParams.set('status', 'all');
+      }
+      if (this.q) url.searchParams.set('q', this.q);
+      url.searchParams.set('p', String(this.page || 1));
+      url.searchParams.set('per_page', String(this.perPage || 25));
+      return url.toString();
+    },
+
+    applyListPayload(data) {
+      if (Array.isArray(data)) {
+        this.rows = data;
+        this.totalCount = data.length;
+        this.totalPages = 1;
+        this.page = 1;
+        return;
+      }
+      this.rows = Array.isArray(data.results) ? data.results : [];
+      this.totalCount = data.count || 0;
+      this.page = data.page || 1;
+      this.perPage = data.per_page || this.perPage;
+      this.totalPages = data.total_pages || 1;
+    },
+
+    async loadRows(updateUrl) {
+      this.error = '';
+      try {
+        this.loaded = false;
+        this.renderRows();
+        const res = await this.apiFetch(this.listUrl());
+        if (await this.handleAuthFailure(res)) return;
+        if (!res.ok) {
+          const d = await res.json().catch(() => ({}));
+          if (!this.error) this.error = this.apiErrorDetail(d) || 'Failed to load vendors.';
+          this.rows = [];
+          this.totalCount = 0;
+          this.totalPages = 1;
+          return;
+        }
+        const data = await res.json();
+        this.applyListPayload(data);
+        if (updateUrl) {
+          const url = new URL(window.location.href);
+          url.searchParams.delete('tab');
+          url.searchParams.set('status', this.statusFilter);
+          url.searchParams.set('p', String(this.page || 1));
+          url.searchParams.set('per_page', String(this.perPage || 25));
+          if (this.q) url.searchParams.set('q', this.q);
+          else url.searchParams.delete('q');
+          window.history.replaceState({}, '', url);
+        }
+      } catch (err) {
+        if (!this.error) this.error = 'Failed to load vendors.';
+        this.rows = [];
+        this.totalCount = 0;
+        this.totalPages = 1;
+      } finally {
+        this.loaded = true;
+        this.renderRows();
+      }
+    },
+
+    goToPage(n) {
+      const next = Math.max(1, Math.min(this.totalPages || 1, Number(n) || 1));
+      if (next === this.page) return;
+      this.page = next;
+      this.clearSelection();
+      this.loadRows(true);
+    },
+
+    onPerPageChange() {
+      this.page = 1;
+      this.clearSelection();
+      this.loadRows(true);
+    },
+
+    setStatus(s) {
+      this.statusFilter = s;
+      this.page = 1;
+      this.clearSelection();
+      this.loadRows(true);
+    },
+
+    onSearchSubmit() {
+      this.page = 1;
+      this.clearSelection();
+      this.loadRows(true);
+    },
+
+    clearSearch() {
+      this.q = '';
+      this.page = 1;
+      this.clearSelection();
+      this.loadRows(true);
+    },
+
+    async approve(id, vendorType) {
+      this.error = '';
+      this.success = '';
+      this.loading = true;
+      const res = await this.apiFetch('/api/v1/tenant/vendors/join-requests/' + id + '/approve/', {
+        method: 'POST',
+        body: JSON.stringify({ vendor_type: vendorType }),
+      });
+      this.loading = false;
+      if (await this.handleAuthFailure(res)) return;
+      if (!res.ok) {
+        const d = await res.json().catch(() => ({}));
+        this.error = this.apiErrorDetail(d) || 'Approve failed.';
+        return;
+      }
+      this.success = 'Vendor approved for this tenant.';
+      this.closeVendor();
+      await this.loadRows(false);
+    },
+
+    openReject(row) {
+      this.selected = row;
+      this.rejectBulk = false;
+      this.rejectRemarks = '';
+      this.rejectOpen = true;
+    },
+
+    async confirmReject() {
+      if (!this.rejectRemarks || this.rejectRemarks.trim().length < 3) {
+        this.error = 'Remarks must be at least 3 characters.';
+        return;
+      }
+      const remarks = this.rejectRemarks.trim();
+      if (this.rejectBulk) {
+        this.rejectOpen = false;
+        this.rejectBulk = false;
+        await this.runBulk(
+          '/api/v1/tenant/vendors/join-requests/bulk-reject/',
+          { ids: this.selectedIds, remarks: remarks },
+          'Rejected'
+        );
+        return;
+      }
+      this.error = '';
+      this.loading = true;
+      const res = await this.apiFetch('/api/v1/tenant/vendors/join-requests/' + this.selected.id + '/reject/', {
+        method: 'POST',
+        body: JSON.stringify({ remarks: remarks }),
+      });
+      this.loading = false;
+      if (await this.handleAuthFailure(res)) return;
+      if (!res.ok) {
+        const d = await res.json().catch(() => ({}));
+        this.error = this.apiErrorDetail(d) || 'Reject failed.';
+        return;
+      }
+      this.closeReject();
+      this.closeVendor();
+      this.success = 'Join request rejected.';
+      await this.loadRows(false);
+    },
+
+    closeVendor() {
+      this.vendorOpen = false;
+      this.vendorLoaded = false;
+      this.selected = null;
+      this.vendorType = '';
+      this.vendorDocuments = [];
+      this.vendorForm = {
+        company_name: '',
+        contact_person: '',
+        email: '',
+        phone: '',
+        address: '',
+      };
+    },
+
+    async openVendor(row, evt) {
+      this.error = '';
+      this.success = '';
+      this.selected = row;
+      this.vendorOpen = true;
+      this.vendorLoaded = false;
+      this.vendorDocuments = [];
+      try {
+        const res = await this.apiFetch('/api/v1/tenant/vendors/' + row.id + '/');
+        if (await this.handleAuthFailure(res)) return;
+        if (!res.ok) {
+          const d = await res.json().catch(() => ({}));
+          this.error = this.apiErrorDetail(d) || 'Failed to load vendor details.';
+          return;
+        }
+        const data = await res.json();
+        const v = data.vendor || {};
+        this.vendorType = data.vendor_type || '';
+        this.vendorDocuments = this.latestDocuments(v.documents || []);
+        this.vendorForm = {
+          company_name: v.company_name || row.company_name || '',
+          contact_person: v.contact_person || '',
+          email: v.email || row.email || '',
+          phone: v.phone || row.phone || '',
+          address: v.address || '',
+        };
+      } finally {
+        this.vendorLoaded = true;
+      }
+    },
+
+    async suspendMembership() {
+      if (!this.selected) return;
+      this.error = '';
+      this.success = '';
+      this.loading = true;
+      const res = await this.apiFetch('/api/v1/tenant/vendors/' + this.selected.id + '/suspend/', {
+        method: 'POST',
+      });
+      this.loading = false;
+      if (await this.handleAuthFailure(res)) return;
+      if (!res.ok) {
+        const d = await res.json().catch(() => ({}));
+        this.error = this.apiErrorDetail(d) || 'Suspend failed.';
+        return;
+      }
+      const data = await res.json();
+      this.selected.status = data.status;
+      this.success = 'Vendor suspended for this tenant.';
+      await this.loadRows(false);
+    },
+
+    async reactivateMembership() {
+      if (!this.selected) return;
+      this.error = '';
+      this.success = '';
+      this.loading = true;
+      const res = await this.apiFetch('/api/v1/tenant/vendors/' + this.selected.id + '/reactivate/', {
+        method: 'POST',
+      });
+      this.loading = false;
+      if (await this.handleAuthFailure(res)) return;
+      if (!res.ok) {
+        const d = await res.json().catch(() => ({}));
+        this.error = this.apiErrorDetail(d) || 'Reactivate failed.';
+        return;
+      }
+      const data = await res.json();
+      this.selected.status = data.status;
+      this.success = 'Vendor reactivated for this tenant.';
+      await this.loadRows(false);
+    },
+
+    async saveVendor() {
+      if (!this.selected) return;
+      this.error = '';
+      this.success = '';
+      this.loading = true;
+      const payload = {
+        vendor: {
+          company_name: (this.vendorForm.company_name || '').trim(),
+          contact_person: (this.vendorForm.contact_person || '').trim(),
+          email: (this.vendorForm.email || '').trim(),
+          phone: (this.vendorForm.phone || '').trim(),
+          address: (this.vendorForm.address || '').trim(),
+        }
+      };
+
+      const res = await this.apiFetch('/api/v1/tenant/vendors/' + this.selected.id + '/', {
+        method: 'PATCH',
+        body: JSON.stringify(payload),
+      });
+      this.loading = false;
+      if (await this.handleAuthFailure(res)) return;
+      if (!res.ok) {
+        const d = await res.json().catch(() => ({}));
+        this.error = this.apiErrorDetail(d) || 'Save failed.';
+        return;
+      }
+      this.success = 'Vendor updated.';
+      await this.loadRows(false);
+    },
+  };
+}
+</script>
+
+          
+          <br class="clear">
+        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
+      </main>
+    </div>
+</div>
+<!-- END Container -->
+
+<!-- SVGs -->
+<svg xmlns="http://www.w3.org/2000/svg" class="base-svgs">
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"/></symbol>
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"/></symbol>
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></symbol>
+</svg>
+<!-- END SVGs -->
+</body>
+</html>

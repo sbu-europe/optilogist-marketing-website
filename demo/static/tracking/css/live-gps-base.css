@@ -1,0 +1,235 @@
+/* Live GPS — shell, map, toolbar, Leaflet chrome. Requires live-gps-tokens.css */
+
+html.live-gps-active, html.live-gps-active body {
+  overflow: hidden;
+  height: 100%;
+}
+
+html.live-gps-active #container {
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+html.live-gps-active .main {
+  overflow: hidden;
+  min-height: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+html.live-gps-active .main > .content {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1 1 auto;
+}
+
+html.live-gps-active #content {
+  padding: 0 !important;
+  max-width: none !important;
+  margin: 0 !important;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#content-main.live-gps-page {
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+html[data-sidebar-collapsed="true"].live-gps-active .live-gps-shell, html.live-gps-active body.dfms-sidebar-collapsed .live-gps-shell {
+  left: var(--sidebar-w-collapsed, 64px);
+}
+
+#live-gps-map {
+  --lg-poi-pin-scale: 1;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background: #ddd;
+}
+
+.live-gps-toolbar {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 500;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  color: var(--lg-ink-2);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--lg-font);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.live-gps-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.live-gps-shell .leaflet-top.leaflet-right {
+  margin-top: 52px;
+}
+
+.live-gps-shell {
+  position: fixed;
+  top: var(--topbar-h, 56px);
+  left: var(--sidebar-w, 240px);
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  overflow: hidden;
+  background: var(--lg-shell-bg, #dfe5ea);
+  transition: left 0.22s ease;
+  --live-gps-popup-viewport-h: 220px;
+  font-family: var(--lg-font);
+  color: var(--lg-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.live-gps-shell--layout-sync .live-gps-objects,
+.live-gps-shell--layout-sync .live-gps-history:not(.is-hidden) {
+  transition: none;
+}
+
+.live-gps-toolbar__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--lg-ink-3);
+}
+
+.live-gps-toolbar__dot--live {
+  background: var(--lg-green);
+  animation: lg-pulse-green 2.4s ease-out infinite;
+}
+
+.live-gps-toolbar__dot--error {
+  background: var(--lg-red);
+}
+
+.live-gps-shell .leaflet-bar {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--lg-shadow-sm);
+}
+
+.live-gps-shell .leaflet-bar a {
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
+  background: var(--lg-surface-strong);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  color: var(--lg-ink-2);
+  border-bottom: 1px solid var(--lg-hairline);
+  font-family: var(--lg-font);
+  font-weight: 400;
+  font-size: 18px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.live-gps-shell .leaflet-bar a:hover {
+  background: var(--lg-control-hover, #fff);
+  color: var(--lg-ink);
+}
+
+.live-gps-history-follow-control.is-hidden {
+  display: none;
+}
+
+.live-gps-history-follow-btn {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  color: var(--lg-ink-2);
+}
+
+.live-gps-history-follow-btn.is-active {
+  color: var(--lg-accent);
+  background: var(--lg-accent-soft);
+}
+
+.live-gps-history-follow-btn.is-active:hover {
+  color: var(--lg-accent-strong, var(--lg-accent));
+  background: rgba(10, 132, 255, 0.22);
+}
+
+.live-gps-shell .leaflet-control-attribution {
+  background: var(--lg-surface);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: 8px 0 0 0;
+  font-size: 10px;
+  color: var(--lg-ink-3);
+  padding: 2px 8px;
+}
+
+/* Map canvas stays light OSM even when admin UI is dark. */
+html.live-gps-active[data-theme="dark"] #live-gps-map,
+html.live-gps-active[data-theme="dark"] .live-gps-follow__map {
+  background: #dfe5ea;
+}
+
+/* Opaque map chrome — translucent hover over the light basemap washes out icons. */
+html.live-gps-active[data-theme="dark"] .live-gps-shell .leaflet-bar a {
+  background: var(--lg-surface-strong);
+  color: var(--lg-ink-2);
+  border-bottom-color: var(--lg-hairline);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+html.live-gps-active[data-theme="dark"] .live-gps-shell .leaflet-bar a:hover,
+html.live-gps-active[data-theme="dark"] .live-gps-shell .leaflet-bar a:focus {
+  background: #2c334a;
+  color: var(--lg-ink);
+}
+
+html.live-gps-active[data-theme="dark"] .live-gps-shell .leaflet-bar a.leaflet-disabled {
+  background: var(--lg-surface-strong);
+  color: var(--lg-ink-3);
+  opacity: 0.45;
+}
+
+html.live-gps-active[data-theme="dark"] .live-gps-history-follow-btn.is-active {
+  color: var(--lg-accent-strong);
+  background: var(--lg-accent-soft);
+}
+
+html.live-gps-active[data-theme="dark"] .live-gps-history-follow-btn.is-active:hover {
+  background: rgba(59, 130, 246, 0.28);
+  color: var(--lg-accent-strong);
+}
+
+html.live-gps-active[data-theme="dark"] .live-gps-shell .leaflet-control-attribution {
+  background: var(--lg-surface);
+  color: var(--lg-ink-3);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}

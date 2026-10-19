@@ -1,0 +1,2144 @@
+<!DOCTYPE html>
+
+<html lang="en-us" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="static/demo/demo-shim.css?v=mv5a1jhl">
+<script src="static/demo/api-data.js?v=mv5a1jhl"></script>
+<script src="static/demo/demo-shim.js?v=mv5a1jhl"></script>
+<script src="static/demo/master-seed.js?v=mv5a1jhl"></script>
+<script src="static/demo/master-crud.js?v=mv5a1jhl"></script>
+<title>Change Product Requisition | Demo Agro Ltd Admin</title>
+<link rel="stylesheet" href="static/admin/css/base.css">
+
+
+  <link rel="stylesheet" href="static/admin/css/nav_sidebar.css">
+  <script src="static/admin/js/nav_sidebar.js" defer></script>
+
+<link rel="stylesheet" href="static/admin/css/forms.css">
+
+
+
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+
+
+<link rel="icon" href="favicon.ico?v=2" sizes="32x32">
+<link rel="icon" href="static/brand/optilogist/svg/favicon.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="static/brand/optilogist/png/apple-touch-icon.png?v=2">
+<link rel="stylesheet" href="static/admin/css/custom.css">
+
+<script>
+  (function(){
+    var t = localStorage.getItem('dfms-admin-theme');
+    if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+    // Keep native date/time picker icons visible: match DFMS theme, not OS preference alone.
+    document.documentElement.style.colorScheme = t === 'dark' ? 'dark' : 'light';
+
+    var collapsed = localStorage.getItem('dfms-sidebar-collapsed') === 'true';
+    var mobile    = window.innerWidth < 768;
+    if (collapsed && !mobile) {
+      document.documentElement.setAttribute('data-sidebar-collapsed', 'true');
+    }
+  })();
+</script>
+
+<script src="static/admin/js/dfms_theme.js" defer></script>
+
+<script src="static/admin/js/dfms_sidebar.js" defer></script>
+
+<script src="static/admin/js/dfms_actions.js" defer></script>
+
+<script src="static/js/password_toggle.js" defer></script>
+
+<script src="static/admin/js/dfms_timepicker.js" defer></script>
+
+<script src="static/admin/js/dfms_labels.js" defer></script>
+
+
+<script src="static/admin/jsi18n.js"></script>
+<link href="static/admin/css/poi_stock_panel.css" media="all" rel="stylesheet">
+<link href="static/admin/css/vendor/select2/select2.min.css" media="screen" rel="stylesheet">
+<link href="static/admin/css/autocomplete.css" media="screen" rel="stylesheet">
+<script src="static/admin/js/vendor/jquery/jquery.min.js"></script>
+<script src="static/admin/js/pr_line_item_autofill.js"></script>
+<script src="static/admin/js/vendor/select2/select2.full.min.js"></script>
+<script src="static/admin/js/vendor/select2/i18n/en.js"></script>
+<script src="static/admin/js/jquery.init.js"></script>
+<script src="static/admin/js/core.js"></script>
+<script src="static/admin/js/inlines.js"></script>
+<script src="static/admin/js/autocomplete.js"></script>
+<script src="static/admin/js/admin/RelatedObjectLookups.js"></script>
+<script src="static/admin/js/actions.js"></script>
+<script src="static/admin/js/urlify.js"></script>
+<script src="static/admin/js/prepopulate.js"></script>
+<script src="static/admin/js/vendor/xregexp/xregexp.min.js"></script>
+
+
+
+
+
+<link rel="stylesheet" href="static/admin/css/poi_stock_panel.css">
+<script src="static/admin/js/poi_stock_panel.js" defer></script>
+
+<script>window.dfmsInitialPoiStockByPanel = {"dfms-destination-poi-stock-panel": {"poi_id": "521b59c5-95cc-433d-9fc0-71658c3c17de", "poi_name": "Bhola Hub", "poi_type": "breeder", "storage_capacity_mt": 100.0, "current_stock_mt": -0.625, "free_capacity_mt": 100.625, "last_updated": "2026-08-19T13:55:14.579249+00:00"} };</script>
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/admin/css/responsive.css">
+    
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+<body class=" app-requisitions model-productrequisition change-form"
+  data-admin-utc-offset="21600">
+<a href="#content-start" class="skip-to-content-link">Skip to main content</a>
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    
+      <header id="header">
+        <div id="branding">
+        
+        </div>
+        
+
+<div id="dfms-topbar-tools">
+
+  
+  <button
+    id="dfms-sidebar-toggle"
+    class="dfms-content-toggle"
+    aria-label="Toggle sidebar"
+    title="Collapse sidebar"
+    type="button"
+  >
+    <i class="bi bi-list"></i>
+  </button>
+
+  
+  <div style="flex:1;"></div>
+
+  
+  <div class="dfms-topbar-right">
+
+    
+    <button
+      id="dfms-theme-toggle"
+      class="dfms-topbar-icon-btn"
+      title="Switch theme"
+      aria-label="Switch theme"
+      type="button"
+    >
+      <i class="toggle-icon bi bi-moon"></i>
+    </button>
+
+    
+    
+    
+    <div class="dfms-user-menu" id="dfms-user-menu">
+      <button
+        class="dfms-user-avatar-btn"
+        aria-haspopup="true"
+        aria-expanded="false"
+        aria-controls="dfms-user-dropdown"
+        type="button"
+        id="dfms-user-avatar-btn"
+      >
+        
+        <span class="dfms-avatar" aria-hidden="true"> DA </span>
+        <span class="dfms-user-name">Demo Admin</span>
+        <i class="bi bi-chevron-down dfms-user-chevron"></i>
+      </button>
+
+      
+      <div class="dfms-user-dropdown dfms-user-dropdown--with-poi" id="dfms-user-dropdown" role="menu" aria-labelledby="dfms-user-avatar-btn">
+
+        
+        <div class="dfms-dropdown-header">
+          <div class="dfms-dropdown-header__avatar"> DA </div>
+          <div class="dfms-dropdown-header__info">
+            <span class="dfms-dropdown-name">Demo Admin</span>
+            
+            <span class="dfms-dropdown-email">admin@example.com</span>
+            
+            
+              
+              
+              <span class="dfms-dropdown-meta">
+                <i class="bi bi-person-badge"></i>
+                Tenant Admin
+              </span>
+              
+              
+            
+            
+            <span class="dfms-dropdown-meta">
+              <i class="bi bi-diagram-3"></i>
+              Administration (tenant admin)
+            </span>
+            
+            
+            
+            <span class="dfms-dropdown-meta dfms-dropdown-meta--poi-warn">
+              <i class="bi bi-exclamation-circle"></i>
+              No site selected
+            </span>
+            
+            
+            
+            
+            <span class="dfms-dropdown-meta">
+              <i class="bi bi-building"></i>
+              Demo Agro Ltd
+            </span>
+            
+            
+          </div>
+        </div>
+
+        
+
+
+        
+
+<div class="dfms-dropdown-divider"></div>
+<div class="dfms-dropdown-poi" id="dfms-poi-profile">
+  <form
+    method="post"
+    action="#" data-demo-form="1"
+    id="dfms-poi-switcher-form"
+    class="dfms-dropdown-poi__form"
+  >
+    <input type="hidden" name="csrfmiddlewaretoken" value="demo">
+    <input type="hidden" name="next" value="/admin/requisitions/productrequisition/fb879449-3382-4747-8729-d3285a9b0c39/change/">
+
+    <div class="dfms-dropdown-poi__field">
+      <label for="dfms-poi-select" class="dfms-dropdown-poi__label">
+        <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
+        Working site
+        
+        <span class="dfms-badge dfms-badge--warning dfms-dropdown-poi__badge">Required</span>
+        
+      </label>
+
+      <div class="dfms-dropdown-poi__select-wrap">
+        <i class="bi bi-building dfms-dropdown-poi__select-icon" aria-hidden="true"></i>
+        <select
+          name="poi_id"
+          id="dfms-poi-select"
+          class="dfms-dropdown-poi__select"
+          aria-label="Select working site"
+          onchange="this.form.submit()"
+        >
+          <option value="" selected>
+            Select a site…
+          </option>
+          
+          <option
+            value="6f1c2c64-97d6-4d2a-9768-9f13b2129737"
+            
+          >Barishal Aquaculture Site</option>
+          
+          <option
+            value="1dd0e4ae-98dd-4d1c-8673-1b330130cfc1"
+            
+          >Barishal Green Field Farm</option>
+          
+          <option
+            value="3f8e8b11-b539-4595-90cf-bccea625b61b"
+            
+          >Barishal Production Unit</option>
+          
+          <option
+            value="1dd20b37-df96-46aa-b27a-92dd38053fe7"
+            
+          >Bhola Vendor Office</option>
+          
+          <option
+            value="2e5b71e9-d800-4fce-a921-a09dcd6e3758"
+            
+          >Bhola Waste Management Unit</option>
+          
+          <option
+            value="b267f13b-8731-44d5-b045-59613974ef7a"
+            
+          >Bhaluka Hub</option>
+          
+          <option
+            value="521b59c5-95cc-433d-9fc0-71658c3c17de"
+            
+          >Bhola Hub</option>
+          
+          <option
+            value="4019a94e-c5c2-4f80-b643-adfc7c1dd1ce"
+            
+          >Chittagong Hub</option>
+          
+          <option
+            value="5a77b607-c6b7-4e3b-a277-1534fe7e6a4e"
+            
+          >Chittagong Hub</option>
+          
+          <option
+            value="314c4410-eef7-41d9-a44d-4dbeb909f8ea"
+            
+          >Chottogram Hub</option>
+          
+        </select>
+        <i class="bi bi-chevron-down dfms-dropdown-poi__select-chevron" aria-hidden="true"></i>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="dfms-dropdown-divider"></div>
+
+
+
+        
+        
+        <a href="#" data-demo-missing="1" class="dfms-dropdown-item" role="menuitem">
+          <i class="bi bi-key"></i>
+          Change password
+        </a>
+        
+
+        <div class="dfms-dropdown-divider"></div>
+
+        <form id="logout-form" method="post" action="#" data-demo-form="1">
+          <input type="hidden" name="csrfmiddlewaretoken" value="demo">
+          <button type="submit" class="dfms-dropdown-item dfms-dropdown-item--danger" role="menuitem">
+            <i class="bi bi-box-arrow-right"></i>
+            Log out
+          </button>
+        </form>
+        <script>
+        (function () {
+          var form = document.getElementById("logout-form");
+          if (!form) return;
+          form.addEventListener("submit", function () {
+            var match = document.cookie.split("; ").find(function (row) {
+              return row.indexOf("csrftoken=") === 0;
+            });
+            if (!match) return;
+            var token = decodeURIComponent(match.split("=").slice(1).join("="));
+            var input = form.querySelector('input[name="csrfmiddlewaretoken"]');
+            if (token && input) input.value = token;
+          });
+        })();
+        </script>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+        
+      </header>
+    
+    <!-- END Header -->
+    
+    
+
+    <div class="main" id="main">
+      
+        
+  
+
+<nav id="dfms-nav-sidebar" class="dfms-nav-sidebar" aria-label="Sidebar">
+
+  
+  <div class="dfms-sidebar-brand">
+    <a href="admin.html" class="dfms-sidebar-brand-link" aria-label="Home">
+      <div class="dfms-sidebar-logo-mark">
+        
+
+<span class="dfms-brand-mark" aria-hidden="true">
+  <img
+    class="dfms-brand-mark__img dfms-brand-mark__img--light"
+    src="static/brand/optilogist/svg/mark-light.svg"
+    alt=""
+    width="32"
+    height="32"
+    decoding="async"
+  >
+  <img
+    class="dfms-brand-mark__img dfms-brand-mark__img--dark"
+    src="static/brand/optilogist/svg/mark-dark.svg"
+    alt=""
+    width="32"
+    height="32"
+    decoding="async"
+  >
+</span>
+
+      </div>
+      <div class="dfms-sidebar-brand-text">
+        <span class="dfms-sidebar-brand-name">Optilogist</span>
+        <span class="dfms-sidebar-brand-sub">Demo Agro Ltd Admin</span>
+      </div>
+    </a>
+    
+    <button
+      type="button"
+      id="dfms-sidebar-close"
+      class="dfms-sidebar-close"
+      aria-label="Close menu"
+      title="Close menu"
+    >
+      <i class="bi bi-x-lg" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  
+  <div class="dfms-nav-search">
+    <i class="bi bi-search dfms-nav-search-icon"></i>
+    <input
+      type="search"
+      id="dfms-nav-filter"
+      class="dfms-nav-filter-input"
+      placeholder="Filter…"
+      aria-label="Filter navigation items"
+      autocomplete="off"
+    >
+  </div>
+
+  
+  <div class="dfms-nav-body" id="dfms-nav-body">
+
+    
+    
+    
+      
+        <div class="dfms-nav-group" data-app="portal-overview">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-overview"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-speedometer2"></i>
+            </span>
+            <span class="dfms-nav-group-label">Overview</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="dashboard">
+                <a href="admin.html" class="dfms-nav-link" data-nav-id="dashboard">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Dashboard</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group dfms-nav-group--active" data-app="portal-requisition">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-requisition"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-clipboard-check"></i>
+            </span>
+            <span class="dfms-nav-group-label">Requisition</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item dfms-nav-item--active" data-label="finished goods">
+                <a href="admin_requisitions_productrequisition.html" class="dfms-nav-link" data-nav-id="requisition_fg" aria-current="page">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Finished Goods</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-port-shipments">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-port-shipments"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-box-seam"></i>
+            </span>
+            <span class="dfms-nav-group-label">Port Shipments</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="port shipments">
+                <a href="admin_requisitions_portshipmentproxy.html" class="dfms-nav-link" data-nav-id="port_shipments">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Port Shipments</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-distribution">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-distribution"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-arrow-right-circle"></i>
+            </span>
+            <span class="dfms-nav-group-label">Distribution</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="product requisitions">
+                <a href="admin_requisitions_productrequisition_pr_type_FINISHED_GOODS.html" class="dfms-nav-link" data-nav-id="distribution_pr_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Product requisitions</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="transport requests">
+                <a href="admin_requisitions_transportrequisition_tr_type_FG.html" class="dfms-nav-link" data-nav-id="distribution_transport_requests">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Transport requests</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-procurement">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-procurement"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-box-arrow-in-right"></i>
+            </span>
+            <span class="dfms-nav-group-label">Procurement</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="port shipments">
+                <a href="admin_requisitions_portshipmentproxy.html" class="dfms-nav-link" data-nav-id="procurement_port_shipments">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Port Shipments</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="transport requests">
+                <a href="admin_requisitions_transportrequisition_tr_type_PORT_CONSIGNMENT.html" class="dfms-nav-link" data-nav-id="procurement_transport_requests">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Transport requests</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-transport">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-transport"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-truck"></i>
+            </span>
+            <span class="dfms-nav-group-label">Transport</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="live gps">
+                <a href="admin_tracking_live_gps.html" class="dfms-nav-link" data-nav-id="live_gps">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Live GPS</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="transport requests">
+                <a href="admin_requisitions_transportrequisition.html" class="dfms-nav-link" data-nav-id="transport_requests">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Transport requests</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="transport orders">
+                <a href="admin_transport_transportorder.html" class="dfms-nav-link" data-nav-id="transport_orders">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Transport orders</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="vehicle planning">
+                <a href="admin_transport_vehicle_planning.html" class="dfms-nav-link" data-nav-id="vehicle_planning">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicle planning</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="bids management">
+                <a href="admin_vendors_biddingsession.html" class="dfms-nav-link" data-nav-id="bids_management">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Bids management</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-master-data">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-master-data"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-database"></i>
+            </span>
+            <span class="dfms-nav-group-label">Master Data</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="points of interest">
+                <a href="admin_master_data_poi.html" class="dfms-nav-link" data-nav-id="pois">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Points of Interest</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="loading/unloading points">
+                <a href="admin_master_data_loadingunloadingpoint.html" class="dfms-nav-link" data-nav-id="loading_unloading_points">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Loading/Unloading Points</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="vehicle brands">
+                <a href="admin_master_data_brand.html" class="dfms-nav-link" data-nav-id="vehicle_brands">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicle Brands</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="vehicles">
+                <a href="admin_master_data_vehicle.html" class="dfms-nav-link" data-nav-id="vehicles">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicles</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="helpers">
+                <a href="admin_users_helper.html" class="dfms-nav-link" data-nav-id="helpers">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Helpers</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="dealers">
+                <a href="admin_master_data_dealer.html" class="dfms-nav-link" data-nav-id="dealers">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Dealers</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="suppliers">
+                <a href="admin_master_data_supplier.html" class="dfms-nav-link" data-nav-id="suppliers">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Suppliers</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="product categories">
+                <a href="admin_master_data_productcategory.html" class="dfms-nav-link" data-nav-id="product_categories">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Product Categories</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="product sub-category">
+                <a href="admin_master_data_productsubcategory.html" class="dfms-nav-link" data-nav-id="product_sub_categories">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Product Sub-category</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="products">
+                <a href="admin_master_data_product.html" class="dfms-nav-link" data-nav-id="products">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Products</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-gate">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-gate"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-door-open"></i>
+            </span>
+            <span class="dfms-nav-group-label">Gate</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="vehicle entry (gate-in)">
+                <a href="admin_operations_gatein_add.html" class="dfms-nav-link" data-nav-id="gate_in">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicle Entry (Gate-In)</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="vehicle exit (gate-out)">
+                <a href="admin_operations_gateout_add.html" class="dfms-nav-link" data-nav-id="gate_out">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicle Exit (Gate-Out)</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="active visits">
+                <a href="admin_operations_gatevisitsession_status_exact_active.html" class="dfms-nav-link" data-nav-id="gate_active_visits">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Active Visits</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="visit history">
+                <a href="admin_operations_gatevisitsession.html" class="dfms-nav-link" data-nav-id="gate_visit_history">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Visit History</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="on-demand to">
+                <a href="admin_operations_gateondemandtorequest.html" class="dfms-nav-link" data-nav-id="gate_on_demand_to">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">On-Demand TO</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-command-center">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-command-center"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-speedometer2"></i>
+            </span>
+            <span class="dfms-nav-group-label">Command Center</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="queue">
+                <a href="admin_operations_queueentry_status_exact_waiting.html" class="dfms-nav-link" data-nav-id="cc_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Queue</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="bay assignments">
+                <a href="admin_operations_bayassignment.html" class="dfms-nav-link" data-nav-id="cc_bay_assignments">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Bay Assignments</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="waiting serials">
+                <a href="admin_operations_waitingserial.html" class="dfms-nav-link" data-nav-id="cc_waiting_serials">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Waiting Serials</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-loading">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-loading"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-box-arrow-up"></i>
+            </span>
+            <span class="dfms-nav-group-label">Loading</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="load events">
+                <a href="admin_operations_loadevent.html" class="dfms-nav-link" data-nav-id="ld_load_events">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Load Events</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="start loading">
+                <a href="admin_operations_loadevent_add.html" class="dfms-nav-link" data-nav-id="ld_new_load_event">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Start Loading</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-unloading">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-unloading"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-box-arrow-down"></i>
+            </span>
+            <span class="dfms-nav-group-label">Unloading</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="unload events">
+                <a href="admin_operations_unloadevent.html" class="dfms-nav-link" data-nav-id="ld_unload_events">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Unload Events</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="start unloading">
+                <a href="admin_operations_unloadevent_add.html" class="dfms-nav-link" data-nav-id="ld_new_unload_event">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Start Unloading</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-qc-checkpoint">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-qc-checkpoint"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-clipboard2-pulse"></i>
+            </span>
+            <span class="dfms-nav-group-label">QC Checkpoint</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="qc queue">
+                <a href="admin_quality_qcqueuetransportorder.html" class="dfms-nav-link" data-nav-id="qc_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">QC Queue</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-scaling">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-scaling"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-speedometer"></i>
+            </span>
+            <span class="dfms-nav-group-label">Scaling</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="scale-in">
+                <a href="admin_operations_scalein_add.html" class="dfms-nav-link" data-nav-id="scale_in">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Scale-In</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="scale-out">
+                <a href="admin_operations_scaleout_add.html" class="dfms-nav-link" data-nav-id="scale_out">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Scale-Out</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="queue tokens">
+                <a href="admin_operations_queuetoken.html" class="dfms-nav-link" data-nav-id="queue_tokens">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Queue Tokens</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="gate passes">
+                <a href="admin_operations_scaleout.html" class="dfms-nav-link" data-nav-id="gate_passes_scaling">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Gate Passes</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-fleet-operations">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-fleet-operations"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-clipboard2-check"></i>
+            </span>
+            <span class="dfms-nav-group-label">Fleet operations</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="dispatch queue">
+                <a href="admin_fleet_supervisor_vehicleinspection_dispatch_queue.html" class="dfms-nav-link" data-nav-id="fleet_dispatch_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Dispatch queue</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="under maintenance">
+                <a href="admin_fleet_supervisor_vehicleinspection_maintenance_queue.html" class="dfms-nav-link" data-nav-id="fleet_maintenance_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Under Maintenance</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="inspection records">
+                <a href="admin_fleet_supervisor_vehicleinspection.html" class="dfms-nav-link" data-nav-id="fleet_inspection_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Inspection records</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-driver-management">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-driver-management"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-person-badge"></i>
+            </span>
+            <span class="dfms-nav-group-label">Driver Management</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="driver attendance">
+                <a href="admin_fleet_supervisor_driverattendance.html" class="dfms-nav-link" data-nav-id="fleet_attendance">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Driver Attendance</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="driver leave management">
+                <a href="admin_fleet_supervisor_driverleave.html" class="dfms-nav-link" data-nav-id="fleet_leave">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Driver Leave Management</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-trips">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-trips"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-phone"></i>
+            </span>
+            <span class="dfms-nav-group-label">Trips</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="my trips">
+                <a href="admin_transport_drivertransportorder_assigned_driver_me.html" class="dfms-nav-link" data-nav-id="driver_my_tos">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">My Trips</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="pod records">
+                <a href="admin_transport_proofofdelivery.html" class="dfms-nav-link" data-nav-id="driver_pod_records">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">POD Records</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-vendors">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-vendors"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-building"></i>
+            </span>
+            <span class="dfms-nav-group-label">Vendors</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="vendors">
+                <a href="vendors.html" class="dfms-nav-link" data-nav-id="vendors">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vendors</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-users-access">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-users-access"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-people"></i>
+            </span>
+            <span class="dfms-nav-group-label">Users &amp; Access</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="users">
+                <a href="admin_users_user.html" class="dfms-nav-link" data-nav-id="users">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Users</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="drivers">
+                <a href="admin_users_driver.html" class="dfms-nav-link" data-nav-id="drivers">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Drivers</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="audit logs">
+                <a href="admin_audit_auditlog.html" class="dfms-nav-link" data-nav-id="audit_logs">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Audit Logs</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+    
+
+    
+    
+    
+
+  </div>
+
+  
+  <div class="dfms-nav-footer">
+    <span class="dfms-nav-footer-text">Optilogist</span>
+  </div>
+
+</nav>
+
+
+      
+      <main id="content-start" class="content" tabindex="-1">
+        
+          
+        
+        <!-- Content -->
+        <div id="content" class="colM">
+          
+  
+  <nav aria-label="Breadcrumbs" class="dfms-breadcrumbs">
+    
+<div class="breadcrumbs">
+  <a href="admin.html">Home</a>
+  
+    &rsaquo; <a href="admin_requisitions_productrequisition.html">Product Requisitions</a>
+  
+  &rsaquo; PR-FG-20260911-0001
+</div>
+
+  </nav>
+  
+
+          
+          
+          <div id="content-main">
+
+<div class="dfms-page-header">
+
+  <div class="dfms-page-header__title">
+    
+    
+    
+    <a href="admin_requisitions_productrequisition.html" class="dfms-page-header__back" title="Back to list">
+      <i class="bi bi-arrow-left"></i>
+    </a>
+    
+
+    <h1>
+      
+        Product Requisition
+      
+    </h1>
+  </div>
+
+  
+  <div class="dfms-page-header__actions">
+    
+    
+    <a href="#" data-demo-missing="1" class="dfms-btn-secondary">
+      <i class="bi bi-clock-history"></i>
+      History
+    </a>
+
+    
+    
+  </div>
+  
+
+</div>
+
+<form enctype="multipart/form-data" method="post" id="productrequisition_form" novalidate><input type="hidden" name="csrfmiddlewaretoken" value="demo">
+<div>
+
+
+
+
+
+
+
+  <fieldset class="module aligned ">
+    <h2>Identity</h2>
+    
+    
+        <div class="form-row field-pr_number">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>PR number:</label>
+                                
+                                    <div class="readonly">PR-FG-20260911-0001</div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-pr_type">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>PR type:</label>
+                                
+                                    <div class="readonly">Finished Goods</div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-status">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Status:</label>
+                                
+                                    <div class="readonly">Partially Allocated</div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-urgency">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label class="required" for="id_urgency">Urgency:</label>
+                                
+                                    <select name="urgency" id="id_urgency">
+  <option value="normal" selected>Normal</option>
+
+  <option value="high">High</option>
+
+  <option value="critical">Critical</option>
+
+</select>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+</fieldset>
+
+
+  <fieldset class="module aligned ">
+    <h2>Requester</h2>
+    
+    
+        <div class="form-row field-requested_by">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Requested by:</label>
+                                
+                                    <div class="readonly"><a href="md_user_change.html#c11cdf8c-1a19-41a8-bf1e-9229fa9ecf03">Mitu Majumder &lt;user13@example.com&gt;</a></div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-created_by">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Created by:</label>
+                                
+                                    <div class="readonly"><a href="md_user_change.html#c11cdf8c-1a19-41a8-bf1e-9229fa9ecf03">Mitu Majumder &lt;user13@example.com&gt;</a></div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-updated_by">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Updated by:</label>
+                                
+                                    <div class="readonly"><a href="md_user_change.html#c11cdf8c-1a19-41a8-bf1e-9229fa9ecf03">Mitu Majumder &lt;user13@example.com&gt;</a></div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-requester_name">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Requester name:</label>
+                                
+                                    <div class="readonly">Mitu Majumder</div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-requester_department">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Requester department:</label>
+                                
+                                    <div class="readonly">administration</div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+</fieldset>
+
+
+  <fieldset class="module aligned ">
+    <h2>Delivery</h2>
+    
+    
+        <div class="form-row field-destination_poi">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label for="id_destination_poi">Destination POI:</label>
+                                
+                                    <div class="related-widget-wrapper" data-model-ref="poi">
+    <select name="destination_poi" id="id_destination_poi">
+  <option value="">---------</option>
+
+  <option value="6f1c2c64-97d6-4d2a-9768-9f13b2129737">Barishal Aquaculture Site (POI-0018)</option>
+
+  <option value="1dd0e4ae-98dd-4d1c-8673-1b330130cfc1">Barishal Green Field Farm (POI-0014)</option>
+
+  <option value="3f8e8b11-b539-4595-90cf-bccea625b61b">Barishal Production Unit (POI-0016)</option>
+
+  <option value="1dd20b37-df96-46aa-b27a-92dd38053fe7">Bhola Vendor Office (POI-0017)</option>
+
+  <option value="2e5b71e9-d800-4fce-a921-a09dcd6e3758">Bhola Waste Management Unit (POI-0015)</option>
+
+  <option value="b267f13b-8731-44d5-b045-59613974ef7a">Bhaluka Hub (POI-0003)</option>
+
+  <option value="521b59c5-95cc-433d-9fc0-71658c3c17de" selected>Bhola Hub (POI-0001)</option>
+
+  <option value="4019a94e-c5c2-4f80-b643-adfc7c1dd1ce">Chittagong Hub (POI-0002)</option>
+
+  <option value="5a77b607-c6b7-4e3b-a277-1534fe7e6a4e">Chittagong Hub (POI-0004)</option>
+
+  <option value="314c4410-eef7-41d9-a44d-4dbeb909f8ea">Chottogram Hub (POI-0005)</option>
+
+</select>
+    
+        <a class="related-widget-wrapper-link change-related" id="change_id_destination_poi"
+            data-href-template="/admin/master_data/poi/__fk__/change/?_to_field=id&amp;_popup=1"
+            data-popup="yes"
+            title="Change selected poi"><img src="static/admin/img/icon-changelink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link add-related" id="add_id_destination_poi"
+            data-popup="yes"
+            href="md_poi_add.html"
+            title="Add another poi"><img src="static/admin/img/icon-addlink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link delete-related" id="delete_id_destination_poi"
+            data-href-template="/admin/master_data/poi/__fk__/delete/?_to_field=id&amp;_popup=1"
+            data-popup="yes"
+            title="Delete selected poi"><img src="static/admin/img/icon-deletelink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link view-related" id="view_id_destination_poi"
+             data-href-template="/admin/master_data/poi/__fk__/change/?_to_field=id"
+             title="View selected poi"><img src="static/admin/img/icon-viewlink.svg" alt="" width="20" height="20"></a>
+    
+</div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-preferred_delivery_datetime">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label for="id_preferred_delivery_datetime">Preferred delivery datetime:</label>
+                                
+                                    <input type="datetime-local" name="preferred_delivery_datetime" value="2026-09-11T16:07" class="vTextField" id="id_preferred_delivery_datetime">
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-special_instructions">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label for="id_special_instructions">Special instructions:</label>
+                                
+                                    <textarea name="special_instructions" cols="40" rows="10" class="vLargeTextField" id="id_special_instructions">
+</textarea>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-remarks">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label for="id_remarks">Remarks:</label>
+                                
+                                    <textarea name="remarks" cols="40" rows="10" class="vLargeTextField" id="id_remarks">
+</textarea>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+</fieldset>
+
+
+  <fieldset class="module aligned ">
+    <h2>Totals</h2>
+    
+    
+        <div class="form-row field-total_weight_kg">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Total weight kg:</label>
+                                
+                                    <div class="readonly">500.000</div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-total_line_items">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Total line items:</label>
+                                
+                                    <div class="readonly">1</div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+</fieldset>
+
+
+  <fieldset class="module aligned ">
+    <h2>Lifecycle</h2>
+    
+    
+        <div class="form-row field-submitted_at">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Submitted at:</label>
+                                
+                                    <div class="readonly">Sept. 11, 2026, 4:07 p.m.</div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-fulfilled_at">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Fulfilled at:</label>
+                                
+                                    <div class="readonly">-</div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-cancelled_at">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Cancelled at:</label>
+                                
+                                    <div class="readonly">-</div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-cancelled_by">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Cancelled by:</label>
+                                
+                                    <div class="readonly">-</div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-cancellation_reason">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Cancellation reason:</label>
+                                
+                                    <div class="readonly"></div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+</fieldset>
+
+
+  <fieldset class="module aligned ">
+    <h2>Timestamps</h2>
+    
+    
+        <div class="form-row field-created_at">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Created at:</label>
+                                
+                                    <div class="readonly">Sept. 11, 2026, 4:07 p.m.</div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-updated_at">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Updated at:</label>
+                                
+                                    <div class="readonly">Sept. 11, 2026, 4:07 p.m.</div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+</fieldset>
+
+
+
+
+
+
+
+<section
+  id="dfms-destination-poi-stock-panel"
+  class="dfms-poi-stock-panel"
+  aria-live="polite"
+  data-poi-select-name="destination_poi"
+  data-incoming-mode="pr_lines"
+  
+  
+>
+  <div class="dfms-poi-stock-panel__head">
+    <i class="bi bi-box-seam"></i>
+    <span>Destination POI — Stock & Capacity</span>
+  </div>
+  <div class="dfms-poi-stock-panel__hint">
+    
+      Live snapshot for Bhola Hub (breeder)
+    
+  </div>
+  <div class="dfms-poi-stock-panel__grid">
+    <div class="dfms-poi-stock-item">
+      <label>Total capacity</label>
+      <span data-k="storage_capacity_mt">
+        100.00 MT
+      </span>
+    </div>
+    <div class="dfms-poi-stock-item">
+      <label>Current stock</label>
+      <span data-k="current_stock_mt">
+        -0.625 MT
+      </span>
+    </div>
+    <div class="dfms-poi-stock-item">
+      <label>Free capacity</label>
+      <span data-k="free_capacity_mt">
+        100.625 MT
+      </span>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+    
+<div class="js-inline-admin-formset inline-group" id="line_items-group"
+     data-inline-type="tabular"
+     data-inline-formset="{&quot;name&quot;: &quot;#line_items&quot;, &quot;options&quot;: {&quot;prefix&quot;: &quot;line_items&quot;, &quot;addText&quot;: &quot;Add another Pr line item&quot;, &quot;deleteText&quot;: &quot;Remove&quot;}}">
+  <div class="tabular inline-related ">
+<input type="hidden" name="line_items-TOTAL_FORMS" value="1" id="id_line_items-TOTAL_FORMS"><input type="hidden" name="line_items-INITIAL_FORMS" value="1" id="id_line_items-INITIAL_FORMS"><input type="hidden" name="line_items-MIN_NUM_FORMS" value="0" id="id_line_items-MIN_NUM_FORMS"><input type="hidden" name="line_items-MAX_NUM_FORMS" value="1000" id="id_line_items-MAX_NUM_FORMS">
+<fieldset class="module ">
+   
+     <h2>Pr line items</h2>
+   
+   
+   <table>
+     <thead><tr>
+       <th class="original"></th>
+     
+       <th class="column-product">Product
+       
+       </th>
+     
+       <th class="column-type_of_packing">Pack size
+       
+       </th>
+     
+       <th class="column-unit_of_measure required">Unit of measure
+       
+       </th>
+     
+       <th class="column-weight_per_unit required">Weight per unit (KG)
+       <img src="static/admin/img/icon-unknown.svg" class="help help-tooltip" width="10" height="10" alt="(Weight in KG per unit of selected UOM)" title="Weight in KG per unit of selected UOM">
+       </th>
+     
+       <th class="column-product_quantity required">Product quantity
+       
+       </th>
+     
+       <th class="column-total_weight_kg required">Total weight (KG)
+       
+       </th>
+     
+     <th>Delete?</th>
+     </tr></thead>
+
+     <tbody>
+     
+        
+        <tr class="form-row has_original"
+             id="line_items-0">
+        <td class="original">
+          <p>
+          
+          Line 1: Broiler Starter Feed 25kg (20.000 Bags)
+          
+          
+          
+            </p>
+          <input type="hidden" name="line_items-0-id" value="b442b3cd-99c2-4abf-897a-94bdd1b2fa81" id="id_line_items-0-id">
+          <input type="hidden" name="line_items-0-requisition" value="fb879449-3382-4747-8729-d3285a9b0c39" id="id_line_items-0-requisition">
+        </td>
+        
+          
+            
+              <td class="field-product">
+              
+                  
+                  <div class="related-widget-wrapper" data-model-ref="product">
+    <select name="line_items-0-product" id="id_line_items-0-product" class="admin-autocomplete" data-ajax--cache="true" data-ajax--delay="250" data-ajax--type="GET" data-ajax--url="/admin/autocomplete/" data-app-label="requisitions" data-model-name="prlineitem" data-field-name="product" data-theme="admin-autocomplete" data-allow-clear="true" data-placeholder="" lang="en"><option value=""></option><option value="20432cb2-dd2f-4193-992a-f906f88de18c" selected>[ITEM-0001] Broiler Starter Feed 25kg — Maize</option><option value="demo-0">[P-1001] Broiler Starter Feed</option><option value="demo-1">[P-1002] Broiler Grower Feed</option><option value="demo-2">[P-1003] Broiler Finisher Feed</option><option value="demo-3">[P-1004] Layer Starter Feed</option><option value="demo-4">[P-1005] Layer Grower Feed</option><option value="demo-5">[P-1006] Layer Mash</option><option value="demo-6">[P-1007] Breeder Starter Feed</option><option value="demo-7">[P-1008] Breeder Layer Feed</option><option value="demo-8">[P-1009] Fish Feed Floating 2mm</option><option value="demo-9">[P-1010] Fish Feed Sinking 3mm</option><option value="demo-10">[P-1011] Cattle Fattening Feed</option><option value="demo-11">[P-1012] Dairy Cattle Feed</option><option value="demo-12">[P-1013] Yellow Maize</option><option value="demo-13">[P-1014] Soybean Meal</option><option value="demo-14">[P-1015] Rice Polish</option><option value="demo-15">[P-1016] Wheat Bran</option><option value="demo-16">[P-1017] Mustard Oil Cake</option><option value="demo-17">[P-1018] Limestone Powder</option><option value="demo-18">[P-1019] Di-Calcium Phosphate</option><option value="demo-19">[P-1020] Feed Grade Salt</option><option value="demo-20">[P-1021] Vitamin Premix</option><option value="demo-21">[P-1022] Mineral Premix</option><option value="demo-22">[P-1023] Lysine HCl</option><option value="demo-23">[P-1024] DL-Methionine</option><option value="demo-24">[P-1025] Choline Chloride 60%</option></select>
+    
+        <a class="related-widget-wrapper-link change-related" id="change_id_line_items-0-product"
+            data-href-template="/admin/master_data/product/__fk__/change/?_to_field=id&amp;_popup=1"
+            data-popup="yes"
+            title="Change selected product"><img src="static/admin/img/icon-changelink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link add-related" id="add_id_line_items-0-product"
+            data-popup="yes"
+            href="md_product_add.html"
+            title="Add another product"><img src="static/admin/img/icon-addlink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link delete-related" id="delete_id_line_items-0-product"
+            data-href-template="/admin/master_data/product/__fk__/delete/?_to_field=id&amp;_popup=1"
+            data-popup="yes"
+            title="Delete selected product"><img src="static/admin/img/icon-deletelink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link view-related" id="view_id_line_items-0-product"
+             data-href-template="/admin/master_data/product/__fk__/change/?_to_field=id"
+             title="View selected product"><img src="static/admin/img/icon-viewlink.svg" alt="" width="20" height="20"></a>
+    
+</div>
+              
+              </td>
+            
+          
+            
+              <td class="field-type_of_packing">
+              
+                  
+                  <input type="text" name="line_items-0-type_of_packing" value="25kg Bag" readonly="readonly" style="background:transparent;border:none;width:90px;" placeholder="—" id="id_line_items-0-type_of_packing">
+              
+              </td>
+            
+          
+            
+              <td class="field-unit_of_measure">
+              
+                  
+                  <input type="text" name="line_items-0-unit_of_measure" value="Bags" readonly="readonly" class="uom-display-input" style="background:transparent;border:none;width:80px;color:inherit;cursor:default;" placeholder="—" id="id_line_items-0-unit_of_measure">
+              
+              </td>
+            
+          
+            
+              <td class="field-weight_per_unit">
+              
+                  
+                  <input type="text" name="line_items-0-weight_per_unit" value="25.000" readonly="readonly" style="background:transparent;border:none;width:90px;" aria-describedby="id_line_items-0-weight_per_unit_helptext" id="id_line_items-0-weight_per_unit">
+              
+              </td>
+            
+          
+            
+              <td class="field-product_quantity">
+              
+                  
+                  <input type="number" name="line_items-0-product_quantity" value="20.000" step="0.001" id="id_line_items-0-product_quantity">
+              
+              </td>
+            
+          
+            
+              <td class="field-total_weight_kg">
+              
+                  
+                  <input type="text" name="line_items-0-total_weight_kg" value="500.000" readonly="readonly" style="background:transparent;border:none;width:90px;" id="id_line_items-0-total_weight_kg">
+              
+              </td>
+            
+          
+        
+        
+          <td class="delete"><input type="checkbox" name="line_items-0-DELETE" id="id_line_items-0-DELETE"></td>
+        
+        </tr>
+     
+        
+        <tr class="form-row  empty-form"
+             id="line_items-empty">
+        <td class="original">
+          
+          <input type="hidden" name="line_items-__prefix__-id" id="id_line_items-__prefix__-id">
+          <input type="hidden" name="line_items-__prefix__-requisition" value="fb879449-3382-4747-8729-d3285a9b0c39" id="id_line_items-__prefix__-requisition">
+        </td>
+        
+          
+            
+              <td class="field-product">
+              
+                  
+                  <div class="related-widget-wrapper" data-model-ref="product">
+    <select name="line_items-__prefix__-product" id="id_line_items-__prefix__-product" class="admin-autocomplete" data-ajax--cache="true" data-ajax--delay="250" data-ajax--type="GET" data-ajax--url="/admin/autocomplete/" data-app-label="requisitions" data-model-name="prlineitem" data-field-name="product" data-theme="admin-autocomplete" data-allow-clear="true" data-placeholder="" lang="en"><option value=""></option><option value="demo-0">[P-1001] Broiler Starter Feed</option><option value="demo-1">[P-1002] Broiler Grower Feed</option><option value="demo-2">[P-1003] Broiler Finisher Feed</option><option value="demo-3">[P-1004] Layer Starter Feed</option><option value="demo-4">[P-1005] Layer Grower Feed</option><option value="demo-5">[P-1006] Layer Mash</option><option value="demo-6">[P-1007] Breeder Starter Feed</option><option value="demo-7">[P-1008] Breeder Layer Feed</option><option value="demo-8">[P-1009] Fish Feed Floating 2mm</option><option value="demo-9">[P-1010] Fish Feed Sinking 3mm</option><option value="demo-10">[P-1011] Cattle Fattening Feed</option><option value="demo-11">[P-1012] Dairy Cattle Feed</option><option value="demo-12">[P-1013] Yellow Maize</option><option value="demo-13">[P-1014] Soybean Meal</option><option value="demo-14">[P-1015] Rice Polish</option><option value="demo-15">[P-1016] Wheat Bran</option><option value="demo-16">[P-1017] Mustard Oil Cake</option><option value="demo-17">[P-1018] Limestone Powder</option><option value="demo-18">[P-1019] Di-Calcium Phosphate</option><option value="demo-19">[P-1020] Feed Grade Salt</option><option value="demo-20">[P-1021] Vitamin Premix</option><option value="demo-21">[P-1022] Mineral Premix</option><option value="demo-22">[P-1023] Lysine HCl</option><option value="demo-23">[P-1024] DL-Methionine</option><option value="demo-24">[P-1025] Choline Chloride 60%</option></select>
+    
+        <a class="related-widget-wrapper-link change-related" id="change_id_line_items-__prefix__-product"
+            data-href-template="/admin/master_data/product/__fk__/change/?_to_field=id&amp;_popup=1"
+            data-popup="yes"
+            title="Change selected product"><img src="static/admin/img/icon-changelink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link add-related" id="add_id_line_items-__prefix__-product"
+            data-popup="yes"
+            href="md_product_add.html"
+            title="Add another product"><img src="static/admin/img/icon-addlink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link delete-related" id="delete_id_line_items-__prefix__-product"
+            data-href-template="/admin/master_data/product/__fk__/delete/?_to_field=id&amp;_popup=1"
+            data-popup="yes"
+            title="Delete selected product"><img src="static/admin/img/icon-deletelink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link view-related" id="view_id_line_items-__prefix__-product"
+             data-href-template="/admin/master_data/product/__fk__/change/?_to_field=id"
+             title="View selected product"><img src="static/admin/img/icon-viewlink.svg" alt="" width="20" height="20"></a>
+    
+</div>
+              
+              </td>
+            
+          
+            
+              <td class="field-type_of_packing">
+              
+                  
+                  <input type="text" name="line_items-__prefix__-type_of_packing" readonly="readonly" style="background:transparent;border:none;width:90px;" placeholder="—" id="id_line_items-__prefix__-type_of_packing">
+              
+              </td>
+            
+          
+            
+              <td class="field-unit_of_measure">
+              
+                  
+                  <input type="text" name="line_items-__prefix__-unit_of_measure" value="Tons" readonly="readonly" class="uom-display-input" style="background:transparent;border:none;width:80px;color:inherit;cursor:default;" placeholder="—" id="id_line_items-__prefix__-unit_of_measure">
+              
+              </td>
+            
+          
+            
+              <td class="field-weight_per_unit">
+              
+                  
+                  <input type="text" name="line_items-__prefix__-weight_per_unit" value="1000" readonly="readonly" style="background:transparent;border:none;width:90px;" aria-describedby="id_line_items-__prefix__-weight_per_unit_helptext" id="id_line_items-__prefix__-weight_per_unit">
+              
+              </td>
+            
+          
+            
+              <td class="field-product_quantity">
+              
+                  
+                  <input type="number" name="line_items-__prefix__-product_quantity" value="0" step="0.001" id="id_line_items-__prefix__-product_quantity">
+              
+              </td>
+            
+          
+            
+              <td class="field-total_weight_kg">
+              
+                  
+                  <input type="text" name="line_items-__prefix__-total_weight_kg" value="0" readonly="readonly" style="background:transparent;border:none;width:90px;" id="id_line_items-__prefix__-total_weight_kg">
+              
+              </td>
+            
+          
+        
+        
+          <td class="delete"></td>
+        
+        </tr>
+     
+     </tbody>
+   </table>
+</fieldset>
+  </div>
+</div>
+
+
+    
+<div class="js-inline-admin-formset inline-group" id="documents-group"
+     data-inline-type="tabular"
+     data-inline-formset="{&quot;name&quot;: &quot;#documents&quot;, &quot;options&quot;: {&quot;prefix&quot;: &quot;documents&quot;, &quot;addText&quot;: &quot;Add another Pr document&quot;, &quot;deleteText&quot;: &quot;Remove&quot;}}">
+  <div class="tabular inline-related last-related">
+<input type="hidden" name="documents-TOTAL_FORMS" value="0" id="id_documents-TOTAL_FORMS"><input type="hidden" name="documents-INITIAL_FORMS" value="0" id="id_documents-INITIAL_FORMS"><input type="hidden" name="documents-MIN_NUM_FORMS" value="0" id="id_documents-MIN_NUM_FORMS"><input type="hidden" name="documents-MAX_NUM_FORMS" value="1000" id="id_documents-MAX_NUM_FORMS">
+<fieldset class="module ">
+   
+     <h2>Pr documents</h2>
+   
+   
+   <table>
+     <thead><tr>
+       <th class="original"></th>
+     
+       <th class="column-document_type required">Document type
+       
+       </th>
+     
+       <th class="column-file required">File
+       
+       </th>
+     
+       <th class="column-file_info">Uploaded file info
+       
+       </th>
+     
+     <th>Delete?</th>
+     </tr></thead>
+
+     <tbody>
+     
+        
+        <tr class="form-row  empty-form"
+             id="documents-empty">
+        <td class="original">
+          
+          <input type="hidden" name="documents-__prefix__-id" id="id_documents-__prefix__-id">
+          <input type="hidden" name="documents-__prefix__-requisition" value="fb879449-3382-4747-8729-d3285a9b0c39" id="id_documents-__prefix__-requisition">
+        </td>
+        
+          
+            
+              <td class="field-document_type">
+              
+                  
+                  <select name="documents-__prefix__-document_type" id="id_documents-__prefix__-document_type">
+  <option value="" selected>---------</option>
+
+  <option value="ArrivalNotice">Arrival Notice</option>
+
+  <option value="Other">Other</option>
+
+</select>
+              
+              </td>
+            
+          
+            
+              <td class="field-file">
+              
+                  
+                  <input type="file" name="documents-__prefix__-file" id="id_documents-__prefix__-file">
+              
+              </td>
+            
+          
+            
+              <td class="field-file_info">
+              
+                  <p>—</p>
+              
+              </td>
+            
+          
+        
+        
+          <td class="delete"></td>
+        
+        </tr>
+     
+     </tbody>
+   </table>
+</fieldset>
+  </div>
+</div>
+
+
+
+
+
+
+
+<div class="submit-row dfms-pr-submit-row">
+
+  
+  
+
+  
+  
+    
+    <a href="admin_requisitions_productrequisition.html" class="dfms-btn-secondary dfms-btn-cancel">
+      Cancel
+    </a>
+  
+
+  
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <span class="dfms-ps-locked-hint">
+      <i class="bi bi-lock-fill"></i>
+      Requisition submitted — record is locked
+    </span>
+  
+
+</div>
+
+
+
+    <script id="django-admin-form-add-constants"
+            src="static/admin/js/change_form.js"
+            
+            async>
+    </script>
+
+
+
+
+<script id="django-admin-prepopulated-fields-constants"
+        src="static/admin/js/prepopulate_init.js"
+        data-prepopulated-fields="[]">
+</script>
+
+
+</div>
+</form></div>
+
+          
+          <br class="clear">
+        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
+      </main>
+    </div>
+</div>
+<!-- END Container -->
+
+<!-- SVGs -->
+<svg xmlns="http://www.w3.org/2000/svg" class="base-svgs">
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"/></symbol>
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"/></symbol>
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></symbol>
+</svg>
+<!-- END SVGs -->
+</body>
+</html>

@@ -1,0 +1,6854 @@
+/*
+ * DFMS Admin — Design System Override
+ *
+ * Applies the DFMS Design System tokens to Django's admin UI.
+ * Loaded via templates/admin/base_site.html on every admin page.
+ *
+ * Design token source: DFMS-product-context/11-design-system/
+ * Token reference:     01-foundation/design-tokens.md
+ * Color reference:     01-foundation/colors.md
+ */
+
+/* ─── Google Fonts ────────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ─── Design Tokens ───────────────────────────────────────────────────────── */
+
+:root {
+  /* Brand */
+  --dfms-primary-dark:   #122056;
+  --dfms-primary:        #5B65DC;
+  --dfms-primary-light:  #EEEFFD;
+  --dfms-primary-hover:  #4A53C4;
+  --dfms-primary-press:  #3A42A8;
+
+  /* Semantic */
+  --dfms-success:        #1E8A4C;
+  --dfms-success-bg:     #D1FAE5;
+  --dfms-warning:        #D97706;
+  --dfms-warning-bg:     #FEF3C7;
+  --dfms-danger:         #C0392B;
+  --dfms-danger-bg:      #FEE2E2;
+  --dfms-info:           #5B65DC;
+  --dfms-info-bg:        #EEEFFD;
+  --dfms-success-dark:   #166534;
+
+  /* Neutrals */
+  --dfms-grey-50:        #F9FAFB;
+  --dfms-grey-100:       #F3F4F6;
+  --dfms-grey-200:       #E5E7EB;
+  --dfms-grey-300:       #D1D5DB;
+  --dfms-grey-400:       #9CA3AF;
+  --dfms-grey-500:       #6B7280;
+  --dfms-grey-600:       #4B5563;
+  --dfms-grey-700:       #374151;
+  --dfms-grey-800:       #1F2937;
+  --dfms-grey-900:       #111827;
+
+  /* Picker surface tokens (light mode) */
+  --dfms-surface:        #FFFFFF;
+  --dfms-picker-face-bg: #F3F4F6;
+  --dfms-picker-day-text: #374151;
+  --dfms-picker-border:  #E5E7EB;
+
+  /* Semantic surface tokens used by admin templates */
+  --dfms-card-bg:        #FFFFFF;
+  --dfms-border-color:   var(--dfms-grey-200);
+  --dfms-secondary-bg:   var(--dfms-grey-100);
+  --dfms-secondary-bg-hover: var(--dfms-grey-200);
+  --dfms-text:           var(--dfms-grey-700);
+  --dfms-text-muted:     var(--dfms-grey-500);
+  --dfms-table-header-bg: var(--dfms-grey-50);
+  --dfms-input-bg:       var(--dfms-grey-50);
+  --dfms-hover-bg:       var(--dfms-grey-50);
+  --dfms-success-bg-subtle: rgba(30,138,76,.08);
+  --dfms-danger-bg-subtle: rgba(192,57,43,.08);
+
+  /* Typography */
+  --dfms-font-sans:      'Inter', system-ui, -apple-system, sans-serif;
+  --dfms-font-mono:      'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Radius */
+  --dfms-radius-sm:      4px;
+  --dfms-radius-md:      8px;
+  --dfms-radius-lg:      12px;
+  --dfms-radius-pill:    9999px;
+
+  /* Shadows */
+  --dfms-shadow-sm:      0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.05);
+  --dfms-shadow-md:      0 4px 6px rgba(0,0,0,.07), 0 2px 4px rgba(0,0,0,.06);
+
+  /* Django admin CSS variable overrides */
+  --primary:             #5B65DC;
+  --secondary:           #122056;
+  --accent:              #5B65DC;
+  --primary-fg:          #fff;
+  --body-fg:             #111827;
+  --body-bg:             #F9FAFB;
+  --body-quiet-color:    #6B7280;
+  --body-loud-color:     #111827;
+  --header-color:        #fff;
+  --header-branding-color: #fff;
+  --header-bg:           #122056;
+  --header-link-color:   #fff;
+  --breadcrumbs-fg:      #6B7280;
+  --breadcrumbs-link-fg: #5B65DC;
+  --breadcrumbs-bg:      #fff;
+  --link-fg:             #5B65DC;
+  --link-hover-color:    #4A53C4;
+  --link-selected-fg:    #3A42A8;
+  --hairline-color:      #E5E7EB;
+  --border-color:        #D1D5DB;
+  --error-fg:            #C0392B;
+  --message-success-bg:  #D1FAE5;
+  --message-warning-bg:  #FEF3C7;
+  --message-error-bg:    #FEE2E2;
+  --darkened-bg:         #F3F4F6;
+  --selected-bg:         #EEEFFD;
+  --selected-row:        #F5F3FF;
+  --button-fg:           #fff;
+  --button-bg:           #5B65DC;
+  --button-hover-bg:     #4A53C4;
+  --default-button-bg:   #5B65DC;
+  --close-button-bg:     #6B7280;
+  --close-button-hover-bg: #4B5563;
+  --delete-button-bg:    #C0392B;
+  --delete-button-hover-bg: #a93226;
+  --object-tools-fg:     #fff;
+  --object-tools-bg:     #5B65DC;
+  --object-tools-hover-bg: #4A53C4;
+  --font-family-primary: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-family-monospace: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* ─── Dark Theme Tokens ───────────────────────────────────────────────────── */
+/* Activated by [data-theme="dark"] on <html>.
+   Colors from: 11-design-system/01-foundation/colors.md — Dark Theme Palette */
+
+[data-theme="dark"] {
+  /* Brand (brightened for dark surfaces) */
+  --dfms-primary:        #7580F0;
+  --dfms-primary-light:  #1C2044;
+  --dfms-primary-hover:  #8A94F5;
+  --dfms-primary-press:  #9AA3F7;
+
+  /* Semantic */
+  --dfms-success:        #34D475;
+  --dfms-success-bg:     rgba(52,212,117,.15);
+  --dfms-warning:        #F59E0B;
+  --dfms-warning-bg:     rgba(245,158,11,.15);
+  --dfms-danger:         #F87171;
+  --dfms-danger-bg:      rgba(248,113,113,.15);
+  --dfms-info:           #7580F0;
+  --dfms-info-bg:        rgba(117,128,240,.15);
+  --dfms-success-dark:   #22C55E;
+
+  /* Neutrals inverted */
+  --dfms-grey-50:        #0D0F1A;
+  --dfms-grey-100:       #161929;
+  --dfms-grey-200:       #1E2340;
+  --dfms-grey-300:       #2A3050;
+  --dfms-grey-400:       #4A5268;
+  --dfms-grey-500:       #6B7280;
+  --dfms-grey-600:       #9CA3AF;
+  --dfms-grey-700:       #D1D5DB;
+  --dfms-grey-800:       #E5E7EB;
+  --dfms-grey-900:       #F9FAFB;
+
+  /* Picker surface tokens (dark mode) */
+  --dfms-surface:        #1e2030;
+  --dfms-picker-face-bg: #252838;
+  --dfms-picker-day-text: #D1D5DB;
+  --dfms-picker-border:  #2a2d3e;
+
+  /* Semantic surface tokens used by admin templates */
+  --dfms-card-bg:        var(--dfms-grey-100);
+  --dfms-border-color:   var(--dfms-grey-200);
+  --dfms-secondary-bg:   var(--dfms-grey-200);
+  --dfms-secondary-bg-hover: var(--dfms-grey-300);
+  --dfms-text:           var(--dfms-grey-700);
+  --dfms-text-muted:     var(--dfms-grey-500);
+  --dfms-table-header-bg: var(--dfms-grey-200);
+  --dfms-input-bg:       var(--dfms-grey-200);
+  --dfms-hover-bg:       var(--dfms-grey-200);
+  --dfms-success-bg-subtle: rgba(52,212,117,.15);
+  --dfms-danger-bg-subtle: rgba(248,113,113,.16);
+
+  /* Django admin variable overrides for dark */
+  --primary:             #7580F0;
+  --secondary:           #122056;
+  --primary-fg:          #fff;
+  --body-fg:             #E5E7EB;
+  --body-bg:             #0D0F1A;
+  --body-quiet-color:    #9CA3AF;
+  --body-loud-color:     #F9FAFB;
+  --header-color:        #fff;
+  --header-branding-color: #fff;
+  --header-bg:           #0A1238;
+  --header-link-color:   #fff;
+  --breadcrumbs-fg:      #9CA3AF;
+  --breadcrumbs-link-fg: #7580F0;
+  --breadcrumbs-bg:      #161929;
+  --link-fg:             #7580F0;
+  --link-hover-color:    #8A94F5;
+  --link-selected-fg:    #9AA3F7;
+  --hairline-color:      #1E2340;
+  --border-color:        #2A3050;
+  --darkened-bg:         #161929;
+  --selected-bg:         #1C2044;
+  --selected-row:        #1A1E38;
+  --button-fg:           #fff;
+  --button-bg:           #7580F0;
+  --button-hover-bg:     #8A94F5;
+  --default-button-bg:   #7580F0;
+  --close-button-bg:     #4B5563;
+  --delete-button-bg:    #F87171;
+  --delete-button-hover-bg: #fa8a8a;
+  --object-tools-bg:     #7580F0;
+  --object-tools-hover-bg: #8A94F5;
+  --message-success-bg:  rgba(52,212,117,.15);
+  --message-warning-bg:  rgba(245,158,11,.15);
+  --message-error-bg:    rgba(248,113,113,.15);
+}
+
+/* Global scrollbar styling for dark mode */
+[data-theme="dark"] * {
+  scrollbar-color: var(--dfms-grey-500) transparent;
+  scrollbar-width: thin;
+}
+[data-theme="dark"] *::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+[data-theme="dark"] *::-webkit-scrollbar-track {
+  background: transparent;
+}
+[data-theme="dark"] *::-webkit-scrollbar-thumb {
+  background: var(--dfms-grey-500);
+  border-radius: 3px;
+}
+[data-theme="dark"] *::-webkit-scrollbar-thumb:hover {
+  background: var(--dfms-grey-600);
+}
+
+/* Apply dark surface colours to key structural elements */
+[data-theme="dark"] body              { background: var(--dfms-grey-50); color: var(--dfms-grey-900); }
+[data-theme="dark"] #header           { background: #0A1238; }
+[data-theme="dark"] div.breadcrumbs   { background: transparent; border-color: transparent; }
+[data-theme="dark"] .module           { background: var(--dfms-grey-100); border-color: var(--dfms-grey-200); }
+[data-theme="dark"] fieldset          { background: var(--dfms-grey-100); border-color: var(--dfms-grey-200); }
+[data-theme="dark"] #nav-sidebar      { background: var(--dfms-grey-100); border-color: var(--dfms-grey-200); }
+/* table/paginator/filter/toolbar/searchbar dark-mode overrides
+   are co-located with their respective sections further below */
+[data-theme="dark"] .form-row         { border-color: var(--dfms-grey-200); }
+[data-theme="dark"] input[type="text"],
+[data-theme="dark"] input[type="email"],
+[data-theme="dark"] input[type="password"],
+[data-theme="dark"] input[type="number"],
+[data-theme="dark"] input[type="url"],
+[data-theme="dark"] input[type="tel"],
+[data-theme="dark"] input[type="date"],
+[data-theme="dark"] input[type="datetime-local"],
+[data-theme="dark"] select,
+[data-theme="dark"] textarea          { background: var(--dfms-grey-200); border-color: var(--dfms-grey-300); color: var(--dfms-grey-900); }
+[data-theme="dark"] .submit-row       { background: var(--dfms-grey-100); border-color: var(--dfms-grey-200); }
+[data-theme="dark"] .actions          { background: var(--dfms-grey-100); border-color: var(--dfms-grey-200); }
+[data-theme="dark"] label             { color: var(--dfms-grey-700); }
+[data-theme="dark"] .help             { color: var(--dfms-grey-500); }
+[data-theme="dark"] .readonly         { color: var(--dfms-grey-800); }
+[data-theme="dark"] .field-schema_name .readonly { background: var(--dfms-grey-200); color: var(--dfms-grey-700); }
+
+/* Theme toggle button */
+.dfms-theme-toggle {
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: var(--dfms-radius-pill);
+  color: rgba(255,255,255,.9);
+  cursor: pointer;
+  font-family: var(--dfms-font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  height: 28px;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: background 0.15s, border-color 0.15s;
+  margin-left: 12px;
+  vertical-align: middle;
+}
+
+.dfms-theme-toggle:hover {
+  background: rgba(255,255,255,.22);
+  border-color: rgba(255,255,255,.35);
+  color: #fff;
+}
+
+.dfms-theme-toggle .toggle-icon {
+  font-size: 13px;
+  line-height: 1;
+}
+
+/* ─── Base / Typography ───────────────────────────────────────────────────── */
+
+body,
+input,
+textarea,
+select,
+button {
+  font-family: var(--dfms-font-sans);
+}
+
+body {
+  background-color: var(--dfms-grey-50);
+  color: var(--dfms-grey-900);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--dfms-font-sans);
+  font-weight: 600;
+  color: var(--dfms-grey-900);
+}
+
+code, pre, .font-mono, .field-schema_name .readonly {
+  font-family: var(--dfms-font-mono);
+  font-size: 13px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DFMS Full Layout
+   ─────────────────────────────────────────────────────────────────────────
+   Django's DOM is:
+     #container
+       #header
+       .main
+         #dfms-nav-sidebar   ← nested inside .main, not #container
+         .content
+
+   We cannot use grid-area on #container to cover the sidebar since it is
+   one level too deep.  Solution: position: fixed the sidebar so it always
+   covers the full viewport height, then push #header and .main to the
+   right with margin-left equal to the sidebar width.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --sidebar-w: 240px;
+  --sidebar-w-collapsed: 64px;
+  --topbar-h: 56px;
+}
+
+/* ── Sidebar: fixed, full height ── */
+.dfms-nav-sidebar {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  height: 100vh !important;
+  z-index: 100;
+  /* width/overflow/transition already set in Sidebar Panel section below */
+}
+
+/* ── Shift everything right to clear the fixed sidebar ── */
+#header,
+.main {
+  /* Default margin matches expanded sidebar — no transition until JS ready */
+  margin-left: var(--sidebar-w);
+}
+
+/* Collapsed pre-paint: applied via data-sidebar-collapsed on <html> from <head> script */
+:root[data-sidebar-collapsed="true"] #header,
+:root[data-sidebar-collapsed="true"] .main {
+  margin-left: var(--sidebar-w-collapsed);
+}
+
+:root[data-sidebar-collapsed="true"] .dfms-nav-sidebar {
+  width: var(--sidebar-w-collapsed);
+  min-width: var(--sidebar-w-collapsed);
+}
+
+/* Transitions enabled only after JS has initialised (JS adds body.dfms-js-ready) */
+body.dfms-js-ready #header,
+body.dfms-js-ready .main {
+  transition: margin-left 0.22s ease;
+}
+
+/* Collapsed: shrink the margin to match */
+body.dfms-sidebar-collapsed #header,
+body.dfms-sidebar-collapsed .main {
+  margin-left: var(--sidebar-w-collapsed);
+}
+
+/* ── Container: plain column ── */
+#container {
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 100vh;
+}
+
+/* ── Topbar (#header) ── */
+#header {
+  position: sticky;
+  top: 0;
+  z-index: 90;    /* below sidebar (100) so sidebar overlaps on mobile */
+  background: #fff;
+  border-bottom: 1px solid var(--dfms-grey-200);
+  height: var(--topbar-h);
+  min-height: var(--topbar-h);
+  max-height: var(--topbar-h);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 0;
+  /* Profile menu hangs below the 56px bar. Django responsive.css sets
+     #user-tools { overflow: auto } at <=1024px, which clips that menu. */
+  overflow: visible;
+}
+
+[data-theme="dark"] #header {
+  background: var(--dfms-grey-100);
+  border-color: var(--dfms-grey-200);
+}
+
+/* Hide Django's branding block inside #header (logo now in sidebar) */
+#header #branding,
+#header #dfms-branding {
+  display: none !important;
+}
+
+/* User tools takes full width since branding is hidden */
+#header #user-tools {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  color: var(--dfms-grey-700);
+  overflow: visible;
+}
+
+/* Topbar links */
+#header a:link,
+#header a:visited {
+  color: var(--dfms-grey-700);
+  font-weight: 500;
+}
+
+#header a:hover {
+  color: var(--dfms-primary);
+}
+
+[data-theme="dark"] #header a:link,
+[data-theme="dark"] #header a:visited {
+  color: var(--dfms-grey-700);
+}
+
+/* ── .main row (sidebar inside it is fixed, so .main is just content) ── */
+.main {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  flex: 1 0 auto;
+}
+
+/* ── Hamburger toggle in topbar ── */
+.dfms-content-toggle {
+  background: none;
+  border: none;
+  color: var(--dfms-grey-500);
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 20px;
+  transition: background 0.15s, color 0.15s;
+  border-radius: var(--dfms-radius-sm);
+  margin-right: 8px;
+}
+
+.dfms-content-toggle:hover {
+  background: var(--dfms-grey-100);
+  color: var(--dfms-grey-900);
+}
+
+.dfms-content-toggle:focus-visible {
+  outline: 2px solid var(--dfms-primary);
+  outline-offset: 1px;
+}
+
+[data-theme="dark"] .dfms-content-toggle {
+  color: var(--dfms-grey-600);
+}
+
+[data-theme="dark"] .dfms-content-toggle:hover {
+  background: var(--dfms-grey-200);
+}
+
+/* ── Content topbar row (breadcrumbs row below topbar) ── */
+.dfms-content-topbar {
+  display: none; /* breadcrumbs now live inline without a separate bar */
+}
+
+/* ── Logo mark ── */
+.dfms-logo-mark {
+  width: 32px;
+  height: 32px;
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  text-decoration: none !important;
+  margin-right: 10px;
+  transition: background 0.15s;
+}
+
+.dfms-logo-mark:hover {
+  background: rgba(255,255,255,.25);
+}
+
+.dfms-logo-mark span {
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+/* ── Vertical divider between logo and title ── */
+.dfms-topbar-divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(255,255,255,.2);
+  margin: 0 12px;
+  flex-shrink: 0;
+}
+
+/* ── Site title ── */
+#branding h1,
+#site-name {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#branding h1 a:link,
+#branding h1 a:visited,
+#site-name a:link,
+#site-name a:visited {
+  color: #fff;
+  text-decoration: none;
+}
+
+#user-tools {
+  font-size: 13px;
+  color: rgba(255,255,255,.8);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+#user-tools a {
+  color: rgba(255,255,255,.9);
+  border-bottom: 1px solid rgba(255,255,255,.3);
+  padding-bottom: 1px;
+}
+
+#user-tools a:hover {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+/* ─── Sidebar Brand / Logo Section ───────────────────────────────────────── */
+
+.dfms-sidebar-brand {
+  flex-shrink: 0;
+  height: var(--topbar-h);
+  min-height: var(--topbar-h);
+  max-height: var(--topbar-h);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  background: #fff;
+}
+
+.dfms-sidebar-brand-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none !important;
+  overflow: hidden;
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto;
+}
+
+/* Mobile drawer close — shown only in the max-width:767 media block */
+.dfms-sidebar-close {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  margin-left: 4px;
+  padding: 0;
+  border: none;
+  border-radius: var(--dfms-radius-sm);
+  background: transparent;
+  color: var(--dfms-grey-600);
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.dfms-sidebar-close:hover {
+  background: var(--dfms-grey-100);
+  color: var(--dfms-grey-900);
+}
+
+[data-theme="dark"] .dfms-sidebar-close {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="dark"] .dfms-sidebar-close:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+/* Scrim behind open mobile drawer */
+.dfms-nav-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99; /* below sidebar (100), above header (90) */
+  background: rgba(15, 23, 42, 0.45);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dfms-nav-backdrop.dfms-nav-backdrop--visible {
+  display: block;
+}
+
+.dfms-sidebar-logo-mark {
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border-radius: var(--dfms-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.dfms-sidebar-logo-mark span {
+  color: #fff;
+  font-weight: 800;
+  font-size: 16px;
+  font-family: var(--dfms-font-sans);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+/* Optilogist brand mark (SVG) — theme-aware light/dark swap */
+.dfms-brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+.dfms-brand-mark__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.dfms-brand-mark__img--dark {
+  display: none;
+}
+
+[data-theme="dark"] .dfms-brand-mark__img--light {
+  display: none;
+}
+
+[data-theme="dark"] .dfms-brand-mark__img--dark {
+  display: block;
+}
+
+.dfms-sidebar-logo-mark .dfms-brand-mark,
+.dfms-sidebar-logo-mark .dfms-brand-mark__img {
+  width: 32px;
+  height: 32px;
+}
+
+.dfms-sidebar-brand-text {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: opacity 0.15s, width 0.22s;
+}
+
+.dfms-sidebar-brand-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--dfms-grey-900);
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.dfms-sidebar-brand-sub {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--dfms-grey-500);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+/* Dark mode brand section */
+[data-theme="dark"] .dfms-sidebar-brand {
+  background: #0E1630;
+}
+
+[data-theme="dark"] .dfms-sidebar-brand-name {
+  color: rgba(255,255,255,.9);
+}
+
+[data-theme="dark"] .dfms-sidebar-brand-sub {
+  color: rgba(255,255,255,.4);
+}
+
+/* Hide brand text in collapsed mode */
+.dfms-nav-sidebar--collapsed .dfms-sidebar-brand-text {
+  opacity: 0;
+  width: 0;
+  pointer-events: none;
+}
+
+.dfms-nav-sidebar--collapsed .dfms-sidebar-brand {
+  padding: 0;
+  justify-content: center;
+}
+
+.dfms-nav-sidebar--collapsed .dfms-sidebar-brand-link {
+  justify-content: center;
+  gap: 0;
+}
+
+/* ─── Topbar Tools (hamburger + right actions) ────────────────────────────── */
+
+#dfms-topbar-tools {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  gap: 0;
+}
+
+/* ─── Topbar icon buttons (theme toggle etc.) ─────────────────────────────── */
+
+.dfms-topbar-icon-btn {
+  background: none;
+  border: none;
+  color: var(--dfms-grey-500);
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--dfms-radius-sm);
+  font-size: 16px;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.dfms-topbar-icon-btn:hover {
+  background: var(--dfms-grey-100);
+  color: var(--dfms-grey-900);
+}
+
+[data-theme="dark"] .dfms-topbar-icon-btn:hover {
+  background: var(--dfms-grey-200);
+  color: var(--dfms-grey-900);
+}
+
+/* ─── Topbar right section ────────────────────────────────────────────────── */
+
+.dfms-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ─── User avatar dropdown ────────────────────────────────────────────────── */
+
+.dfms-user-menu {
+  position: relative;
+}
+
+.dfms-user-avatar-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1px solid var(--dfms-grey-200);
+  border-radius: var(--dfms-radius-pill);
+  padding: 4px 10px 4px 4px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  font-family: var(--dfms-font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--dfms-grey-700);
+}
+
+.dfms-user-avatar-btn:hover {
+  background: var(--dfms-grey-50);
+  border-color: var(--dfms-grey-300);
+}
+
+[data-theme="dark"] .dfms-user-avatar-btn {
+  border-color: var(--dfms-grey-300);
+  color: var(--dfms-grey-700);
+}
+
+[data-theme="dark"] .dfms-user-avatar-btn:hover {
+  background: var(--dfms-grey-200);
+}
+
+/* Avatar initials circle */
+.dfms-avatar {
+  width: 28px;
+  height: 28px;
+  background: var(--dfms-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.dfms-user-name {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dfms-user-chevron {
+  font-size: 11px;
+  color: var(--dfms-grey-400);
+  transition: transform 0.18s ease;
+}
+
+.dfms-user-avatar-btn[aria-expanded="true"] .dfms-user-chevron {
+  transform: rotate(180deg);
+}
+
+/* Dropdown panel */
+.dfms-user-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 260px;
+  background: #fff;
+  border: 1px solid var(--dfms-grey-200);
+  border-radius: var(--dfms-radius-lg);
+  box-shadow: 0 8px 24px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06);
+  z-index: 200;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-6px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.dfms-user-dropdown.dfms-dropdown--open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  /* overflow:hidden on the closed panel clips native <select> lists. */
+  overflow: visible;
+}
+
+[data-theme="dark"] .dfms-user-dropdown {
+  background: var(--dfms-grey-100);
+  border-color: var(--dfms-grey-200);
+}
+
+/* Dropdown header — identity card */
+.dfms-dropdown-header {
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--dfms-primary-light);
+  border-bottom: 1px solid var(--dfms-grey-200);
+}
+
+.dfms-dropdown-header__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--dfms-primary);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+.dfms-dropdown-header__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.dfms-dropdown-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dfms-grey-900);
+  line-height: 1.3;
+}
+
+.dfms-dropdown-email {
+  font-size: 11px;
+  color: var(--dfms-grey-500);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dfms-dropdown-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--dfms-grey-600);
+  background: rgba(255,255,255,0.7);
+  border: 1px solid var(--dfms-grey-200);
+  border-radius: var(--dfms-radius-pill);
+  padding: 2px 7px 2px 5px;
+  margin-top: 4px;
+  width: fit-content;
+}
+
+.dfms-dropdown-meta .bi {
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .dfms-dropdown-header {
+  background: var(--dfms-grey-200);
+  border-color: var(--dfms-grey-300);
+}
+
+[data-theme="dark"] .dfms-dropdown-header__avatar {
+  background: var(--dfms-primary);
+}
+
+[data-theme="dark"] .dfms-dropdown-meta {
+  background: rgba(255,255,255,0.06);
+  border-color: var(--dfms-grey-300);
+  color: var(--dfms-grey-600);
+}
+
+/* Divider */
+.dfms-dropdown-divider {
+  height: 1px;
+  background: var(--dfms-grey-100);
+  margin: 0;
+}
+
+[data-theme="dark"] .dfms-dropdown-divider {
+  background: var(--dfms-grey-200);
+}
+
+/* Dropdown items */
+.dfms-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--dfms-grey-700);
+  text-decoration: none;
+  background: none;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  font-family: var(--dfms-font-sans);
+  transition: background 0.1s, color 0.1s;
+  text-align: left;
+}
+
+.dfms-dropdown-item:hover {
+  background: var(--dfms-grey-50);
+  color: var(--dfms-grey-900);
+}
+
+[data-theme="dark"] .dfms-dropdown-item:hover {
+  background: var(--dfms-grey-200);
+}
+
+.dfms-dropdown-item i {
+  font-size: 15px;
+  color: var(--dfms-grey-400);
+  flex-shrink: 0;
+  transition: color 0.1s;
+}
+
+.dfms-dropdown-item:hover i {
+  color: var(--dfms-grey-600);
+}
+
+/* Logout form — strip all form chrome so button fills the slot */
+.dfms-user-dropdown form {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+/* Prevent Django admin global styles from breaking dropdown items */
+.dfms-dropdown-item,
+.dfms-dropdown-item:link,
+.dfms-dropdown-item:visited,
+.dfms-user-dropdown form button.dfms-dropdown-item {
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  padding: 9px 14px !important;
+  margin: 0 !important;
+  line-height: 1.4 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline-offset: -2px;
+}
+
+.dfms-dropdown-item--danger,
+.dfms-dropdown-item--danger:link,
+.dfms-dropdown-item--danger:visited {
+  color: var(--dfms-danger) !important;
+}
+
+.dfms-dropdown-item--danger:hover {
+  background: var(--dfms-danger-bg);
+  color: var(--dfms-danger) !important;
+}
+
+.dfms-dropdown-item--danger i {
+  color: var(--dfms-danger) !important;
+  opacity: 0.85;
+}
+
+/* ─── Sidebar nav items — light mode (colour overrides) ──────────────────── */
+
+.dfms-nav-group-icon {
+  color: var(--dfms-grey-400);
+}
+
+.dfms-nav-group--active > .dfms-nav-group-header .dfms-nav-group-icon,
+.dfms-nav-group-header:hover .dfms-nav-group-icon {
+  color: var(--dfms-primary);
+}
+
+.dfms-nav-filter-input {
+  background: var(--dfms-grey-50);
+  border-color: var(--dfms-grey-200);
+  color: var(--dfms-grey-900);
+}
+
+.dfms-nav-filter-input::placeholder {
+  color: var(--dfms-grey-400);
+}
+
+.dfms-nav-filter-input:focus {
+  background: #fff;
+  border-color: var(--dfms-primary);
+  box-shadow: 0 0 0 2px rgba(91,101,220,.15);
+}
+
+.dfms-nav-search-icon {
+  color: var(--dfms-grey-400);
+}
+
+.dfms-nav-footer {
+  border-top-color: var(--dfms-grey-200);
+}
+
+.dfms-nav-footer-text {
+  color: var(--dfms-grey-400);
+}
+
+.dfms-nav-empty {
+  color: var(--dfms-grey-400);
+}
+
+/* ─── Sidebar nav items — dark mode ──────────────────────────────────────── */
+
+[data-theme="dark"] .dfms-nav-sidebar {
+  background: #0E1630;
+  border-color: rgba(255,255,255,.07);
+}
+
+[data-theme="dark"] .dfms-nav-group-header {
+  color: rgba(255,255,255,.6);
+}
+
+[data-theme="dark"] .dfms-nav-group-header:hover {
+  background: rgba(255,255,255,.07);
+  color: rgba(255,255,255,.9);
+}
+
+[data-theme="dark"] .dfms-nav-group-icon {
+  color: rgba(255,255,255,.45);
+}
+
+[data-theme="dark"] .dfms-nav-group--active .dfms-nav-group-icon,
+[data-theme="dark"] .dfms-nav-group-header:hover .dfms-nav-group-icon {
+  color: rgba(255,255,255,.9);
+}
+
+[data-theme="dark"] .dfms-nav-group-chevron {
+  color: rgba(255,255,255,.3);
+}
+
+[data-theme="dark"] .dfms-nav-filter-input {
+  background: rgba(255,255,255,.07);
+  border-color: rgba(255,255,255,.1);
+  color: rgba(255,255,255,.9);
+}
+
+[data-theme="dark"] .dfms-nav-filter-input::placeholder {
+  color: rgba(255,255,255,.3);
+}
+
+[data-theme="dark"] .dfms-nav-filter-input:focus {
+  background: rgba(255,255,255,.11);
+  border-color: var(--dfms-primary);
+  box-shadow: 0 0 0 2px rgba(117,128,240,.3);
+}
+
+[data-theme="dark"] .dfms-nav-search-icon {
+  color: rgba(255,255,255,.3);
+}
+
+[data-theme="dark"] .dfms-nav-link,
+[data-theme="dark"] .dfms-nav-link:link,
+[data-theme="dark"] .dfms-nav-link:visited {
+  color: rgba(255,255,255,.85);
+}
+
+[data-theme="dark"] .dfms-nav-link:hover {
+  background: rgba(255,255,255,.07);
+  color: rgba(255,255,255,.95);
+}
+
+[data-theme="dark"] .dfms-nav-item--active .dfms-nav-link,
+[data-theme="dark"] .dfms-nav-item--active .dfms-nav-link:link,
+[data-theme="dark"] .dfms-nav-item--active .dfms-nav-link:visited,
+[data-theme="dark"] .dfms-nav-link[aria-current="page"],
+[data-theme="dark"] .dfms-nav-link[aria-current="page"]:link,
+[data-theme="dark"] .dfms-nav-link[aria-current="page"]:visited {
+  background: rgba(117,128,240,.2);
+  color: #a5acf5;
+  border-left-color: #7580F0;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .dfms-nav-item-dot {
+  color: rgba(255,255,255,.2);
+}
+
+[data-theme="dark"] .dfms-nav-item--active .dfms-nav-item-dot,
+[data-theme="dark"] .dfms-nav-link:hover .dfms-nav-item-dot {
+  color: rgba(255,255,255,.6);
+}
+
+[data-theme="dark"] .dfms-nav-footer {
+  border-top-color: rgba(255,255,255,.08);
+}
+
+[data-theme="dark"] .dfms-nav-footer-text {
+  color: rgba(255,255,255,.25);
+}
+
+[data-theme="dark"] .dfms-nav-empty {
+  color: rgba(255,255,255,.35);
+}
+
+/* ─── Breadcrumbs ─────────────────────────────────────────────────────────── */
+
+/* Breadcrumbs — sit at top of content area above page title */
+.dfms-breadcrumbs {
+  margin-bottom: 4px;
+}
+
+div.breadcrumbs {
+  background: transparent;
+  border: none;
+  padding: 0 0 4px 0;
+  margin: 0;
+  font-size: 13px;
+  color: var(--dfms-grey-400);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+div.breadcrumbs a {
+  color: var(--dfms-primary);
+  font-weight: 500;
+}
+
+div.breadcrumbs a:hover {
+  color: var(--dfms-primary-hover);
+}
+
+[data-theme="dark"] div.breadcrumbs {
+  color: var(--dfms-grey-500);
+}
+
+/* ─── Content Area ────────────────────────────────────────────────────────── */
+
+#content {
+  padding: 24px;
+}
+
+#content-main {
+  float: none;
+  width: 100%;
+}
+
+.content-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--dfms-grey-900);
+  margin-bottom: 6px;
+}
+
+/* ─── Changelist page header (title + Add button) ────────────────────────── */
+
+.dfms-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.dfms-page-header__title h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--dfms-grey-900);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.dfms-page-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.dfms-inline-form {
+  display: inline-flex;
+  margin: 0;
+}
+
+/* POST buttons in page headers — match link-styled dfms-btn-add / dfms-btn-secondary */
+.dfms-page-header__actions .dfms-inline-form button.dfms-btn-add,
+.dfms-page-header__actions button.dfms-btn-add,
+.dfms-page-header__actions .dfms-inline-form button.dfms-btn-secondary,
+.dfms-page-header__actions button.dfms-btn-secondary,
+.change-list .dfms-page-header__actions .dfms-inline-form button.dfms-btn-secondary {
+  cursor: pointer;
+  font-family: var(--dfms-font-sans);
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.dfms-page-header__actions button.dfms-btn-add,
+.dfms-page-header__actions .dfms-inline-form button.dfms-btn-add {
+  border: none;
+}
+
+.dfms-page-header__actions button.dfms-btn-secondary:disabled,
+.dfms-page-header__actions button.dfms-btn-secondary[disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+[data-theme="dark"] .dfms-page-header__actions button.dfms-btn-secondary:disabled,
+[data-theme="dark"] .dfms-page-header__actions button.dfms-btn-secondary[disabled] {
+  background: var(--dfms-grey-200);
+  border-color: var(--dfms-grey-300);
+  color: var(--dfms-grey-500) !important;
+}
+
+/* Primary "Add …" button */
+.dfms-btn-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 14px;
+  background: var(--dfms-primary) !important;
+  color: #fff !important;
+  border-radius: var(--dfms-radius-sm);
+  font-size: 13px !important;
+  font-weight: 500;
+  font-family: var(--dfms-font-sans);
+  text-decoration: none !important;
+  transition: background 0.15s, box-shadow 0.15s;
+  white-space: nowrap;
+  line-height: 1;
+  border: none;
+}
+
+.dfms-btn-add:hover,
+.dfms-btn-add:focus {
+  background: var(--dfms-primary-hover) !important;
+  color: #fff !important;
+  box-shadow: var(--dfms-shadow-sm);
+  text-decoration: none !important;
+}
+
+.dfms-btn-add i,
+.dfms-btn-add__icon {
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff !important;
+  line-height: 1;
+}
+
+/* Hide the now-replaced default object-tools list on changelist + change-form pages */
+.change-list ul.object-tools,
+.change-form ul.object-tools {
+  display: none;
+}
+
+/* ── Back arrow link in page header ── */
+.dfms-page-header__back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--dfms-radius-sm);
+  color: var(--dfms-grey-500);
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+  font-size: 16px;
+}
+
+.dfms-page-header__back:hover {
+  background: var(--dfms-grey-100);
+  color: var(--dfms-grey-900);
+}
+
+/* ── Secondary outlined button (History, View on site) ── */
+.dfms-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 12px;
+  background: #fff;
+  color: var(--dfms-primary) !important;
+  border: 1.5px solid var(--dfms-grey-300);
+  border-radius: var(--dfms-radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--dfms-font-sans);
+  text-decoration: none !important;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.dfms-btn-secondary:hover,
+.dfms-btn-secondary:focus {
+  border-color: var(--dfms-primary);
+  background: var(--dfms-primary-light);
+  color: var(--dfms-primary) !important;
+  box-shadow: none;
+  text-decoration: none !important;
+}
+
+.dfms-btn-secondary i {
+  font-size: 13px;
+  color: inherit;
+}
+
+/* ─── Change Form — layout & header ────────────────────────────────────── */
+
+/* Constrain form content to readable width */
+.change-form #content-main {
+  max-width: 960px;
+}
+
+/* Suppress Django's auto-generated "Add X" / "Select X to change" h1 —
+   our dfms-page-header renders the title instead */
+.change-form #content > h1,
+.change-list #content > h1 {
+  display: none;
+}
+
+/* Align the back arrow and h1 in the same row */
+.change-form .dfms-page-header__title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ─── Dark mode ── */
+[data-theme="dark"] .dfms-page-header__title h1 {
+  color: var(--dfms-grey-900);
+}
+
+[data-theme="dark"] .dfms-page-header__back {
+  color: var(--dfms-grey-500);
+}
+
+[data-theme="dark"] .dfms-page-header__back:hover {
+  background: var(--dfms-grey-200);
+  color: var(--dfms-grey-900);
+}
+
+[data-theme="dark"] .dfms-btn-secondary {
+  background: var(--dfms-grey-200);
+  border-color: var(--dfms-grey-300);
+  color: var(--dfms-primary) !important;
+}
+
+[data-theme="dark"] .dfms-btn-secondary:hover {
+  background: var(--dfms-grey-300);
+  border-color: var(--dfms-primary);
+}
+
+/* ─── Sidebar / Nav ───────────────────────────────────────────────────────── */
+
+#nav-sidebar {
+  background: #fff;
+  border-right: 1px solid var(--dfms-grey-200);
+  padding-top: 16px;
+}
+
+#nav-sidebar .current-app .section:link,
+#nav-sidebar .current-app .section:visited {
+  color: var(--dfms-primary);
+  font-weight: 600;
+}
+
+.toggle-nav-sidebar {
+  border-color: var(--dfms-grey-200);
+  background: var(--dfms-grey-50);
+}
+
+/* ─── Modules / Cards ─────────────────────────────────────────────────────── */
+
+.module {
+  background: #fff;
+  border: 1px solid var(--dfms-grey-200);
+  border-radius: var(--dfms-radius-md);
+  box-shadow: var(--dfms-shadow-sm);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.module caption,
+.module h2,
+.module .section {
+  background: var(--dfms-primary-dark);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 10px 16px;
+}
+
+.module.aligned caption {
+  background: var(--dfms-grey-100);
+  color: var(--dfms-grey-700);
+  border-bottom: 1px solid var(--dfms-grey-200);
+}
+
+/* App list on dashboard */
+#content-main .module > table {
+  border: none;
+}
+
+/* ─── Tables ──────────────────────────────────────────────────────────────── */
+
+#result_list,
+.results table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--dfms-grey-200);
+  border-radius: var(--dfms-radius-md);
+  overflow: hidden;
+  font-size: 13px;
+}
+
+/* ── Column headers ── */
+#result_list thead th,
+.results table thead th {
+  background: var(--dfms-grey-50);
+  color: var(--dfms-grey-600);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  padding: 0 16px;
+  height: 40px;
+  border-bottom: 1px solid var(--dfms-grey-200);
+  white-space: nowrap;
+  user-select: none;
+}
+
+#result_list thead th a,
+.results table thead th a {
+  color: var(--dfms-grey-600);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+#result_list thead th a:hover,
+.results table thead th a:hover {
+  color: var(--dfms-primary);
+}
+
+/* Hide only the remove link and toggle anchor — keep the priority number */
+#result_list thead th .sortoptions .sortremove,
+#result_list thead th .sortoptions .toggle,
+.results table thead th .sortoptions .sortremove,
+.results table thead th .sortoptions .toggle {
+  display: none !important;
+}
+
+/* Style the sort priority badge */
+#result_list thead th .sortoptions .sortpriority,
+.results table thead th .sortoptions .sortpriority {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  background: var(--dfms-primary);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 600;
+  border-radius: 99px;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+/* Sort indicators using Bootstrap Icons font glyphs — scoped to the title link only */
+th.sorted .text a::after {
+  font-family: "bootstrap-icons";
+  font-size: 11px;
+  color: var(--dfms-primary);
+  opacity: 0.8;
+}
+
+th.ascending .text a::after  { content: "\f286"; }  /* bi-chevron-up */
+th.descending .text a::after { content: "\f282"; }  /* bi-chevron-down */
+
+/* Unsorted column hover hint */
+th:not(.sorted) .text a:hover::after {
+  font-family: "bootstrap-icons";
+  font-size: 11px;
+  content: "\f127";  /* bi-arrow-down-up */
+  color: var(--dfms-grey-300);
+  margin-left: 2px;
+}
+
+/* ── Rows ── */
+#result_list tbody tr,
+.results table tbody tr {
+  border-bottom: 1px solid var(--dfms-grey-100);
+  transition: background 0.08s ease;
+}
+
+#result_list tbody tr:hover,
+.results table tbody tr:hover {
+  background: var(--dfms-grey-50);
+}
+
+#result_list tbody tr:last-child,
+.results table tbody tr:last-child {
+  border-bottom: none;
+}
+
+/* ── Cells ── */
+#result_list td,
+.results table td {
+  padding: 0 16px;
+  height: 44px;
+  font-size: 13px;
+  color: var(--dfms-grey-800);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* Transport Orders: TO number is the first column (rendered as <th>), keep it single-line.
+   We target the cell and the link because the <a> may receive wrapping styles. */
+#result_list tbody th.field-to_number,
+#result_list tbody th.field-to_number a {
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: none !important;
+}
+
+/* First link in a row (the object title) — primary colour */
+#result_list tbody td:first-of-type a,
+#result_list tbody th a {
+  color: var(--dfms-primary);
+  font-weight: 500;
+}
+
+#result_list tbody td:first-of-type a:hover,
+#result_list tbody th a:hover {
+  color: var(--dfms-primary-hover);
+  text-decoration: underline;
+}
+
+/* ── Checkbox cells ── */
+#result_list th.action-checkbox-column,
+#result_list td.action-checkbox {
+  width: 44px;
+  min-width: 44px;
+  padding: 0 0 0 16px;
+  text-align: center;
+}
+
+/* ── Selected row ── */
+#result_list tr.selected,
+.results table tr.selected {
+  background: var(--dfms-primary-light) !important;
+}
+
+/* ── Dark mode ── */
+[data-theme="dark"] #result_list,
+[data-theme="dark"] .results table {
+  border-color: var(--dfms-grey-200);
+  background: var(--dfms-grey-100);
+}
+
+[data-theme="dark"] #result_list thead th,
+[data-theme="dark"] .results table thead th {
+  background: var(--dfms-grey-200);
+  color: var(--dfms-grey-600);
+  border-color: var(--dfms-grey-300);
+}
+
+[data-theme="dark"] #result_list tbody tr {
+  border-color: var(--dfms-grey-200);
+}
+
+[data-theme="dark"] #result_list tbody tr:hover {
+  background: var(--dfms-grey-200);
+}
+
+[data-theme="dark"] #result_list td {
+  color: var(--dfms-grey-700);
+}
+
+/* ─── Checkboxes ──────────────────────────────────────────────────────────── */
+
+input[type="checkbox"] {
+  accent-color: var(--dfms-primary);
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+/* ─── Pagination ──────────────────────────────────────────────────────────── */
+
+.paginator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--dfms-grey-50);
+  border-top: 1px solid var(--dfms-grey-200);
+  padding: 10px 16px;
+  font-size: 13px;
+  color: var(--dfms-grey-500);
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.dfms-paginator-meta {
+  width: 100%;
+  color: var(--dfms-grey-600);
+  margin-bottom: 2px;
+  font-weight: 500;
+}
+
+.dfms-paginator-nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.paginator .dfms-page-prev,
+.paginator .dfms-page-next {
+  min-width: 74px !important;
+}
+
+.paginator .disabled {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 74px;
+  height: 28px;
+  padding: 0 8px;
+  border-radius: var(--dfms-radius-sm);
+  border: 1px solid var(--dfms-grey-300);
+  color: var(--dfms-grey-500);
+  background: #fff;
+  cursor: not-allowed;
+}
+
+.dfms-page-ellipsis {
+  color: var(--dfms-grey-400);
+  font-weight: 600;
+  padding: 0 4px;
+}
+
+.paginator a:link,
+.paginator a:visited {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 10px;
+  color: var(--dfms-grey-700);
+  font-weight: 600;
+  border: 1px solid var(--dfms-grey-300);
+  background: #fff;
+  transition: background 0.12s, border-color 0.12s, color 0.12s, box-shadow 0.12s;
+}
+
+.paginator a:hover {
+  background: var(--dfms-primary-light);
+  border-color: var(--dfms-primary);
+  box-shadow: 0 0 0 2px rgba(91, 101, 220, 0.12);
+  color: var(--dfms-primary);
+}
+
+.paginator a:focus-visible {
+  outline: none;
+  border-color: var(--dfms-primary);
+  box-shadow: 0 0 0 3px rgba(91, 101, 220, 0.2);
+  color: var(--dfms-grey-900);
+}
+
+.paginator .this-page {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 10px;
+  background: var(--dfms-primary);
+  color: #fff;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 13px;
+  border: 1px solid var(--dfms-primary);
+  box-shadow: 0 2px 8px rgba(91, 101, 220, 0.24);
+}
+
+/* Hide Django's "Show all" control in changelist pagination. */
+.paginator .showall,
+.paginator a.showall,
+.paginator a[href*="all="] {
+  display: none !important;
+}
+
+[data-theme="dark"] .paginator {
+  background: var(--dfms-grey-100);
+  border-color: var(--dfms-grey-200);
+}
+
+[data-theme="dark"] .dfms-paginator-meta {
+  color: var(--dfms-grey-500);
+}
+
+[data-theme="dark"] .paginator a:link,
+[data-theme="dark"] .paginator a:visited {
+  border-color: var(--dfms-grey-300);
+  color: var(--dfms-grey-700);
+  background: var(--dfms-grey-100);
+}
+
+[data-theme="dark"] .paginator a:hover {
+  background: rgba(117, 128, 240, 0.18);
+  border-color: var(--dfms-primary);
+  color: var(--dfms-grey-900);
+}
+
+[data-theme="dark"] .paginator a:focus-visible {
+  outline: none;
+  border-color: var(--dfms-primary);
+  box-shadow: 0 0 0 3px rgba(117, 128, 240, 0.24);
+  color: var(--dfms-grey-900);
+}
+
+[data-theme="dark"] .paginator .disabled {
+  border-color: var(--dfms-grey-300);
+  color: var(--dfms-grey-400);
+  background: var(--dfms-grey-200);
+}
+
+/* Design-system DynamicPagination footer (changelist + custom admin tables). */
+.dfms-pagination-parent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.dfms-pagination-numbers .paginator {
+  margin: 0;
+}
+
+.dfms-pagination-controls {
+  display: inline-flex;
+  align-items: center;
+}
+
+.dfms-pagination-parent .paginator {
+  justify-content: flex-start;
+}
+
+.per-page-selector {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.per-page-selector__label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--dfms-grey-700, #334155);
+}
+
+.per-page-selector__select {
+  min-width: 78px;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--dfms-grey-300, #cbd5e1);
+  border-radius: 8px;
+  font-size: 13px;
+  background: var(--dfms-input-bg);
+  color: var(--dfms-grey-900);
+}
+
+.per-page-selector__select:focus {
+  outline: none;
+  border-color: var(--dfms-primary, #5B65DC);
+  box-shadow: 0 0 0 3px rgba(91, 101, 220, 0.16);
+}
+
+[data-theme="dark"] .per-page-selector__label {
+  color: var(--dfms-grey-600);
+}
+
+[data-theme="dark"] .per-page-selector__select,
+[data-theme="dark"] .vm-vendors .per-page-selector__select {
+  background: var(--dfms-grey-100) !important;
+  border-color: var(--dfms-grey-300) !important;
+  color: var(--dfms-grey-700) !important;
+}
+
+/* ─── Change List — Search toolbar ───────────────────────────────────────── */
+
+#toolbar {
+  background: #fff !important;
+  border: 1px solid var(--dfms-grey-200) !important;
+  border-radius: var(--dfms-radius-md) var(--dfms-radius-md) 0 0;
+  border-bottom: none !important;
+  border-top: 1px solid var(--dfms-grey-200) !important;
+  padding: 10px 16px !important;
+  margin-bottom: 0 !important;
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* When there's no result list below, restore bottom border */
+#toolbar:last-child {
+  border-radius: var(--dfms-radius-md);
+  border-bottom: 1px solid var(--dfms-grey-200);
+}
+
+/* Reset Django's generic "#toolbar form input" rule that targets our searchbar */
+#toolbar #changelist-search input {
+  border-radius: var(--dfms-radius-sm);
+  font-size: 14px;
+  padding: 0;
+  color: var(--dfms-grey-900);
+}
+
+/* ── Search group wrapper ──
+   Renders as: [ 🔍  Search…          × ]
+   The icon is a non-interactive pseudo-element via the wrapper's ::before.
+   The submit button is visually hidden — Enter key submits. */
+.dfms-search-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex: 1 1 240px;
+  max-width: 400px;
+  gap: 0;
+}
+
+/* Search icon — sits inside the left of the input via absolute positioning on the wrapper */
+.dfms-search-icon {
+  position: absolute;
+  left: 11px;
+  font-size: 13px;
+  color: var(--dfms-grey-400);
+  pointer-events: none;
+  line-height: 1;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Input — use #toolbar #searchbar (2 IDs) to beat Django changelists.css specificity */
+#toolbar #searchbar,
+.dfms-search-input {
+  width: 100%;
+  height: 34px !important;
+  padding: 0 34px 0 30px !important;
+  border: 1.5px solid var(--dfms-grey-300) !important;
+  border-radius: var(--dfms-radius-sm) !important;
+  font-size: 13px !important;
+  font-family: var(--dfms-font-sans) !important;
+  color: var(--dfms-grey-900) !important;
+  background: #fff !important;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  outline: none;
+  min-width: 0;
+  box-sizing: border-box;
+  margin: 0 !important;
+  vertical-align: unset !important;
+  max-width: 100%;
+}
+
+#toolbar #searchbar:focus,
+.dfms-search-input:focus {
+  border-color: var(--dfms-primary) !important;
+  box-shadow: 0 0 0 3px rgba(91,101,220,.15) !important;
+}
+
+/* Clear (×) link — only rendered when query is active */
+.dfms-search-clear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--dfms-grey-400);
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 1;
+  transition: background 0.15s, color 0.15s;
+  z-index: 1;
+}
+
+.dfms-search-clear:hover {
+  background: var(--dfms-grey-200);
+  color: var(--dfms-grey-700);
+}
+
+/* Submit button — visually hidden, Enter key triggers submission */
+#changelist-search .dfms-search-submit,
+.dfms-search-submit {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0,0,0,0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Result count */
+.dfms-search-count {
+  font-size: 12px;
+  color: var(--dfms-grey-500);
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+.dfms-search-count a {
+  color: var(--dfms-primary);
+  text-decoration: none;
+}
+
+.dfms-search-count a:hover {
+  text-decoration: underline;
+}
+
+/* Help text */
+.dfms-search-help {
+  font-size: 12px;
+  color: var(--dfms-grey-500);
+  margin: 4px 0 0;
+  padding: 0 4px;
+}
+
+/* ── Dark mode ── */
+[data-theme="dark"] #toolbar {
+  background: var(--dfms-grey-100) !important;
+  border-color: var(--dfms-grey-200) !important;
+  border-top: 1px solid var(--dfms-grey-200) !important;
+}
+
+[data-theme="dark"] #toolbar #changelist-search,
+[data-theme="dark"] #toolbar .dfms-search-wrap {
+  background: transparent !important;
+}
+
+[data-theme="dark"] #toolbar #searchbar,
+[data-theme="dark"] .dfms-search-input {
+  background: var(--dfms-grey-200) !important;
+  border-color: var(--dfms-grey-300) !important;
+  color: var(--dfms-grey-900) !important;
+}
+
+[data-theme="dark"] #toolbar #searchbar:-webkit-autofill,
+[data-theme="dark"] #toolbar #searchbar:-webkit-autofill:hover,
+[data-theme="dark"] #toolbar #searchbar:-webkit-autofill:focus,
+[data-theme="dark"] .dfms-search-input:-webkit-autofill,
+[data-theme="dark"] .dfms-search-input:-webkit-autofill:hover,
+[data-theme="dark"] .dfms-search-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--dfms-grey-900) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--dfms-grey-200) inset !important;
+  box-shadow: 0 0 0 1000px var(--dfms-grey-200) inset !important;
+  caret-color: var(--dfms-grey-900) !important;
+}
+
+/* Dark mode autofill — all form controls (login, auth, admin forms). */
+[data-theme="dark"] input:-webkit-autofill,
+[data-theme="dark"] input:-webkit-autofill:hover,
+[data-theme="dark"] input:-webkit-autofill:focus,
+[data-theme="dark"] textarea:-webkit-autofill,
+[data-theme="dark"] textarea:-webkit-autofill:hover,
+[data-theme="dark"] textarea:-webkit-autofill:focus,
+[data-theme="dark"] select:-webkit-autofill,
+[data-theme="dark"] select:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--dfms-grey-900) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--dfms-grey-200) inset !important;
+  box-shadow: 0 0 0 1000px var(--dfms-grey-200) inset !important;
+  caret-color: var(--dfms-grey-900) !important;
+}
+
+[data-theme="dark"] body.auth-body .auth-input:-webkit-autofill,
+[data-theme="dark"] body.auth-body .auth-input:-webkit-autofill:hover,
+[data-theme="dark"] body.auth-body .auth-input:-webkit-autofill:focus,
+[data-theme="dark"] body.login input:-webkit-autofill,
+[data-theme="dark"] body.login input:-webkit-autofill:hover,
+[data-theme="dark"] body.login input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--dfms-grey-900) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--dfms-grey-100) inset !important;
+  box-shadow: 0 0 0 1000px var(--dfms-grey-100) inset !important;
+  caret-color: var(--dfms-grey-900) !important;
+}
+
+
+[data-theme="dark"] .dfms-search-icon {
+  color: var(--dfms-grey-500);
+}
+
+[data-theme="dark"] .dfms-search-clear {
+  color: var(--dfms-grey-500);
+}
+
+[data-theme="dark"] .dfms-search-clear:hover {
+  background: var(--dfms-grey-300);
+  color: var(--dfms-grey-900);
+}
+
+[data-theme="dark"] .dfms-search-count {
+  color: var(--dfms-grey-500);
+}
+
+[data-theme="dark"] .dfms-search-help {
+  color: var(--dfms-grey-500);
+}
+
+/* ─── Change List — Filters sidebar ──────────────────────────────────────── */
+
+#changelist-filter {
+  background: #fff;
+  border: 1px solid var(--dfms-grey-200);
+  border-radius: var(--dfms-radius-md);
+  overflow: hidden;
+}
+
+#changelist-filter h2 {
+  background: var(--dfms-grey-50);
+  color: var(--dfms-grey-600);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--dfms-grey-200);
+  margin: 0;
+}
+
+#changelist-filter h3 {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--dfms-grey-500);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 12px 14px 4px;
+  margin: 0;
+}
+
+#changelist-filter ul {
+  padding: 4px 8px 8px;
+  margin: 0;
+  list-style: none;
+}
+
+#changelist-filter li a {
+  color: var(--dfms-grey-700);
+  font-size: 13px;
+  display: block;
+  padding: 4px 8px;
+  border-radius: var(--dfms-radius-sm);
+  transition: background 0.1s, color 0.1s;
+}
+
+#changelist-filter li a:hover {
+  background: var(--dfms-grey-100);
+  color: var(--dfms-grey-900);
+}
+
+#changelist-filter li.selected a {
+  background: var(--dfms-primary-light);
+  color: var(--dfms-primary);
+  font-weight: 500;
+}
+
+[data-theme="dark"] #changelist-filter {
+  background: var(--dfms-grey-100);
+  border-color: var(--dfms-grey-200);
+}
+
+[data-theme="dark"] #changelist-filter h2 {
+  background: var(--dfms-grey-200);
+  color: var(--dfms-grey-600);
+  border-color: var(--dfms-grey-300);
+}
+
+[data-theme="dark"] #changelist-filter li a {
+  color: var(--dfms-grey-600);
+}
+
+[data-theme="dark"] #changelist-filter li a:hover {
+  background: var(--dfms-grey-200);
+  color: var(--dfms-grey-900);
+}
+
+/* ─── Change List — Actions bar (no-JS fallback, hidden when toolbar active) */
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--dfms-grey-50);
+  border: 1px solid var(--dfms-grey-200);
+  border-top: none;
+  padding: 8px 16px;
+  font-size: 13px;
+  flex-wrap: wrap;
+}
+
+/* Style the bulk-action select */
+.actions select {
+  height: 32px !important;
+  padding: 0 8px !important;
+  font-size: 13px !important;
+  border-color: var(--dfms-grey-300) !important;
+  border-radius: var(--dfms-radius-sm) !important;
+  background: #fff !important;
+  color: var(--dfms-grey-700) !important;
+  min-width: 180px;
+}
+
+/* "Go" button */
+.actions button[name="index"],
+.actions .button {
+  height: 32px !important;
+  padding: 0 14px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  border-radius: var(--dfms-radius-sm) !important;
+  background: var(--dfms-primary) !important;
+  color: #fff !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: background 0.15s !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+.actions button[name="index"]:hover,
+.actions .button:hover {
+  background: var(--dfms-primary-hover) !important;
+}
+
+.action-counter {
+  color: var(--dfms-grey-500);
+  font-size: 12px;
+}
+
+[data-theme="dark"] .actions {
+  background: var(--dfms-grey-100);
+  border-color: var(--dfms-grey-200);
+}
+
+[data-theme="dark"] .actions select {
+  background: var(--dfms-grey-200) !important;
+  border-color: var(--dfms-grey-300) !important;
+  color: var(--dfms-grey-700) !important;
+}
+
+/* Compact inline action in custom / changelist table rows (not page-header dfms-btn-add) */
+.dfms-table-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--dfms-primary);
+  background: #fff;
+  border: 1px solid var(--dfms-grey-200);
+  border-radius: var(--dfms-radius-sm);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.1s, border-color 0.1s, color 0.1s;
+}
+
+.dfms-table-action:hover,
+.dfms-table-action:focus {
+  background: var(--dfms-primary-light);
+  border-color: var(--dfms-primary);
+  color: var(--dfms-primary);
+  text-decoration: none;
+}
+
+[data-theme="dark"] .dfms-table-action {
+  background: var(--dfms-grey-100);
+  border-color: var(--dfms-grey-300);
+  color: var(--dfms-primary);
+}
+
+/* ─── Row actions ─────────────────────────────────────────────────────────── */
+
+td.dfms-row-actions {
+  width: 44px;
+  min-width: 44px;
+  padding: 0 8px !important;
+  text-align: center;
+  position: relative;
+}
+
+th.dfms-row-actions-header {
+  width: 44px;
+  min-width: 44px;
+  padding: 0 !important;
+  background: var(--dfms-grey-50);
+  border-bottom: 1px solid var(--dfms-grey-200);
+}
+
+.dfms-row-menu-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--dfms-radius-sm);
+  background: none;
+  border: none;
+  color: var(--dfms-grey-400);
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.1s, color 0.1s;
+  padding: 0;
+}
+
+.dfms-row-menu-btn:hover {
+  background: var(--dfms-grey-100);
+  color: var(--dfms-grey-700);
+}
+
+tr:hover .dfms-row-menu-btn {
+  color: var(--dfms-grey-500);
+}
+
+/* Row dropdown panel */
+.dfms-row-dropdown {
+  position: fixed;
+  z-index: 500;
+  background: #fff;
+  border: 1px solid var(--dfms-grey-200);
+  border-radius: var(--dfms-radius-md);
+  box-shadow: var(--dfms-shadow-md);
+  min-width: 148px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity 0.12s ease, transform 0.12s ease;
+}
+
+.dfms-row-dropdown.dfms-row-dropdown--open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+[data-theme="dark"] .dfms-row-dropdown {
+  background: var(--dfms-grey-100);
+  border-color: var(--dfms-grey-200);
+}
+
+.dfms-row-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--dfms-grey-700);
+  text-decoration: none;
+  transition: background 0.08s;
+  cursor: pointer;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: var(--dfms-font-sans);
+}
+
+.dfms-row-dropdown-item i {
+  font-size: 14px;
+  color: var(--dfms-grey-400);
+  flex-shrink: 0;
+}
+
+.dfms-row-dropdown-item:hover {
+  background: var(--dfms-grey-50);
+  color: var(--dfms-grey-900);
+}
+
+.dfms-row-dropdown-item:hover i {
+  color: var(--dfms-grey-600);
+}
+
+.dfms-row-dropdown-item--danger {
+  color: var(--dfms-danger) !important;
+}
+
+.dfms-row-dropdown-item--danger i {
+  color: var(--dfms-danger) !important;
+  opacity: 0.8;
+}
+
+.dfms-row-dropdown-item--danger:hover {
+  background: var(--dfms-danger-bg) !important;
+}
+
+[data-theme="dark"] .dfms-row-dropdown-item:hover {
+  background: var(--dfms-grey-200);
+}
+
+.dfms-row-dropdown-divider {
+  height: 1px;
+  background: var(--dfms-grey-100);
+  margin: 2px 0;
+}
+
+[data-theme="dark"] .dfms-row-dropdown-divider {
+  background: var(--dfms-grey-200);
+}
+
+/* ─── Selection toolbar ───────────────────────────────────────────────────── */
+
+.dfms-selection-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+  min-height: 48px;
+  background: var(--dfms-primary-light);
+  border-radius: var(--dfms-radius-md) var(--dfms-radius-md) 0 0;
+  border: 1px solid var(--dfms-grey-200);
+  border-bottom: none;
+  flex-wrap: wrap;
+  /* Animate in */
+  animation: dfms-toolbar-in 0.15s ease;
+}
+
+[data-theme="dark"] .dfms-selection-toolbar {
+  background: #1a2460;
+  border-color: rgba(255,255,255,.1);
+}
+
+@keyframes dfms-toolbar-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.dfms-selection-toolbar[hidden] {
+  display: none !important;
+}
+
+.dfms-selection-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dfms-primary);
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .dfms-selection-count {
+  color: rgba(255,255,255,.9);
+}
+
+.dfms-selection-count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  background: var(--dfms-primary);
+  border-radius: var(--dfms-radius-pill);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.dfms-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+/* Action buttons inside the selection toolbar */
+.dfms-toolbar-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: var(--dfms-radius-sm);
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--dfms-font-sans);
+  cursor: pointer;
+  border: 1px solid var(--dfms-primary);
+  background: var(--dfms-primary);
+  color: #fff;
+  transition: background 0.1s, border-color 0.1s;
+  white-space: nowrap;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.dfms-toolbar-action-btn:hover {
+  background: var(--dfms-primary-hover);
+  border-color: var(--dfms-primary-hover);
+  color: #fff;
+}
+
+.dfms-toolbar-action-btn--danger {
+  background: var(--dfms-danger);
+  border-color: var(--dfms-danger);
+  color: #fff;
+}
+
+.dfms-toolbar-action-btn--danger:hover {
+  background: #a93226;
+  border-color: #a93226;
+}
+
+[data-theme="dark"] .dfms-toolbar-action-btn {
+  border-color: rgba(255,255,255,.25);
+  background: rgba(255,255,255,.12);
+  color: rgba(255,255,255,.9);
+}
+
+[data-theme="dark"] .dfms-toolbar-action-btn:hover {
+  background: rgba(255,255,255,.2);
+  border-color: rgba(255,255,255,.4);
+  color: #fff;
+}
+
+[data-theme="dark"] .dfms-toolbar-action-btn--danger {
+  background: rgba(192,57,43,.3);
+  border-color: rgba(192,57,43,.5);
+  color: #fca5a5;
+}
+
+[data-theme="dark"] .dfms-toolbar-action-btn--danger:hover {
+  background: rgba(192,57,43,.45);
+  color: #fecaca;
+}
+
+.dfms-clear-selection {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: var(--dfms-radius-sm);
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--dfms-font-sans);
+  color: var(--dfms-grey-500);
+  background: none;
+  border: 1px solid var(--dfms-grey-300);
+  cursor: pointer;
+  transition: color 0.1s, border-color 0.1s;
+}
+
+.dfms-clear-selection:hover {
+  color: var(--dfms-grey-700);
+  border-color: var(--dfms-grey-400);
+}
+
+[data-theme="dark"] .dfms-clear-selection {
+  color: rgba(255,255,255,.5);
+  border-color: rgba(255,255,255,.2);
+}
+
+[data-theme="dark"] .dfms-clear-selection:hover {
+  color: rgba(255,255,255,.85);
+  border-color: rgba(255,255,255,.35);
+}
+
+/* ─── Forms ───────────────────────────────────────────────────────────────── */
+
+.form-row {
+  border-bottom: 1px solid var(--dfms-grey-100);
+  padding: 12px 16px;
+}
+
+.form-row:last-child {
+  border-bottom: none;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="url"],
+input[type="tel"],
+input[type="date"],
+input[type="datetime-local"],
+select,
+textarea {
+  border: 1.5px solid var(--dfms-grey-300);
+  border-radius: var(--dfms-radius-sm);
+  padding: 5px 10px;
+  font-size: 13px;
+  font-family: var(--dfms-font-sans);
+  color: var(--dfms-grey-900);
+  background: var(--dfms-input-bg);
+  transition: border-color 0.15s, box-shadow 0.15s;
+  height: 34px;
+}
+
+/* Auth/onboarding (.auth-input): global input[type=…] above beats .auth-input from
+   dfms.css on blur — keep filled values readable in dark mode. */
+body.auth-body .auth-input,
+body.auth-body input.auth-input {
+  background: var(--dfms-grey-100) !important;
+  color: var(--dfms-text) !important;
+  border-color: var(--dfms-grey-300) !important;
+}
+
+body.auth-body .auth-input:focus {
+  background: var(--dfms-grey-50) !important;
+  border-color: var(--dfms-primary) !important;
+  box-shadow: 0 0 0 3px rgba(91,101,220,.15) !important;
+}
+
+body.auth-body .auth-input-group .auth-toggle {
+  background: var(--dfms-grey-100) !important;
+  border-color: var(--dfms-grey-300) !important;
+  color: var(--dfms-grey-500) !important;
+}
+
+/* Native date/time picker chrome must follow DFMS theme, not OS prefers-color-scheme.
+   `color-scheme: light dark` (or OS-dark while data-theme=light) paints a light calendar
+   icon on a white field — icon looks "missing" in light mode. */
+input[type="date"],
+input[type="datetime-local"],
+input[type="time"] {
+  color-scheme: light;
+}
+[data-theme="dark"] input[type="date"],
+[data-theme="dark"] input[type="datetime-local"],
+[data-theme="dark"] input[type="time"] {
+  color-scheme: dark;
+}
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 1;
+}
+
+textarea {
+  height: auto;
+  min-height: 96px;
+  resize: vertical;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="url"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+input[type="datetime-local"]:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--dfms-primary);
+  box-shadow: 0 0 0 3px rgba(91,101,220,.15);
+}
+
+.errorlist {
+  font-size: 12px;
+  color: var(--dfms-danger);
+  padding: 4px 0;
+  margin: 0;
+  list-style: none;
+}
+
+.errorlist li::before {
+  content: '⚠ ';
+}
+
+.help {
+  font-size: 12px;
+  color: var(--dfms-grey-500);
+  margin-top: 4px;
+}
+
+/* Field labels */
+label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--dfms-grey-700);
+}
+
+/* Required asterisk on the field label only (not RadioSelect option labels).
+   Use label.required — NOT ".required label", which also matches option labels
+   inside a required form-row. */
+label.required::after {
+  content: ' *';
+  color: var(--dfms-danger);
+  font-weight: 700;
+}
+
+/* Kill Django's .aligned label spacer and any ::before/::after on option labels */
+.radiolist label::after,
+.radiolist label::before,
+form .aligned .radiolist label::after,
+form .aligned .radiolist label::before,
+form .aligned .radiolist label:not(.vCheckboxLabel)::after,
+.field-invite_channel .radiolist label::after,
+.field-invite_channel .radiolist label::before {
+  content: none !important;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  background: none !important;
+}
+
+/* RadioSelect: one custom circle (avoids native double-draw from padded inputs) */
+form .aligned .radiolist,
+.field-invite_channel .radiolist {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+}
+
+form .aligned .radiolist > div,
+.field-invite_channel .radiolist > div {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+form .aligned .radiolist label,
+.field-invite_channel .radiolist label {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 10px;
+  width: auto !important;
+  min-width: 0 !important;
+  float: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: 1.3;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--dfms-grey-800);
+}
+
+form .aligned .radiolist input[type="radio"],
+.field-invite_channel .radiolist input[type="radio"],
+.field-invite_channel input[type="radio"] {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  box-sizing: border-box;
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px;
+  min-height: 16px;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 2px solid var(--dfms-grey-400) !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none;
+  flex-shrink: 0;
+  cursor: pointer;
+  vertical-align: middle;
+  accent-color: unset;
+}
+
+form .aligned .radiolist input[type="radio"]:checked,
+.field-invite_channel .radiolist input[type="radio"]:checked,
+.field-invite_channel input[type="radio"]:checked {
+  border-color: var(--dfms-primary) !important;
+  background:
+    radial-gradient(
+      circle at center,
+      var(--dfms-primary) 0 38%,
+      transparent 40%
+    ) !important;
+}
+
+form .aligned .radiolist input[type="radio"]:focus,
+form .aligned .radiolist input[type="radio"]:focus-visible,
+.field-invite_channel input[type="radio"]:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Readonly values */
+.readonly {
+  color: var(--dfms-grey-800);
+  padding: 8px 0;
+  display: inline-block;
+}
+
+/* Calculated Goods Pickup Date still uses the same input box as the other dates. */
+.field-goods_pickup_date input[readonly] {
+  background: var(--dfms-input-bg);
+  color: var(--dfms-grey-900);
+  cursor: default;
+}
+
+.field-goods_pickup_date .readonly {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  min-width: 10em;
+  height: 34px;
+  padding: 5px 10px;
+  border: 1.5px solid var(--dfms-grey-300);
+  border-radius: var(--dfms-radius-sm);
+  background: var(--dfms-input-bg);
+  color: var(--dfms-grey-900);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.field-schema_name .readonly {
+  font-family: var(--dfms-font-mono);
+  font-size: 13px;
+  background: var(--dfms-grey-100);
+  padding: 4px 8px;
+  border-radius: var(--dfms-radius-sm);
+  color: var(--dfms-grey-700);
+}
+
+/* LD-01 load/unload add form — point queue row selection (ld_queue_select.js) */
+.ld-queue-hint {
+  margin: 0 0 0.5rem;
+}
+
+.ld-queue-table .ld-queue-row {
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+
+.ld-queue-table .ld-queue-row:hover {
+  background: var(--dfms-primary-light);
+}
+
+.ld-queue-table .ld-queue-row--selected,
+.ld-queue-table .ld-queue-row--selected:hover {
+  background: var(--dfms-primary-light);
+  box-shadow: inset 3px 0 0 var(--dfms-primary);
+}
+
+.ld-queue-table .ld-queue-row:focus-visible {
+  outline: 2px solid var(--dfms-primary);
+  outline-offset: -2px;
+}
+
+/* LD-01 change form — mandatory completion reminder after start */
+.ld-completion-required-banner {
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--dfms-radius-sm);
+  background: var(--dfms-warning-bg);
+  border: 1px solid rgba(217, 119, 6, 0.35);
+}
+
+.ld-completion-required-banner h3 {
+  margin: 0 0 0.35rem;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--dfms-warning);
+}
+
+.ld-completion-required-banner ul {
+  margin: 0.35rem 0 0 1.1rem;
+  padding: 0;
+  color: var(--dfms-grey-700);
+  font-size: 13px;
+}
+
+.ld-completion-required-banner li {
+  margin: 0.2rem 0;
+}
+
+/* Fieldset sections */
+fieldset {
+  border: 1px solid var(--dfms-grey-200);
+  border-radius: var(--dfms-radius-md);
+  margin-bottom: 16px;
+  background: #fff;
+  box-shadow: var(--dfms-shadow-sm);
+  overflow: hidden;
+}
+
+fieldset h2,
+.module h2,
+.inline-group h2 {
+  background: var(--dfms-grey-100) !important;
+  color: var(--dfms-grey-600) !important;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  margin: 0;
+  border-bottom: 1px solid var(--dfms-grey-200);
+}
+
+[data-theme="dark"] fieldset h2,
+[data-theme="dark"] .module h2,
+[data-theme="dark"] .inline-group h2 {
+  background: var(--dfms-grey-200) !important;
+  color: var(--dfms-grey-600) !important;
+  border-color: var(--dfms-grey-300);
+}
+
+fieldset.collapse {
+  border: 1px solid var(--dfms-grey-200);
+  border-radius: var(--dfms-radius-md);
+}
+
+fieldset.collapse h2 {
+  cursor: pointer;
+}
+
+fieldset.collapse h2 a {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--dfms-primary);
+  float: right;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* Date / Time widgets */
+.datetimeshortcuts a {
+  color: var(--dfms-primary);
+}
+
+/* ─── Buttons ─────────────────────────────────────────────────────────────── */
+
+.button,
+input[type="submit"],
+input[type="button"],
+.submit-row input,
+a.button {
+  background: var(--dfms-primary);
+  border: none;
+  border-radius: var(--dfms-radius-sm);
+  color: #fff;
+  cursor: pointer;
+  font-family: var(--dfms-font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  padding: 0 18px;
+  transition: background 0.15s, box-shadow 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.button:hover,
+input[type="submit"]:hover,
+.submit-row input:hover,
+a.button:hover {
+  background: var(--dfms-primary-hover);
+  box-shadow: var(--dfms-shadow-sm);
+  color: #fff;
+}
+
+.button:active,
+input[type="submit"]:active {
+  background: var(--dfms-primary-press);
+}
+
+.button:focus,
+input[type="submit"]:focus {
+  outline: 3px solid rgba(91,101,220,.35);
+  outline-offset: 2px;
+}
+
+/* Secondary / default button */
+.button.default,
+input[type="submit"].default {
+  background: var(--dfms-primary);
+}
+
+/* Danger / delete buttons */
+.deletelink,
+.button.danger,
+.submit-row a.deletelink {
+  background: var(--dfms-danger) !important;
+  color: #fff !important;
+  border-radius: var(--dfms-radius-sm);
+  padding: 0 14px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+
+.deletelink:hover,
+.button.danger:hover,
+.submit-row a.deletelink:hover {
+  background: #a93226 !important;
+  color: #fff !important;
+}
+
+/* Save row */
+.submit-row {
+  background: var(--dfms-grey-50);
+  border-top: 1px solid var(--dfms-grey-200);
+  border-radius: 0 0 var(--dfms-radius-md) var(--dfms-radius-md);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  /* Sticky footer — stays visible while scrolling long forms */
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+  box-shadow: 0 -2px 8px rgba(0,0,0,.06);
+}
+
+/* Delete — far left */
+.submit-row a.deletelink {
+  margin-right: auto;
+  order: -1;
+}
+
+/* Cancel — secondary style, sits before Save */
+.submit-row .dfms-btn-cancel {
+  margin-left: auto;
+}
+
+/* Save button — compact, matches design system */
+.submit-row .dfms-btn-save,
+input[type="submit"].dfms-btn-save {
+  height: 34px !important;
+  padding: 0 18px !important;
+  font-size: 13px !important;
+  background: var(--dfms-primary) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: var(--dfms-radius-sm) !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
+}
+
+.submit-row .dfms-btn-save:hover,
+input[type="submit"].dfms-btn-save:hover {
+  background: var(--dfms-primary-hover) !important;
+  box-shadow: none !important;
+}
+
+.submit-row .dfms-btn-save:focus,
+input[type="submit"].dfms-btn-save:focus {
+  outline: 3px solid rgba(91,101,220,.3) !important;
+  outline-offset: 2px !important;
+  box-shadow: none !important;
+}
+
+/* ── Port Shipment — Save as Draft (inherits secondary style) ── */
+.submit-row button.dfms-btn-draft {
+  background: #fff;
+  border-color: var(--dfms-border-color);
+  color: var(--dfms-primary) !important;
+  cursor: pointer;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+.submit-row button.dfms-btn-draft:hover {
+  border-color: var(--dfms-primary) !important;
+  background: var(--dfms-primary-light) !important;
+  color: var(--dfms-primary) !important;
+  box-shadow: none !important;
+}
+
+[data-theme="dark"] .submit-row button.dfms-btn-draft {
+  background: var(--dfms-grey-200) !important;
+  border-color: var(--dfms-grey-300) !important;
+  color: var(--dfms-primary) !important;
+}
+
+[data-theme="dark"] .submit-row button.dfms-btn-draft:hover {
+  background: var(--dfms-grey-300) !important;
+  border-color: var(--dfms-primary) !important;
+}
+
+/* ── Port Shipment — Submit Shipment (inherits primary save style) ── */
+.submit-row button.dfms-btn-submit-shipment {
+  background: var(--dfms-primary) !important;
+  border-color: var(--dfms-primary) !important;
+  color: #fff !important;
+  cursor: pointer;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+.submit-row button.dfms-btn-submit-shipment:hover {
+  background: var(--dfms-primary-hover) !important;
+  border-color: var(--dfms-primary-hover) !important;
+  box-shadow: none !important;
+}
+
+.submit-row button.dfms-btn-submit-shipment:focus {
+  outline: 3px solid rgba(91,101,220,.3) !important;
+  outline-offset: 2px !important;
+  box-shadow: none !important;
+}
+
+/* ── DM Approval action buttons ── */
+.dfms-btn-approve,
+.dfms-btn-reject,
+.dfms-btn-modify,
+.submit-row .dfms-btn-approve,
+.submit-row .dfms-btn-reject,
+.submit-row .dfms-btn-modify {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px !important;
+  padding: 0 14px !important;
+  border-radius: var(--dfms-radius-sm) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  font-family: var(--dfms-font-sans);
+  text-decoration: none !important;
+  white-space: nowrap;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: none !important;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+/* Approve — solid filled green (primary positive action) */
+.dfms-btn-approve,
+.submit-row .dfms-btn-approve {
+  background: #16a34a !important;
+  border: none !important;
+  color: #fff !important;
+}
+.dfms-btn-approve:hover,
+.dfms-btn-approve:focus,
+.submit-row .dfms-btn-approve:hover,
+.submit-row .dfms-btn-approve:focus {
+  background: #15803d !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+}
+
+/* Approve with Modifications — neutral outlined */
+.dfms-btn-modify,
+.submit-row .dfms-btn-modify {
+  background: transparent !important;
+  border: 1.5px solid var(--border-color, #ccc) !important;
+  color: var(--body-fg, #333) !important;
+}
+.dfms-btn-modify:hover,
+.dfms-btn-modify:focus,
+.submit-row .dfms-btn-modify:hover,
+.submit-row .dfms-btn-modify:focus {
+  background: var(--darkened-bg, #f5f5f5) !important;
+  border-color: var(--body-quiet-color, #999) !important;
+  color: var(--body-fg, #333) !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+}
+
+/* Reject — solid danger (filled red) */
+.dfms-btn-reject,
+.submit-row .dfms-btn-reject {
+  background: #dc2626 !important;
+  border: none !important;
+  color: #fff !important;
+}
+.dfms-btn-reject:hover,
+.dfms-btn-reject:focus,
+.submit-row .dfms-btn-reject:hover,
+.submit-row .dfms-btn-reject:focus {
+  background: #b91c1c !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+}
+
+.dfms-btn-approve i,
+.dfms-btn-modify i,
+.dfms-btn-reject i {
+  font-size: 13px;
+  color: inherit;
+}
+
+/* Dark mode */
+[data-theme="dark"] .dfms-btn-approve,
+[data-theme="dark"] .submit-row .dfms-btn-approve {
+  background: #16a34a !important;
+}
+[data-theme="dark"] .dfms-btn-approve:hover,
+[data-theme="dark"] .submit-row .dfms-btn-approve:hover {
+  background: #15803d !important;
+}
+[data-theme="dark"] .dfms-btn-modify,
+[data-theme="dark"] .submit-row .dfms-btn-modify {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: var(--body-fg, #e0e0e0) !important;
+}
+[data-theme="dark"] .dfms-btn-modify:hover,
+[data-theme="dark"] .submit-row .dfms-btn-modify:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+}
+[data-theme="dark"] .dfms-btn-reject,
+[data-theme="dark"] .submit-row .dfms-btn-reject {
+  background: #dc2626 !important;
+  color: #fff !important;
+}
+[data-theme="dark"] .dfms-btn-reject:hover,
+[data-theme="dark"] .submit-row .dfms-btn-reject:hover {
+  background: #b91c1c !important;
+}
+
+/* ── DM Actions label inside submit-row ── */
+.dfms-dm-actions__label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--body-quiet-color);
+}
+
+/* ── Port Shipment — locked hint ── */
+.dfms-ps-locked-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--dfms-grey-500);
+  margin-left: auto;
+  padding: 0 4px;
+}
+
+.submit-row p {
+  font-size: 12px;
+  color: var(--dfms-grey-500);
+  margin: 0;
+}
+
+[data-theme="dark"] .submit-row {
+  background: var(--dfms-grey-100);
+  box-shadow: 0 -2px 8px rgba(0,0,0,.2);
+}
+
+/* Object tools (history, view on site links) */
+ul.object-tools {
+  margin: 0 0 8px 0;
+  padding: 0;
+  float: right;
+  list-style: none;
+  display: flex;
+  gap: 6px;
+}
+
+ul.object-tools li {
+  margin: 0;
+}
+
+ul.object-tools a {
+  background: var(--dfms-primary-dark);
+  border-radius: var(--dfms-radius-pill);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 14px;
+  display: block;
+  transition: background 0.15s;
+}
+
+ul.object-tools a:hover,
+ul.object-tools a:focus {
+  background: var(--dfms-primary);
+  color: #fff;
+}
+
+ul.object-tools a.addlink {
+  background: var(--dfms-primary);
+}
+
+ul.object-tools a.addlink:hover {
+  background: var(--dfms-primary-hover);
+}
+
+/* ─── Status Badges (tenant subscription) ─────────────────────────────────── */
+
+.dfms-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: var(--dfms-radius-pill);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 3px 10px;
+  line-height: 1;
+  height: 20px;
+}
+
+.dfms-badge--active {
+  background: var(--dfms-success-bg);
+  color: var(--dfms-success);
+  border: 1px solid rgba(30,138,76,.25);
+}
+
+.dfms-badge--trial {
+  background: var(--dfms-info-bg);
+  color: var(--dfms-info);
+  border: 1px solid rgba(91,101,220,.25);
+}
+
+.dfms-badge--warning,
+.dfms-badge--suspended {
+  background: var(--dfms-warning-bg);
+  color: var(--dfms-warning);
+  border: 1px solid rgba(217,119,6,.25);
+}
+
+.dfms-badge--danger,
+.dfms-badge--cancelled {
+  background: var(--dfms-danger-bg);
+  color: var(--dfms-danger);
+  border: 1px solid rgba(192,57,43,.25);
+}
+
+.dfms-badge--neutral {
+  background: var(--dfms-grey-100);
+  color: var(--dfms-grey-600);
+  border: 1px solid var(--dfms-grey-300);
+}
+
+/* ─── PR / TR Workflow Status Badges ───────────────────────────────────────── */
+/* PR statuses */
+.dfms-badge--draft {
+  background: var(--dfms-grey-100);
+  color: var(--dfms-grey-600);
+  border: 1px solid var(--dfms-grey-300);
+}
+.dfms-badge--submitted {
+  background: var(--dfms-info-bg);
+  color: var(--dfms-info);
+  border: 1px solid rgba(91,101,220,.25);
+}
+.dfms-badge--in-progress {
+  background: var(--dfms-warning-bg);
+  color: var(--dfms-warning);
+  border: 1px solid rgba(217,119,6,.25);
+}
+.dfms-badge--fully-allocated {
+  background: #EDE9FE;
+  color: #6D28D9;
+  border: 1px solid rgba(109,40,217,.25);
+}
+.dfms-badge--fulfilled {
+  background: var(--dfms-success-bg);
+  color: var(--dfms-success);
+  border: 1px solid rgba(30,138,76,.25);
+}
+.dfms-badge--cancelled {
+  background: var(--dfms-danger-bg);
+  color: var(--dfms-danger);
+  border: 1px solid rgba(192,57,43,.25);
+}
+/* TR-only statuses */
+.dfms-badge--pending-approval {
+  background: var(--dfms-warning-bg);
+  color: var(--dfms-warning);
+  border: 1px solid rgba(217,119,6,.25);
+}
+.dfms-badge--approved {
+  background: var(--dfms-success-bg);
+  color: var(--dfms-success);
+  border: 1px solid rgba(30,138,76,.25);
+}
+.dfms-badge--rejected {
+  background: var(--dfms-danger-bg);
+  color: var(--dfms-danger);
+  border: 1px solid rgba(192,57,43,.25);
+}
+.dfms-badge--available-planning {
+  background: #EDE9FE;
+  color: #6D28D9;
+  border: 1px solid rgba(109,40,217,.25);
+}
+.dfms-badge--under-planning {
+  background: #E0F2FE;
+  color: #0369A1;
+  border: 1px solid rgba(3,105,161,.25);
+}
+.dfms-badge--partially-allocated {
+  background: var(--dfms-warning-bg);
+  color: var(--dfms-warning);
+  border: 1px solid rgba(217,119,6,.25);
+}
+/* TO yard sub-states */
+.dfms-badge--info {
+  background: var(--dfms-info-bg);
+  color: var(--dfms-info);
+  border: 1px solid rgba(91,101,220,.25);
+}
+.dfms-badge--awaiting-dispatch,
+.dfms-badge--pending-approval {
+  background: var(--dfms-warning-bg);
+  color: var(--dfms-warning);
+  border: 1px solid rgba(217,119,6,.25);
+}
+
+[data-theme="dark"] .dfms-badge--pending-approval,
+[data-theme="dark"] .dfms-badge--awaiting-dispatch {
+  background: rgba(245, 158, 11, 0.22);
+  color: #FBBF24;
+  border: 1px solid rgba(245, 158, 11, 0.45);
+}
+
+[data-theme="dark"] .dfms-badge--approved {
+  background: rgba(52, 212, 117, 0.22);
+  color: #4ADE80;
+  border: 1px solid rgba(52, 212, 117, 0.45);
+}
+
+[data-theme="dark"] .dfms-badge--info,
+[data-theme="dark"] .dfms-badge--submitted {
+  background: rgba(117, 128, 240, 0.22);
+  color: #A5B4FC;
+  border: 1px solid rgba(117, 128, 240, 0.45);
+}
+
+[data-theme="dark"] .dfms-badge--in-progress {
+  background: rgba(245, 158, 11, 0.22);
+  color: #FBBF24;
+  border: 1px solid rgba(245, 158, 11, 0.45);
+}
+
+[data-theme="dark"] .dfms-badge--under-planning {
+  background: rgba(56, 189, 248, 0.18);
+  color: #7DD3FC;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+}
+/* Urgency badges */
+.dfms-badge--urgency-normal {
+  background: var(--dfms-grey-100);
+  color: var(--dfms-grey-600);
+  border: 1px solid var(--dfms-grey-300);
+}
+.dfms-badge--urgency-high {
+  background: var(--dfms-warning-bg);
+  color: var(--dfms-warning);
+  border: 1px solid rgba(217,119,6,.25);
+}
+.dfms-badge--urgency-critical {
+  background: var(--dfms-danger-bg);
+  color: var(--dfms-danger);
+  border: 1px solid rgba(192,57,43,.25);
+}
+
+/* ─── Trip / Workflow Status Colors (13 states) ────────────────────────────── */
+
+.status-pending          { background: #FEF3C7; color: #92400E; }
+.status-assigned         { background: #DBEAFE; color: #1E40AF; }
+.status-gate-in          { background: #D1FAE5; color: #065F46; }
+.status-loading          { background: #E0E7FF; color: #3730A3; }
+.status-scale-in         { background: #FDE68A; color: #78350F; }
+.status-in-transit       { background: #EEEFFD; color: #3730A3; }
+.status-gate-out         { background: #D1FAE5; color: #065F46; }
+.status-unloading        { background: #E0E7FF; color: #3730A3; }
+.status-scale-out        { background: #FEF9C3; color: #713F12; }
+.status-qc-pending       { background: #FDE8D8; color: #9A3412; }
+.status-completed        { background: #D1FAE5; color: #1E8A4C; }
+.status-on-hold          { background: #F3F4F6; color: #374151; }
+.status-cancelled        { background: #FEE2E2; color: #C0392B; }
+
+/* ─── Messages / Alerts ───────────────────────────────────────────────────── */
+
+ul.messagelist {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+ul.messagelist li {
+  border-radius: var(--dfms-radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0 0 6px 0;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+ul.messagelist li.success {
+  background: var(--dfms-success-bg);
+  color: var(--dfms-success);
+  border-left: 4px solid var(--dfms-success);
+}
+
+ul.messagelist li.warning {
+  background: var(--dfms-warning-bg);
+  color: var(--dfms-warning);
+  border-left: 4px solid var(--dfms-warning);
+}
+
+ul.messagelist li.error {
+  background: var(--dfms-danger-bg);
+  color: var(--dfms-danger);
+  border-left: 4px solid var(--dfms-danger);
+}
+
+/* ─── Login Page ──────────────────────────────────────────────────────────── */
+
+body.login {
+  background: var(--dfms-grey-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+body.login #header {
+  display: none;
+}
+
+body.login .main {
+  margin-left: 0 !important;
+}
+
+body.login .dfms-nav-sidebar {
+  display: none !important;
+}
+
+body.login #content-main {
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+body.login #container {
+  background: none;
+  min-width: unset;
+}
+
+body.login .login-card {
+  background: var(--dfms-card-bg);
+  border: 1px solid var(--dfms-grey-200);
+  border-radius: var(--dfms-radius-lg);
+  box-shadow: var(--dfms-shadow-md);
+  padding: 36px 40px 40px;
+  width: 100%;
+  max-width: 440px;
+}
+
+body.login .login-logo {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+body.login .login-logo .logo-mark {
+  width: 56px;
+  height: 56px;
+  background: transparent;
+  border-radius: var(--dfms-radius-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+
+body.login .login-logo .logo-mark span {
+  color: #fff;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+}
+
+body.login .login-logo .logo-mark .dfms-brand-mark,
+body.login .login-logo .logo-mark .dfms-brand-mark__img {
+  width: 56px;
+  height: 56px;
+}
+
+body.login .login-logo h1 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--dfms-grey-900);
+  margin: 0 0 6px 0;
+  line-height: 1.25;
+}
+
+body.login .login-logo .login-subtitle {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--dfms-grey-500);
+  margin: 0;
+}
+
+/* Optilogist lockup (O + wordmark) — theme-aware light/dark swap */
+.dfms-brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  width: min(220px, 78%);
+  height: auto;
+  max-height: 44px;
+}
+
+.dfms-brand-lockup__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 44px;
+  object-fit: contain;
+}
+
+.dfms-brand-lockup__img--dark {
+  display: none;
+}
+
+[data-theme="dark"] .dfms-brand-lockup__img--light {
+  display: none;
+}
+
+[data-theme="dark"] .dfms-brand-lockup__img--dark {
+  display: block;
+}
+
+body.login .form-row {
+  border: none;
+  padding: 0 0 16px 0;
+}
+
+body.login input[type="text"],
+body.login input[type="email"],
+body.login input[type="password"] {
+  width: 100%;
+  box-sizing: border-box;
+  height: 44px;
+  padding: 10px 14px;
+  font-size: 15px;
+  background: var(--dfms-grey-100) !important;
+  border-color: var(--dfms-grey-300) !important;
+  color: var(--dfms-grey-900) !important;
+}
+
+/* Generic password field wrapper (admin + portal-login pages) */
+.dfms-password-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.dfms-password-wrap input[type="password"],
+.dfms-password-wrap input[type="text"] {
+  padding-right: 40px !important; /* reserve space for suffix icon */
+}
+
+/* Hide Edge/IE native reveal so only our custom eye toggle shows */
+.dfms-password-wrap input[type="password"]::-ms-reveal,
+.dfms-password-wrap input[type="password"]::-ms-clear {
+  display: none;
+}
+
+.dfms-password-toggle {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--dfms-grey-500);
+  cursor: pointer;
+  padding: 0;
+  border-radius: 6px;
+}
+
+.dfms-password-wrap > .dfms-password-toggle {
+  position: absolute !important;
+  right: 6px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  display: inline-flex !important;
+  border: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  appearance: none;
+}
+
+.dfms-password-wrap--toggle-flush > .dfms-password-toggle {
+  right: 0 !important;
+}
+
+.dfms-password-wrap--toggle-flush input[type="password"],
+.dfms-password-wrap--toggle-flush input[type="text"] {
+  padding-right: 2px !important; /* only reserve the icon width */
+}
+
+.dfms-password-toggle:hover {
+  background: var(--dfms-grey-200);
+  color: var(--dfms-grey-700);
+}
+
+.dfms-password-toggle:focus-visible {
+  outline: 3px solid rgba(91,101,220,.35);
+  outline-offset: 2px;
+}
+
+body.login .submit-row {
+  background: none;
+  border: none;
+  padding: 8px 0 0 0;
+}
+
+body.login .submit-row input[type="submit"] {
+  width: 100%;
+  height: 44px;
+  font-size: 15px;
+  font-weight: 600;
+  justify-content: center;
+  border-radius: var(--dfms-radius-md);
+}
+
+body.login #content-main a {
+  color: var(--dfms-primary);
+  font-size: 13px;
+}
+
+/* ─── Dashboard ────────────────────────────────────────────────────────────── */
+
+.dfms-welcome-banner {
+  background: linear-gradient(135deg, var(--dfms-primary-dark) 0%, #1E2A5E 100%);
+  border-radius: var(--dfms-radius-md);
+  color: #fff;
+  padding: 24px 28px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.dfms-welcome-banner .welcome-text h2 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+}
+
+.dfms-welcome-banner .welcome-text p {
+  color: rgba(255,255,255,.75);
+  font-size: 14px;
+  margin: 0;
+}
+
+.dfms-welcome-banner .welcome-badge {
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: var(--dfms-radius-md);
+  padding: 10px 16px;
+  text-align: center;
+  min-width: 120px;
+}
+
+.dfms-welcome-banner .welcome-badge .badge-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,.65);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.dfms-welcome-banner .welcome-badge .badge-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* ─── Dashboard — stat cards & charts ────────────────────────────────────── */
+
+/* Override Django's hardcoded .dashboard #content { width: 600px } */
+.dashboard #content {
+  width: auto !important;
+  max-width: 100% !important;
+}
+
+.dashboard #content-main {
+  width: 100% !important;
+  float: none !important;
+}
+
+/* Stat card grid */
+.dfms-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 14px;
+}
+
+/* Individual stat card */
+.dfms-stat-card {
+  background: #fff;
+  border: 1px solid var(--dfms-grey-200);
+  border-radius: var(--dfms-radius-md);
+  padding: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  transition: box-shadow 0.15s;
+}
+
+.dfms-stat-card:hover {
+  box-shadow: var(--dfms-shadow-sm);
+}
+
+/* Icon circle */
+.dfms-stat-card__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--dfms-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.dfms-stat-card__icon--primary  { background: var(--dfms-primary-light); color: var(--dfms-primary); }
+.dfms-stat-card__icon--success  { background: #dcfce7; color: #16a34a; }
+.dfms-stat-card__icon--warning  { background: #fef3c7; color: #b45309; }
+.dfms-stat-card__icon--danger   { background: #fee2e2; color: #dc2626; }
+
+/* Value + label */
+.dfms-stat-card__body {
+  min-width: 0;
+}
+
+.dfms-stat-card__value {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--dfms-grey-900);
+  line-height: 1.1;
+  margin-bottom: 3px;
+}
+
+.dfms-stat-card__label {
+  font-size: 12px;
+  color: var(--dfms-grey-500);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Accent variants — left border colour */
+.dfms-stat-card--success { border-left: 3px solid #22c55e; }
+.dfms-stat-card--warning { border-left: 3px solid #f59e0b; }
+.dfms-stat-card--danger  { border-left: 3px solid #ef4444; }
+.dfms-stat-card--primary { border-left: 3px solid var(--dfms-primary); }
+.dfms-stat-card--info    { border-left: 3px solid #0ea5e9; }
+.dfms-stat-card--muted   { border-left: 3px solid var(--dfms-grey-300); }
+
+/* Clickable stat card (role dashboard widgets) */
+.dfms-stat-card--link {
+  color: inherit;
+  display: flex;
+}
+.dfms-stat-card--link:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+  transform: translateY(-1px);
+  transition: box-shadow 0.15s, transform 0.15s;
+  border-color: var(--dfms-primary);
+}
+
+/* Empty-state value (zero count) */
+.dfms-stat-card__value--empty {
+  font-size: 14px;
+  color: var(--dfms-grey-400);
+}
+
+/* icon colours for extra variants */
+.dfms-stat-card__icon--info    { background: #e0f2fe; color: #0369a1; }
+.dfms-stat-card__icon--muted   { background: var(--dfms-grey-100); color: var(--dfms-grey-500); }
+
+[data-theme="dark"] .dfms-stat-card--link:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,.4);
+}
+
+/* Chart row */
+.dfms-chart-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.dfms-chart-card {
+  background: #fff;
+  border: 1px solid var(--dfms-grey-200);
+  border-radius: var(--dfms-radius-md);
+  overflow: hidden;
+}
+
+.dfms-chart-card__header {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--dfms-grey-600);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--dfms-grey-100);
+  background: var(--dfms-grey-50);
+}
+
+.dfms-chart-card__body {
+  padding: 20px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Quick access section label */
+.dfms-dashboard-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--dfms-grey-400);
+  padding: 6px 0 10px;
+  border-top: 1px solid var(--dfms-grey-200);
+  margin-bottom: 8px;
+}
+
+/* ── Dark mode ── */
+[data-theme="dark"] .dfms-stat-card {
+  background: var(--dfms-grey-100);
+  border-color: var(--dfms-grey-200);
+}
+
+[data-theme="dark"] .dfms-stat-card__value {
+  color: var(--dfms-grey-900);
+}
+
+[data-theme="dark"] .dfms-stat-card__label {
+  color: var(--dfms-grey-500);
+}
+
+[data-theme="dark"] .dfms-stat-card__icon--primary { background: rgba(91,101,220,.2); }
+[data-theme="dark"] .dfms-stat-card__icon--success  { background: rgba(34,197,94,.15); }
+[data-theme="dark"] .dfms-stat-card__icon--warning  { background: rgba(245,158,11,.15); }
+[data-theme="dark"] .dfms-stat-card__icon--danger   { background: rgba(239,68,68,.15);  }
+
+[data-theme="dark"] .dfms-chart-card {
+  background: var(--dfms-grey-100);
+  border-color: var(--dfms-grey-200);
+}
+
+[data-theme="dark"] .dfms-chart-card__header {
+  background: var(--dfms-grey-200);
+  border-color: var(--dfms-grey-300);
+  color: var(--dfms-grey-700);
+}
+
+[data-theme="dark"] .dfms-dashboard-section-label {
+  color: var(--dfms-grey-500);
+  border-color: var(--dfms-grey-200);
+}
+
+/* ─── Section Block (used for Recent Activity on dashboard) ──────────────── */
+
+.dfms-section-block {
+  background: #fff;
+  border: 1px solid var(--dfms-grey-200);
+  border-radius: var(--dfms-radius-md);
+  overflow: hidden;
+}
+
+.dfms-section-block__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--dfms-grey-100);
+  background: var(--dfms-grey-50);
+}
+
+.dfms-section-block__title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--dfms-grey-600);
+}
+
+/* Activity list inside a section block */
+.dfms-activity-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dfms-activity-list__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 16px;
+  border-bottom: 1px solid var(--dfms-grey-100);
+  transition: background 0.12s;
+}
+
+.dfms-activity-list__item:last-child {
+  border-bottom: none;
+}
+
+.dfms-activity-list__item:hover {
+  background: var(--dfms-grey-50);
+}
+
+.dfms-activity-list__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--dfms-radius-sm);
+  flex-shrink: 0;
+  font-size: 11px;
+}
+
+.dfms-activity-list__badge--add    { background: var(--dfms-success-bg); color: var(--dfms-success); }
+.dfms-activity-list__badge--change { background: var(--dfms-primary-light); color: var(--dfms-primary); }
+.dfms-activity-list__badge--delete { background: var(--dfms-danger-bg); color: var(--dfms-danger); }
+
+.dfms-activity-list__body {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+}
+
+.dfms-activity-list__obj {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--dfms-grey-800);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+a.dfms-activity-list__obj:hover {
+  color: var(--dfms-primary);
+  text-decoration: underline;
+}
+
+.dfms-activity-list__type {
+  font-size: 11px;
+  color: var(--dfms-grey-400);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Dark mode */
+[data-theme="dark"] .dfms-section-block {
+  background: var(--dfms-grey-100);
+  border-color: var(--dfms-grey-200);
+}
+
+[data-theme="dark"] .dfms-section-block__header {
+  background: var(--dfms-grey-200);
+  border-color: var(--dfms-grey-300);
+}
+
+[data-theme="dark"] .dfms-activity-list__item {
+  border-color: var(--dfms-grey-200);
+}
+
+[data-theme="dark"] .dfms-activity-list__item:hover {
+  background: var(--dfms-grey-200);
+}
+
+[data-theme="dark"] .dfms-activity-list__obj {
+  color: var(--dfms-grey-800);
+}
+
+[data-theme="dark"] .dfms-activity-list__type {
+  color: var(--dfms-grey-500);
+}
+
+/* ─── Misc / Utilities ────────────────────────────────────────────────────── */
+
+/* Inline action links in changelist */
+.field-__str__ a,
+.changelink,
+.inlinechangelink {
+  color: var(--dfms-primary);
+  font-weight: 500;
+}
+
+/* Inline add links */
+.add-row a,
+.inlineaddlink {
+  color: var(--dfms-primary);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Calendar / clock popup shell — calendarbox look is fully owned below */
+.clockbox {
+  border: 1px solid var(--dfms-grey-200);
+  border-radius: var(--dfms-radius-md);
+  box-shadow: var(--dfms-shadow-md);
+}
+
+/* Related object action icons (+ / edit / x / eye).
+   Django already emits <img src="{% static 'admin/img/icon-*.svg' %}"> (S3 URL
+   in staging). Do not hide those images or remask via url("/static/...") —
+   /static/ hits the app origin and 404s when files live only on S3. */
+.related-widget-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.related-widget-wrapper-link {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--dfms-radius-sm);
+  color: var(--dfms-primary);
+  background: transparent;
+  transition: background 0.15s, color 0.15s;
+}
+
+.related-widget-wrapper-link img {
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+.related-widget-wrapper-link.delete-related {
+  color: var(--dfms-danger);
+}
+
+.related-widget-wrapper-link:hover {
+  background: var(--dfms-grey-100);
+}
+
+[data-theme="dark"] .related-widget-wrapper-link:hover {
+  background: var(--dfms-grey-200);
+}
+
+/* Caption / count labels */
+.table-caption-row,
+p.paginator {
+  font-size: 13px;
+  color: var(--dfms-grey-500);
+}
+
+/* ─── Responsive tweaks ────────────────────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  #content {
+    padding: 16px;
+  }
+
+  /* Changelist top actions (Import / Export / Add): stack cleanly on mobile. */
+  .change-list .dfms-page-header {
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .change-list .dfms-page-header__title,
+  .change-list .dfms-page-header__actions {
+    width: 100%;
+  }
+
+  .change-list .dfms-page-header__actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .change-list .dfms-inline-form {
+    display: block;
+    width: 100%;
+  }
+
+  .change-list .dfms-btn-add,
+  .change-list .dfms-btn-secondary,
+  .change-list .dfms-page-header__actions .button,
+  .change-list .dfms-page-header__actions button,
+  .change-list .dfms-page-header__actions a {
+    width: 100%;
+    min-height: 40px;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  /* Mobile forms: keep controls tappable and prevent cramped fields. */
+  body.add-form .aligned .form-row input[type="text"],
+  body.add-form .aligned .form-row input[type="email"],
+  body.add-form .aligned .form-row input[type="password"],
+  body.add-form .aligned .form-row input[type="number"],
+  body.add-form .aligned .form-row input[type="url"],
+  body.add-form .aligned .form-row input[type="tel"],
+  body.add-form .aligned .form-row input[type="date"],
+  body.add-form .aligned .form-row input[type="datetime-local"],
+  body.add-form .aligned .form-row input[type="time"],
+  body.add-form .aligned .form-row select,
+  body.add-form .aligned .form-row textarea,
+  body.change-form .aligned .form-row input[type="text"],
+  body.change-form .aligned .form-row input[type="email"],
+  body.change-form .aligned .form-row input[type="password"],
+  body.change-form .aligned .form-row input[type="number"],
+  body.change-form .aligned .form-row input[type="url"],
+  body.change-form .aligned .form-row input[type="tel"],
+  body.change-form .aligned .form-row input[type="date"],
+  body.change-form .aligned .form-row input[type="datetime-local"],
+  body.change-form .aligned .form-row input[type="time"],
+  body.change-form .aligned .form-row select,
+  body.change-form .aligned .form-row textarea,
+  body.add-form .aligned .form-row .vTextField,
+  body.add-form .aligned .form-row .vLargeTextField,
+  body.change-form .aligned .form-row .vTextField,
+  body.change-form .aligned .form-row .vLargeTextField {
+    width: calc(100% - 12px);
+    max-width: 100%;
+    min-height: 40px;
+    padding: 10px 12px;
+    margin: 0 6px;
+    box-sizing: border-box;
+  }
+
+  /* Keep labels/help/errors aligned with inset form controls. */
+  body.add-form .aligned .form-row label,
+  body.change-form .aligned .form-row label,
+  body.add-form .aligned .form-row .help,
+  body.change-form .aligned .form-row .help,
+  body.add-form .aligned .form-row .errorlist,
+  body.change-form .aligned .form-row .errorlist {
+    margin-left: 6px;
+  }
+
+  /* Align checkbox controls with the same left inset on mobile forms. */
+  body.add-form .aligned .form-row input[type="checkbox"],
+  body.change-form .aligned .form-row input[type="checkbox"] {
+    margin-left: 6px;
+    margin-right: 8px;
+  }
+
+  body.add-form .aligned .form-row .checkbox-row label,
+  body.change-form .aligned .form-row .checkbox-row label {
+    margin-left: 0;
+  }
+
+  body.add-form .aligned .form-row textarea,
+  body.change-form .aligned .form-row textarea,
+  body.add-form .aligned .form-row .vLargeTextField,
+  body.change-form .aligned .form-row .vLargeTextField {
+    min-height: 112px;
+  }
+
+  .dfms-welcome-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .submit-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  /* Mobile submit actions: full-width and consistent touch targets. */
+  .submit-row input[type="submit"],
+  .submit-row button,
+  .submit-row a,
+  .submit-row .dfms-btn-save,
+  .submit-row .dfms-btn-cancel {
+    width: 100%;
+    min-height: 40px;
+    margin: 0;
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* Cancel button uses auto margin on desktop; reset for mobile stacking. */
+  .submit-row .dfms-btn-cancel {
+    margin-left: 0;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DFMS Modern Sidebar
+   Design spec: 11-design-system/02-components/navigation.md
+   240px expanded / 64px icon-only collapsed
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Layout (supplementary) ──────────────────────────────────────────────── */
+
+/* The fixed sidebar takes no space in the normal flow, so .content fills all of .main */
+.main > .content {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: auto;
+}
+
+#content-related,
+#content-main {
+  float: none !important;
+  width: auto !important;
+}
+
+/* Hide Django's default recent-actions module & empty sidebar wrapper */
+#content-related #recent-actions-module,
+#content-related:empty {
+  display: none !important;
+}
+
+/* Ensure empty sidebar doesn't reserve space */
+.dashboard #content-related {
+  display: none;
+}
+
+/* Hide Django's default sidebar toggle button */
+.toggle-nav-sidebar,
+#toggle-nav-sidebar {
+  display: none !important;
+}
+
+/* Hide Django's own #nav-sidebar so only ours renders */
+.main > #nav-sidebar {
+  display: none !important;
+}
+
+/* ─── Sidebar Panel ───────────────────────────────────────────────────────── */
+
+.dfms-nav-sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  background: #fff;
+  border-right: 1px solid var(--dfms-grey-200);
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  /* No transition by default — JS adds .dfms-nav-sidebar--ready after load
+     so the initial paint is instant (no flash), transitions only after that */
+}
+
+/* Transitions enabled only after JS has initialised */
+.dfms-nav-sidebar.dfms-nav-sidebar--ready {
+  transition: width 0.22s ease, min-width 0.22s ease;
+}
+
+/* Collapsed state */
+.dfms-nav-sidebar.dfms-nav-sidebar--collapsed {
+  width: var(--sidebar-w-collapsed);
+  min-width: var(--sidebar-w-collapsed);
+}
+
+[data-theme="dark"] .dfms-nav-sidebar {
+  background: var(--dfms-grey-100);
+  border-color: var(--dfms-grey-200);
+}
+
+/* ─── Sidebar Toggle ──────────────────────────────────────────────────────────
+   The toggle button (.dfms-content-toggle) lives in .dfms-content-topbar,
+   at the top of the content area — not in the brand header.
+   No in-sidebar toggle button is rendered.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.dfms-dropdown-meta--poi {
+  color: var(--dfms-primary-dark);
+  background: var(--dfms-primary-light);
+  border-color: rgba(91, 101, 220, 0.25);
+}
+
+.dfms-dropdown-meta--poi-warn {
+  color: var(--dfms-warning);
+  background: var(--dfms-warning-bg);
+  border-color: rgba(217, 119, 6, 0.25);
+}
+
+.dfms-user-dropdown--with-poi {
+  width: 300px;
+}
+
+[data-theme="dark"] .dfms-dropdown-meta--poi {
+  color: #c7d2fe;
+  background: rgba(91, 101, 220, 0.18);
+  border-color: rgba(91, 101, 220, 0.35);
+}
+
+[data-theme="dark"] .dfms-dropdown-meta--poi-warn {
+  color: #fbbf24;
+  background: rgba(217, 119, 6, 0.15);
+  border-color: rgba(217, 119, 6, 0.35);
+}
+
+/* Working site select inside profile dropdown */
+.dfms-dropdown-poi {
+  padding: 4px 0;
+}
+
+.dfms-dropdown-poi__form {
+  margin: 0;
+  padding: 0;
+}
+
+.dfms-dropdown-poi__field {
+  padding: 10px 14px 12px;
+}
+
+.dfms-dropdown-poi__label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--dfms-grey-500);
+}
+
+.dfms-dropdown-poi__label .bi {
+  font-size: 12px;
+  color: var(--dfms-primary);
+}
+
+.dfms-dropdown-poi__badge {
+  margin-left: auto;
+  height: 18px;
+  padding: 2px 8px;
+  font-size: 10px;
+}
+
+.dfms-dropdown-poi__select-wrap {
+  position: relative;
+}
+
+.dfms-dropdown-poi__select-icon,
+.dfms-dropdown-poi__select-chevron {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--dfms-grey-400);
+}
+
+.dfms-dropdown-poi__select-icon {
+  left: 10px;
+  font-size: 14px;
+}
+
+.dfms-dropdown-poi__select-chevron {
+  right: 10px;
+  font-size: 11px;
+}
+
+.dfms-dropdown-poi__select {
+  width: 100%;
+  height: 36px;
+  padding: 0 30px 0 32px;
+  border: 1.5px solid var(--dfms-grey-200);
+  border-radius: var(--dfms-radius-sm);
+  font-size: 13px;
+  font-family: var(--dfms-font-sans);
+  font-weight: 500;
+  color: var(--dfms-grey-900);
+  background: var(--dfms-grey-50);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.dfms-dropdown-poi__select:hover {
+  border-color: var(--dfms-grey-300);
+}
+
+.dfms-dropdown-poi__select:focus {
+  outline: none;
+  border-color: var(--dfms-primary);
+  box-shadow: 0 0 0 2px rgba(91, 101, 220, 0.15);
+}
+
+.dfms-dropdown-poi--loading .dfms-dropdown-poi__select {
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+[data-theme="dark"] .dfms-dropdown-poi__select {
+  background: var(--dfms-grey-200);
+  border-color: var(--dfms-grey-300);
+  color: var(--dfms-grey-900);
+}
+
+[data-theme="dark"] .dfms-dropdown-poi__select:hover {
+  border-color: var(--dfms-grey-400);
+}
+
+/* ─── Search / Filter ─────────────────────────────────────────────────────── */
+
+.dfms-nav-search {
+  padding: 12px 12px 8px;
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+  transition: opacity 0.2s, height 0.22s;
+  height: 52px;
+}
+
+.dfms-nav-sidebar--collapsed .dfms-nav-search {
+  height: 0;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dfms-nav-search-icon {
+  position: absolute;
+  left: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--dfms-grey-400);
+  font-size: 13px;
+  pointer-events: none;
+}
+
+.dfms-nav-filter-input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 32px;
+  padding: 0 8px 0 30px;
+  border: 1.5px solid var(--dfms-grey-200);
+  border-radius: var(--dfms-radius-sm);
+  font-size: 13px;
+  font-family: var(--dfms-font-sans);
+  background: var(--dfms-grey-50);
+  color: var(--dfms-grey-900);
+  transition: border-color 0.15s;
+}
+
+.dfms-nav-filter-input:focus {
+  outline: none;
+  border-color: var(--dfms-primary);
+  box-shadow: 0 0 0 2px rgba(91,101,220,.15);
+}
+
+[data-theme="dark"] .dfms-nav-filter-input {
+  background: var(--dfms-grey-200);
+  border-color: var(--dfms-grey-300);
+  color: var(--dfms-grey-900);
+}
+
+/* ─── Scrollable body ─────────────────────────────────────────────────────── */
+
+.dfms-nav-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 4px 0 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--dfms-grey-400) transparent;
+}
+
+.dfms-nav-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.dfms-nav-body::-webkit-scrollbar-thumb {
+  background: var(--dfms-grey-400);
+  border-radius: 2px;
+}
+
+[data-theme="dark"] .dfms-nav-body {
+  scrollbar-color: var(--dfms-grey-500) transparent;
+}
+
+[data-theme="dark"] .dfms-nav-body::-webkit-scrollbar-thumb {
+  background: var(--dfms-grey-500);
+}
+
+/* ─── App Group ───────────────────────────────────────────────────────────── */
+
+.dfms-nav-group {
+  margin-bottom: 1px;
+}
+
+/* Group header button */
+.dfms-nav-group-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 10px 0 12px;
+  height: 36px;
+  font-family: var(--dfms-font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--dfms-grey-700);
+  text-align: left;
+  transition: background 0.12s, color 0.12s;
+  white-space: nowrap;
+  overflow: hidden;
+  border-radius: var(--dfms-radius-sm);
+  margin: 0 6px;
+  width: calc(100% - 12px);
+}
+
+.dfms-nav-group-header:hover {
+  background: var(--dfms-grey-50);
+  color: var(--dfms-grey-700);
+}
+
+[data-theme="dark"] .dfms-nav-group-header:hover {
+  background: var(--dfms-grey-200);
+}
+
+.dfms-nav-group-icon {
+  font-size: 16px;
+  color: var(--dfms-grey-500);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: 18px;
+  justify-content: center;
+  transition: color 0.12s;
+}
+
+.dfms-nav-group--active .dfms-nav-group-icon,
+.dfms-nav-group-header:hover .dfms-nav-group-icon {
+  color: var(--dfms-primary);
+}
+
+.dfms-nav-group-label {
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+}
+
+.dfms-nav-group-chevron {
+  font-size: 11px;
+  color: var(--dfms-grey-400);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+/* Rotate chevron when group is collapsed */
+.dfms-nav-group-header[aria-expanded="false"] .dfms-nav-group-chevron {
+  transform: rotate(-90deg);
+}
+
+/* ─── Model Items ─────────────────────────────────────────────────────────── */
+
+.dfms-nav-items {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 4px 0;
+  overflow: hidden;
+  transition: max-height 0.22s ease, opacity 0.18s ease;
+  max-height: 600px;
+  opacity: 1;
+}
+
+/* Collapsed group */
+.dfms-nav-items--hidden {
+  max-height: 0 !important;
+  opacity: 0;
+}
+
+/* In icon-only sidebar, show items as tooltips (handled via title attr) */
+.dfms-nav-sidebar--collapsed .dfms-nav-items {
+  max-height: 0 !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dfms-nav-item {
+  margin: 0 6px 1px;
+}
+
+/* Match parent group header color. Include :link/:visited so Django admin
+   default link colors (purple/blue) do not win on specificity. */
+.dfms-nav-link,
+.dfms-nav-link:link,
+.dfms-nav-link:visited {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* left pad: 12px group-margin + 16px icon-width + 8px gap = 36px visual indent */
+  padding: 0 10px 0 32px;
+  height: 32px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--dfms-grey-700);
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: background 0.1s, color 0.1s;
+  border-radius: var(--dfms-radius-sm);
+  position: relative;
+}
+
+.dfms-nav-link:hover {
+  background: var(--dfms-grey-100);
+  color: var(--dfms-grey-900);
+  text-decoration: none;
+}
+
+.dfms-nav-item--active .dfms-nav-link,
+.dfms-nav-item--active .dfms-nav-link:link,
+.dfms-nav-item--active .dfms-nav-link:visited,
+.dfms-nav-link[aria-current="page"],
+.dfms-nav-link[aria-current="page"]:link,
+.dfms-nav-link[aria-current="page"]:visited {
+  background: var(--dfms-primary-light);
+  color: var(--dfms-primary);
+  font-weight: 500;
+}
+
+/* Subtle left accent bar on active item — uses box-shadow so no padding shift */
+.dfms-nav-item--active .dfms-nav-link::before,
+.dfms-nav-link[aria-current="page"]::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  background: var(--dfms-primary);
+  border-radius: 0 2px 2px 0;
+}
+
+.dfms-nav-link--disabled {
+  color: var(--dfms-grey-300);
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Replace dot icon with a thin dash — less visual noise */
+.dfms-nav-item-dot {
+  display: none;
+}
+
+.dfms-nav-item-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: opacity 0.15s;
+  line-height: 1;
+}
+
+/* ─── Sidebar Footer ──────────────────────────────────────────────────────── */
+
+.dfms-nav-footer {
+  border-top: 1px solid var(--dfms-grey-200);
+  padding: 10px 14px;
+  flex-shrink: 0;
+  overflow: hidden;
+  transition: opacity 0.15s;
+}
+
+.dfms-nav-sidebar--collapsed .dfms-nav-footer {
+  opacity: 0;
+  height: 0;
+  padding: 0;
+  border: none;
+}
+
+.dfms-nav-footer-text {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--dfms-grey-400);
+  white-space: nowrap;
+}
+
+/* ─── Collapsed icon-only mode ────────────────────────────────────────────── */
+
+/* Group headers become 64px-wide centred icon buttons */
+.dfms-nav-sidebar--collapsed .dfms-nav-group-header {
+  justify-content: center;
+  padding: 0;
+  height: 44px;
+  width: var(--sidebar-w-collapsed);
+  min-width: var(--sidebar-w-collapsed);
+  overflow: visible;   /* let nothing clip the icon */
+  gap: 0;
+}
+
+.dfms-nav-sidebar--collapsed .dfms-nav-group-header:hover {
+  background: var(--dfms-grey-100);
+}
+
+[data-theme="dark"] .dfms-nav-sidebar--collapsed .dfms-nav-group-header:hover {
+  background: rgba(255,255,255,.07);
+}
+
+.dfms-nav-sidebar--collapsed .dfms-nav-group-icon {
+  font-size: 18px;
+  width: auto;
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.dfms-nav-sidebar--collapsed .dfms-nav-group--active .dfms-nav-group-icon,
+.dfms-nav-sidebar--collapsed .dfms-nav-group-header:hover .dfms-nav-group-icon {
+  color: var(--dfms-primary);
+}
+
+/* Hide label and chevron in collapsed mode (width:0 alone can still affect layout) */
+.dfms-nav-sidebar--collapsed .dfms-nav-group-label,
+.dfms-nav-sidebar--collapsed .dfms-nav-group-chevron {
+  display: none;
+}
+
+/* ─── Filter: hide non-matching items ─────────────────────────────────────── */
+
+.dfms-nav-item--hidden {
+  display: none;
+}
+
+.dfms-nav-group--all-hidden {
+  display: none;
+}
+
+/* ─── Adjust content area when sidebar is present ────────────────────────── */
+
+/* Override Django's default content float/width so it sits next to sidebar */
+#content-main {
+  float: none !important;
+  width: auto !important;
+}
+
+/* ─── Dark mode sidebar ───────────────────────────────────────────────────── */
+
+[data-theme="dark"] .dfms-nav-footer {
+  border-color: var(--dfms-grey-200);
+}
+
+[data-theme="dark"] .dfms-nav-items {
+  background: transparent;
+}
+
+/* ─── Responsive: hide sidebar on small screens ───────────────────────────── */
+
+@media (max-width: 767px) {
+  /* On mobile sidebar slides over content — no margin offset needed */
+  #header,
+  .main {
+    margin-left: 0 !important;
+  }
+
+  .dfms-nav-sidebar {
+    top: 0;
+    height: 100vh !important;
+    transform: translateX(-100%);
+    transition: transform 0.22s ease, width 0.22s ease;
+    box-shadow: var(--dfms-shadow-md);
+    width: var(--sidebar-w) !important;
+    min-width: var(--sidebar-w) !important;
+  }
+
+  .dfms-nav-sidebar.dfms-nav-sidebar--mobile-open {
+    transform: translateX(0);
+  }
+
+  .dfms-sidebar-close {
+    display: flex;
+  }
+
+  body.dfms-nav-drawer-open {
+    overflow: hidden;
+  }
+}
+
+/* ─── PR / TR Line Item Inline — wide table fix ──────────────────────────── */
+
+/*
+ * The PRLineItemInline and TRLineItemInline tables have many columns and
+ * overflow their container when Django Admin constrains the content area.
+ * Allow horizontal scroll on the fieldset wrapper and let each column
+ * breathe with a minimum width so text is never cropped.
+ */
+
+#line_items-group .tabular.inline-related,
+#tr_line_items-group .tabular.inline-related,
+#gate-on-demand-lines .tabular.inline-related {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--dfms-grey-400) transparent;
+}
+
+#line_items-group .tabular.inline-related::-webkit-scrollbar,
+#tr_line_items-group .tabular.inline-related::-webkit-scrollbar,
+#gate-on-demand-lines .tabular.inline-related::-webkit-scrollbar {
+  height: 4px;
+}
+
+#line_items-group .tabular.inline-related::-webkit-scrollbar-thumb,
+#tr_line_items-group .tabular.inline-related::-webkit-scrollbar-thumb,
+#gate-on-demand-lines .tabular.inline-related::-webkit-scrollbar-thumb {
+  background: var(--dfms-grey-400);
+  border-radius: 2px;
+}
+
+[data-theme="dark"] #line_items-group .tabular.inline-related,
+[data-theme="dark"] #tr_line_items-group .tabular.inline-related,
+[data-theme="dark"] #gate-on-demand-lines .tabular.inline-related {
+  scrollbar-color: var(--dfms-grey-500) transparent;
+}
+
+[data-theme="dark"] #line_items-group .tabular.inline-related::-webkit-scrollbar-thumb,
+[data-theme="dark"] #tr_line_items-group .tabular.inline-related::-webkit-scrollbar-thumb,
+[data-theme="dark"] #gate-on-demand-lines .tabular.inline-related::-webkit-scrollbar-thumb {
+  background: var(--dfms-grey-500);
+}
+
+#line_items-group .tabular.inline-related fieldset,
+#tr_line_items-group .tabular.inline-related fieldset,
+#gate-on-demand-lines .tabular.inline-related fieldset {
+  min-width: max-content;
+}
+
+/* Gate on-demand: .module { overflow:hidden } clips wide line tables — scroll the wrapper */
+#gate-on-demand-lines {
+  max-width: 100%;
+}
+
+#gate-on-demand-lines .tabular.inline-related {
+  max-width: 100%;
+  overflow-x: auto !important;
+  overflow-y: visible;
+}
+
+#gate-on-demand-lines .tabular.inline-related > fieldset.module {
+  overflow: visible !important;
+  min-width: max-content;
+}
+
+/* Column min-widths so content isn't truncated */
+#line_items-group table,
+#tr_line_items-group table {
+  table-layout: auto;
+  width: 100%;
+  min-width: 1100px;
+}
+
+#gate-on-demand-lines table {
+  table-layout: auto;
+  width: 100%;
+  min-width: 980px;
+}
+
+#line_items-group table th,
+#line_items-group table td,
+#tr_line_items-group table th,
+#tr_line_items-group table td,
+#gate-on-demand-lines table th,
+#gate-on-demand-lines table td {
+  white-space: nowrap;
+  padding: 6px 8px;
+  vertical-align: middle;
+  height: 100%;
+}
+
+/* Force all cells in a row to share the same height */
+#line_items-group table tr,
+#tr_line_items-group table tr,
+#gate-on-demand-lines table tr {
+  display: table-row;
+}
+
+/* Hide the hidden empty form template row used by Django inline JS */
+#line_items-group table tr.empty-form,
+#tr_line_items-group table tr.empty-form,
+#gate-on-demand-lines table tr.empty-form {
+  display: none !important;
+}
+
+/* Hide the object __str__ label column in inline rows */
+#line_items-group .original,
+#line_items-group td.original,
+#tr_line_items-group .original,
+#tr_line_items-group td.original,
+#documents-group .original,
+#documents-group td.original,
+[id^="line_items-"] td.original > p,
+[id^="tr_line_items-"] td.original > p {
+  display: none !important;
+}
+
+/* Center the inline-deletelink in line item rows */
+[id^="line_items-"] > td.delete,
+[id^="tr_line_items-"] > td.delete,
+#gate-on-demand-lines td.delete {
+  display: table-cell !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  padding: 0 8px !important;
+}
+
+[id^="line_items-"] > td.delete div,
+[id^="tr_line_items-"] > td.delete div,
+#gate-on-demand-lines td.delete div {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+  min-height: 36px !important;
+}
+
+[id^="line_items-"] > td.delete .inline-deletelink,
+[id^="tr_line_items-"] > td.delete .inline-deletelink,
+#gate-on-demand-lines td.delete .inline-deletelink {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Left-align "Add another" link in line item inlines */
+#line_items-group > div > fieldset > table > tbody > tr.add-row > td,
+#tr_line_items-group > div > fieldset > table > tbody > tr.add-row > td,
+#gate-on-demand-lines table > tbody > tr.add-row > td {
+  text-align: left !important;
+}
+
+
+/* Inputs and selects fill cell height uniformly */
+#line_items-group table td input,
+#line_items-group table td select,
+#line_items-group table td .select2-container,
+#tr_line_items-group table td input,
+#tr_line_items-group table td select,
+#gate-on-demand-lines table td input,
+#gate-on-demand-lines table td select {
+  box-sizing: border-box;
+  height: 36px;
+  line-height: 36px;
+  vertical-align: middle;
+}
+
+/* Readonly <p> tags align with input height */
+#line_items-group table td p.readonly,
+#tr_line_items-group table td p.readonly {
+  margin: 0;
+  padding: 0;
+  line-height: 36px;
+  height: 36px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Product searchable dropdown — room for [code] name — category — subcategory */
+#line_items-group .select2-container {
+  min-width: 220px;
+  max-width: 360px;
+}
+
+/* Readonly text fields — prevent over-shrinking */
+#line_items-group .readonly,
+#tr_line_items-group .readonly {
+  min-width: 80px;
+  display: inline-block;
+}
+
+/* Numeric input columns — keep compact */
+#line_items-group input[name$="-product_quantity"],
+#line_items-group input[name$="-weight_per_unit"],
+#tr_line_items-group input[name$="-quantity"] {
+  width: 90px;
+}
+
+/* UOM select */
+#line_items-group select[name$="-unit_of_measure"] {
+  width: 100px;
+}
+
+/* ─── Date / Time picker icons — Bootstrap Icons, styled to match sidebar nav icons ── */
+
+/* Remove Django's SVG background images from the span elements */
+.datetimeshortcuts .date-icon,
+.datetimeshortcuts .clock-icon {
+  background-image: none !important;
+  background: none !important;
+  overflow: visible !important;
+  width: 16px !important;
+  height: 16px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Inject Bootstrap Icon via ::before on the span */
+.datetimeshortcuts .date-icon::before,
+.datetimeshortcuts .clock-icon::before {
+  font-family: "bootstrap-icons" !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  font-size: 15px;
+  color: var(--dfms-grey-700, #374151);
+  transition: color 0.12s;
+}
+
+/* Calendar — bi-calendar3 */
+.datetimeshortcuts .date-icon::before {
+  content: "\f214" !important;
+}
+
+/* Clock — bi-clock */
+.datetimeshortcuts .clock-icon::before {
+  content: "\f293" !important;
+}
+
+/* Hover: match sidebar active/hover colour */
+.datetimeshortcuts a:hover .date-icon::before,
+.datetimeshortcuts a:focus .date-icon::before,
+.datetimeshortcuts a:hover .clock-icon::before,
+.datetimeshortcuts a:focus .clock-icon::before {
+  color: var(--dfms-primary, #5B65DC) !important;
+  background-position: unset !important;
+}
+
+/* ─── Hide Django's default clock popup (replaced by DFMS material picker) ─── */
+.clockbox {
+  display: none !important;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   DFMS date calendar — light card matching the product date-picker reference
+   Do NOT set display here: Django toggles inline display none/block. An
+   !important display would pin the popup open and break click-outside dismiss.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.calendarbox,
+.calendarbox.module {
+  background: #ffffff !important;
+  border: none !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.08),
+    0 12px 28px -4px rgba(0, 0, 0, 0.14) !important;
+  padding: 16px !important;
+  width: 336px !important;
+  height: 336px !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  z-index: 10050 !important;
+  font-family: var(--dfms-font-sans, Inter, system-ui, sans-serif) !important;
+  color: #111827 !important;
+}
+
+/* ── Header: outlined chevron buttons + dark month label ── */
+.calendarbox > div:first-child {
+  background: transparent !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 0 10px !important;
+  position: relative !important;
+  gap: 8px !important;
+  height: 42px !important;
+  box-sizing: border-box !important;
+}
+
+.calendarbox .calendarnav-previous,
+.calendarbox .calendarnav-next {
+  position: static !important;
+  background: #ffffff !important;
+  border: 1px solid #E5E7EB !important;
+  border-radius: 8px !important;
+  color: #6B7280 !important;
+  font-size: 14px !important;
+  width: 32px !important;
+  height: 32px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  transition: background 0.12s, border-color 0.12s !important;
+  flex-shrink: 0 !important;
+  line-height: 1 !important;
+  box-shadow: none !important;
+}
+
+.calendarbox .calendarnav-previous:hover,
+.calendarbox .calendarnav-next:hover {
+  background: #F9FAFB !important;
+  border-color: #D1D5DB !important;
+}
+
+.dfms-cal-month-label {
+  flex: 1 !important;
+  text-align: center !important;
+  color: #111827 !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.2 !important;
+  pointer-events: none !important;
+}
+
+/* ── Grid — open white field, no hairlines between days ── */
+.calendarbox .calendar {
+  padding: 0 !important;
+  background: transparent !important;
+  height: calc(336px - 16px - 16px - 42px) !important;
+  box-sizing: border-box !important;
+}
+
+.calendarbox .calendar table {
+  width: 100% !important;
+  height: 100% !important;
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+  table-layout: fixed !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+.calendarbox .calendar caption {
+  display: none !important;
+}
+
+.calendarbox .calendar tr {
+  background: transparent !important;
+  border: none !important;
+}
+
+.calendarbox .calendar th {
+  background: transparent !important;
+  color: #9CA3AF !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  padding: 2px 0 6px !important;
+  text-align: center !important;
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  width: calc(100% / 7) !important;
+  height: auto !important;
+}
+
+.calendarbox .calendar td {
+  padding: 2px 0 !important;
+  text-align: center !important;
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  width: calc(100% / 7) !important;
+  vertical-align: middle !important;
+  background: transparent !important;
+}
+
+.calendarbox .calendar td a,
+.calendarbox .calendar td .dfms-cal-outday {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 10px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+  box-sizing: border-box !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.calendarbox .calendar td a {
+  color: #111827 !important;
+  background: transparent !important;
+  transition: background 0.12s, color 0.12s !important;
+  position: relative !important;
+}
+
+.calendarbox .calendar td a:hover,
+.calendarbox .calendar td a:focus {
+  background: #F3F4F6 !important;
+  color: #111827 !important;
+}
+
+/* Past days — muted so they read as already gone (UAT color cue) */
+.calendarbox .calendar td.past a {
+  color: #9CA3AF !important;
+}
+
+.calendarbox .calendar td.past a:hover,
+.calendarbox .calendar td.past a:focus {
+  background: #F3F4F6 !important;
+  color: #6B7280 !important;
+}
+
+/* Adjacent month days (visual only) */
+.calendarbox .calendar td.nonday {
+  opacity: 1 !important;
+  background: transparent !important;
+}
+
+.calendarbox .calendar td .dfms-cal-outday {
+  color: #D1D5DB !important;
+  pointer-events: none !important;
+}
+
+/* Today — soft gray circle + dash under the number */
+.calendarbox .calendar td.today a {
+  background: #F3F4F6 !important;
+  border-radius: 50% !important;
+  color: #111827 !important;
+  font-weight: 500 !important;
+}
+
+.calendarbox .calendar td.today a::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 50% !important;
+  bottom: 6px !important;
+  width: 10px !important;
+  height: 2px !important;
+  margin-left: -5px !important;
+  background: #4B5563 !important;
+  border-radius: 1px !important;
+}
+
+/* Selected — solid blue rounded square */
+.calendarbox .calendar td.selected a,
+.calendarbox .calendar td.selected a:hover,
+.calendarbox .calendar td.selected a:focus {
+  background: #2F80ED !important;
+  border-radius: 10px !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+.calendarbox .calendar td.selected a::after,
+.calendarbox .calendar td.today.selected a::after {
+  display: none !important;
+}
+
+/* Reference card has no shortcut / cancel footer */
+.calendarbox .calendar-shortcuts,
+.calendarbox .calendar-cancel {
+  display: none !important;
+}
+
+/* ─── DFMS Material Time Picker ─── */
+#dfms-tp-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: transparent;
+}
+
+#dfms-tp-picker {
+  display: none;
+  position: absolute;
+  z-index: 9999;
+  width: 260px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.32);
+  background: var(--dfms-surface, #1e2030);
+  border: 1px solid var(--dfms-grey-200, #2a2d3e);
+  font-family: var(--dfms-font-sans, Inter, sans-serif);
+}
+
+/* Header */
+.dfms-tp-header {
+  background: var(--dfms-primary, #5B65DC);
+  padding: 16px 20px 12px;
+}
+
+.dfms-tp-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 4px;
+}
+
+.dfms-tp-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.dfms-tp-display {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* AM / PM toggle */
+.dfms-tp-ampm {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.dfms-tp-ampm-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.5);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+  line-height: 1;
+}
+
+.dfms-tp-ampm-btn.active {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+}
+
+.dfms-tp-ampm-btn:hover:not(.active) {
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.8);
+}
+
+.dfms-tp-hour,
+.dfms-tp-minute {
+  font-size: 40px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  padding: 0 4px;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+  line-height: 1;
+}
+
+.dfms-tp-hour.active,
+.dfms-tp-minute.active {
+  color: #fff;
+  background: rgba(255,255,255,0.15);
+}
+
+.dfms-tp-sep {
+  font-size: 40px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.7);
+  line-height: 1;
+}
+
+/* Clock face */
+.dfms-tp-clock {
+  padding: 16px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dfms-tp-face {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: var(--dfms-picker-face-bg, var(--dfms-grey-100));
+  cursor: pointer;
+}
+
+.dfms-tp-center {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--dfms-primary, #5B65DC);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.dfms-tp-hand {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  width: 2px;
+  height: 72px; /* fallback before JS measures */
+  margin-left: -1px;
+  transform-origin: bottom center;
+  background: var(--dfms-primary, #5B65DC);
+  border-radius: 3px 3px 0 0;
+  z-index: 1;
+  transition: transform 0.2s cubic-bezier(.4,0,.2,1);
+}
+
+/* Tip dot at the top of the hand */
+.dfms-tp-hand::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--dfms-primary, #5B65DC);
+}
+
+.dfms-tp-num {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--dfms-grey-700, #D1D5DB);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+  z-index: 3;
+}
+
+.dfms-tp-num--inner {
+  font-size: 11px;
+  width: 26px;
+  height: 26px;
+  color: var(--dfms-grey-500, #9CA3AF);
+}
+
+.dfms-tp-num:hover {
+  background: rgba(91,101,220,0.2);
+  color: #fff;
+}
+
+.dfms-tp-num.selected {
+  background: var(--dfms-primary, #5B65DC);
+  color: #fff;
+}
+
+/* Footer */
+.dfms-tp-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 8px 16px 14px;
+  border-top: 1px solid var(--dfms-grey-200, #2a2d3e);
+}
+
+.dfms-tp-btn {
+  padding: 6px 16px;
+  border-radius: 6px;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.dfms-tp-cancel {
+  background: transparent;
+  color: var(--dfms-grey-500, #9CA3AF);
+}
+
+.dfms-tp-cancel:hover {
+  background: var(--dfms-grey-100, #252838);
+  color: var(--dfms-grey-700, #D1D5DB);
+}
+
+.dfms-tp-ok {
+  background: var(--dfms-primary, #5B65DC);
+  color: #fff;
+}
+
+.dfms-tp-ok:hover {
+  background: var(--dfms-primary-hover, #4A53C4);
+}
+
+/* ── Select2 autocomplete — match admin input field style ── */
+.select2-container .select2-selection--multiple {
+  background: var(--dfms-input-bg, #181b2e) !important;
+  border: 1px solid var(--dfms-border, #2d3148) !important;
+  border-radius: 6px !important;
+  min-height: 36px !important;
+  padding: 2px 6px !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background: var(--dfms-primary-light, #1C2044) !important;
+  border: 1px solid var(--dfms-primary, #5B65DC) !important;
+  border-radius: 4px !important;
+  color: var(--dfms-text, #e2e4f0) !important;
+  font-size: 12px !important;
+  padding: 1px 6px !important;
+  margin: 3px 4px 3px 0 !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+  color: var(--dfms-grey-400, #9CA3AF) !important;
+  margin-right: 4px !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+  color: var(--dfms-danger, #F87171) !important;
+  background: transparent !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-search__field {
+  color: var(--dfms-text, #e2e4f0) !important;
+  background: transparent !important;
+}
+
+.select2-dropdown {
+  background: var(--dfms-card-bg, #1a1d30) !important;
+  border: 1px solid var(--dfms-border, #2d3148) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4) !important;
+}
+
+.select2-container--default .select2-results__option {
+  color: var(--dfms-text, #e2e4f0) !important;
+  font-size: 13px !important;
+  padding: 6px 10px !important;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background: var(--dfms-primary, #5B65DC) !important;
+  color: #fff !important;
+}
+
+.select2-container--default .select2-results__option[aria-selected=true] {
+  background: var(--dfms-primary-light, #1C2044) !important;
+  color: var(--dfms-primary, #5B65DC) !important;
+}
+
+.select2-search--dropdown .select2-search__field {
+  background: var(--dfms-input-bg, #181b2e) !important;
+  border: 1px solid var(--dfms-border, #2d3148) !important;
+  border-radius: 4px !important;
+  color: var(--dfms-text, #e2e4f0) !important;
+  padding: 5px 8px !important;
+  font-size: 13px !important;
+}
+
+.select2-container--focus .select2-selection--multiple {
+  border-color: var(--dfms-primary, #5B65DC) !important;
+  outline: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DFMS Trips (driver) — Enhanced Mobile Responsive Styles
+   ═══════════════════════════════════════════════════════════════════════════
+   
+   These styles ensure the Django Admin is fully usable on mobile devices,
+   especially for driver-facing operations where field staff access the system
+   via smartphones and tablets.
+   
+   Breakpoints:
+   - Mobile:  ≤ 640px  (portrait phones, common mobile devices)
+   - Tablet:  641-768px (landscape phones, small tablets)
+   - Desktop: > 768px   (standard admin layout)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Mobile Viewport: ≤ 640px ────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  /* ══ Layout & Spacing ══ */
+  
+  /* Reduce padding on main content area */
+  #content {
+    padding: 12px !important;
+  }
+  
+  /* Module/fieldset spacing */
+  .module,
+  fieldset {
+    margin-bottom: 1rem;
+  }
+  
+  /* ══ Typography ══ */
+  
+  body {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.625rem;
+  }
+  
+  h3 {
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* ══ Breadcrumbs ══ */
+  
+  .breadcrumbs,
+  .dfms-breadcrumbs {
+    padding: 0.75rem 12px;
+    font-size: 0.8125rem;
+  }
+  
+  /* ══ Page Headers ══ */
+  
+  .dfms-page-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+  }
+  
+  .dfms-page-header__title h1 {
+    font-size: 1.375rem;
+  }
+  
+  .dfms-page-header__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+  
+  /* ══ Buttons & Touch Targets ══ */
+  
+  /* All buttons should meet 44×44px iOS/Android guidelines */
+  .dfms-btn,
+  .dfms-btn-add,
+  .dfms-btn-save,
+  .dfms-btn-cancel,
+  .dfms-btn-secondary,
+  .dfms-btn-primary,
+  .button,
+  button[type="submit"],
+  input[type="submit"],
+  a.button {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0.625rem 1rem;
+    font-size: 0.9375rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  
+  /* Full-width buttons in headers/toolbars */
+  .dfms-page-header__actions .dfms-btn,
+  .dfms-page-header__actions .dfms-btn-add,
+  .dfms-page-header__actions .dfms-btn-secondary,
+  .dfms-page-header__actions .dfms-inline-form,
+  .dfms-page-header__actions .dfms-inline-form button,
+  .dfms-page-header__actions .button {
+    width: 100%;
+  }
+  
+  /* Submit row buttons stack vertically */
+  .submit-row {
+    display: flex;
+    flex-direction: column-reverse; /* Primary action at top */
+    gap: 0.625rem;
+    padding: 1rem 12px;
+  }
+  
+  .submit-row button,
+  .submit-row input[type="submit"],
+  .submit-row a {
+    width: 100%;
+    margin: 0;
+  }
+  
+  /* ══ Forms & Inputs ══ */
+  
+  /* All form inputs touch-friendly */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="url"],
+  input[type="tel"],
+  input[type="date"],
+  input[type="datetime-local"],
+  input[type="time"],
+  select,
+  textarea,
+  .vTextField,
+  .vLargeTextField {
+    min-height: 44px;
+    font-size: 1rem; /* Prevent iOS zoom on focus */
+    padding: 0.625rem 0.875rem;
+    border-radius: var(--dfms-radius-sm, 4px);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  textarea,
+  .vLargeTextField {
+    min-height: 100px;
+  }
+  
+  /* Form row labels */
+  .form-row label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    margin-bottom: 0.375rem;
+    display: block;
+  }
+  
+  /* Form row spacing */
+  .form-row {
+    margin-bottom: 1.125rem;
+  }
+  
+  /* Help text */
+  .help,
+  .helptext {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    margin-top: 0.375rem;
+  }
+  
+  /* ══ Tables ══ */
+  
+  /* For simple tables, maintain table layout but allow scroll */
+  #result_list {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Driver changelist scrolls inside .dfms-driver-changelist-scroll .results */
+  body.model-drivertransportorder.change-list .dfms-driver-changelist-scroll .results {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+  }
+  
+  /* Ensure table doesn't shrink below readable size */
+  #result_list table {
+    min-width: 100%;
+  }
+  
+  /* Table cells minimum padding for touch */
+  #result_list th,
+  #result_list td {
+    padding: 0.625rem 0.5rem;
+    font-size: 0.875rem;
+  }
+  
+  /* Action checkboxes larger touch target */
+  #result_list input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  
+  /* ══ Badges & Status Indicators ══ */
+  
+  .dfms-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.625rem;
+    white-space: nowrap;
+  }
+  
+  /* ══ Modals & Overlays ══ */
+  
+  /* Django's delete confirmation, etc. */
+  .deleteconfirm {
+    padding: 1rem;
+  }
+  
+  /* ══ Messages ══ */
+  
+  .messagelist li {
+    padding: 0.875rem 1rem;
+    font-size: 0.9375rem;
+  }
+  
+  /* ══ Fieldsets ══ */
+  
+  fieldset.module {
+    padding: 1rem;
+  }
+  
+  fieldset h2 {
+    font-size: 1.125rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  /* Description text under fieldset headers */
+  fieldset .description {
+    font-size: 0.8125rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+  }
+  
+  /* ══ Navigation Sidebar ══ */
+  
+  /* Ensure sidebar is fully accessible on mobile */
+  .dfms-nav-sidebar {
+    width: var(--sidebar-w) !important;
+    max-width: 85vw; /* Don't cover entire screen */
+  }
+  
+  /* Nav links — keep desktop density; don't inflate submenu row height */
+  .dfms-nav-group-header {
+    min-height: 40px;
+    height: auto;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .dfms-nav-link,
+  .dfms-nav-link:link,
+  .dfms-nav-link:visited {
+    min-height: 36px;
+    height: auto;
+    padding: 6px 10px 6px 32px;
+    font-size: 13px;
+    color: var(--dfms-grey-700);
+  }
+
+  .dfms-nav-item--active .dfms-nav-link,
+  .dfms-nav-item--active .dfms-nav-link:link,
+  .dfms-nav-item--active .dfms-nav-link:visited,
+  .dfms-nav-link[aria-current="page"],
+  .dfms-nav-link[aria-current="page"]:link,
+  .dfms-nav-link[aria-current="page"]:visited {
+    color: var(--dfms-primary);
+  }
+  
+  /* ══ Filters (changelist sidebar) ══ */
+  
+  #changelist-filter {
+    padding: 1rem;
+  }
+  
+  #changelist-filter h2,
+  #changelist-filter h3 {
+    font-size: 1rem;
+    margin-bottom: 0.625rem;
+  }
+  
+  #changelist-filter li {
+    padding: 0.5rem 0;
+  }
+  
+  #changelist-filter a {
+    padding: 0.375rem 0.5rem;
+    display: block;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* ══ Search ══ */
+  
+  #searchbar {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  #changelist-search {
+    margin-bottom: 1rem;
+  }
+  
+  #changelist-search input[type="text"] {
+    width: 100%;
+    min-height: 44px;
+    font-size: 1rem;
+  }
+  
+  /* ══ Pagination ══ */
+  
+  .paginator {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+  
+  .paginator a,
+  .paginator span {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+  }
+  
+  /* ══ Date/Time Pickers ══ */
+  
+  /* Ensure native pickers are accessible */
+  .datetimeshortcuts {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  .datetimeshortcuts a {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* ══ Inline Formsets ══ */
+  
+  /* Stack inline forms vertically */
+  .inline-related {
+    margin-bottom: 1rem;
+  }
+  
+  .inline-related h3 {
+    font-size: 1rem;
+    padding: 0.75rem;
+  }
+  
+  /* Tabular inlines: horizontal scroll */
+  .tabular.inline-related {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .tabular.inline-related table {
+    min-width: 600px;
+  }
+  
+  /* ══ Autocomplete (Select2) ══ */
+  
+  .select2-container {
+    font-size: 1rem;
+  }
+  
+  .select2-selection {
+    min-height: 44px !important;
+  }
+  
+  /* ══ User Tools Dropdown ══ */
+  
+  .dfms-user-dropdown {
+    right: 0;
+    width: calc(100vw - 2rem);
+    max-width: 320px;
+  }
+  
+  /* ══ Topbar ══ */
+  
+  #header {
+    padding: 0 12px;
+    height: 56px;
+  }
+  
+  .dfms-content-toggle {
+    width: 44px;
+    height: 44px;
+    font-size: 24px;
+  }
+  
+  /* ══ Readonly Fields ══ */
+  
+  .readonly {
+    font-size: 0.9375rem;
+    padding: 0.625rem 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* ─── Tablet Viewport: 641px - 768px ──────────────────────────────────────── */
+
+@media (min-width: 641px) and (max-width: 768px) {
+  /* Moderate spacing adjustments */
+  #content {
+    padding: 16px !important;
+  }
+  
+  /* Buttons can be slightly smaller but still touch-friendly */
+  .dfms-btn,
+  button,
+  input[type="submit"],
+  a.button {
+    min-height: 42px;
+  }
+  
+  /* Form inputs */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  select,
+  textarea {
+    min-height: 42px;
+    font-size: 0.9375rem;
+  }
+  
+  /* Two-column button layout where appropriate */
+  .dfms-page-header__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+  
+  /* Submit row can stay horizontal with spacing */
+  .submit-row {
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 0.75rem;
+  }
+  
+  .submit-row button,
+  .submit-row input[type="submit"],
+  .submit-row a {
+    width: auto;
+    min-width: 120px;
+  }
+}
+
+/* ─── Wide Tablet & Small Desktop: 769px - 1024px ─────────────────────────── */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Slight content area adjustment for optimal reading width */
+  #content {
+    padding: 20px;
+  }
+  
+  /* Ensure tables don't overflow */
+  #result_list {
+    overflow-x: auto;
+  }
+}
+
+/* ─── Mobile Landscape Optimization ───────────────────────────────────────── */
+
+@media (max-width: 896px) and (orientation: landscape) {
+  /* Reduce vertical spacing in landscape */
+  .module,
+  fieldset {
+    margin-bottom: 0.75rem;
+  }
+  
+  .form-row {
+    margin-bottom: 0.875rem;
+  }
+  
+  /* Compact header */
+  .dfms-page-header {
+    padding: 0.5rem 0;
+  }
+  
+  /* Shorter buttons vertically */
+  .dfms-btn,
+  button,
+  input[type="submit"] {
+    min-height: 40px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
+/* ─── Entity summary card (TR / Gate TO context) ─────────────────────────── */
+
+.to-tr-header {
+  background: var(--darkened-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin: 0.5rem 0 0;
+}
+
+.to-tr-header__number {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--dfms-primary);
+  margin: 0 0 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.to-tr-header__number .bi {
+  margin-right: 0.35rem;
+}
+
+.to-tr-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.5rem 1.5rem;
+  font-size: 0.82rem;
+}
+
+.to-tr-meta__item strong {
+  display: block;
+  font-size: 0.73rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--body-quiet-color);
+  margin-bottom: 0.15rem;
+}
+
+.to-tr-meta__item span {
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.to-tr-header--empty .to-tr-header__number span,
+.to-tr-header--empty .to-tr-meta__item span {
+  color: var(--body-quiet-color);
+  font-weight: 500;
+}
+
+/* Gate-in add: placeholder until TO selected */
+.gate-to-summary-placeholder {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  margin: 0.5rem 0 0;
+  padding: 0.9rem 1.1rem;
+  border: 1px dashed var(--border-color);
+  border-radius: 8px;
+  background: var(--body-quiet-bg, var(--darkened-bg));
+  color: var(--body-quiet-color);
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.gate-to-summary-placeholder .bi {
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+  font-size: 1.1rem;
+  color: var(--dfms-primary);
+  opacity: 0.85;
+}
+
+.gate-to-summary-placeholder--loading .bi {
+  animation: gate-summary-spin 0.75s linear infinite;
+}
+
+@keyframes gate-summary-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.gate-to-summary-placeholder--hidden,
+.gate-to-summary--hidden {
+  display: none !important;
+}
+
+/* Gate visit card — enhanced when visible */
+.gate-to-summary.to-tr-header--populated {
+  border-left: 3px solid var(--dfms-primary);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--dfms-primary) 10%, transparent);
+  animation: gate-summary-in 0.28s ease-out;
+}
+
+.gate-to-summary .to-tr-header__number {
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding-bottom: 0.65rem;
+  margin-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.gate-to-summary .to-tr-meta {
+  gap: 0.85rem 1.25rem;
+}
+
+.gate-to-summary .to-tr-meta__item--wide {
+  grid-column: span 2;
+}
+
+@media (max-width: 720px) {
+  .gate-to-summary .to-tr-meta__item--wide {
+    grid-column: span 1;
+  }
+}
+
+@keyframes gate-summary-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.gate-to-summary__warning {
+  margin: 0 0 0.75rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 6px;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.gate-to-summary__warning[hidden] {
+  display: none !important;
+}
+
+[data-theme="dark"] .gate-to-summary__warning {
+  background: color-mix(in srgb, #f59e0b 22%, var(--body-bg));
+  color: #fcd34d;
+}
+
+/* ─── Print Styles ────────────────────────────────────────────────────────── */
+
+@media print {
+  /* Hide navigation, controls, actions when printing */
+  .dfms-nav-sidebar,
+  #header,
+  .breadcrumbs,
+  .submit-row,
+  .dfms-page-header__actions,
+  .object-tools,
+  .actions {
+    display: none !important;
+  }
+  
+  /* Ensure content uses full page width */
+  #content {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  .main {
+    margin-left: 0 !important;
+  }
+  
+  /* Tables fit to page */
+  #result_list table {
+    width: 100%;
+    font-size: 10pt;
+  }
+}
+
+/* ═══ End Mobile Responsive Styles ═══ */
+
+/* ─── QC Checkpoint v3 (QC Queue + Add QC) ─────────────────────────────── */
+
+.qc-queue-help {
+  margin: 0 0 1rem;
+  max-width: 72ch;
+  color: var(--dfms-grey-600);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.qc-queue-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.qc-queue-detail-page {
+  max-width: 1100px;
+}
+
+.qc-queue-detail-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.qc-queue-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin: 12px 16px 8px;
+}
+
+.qc-queue-detail-meta__item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.qc-queue-detail-meta__item strong {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--dfms-grey-500);
+}
+
+.qc-queue-detail-page .qc-to-details-panel {
+  margin: 0 16px 16px;
+}
+
+.qc-queue-detail-samples {
+  margin: 0 16px 16px;
+}
+
+.qc-queue-sample-readonly {
+  min-width: 860px !important;
+  table-layout: auto !important;
+}
+
+.qc-queue-sample-readonly td {
+  vertical-align: top;
+  font-size: 13px;
+}
+
+.qc-queue-sample-readonly .qc-col-analysis,
+.qc-queue-sample-readonly .qc-col-remarks {
+  max-width: 220px;
+  word-break: break-word;
+}
+
+.qc-add-qc-page .dfms-page-header {
+  margin-bottom: 1rem;
+}
+
+/* .module { overflow:hidden } clips wide sample table — allow scroll wrapper to work */
+.qc-add-qc-page .qc-samples-fieldset {
+  overflow: visible;
+  padding-bottom: 16px;
+}
+
+.qc-add-qc-page .qc-samples-fieldset > .help,
+.qc-add-qc-page .qc-samples-fieldset > .errorlist,
+.qc-add-qc-page .qc-samples-fieldset > .qc-sample-table-scroll,
+.qc-add-qc-page .qc-samples-fieldset > .qc-sample-toolbar {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.qc-add-qc-page .qc-samples-fieldset h2 {
+  border-radius: var(--dfms-radius-md) var(--dfms-radius-md) 0 0;
+}
+
+.qc-add-qc-page .qc-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.qc-alert-banner {
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--dfms-radius-sm);
+  background: var(--dfms-warning-bg);
+  border: 1px solid rgba(217, 119, 6, 0.35);
+  color: var(--dfms-grey-700);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.qc-alert-banner__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 0.25rem;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dfms-warning);
+}
+
+.qc-to-details-panel {
+  padding: 0.25rem 0;
+}
+
+.qc-to-details-panel .grp-table {
+  margin-top: 0;
+}
+
+.qc-to-details-panel .help {
+  margin: 0;
+}
+
+.qc-to-field-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px 16px;
+}
+
+.qc-auto-pass-btn {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.qc-auto-pass-btn[disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.qc-to-field-row .form-row {
+  flex: 1 1 280px;
+  margin: 0;
+}
+
+.qc-to-field-row .form-row label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: var(--dfms-grey-700);
+}
+
+.qc-to-field-row .form-row select {
+  width: 100%;
+  max-width: 420px;
+}
+
+.qc-sample-table-scroll {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  overflow-x: auto !important;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--dfms-grey-400) transparent;
+  margin-top: 0.5rem;
+  border: 1px solid var(--dfms-grey-200);
+  border-radius: var(--dfms-radius-sm);
+  background: var(--dfms-card-bg, #fff);
+}
+
+.qc-sample-table-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.qc-sample-table-scroll::-webkit-scrollbar-thumb {
+  background: var(--dfms-grey-400);
+  border-radius: 3px;
+}
+
+[data-theme="dark"] .qc-sample-table-scroll {
+  border-color: var(--dfms-grey-300);
+  scrollbar-color: var(--dfms-grey-500) transparent;
+}
+
+[data-theme="dark"] .qc-sample-table-scroll::-webkit-scrollbar-thumb {
+  background: var(--dfms-grey-500);
+}
+
+.qc-sample-table {
+  width: 100%;
+  min-width: 980px;
+  table-layout: fixed;
+  margin: 0;
+  border-collapse: collapse;
+  border: none;
+  font-size: 13px;
+}
+
+.qc-sample-table col.qc-col-index { width: 40px; }
+.qc-sample-table col.qc-col-analysis { width: 180px; }
+.qc-sample-table col.qc-col-remarks { width: 150px; }
+.qc-sample-table col.qc-col-moisture { width: 88px; }
+.qc-sample-table col.qc-col-side { width: 112px; }
+.qc-sample-table col.qc-col-photo { width: 148px; }
+.qc-sample-table col.qc-col-decision { width: 104px; }
+.qc-sample-table col.qc-col-failed { width: 108px; }
+.qc-sample-table col.qc-col-actions { width: 56px; }
+
+.qc-sample-table thead th {
+  background: var(--dfms-grey-50);
+  color: var(--dfms-grey-600);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--dfms-grey-200);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.qc-sample-table tbody td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--dfms-grey-200);
+  vertical-align: top;
+}
+
+.qc-sample-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.qc-sample-table th.num,
+.qc-sample-table td.num {
+  text-align: right;
+}
+
+.qc-sample-table textarea,
+.qc-sample-table .qc-sample-textarea,
+.qc-sample-table .vLargeTextField {
+  display: block;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  min-height: 52px !important;
+  height: 52px;
+  max-height: 120px;
+  margin: 0 !important;
+  padding: 6px 8px !important;
+  resize: vertical;
+  box-sizing: border-box;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.qc-sample-table input[type="number"],
+.qc-sample-table input[type="text"],
+.qc-sample-table select {
+  display: block;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  min-height: 34px;
+  height: 34px;
+  margin: 0 !important;
+  padding: 4px 8px !important;
+  box-sizing: border-box;
+  font-size: 13px;
+}
+
+.qc-sample-table input[type="file"] {
+  display: block;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0;
+  font-size: 12px;
+  box-sizing: border-box;
+}
+
+.qc-sample-table .qc-sample-index {
+  text-align: center;
+  vertical-align: middle;
+  color: var(--dfms-grey-500);
+  font-weight: 600;
+}
+
+.qc-sample-table .qc-sample-row-actions {
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.qc-sample-table .qc-sample-remove-btn {
+  padding: 0.2rem 0.45rem;
+}
+
+.qc-sample-table thead th.qc-col-failed {
+  display: none;
+}
+
+.qc-sample-table.qc-show-failed-qty thead th.qc-col-failed {
+  display: table-cell;
+}
+
+.qc-sample-table .qc-col-failed.is-hidden {
+  display: none;
+}
+
+.qc-sample-table .errorlist {
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 11px;
+}
+
+.qc-sample-toolbar button[disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.qc-sample-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 0.75rem;
+}
+
+[data-theme="dark"] .qc-sample-table thead th {
+  background: var(--dfms-grey-100);
+  border-color: var(--dfms-grey-300);
+  color: var(--dfms-grey-600);
+}
+
+[data-theme="dark"] .qc-sample-table tbody td {
+  border-color: var(--dfms-grey-300);
+}
+
+.qc-action-confirm-page {
+  max-width: 640px;
+}
+
+.qc-action-confirm-page .qc-action-confirm__to {
+  margin: 0 0 1rem;
+  padding: 10px 14px;
+  border-radius: var(--dfms-radius-sm);
+  background: var(--dfms-grey-50);
+  border: 1px solid var(--dfms-grey-200);
+  font-size: 14px;
+}
+
+.qc-action-confirm-page .qc-action-confirm__to strong {
+  color: var(--dfms-grey-800);
+}
+
+[data-theme="dark"] .qc-alert-banner {
+  color: var(--dfms-grey-600);
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+[data-theme="dark"] .qc-action-confirm-page .qc-action-confirm__to {
+  background: var(--dfms-grey-100);
+  border-color: var(--dfms-grey-200);
+}
+

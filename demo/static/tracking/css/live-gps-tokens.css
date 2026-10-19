@@ -1,0 +1,202 @@
+/* Live GPS design tokens, shared surfaces, and motion. Load first. */
+
+html.live-gps-active {
+  --lg-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Inter", "Helvetica Neue", Arial, sans-serif;
+  --lg-accent: #0a84ff;
+  --lg-accent-strong: #0064d2;
+  --lg-accent-soft: rgba(10, 132, 255, 0.10);
+  --lg-ink: #1d1d1f;
+  --lg-ink-2: #56565c;
+  --lg-ink-3: #98989d;
+  --lg-green: #22c55e;
+  --lg-amber: #f5a623;
+  --lg-red: #ff453a;
+  --lg-surface: rgba(255, 255, 255, 0.78);
+  --lg-surface-strong: rgba(255, 255, 255, 0.94);
+  --lg-surface-border: rgba(255, 255, 255, 0.62);
+  --lg-surface-inset: rgba(255, 255, 255, 0.45);
+  --lg-hairline: rgba(0, 0, 0, 0.06);
+  --lg-shadow-lg: 0 24px 60px rgba(15, 23, 42, 0.18), 0 2px 10px rgba(15, 23, 42, 0.07);
+  --lg-shadow-md: 0 14px 36px rgba(15, 23, 42, 0.14), 0 2px 8px rgba(15, 23, 42, 0.06);
+  --lg-shadow-sm: 0 4px 16px rgba(15, 23, 42, 0.10);
+  --lg-radius-lg: 18px;
+  --lg-radius-md: 13px;
+  --lg-radius-sm: 9px;
+  --lg-panel-layout-duration: 0.34s;
+  --lg-panel-layout-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --lg-shell-bg: #dfe5ea;
+  --lg-control-hover: #fff;
+  --lg-card-bg: #fff;
+  --lg-card-border: #e5e7eb;
+  --lg-muted-fill: rgba(0, 0, 0, 0.055);
+  --lg-muted-fill-hover: rgba(0, 0, 0, 0.08);
+  --lg-chart-bg: #ffffff;
+  --lg-chart-grid: #f1f5f9;
+  --lg-chart-label: #64748b;
+  --lg-chart-fill-fade: rgba(255, 255, 255, 0);
+  --lg-chart-dot-stroke: #ffffff;
+  --lg-seek-rail: #e2e8f0;
+}
+
+/* Admin dark theme — Live GPS surfaces inherit these tokens. */
+html.live-gps-active[data-theme="dark"] {
+  --lg-accent: #3b82f6;
+  --lg-accent-strong: #60a5fa;
+  --lg-accent-soft: rgba(59, 130, 246, 0.22);
+  --lg-ink: #f5f5f7;
+  --lg-ink-2: #d4d4d8;
+  --lg-ink-3: #a1a1aa;
+  --lg-green: #4ade80;
+  --lg-amber: #fbbf24;
+  --lg-red: #f87171;
+  /* Opaque panels — frosted white glass + light ink = unreadable in dark mode. */
+  --lg-surface: #161929;
+  --lg-surface-strong: #1c2034;
+  --lg-surface-border: rgba(255, 255, 255, 0.12);
+  --lg-surface-inset: rgba(255, 255, 255, 0.04);
+  --lg-hairline: rgba(255, 255, 255, 0.10);
+  --lg-shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.55), 0 2px 10px rgba(0, 0, 0, 0.35);
+  --lg-shadow-md: 0 14px 36px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.28);
+  --lg-shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --lg-shell-bg: #0b0d14;
+  --lg-control-hover: rgba(255, 255, 255, 0.10);
+  --lg-card-bg: #1e2438;
+  --lg-card-border: rgba(255, 255, 255, 0.12);
+  --lg-muted-fill: rgba(255, 255, 255, 0.10);
+  --lg-muted-fill-hover: rgba(255, 255, 255, 0.14);
+  --lg-chart-bg: #12151f;
+  --lg-chart-grid: rgba(255, 255, 255, 0.08);
+  --lg-chart-label: #c4c4cc;
+  --lg-chart-fill-fade: rgba(18, 21, 31, 0);
+  --lg-chart-dot-stroke: #1c2034;
+  --lg-seek-rail: rgba(255, 255, 255, 0.16);
+}
+
+.live-gps-objects,
+.live-gps-history,
+.live-gps-follow,
+.live-gps-panel,
+.live-gps-obj-menu,
+.live-gps-objects__filter-menu,
+.live-gps-history-device-field__menu,
+.live-gps-toolbar,
+.live-gps-date-modal__dialog {
+  background: var(--lg-surface);
+  -webkit-backdrop-filter: blur(22px) saturate(1.9);
+  backdrop-filter: blur(22px) saturate(1.9);
+  border: 1px solid var(--lg-surface-border);
+  box-shadow: var(--lg-shadow-md), inset 0 0 0 0.5px var(--lg-surface-inset);
+  color: var(--lg-ink);
+}
+
+/* Hard override: do not keep light glass panels when admin is dark. */
+html.live-gps-active[data-theme="dark"] .live-gps-objects,
+html.live-gps-active[data-theme="dark"] .live-gps-history,
+html.live-gps-active[data-theme="dark"] .live-gps-follow,
+html.live-gps-active[data-theme="dark"] .live-gps-panel,
+html.live-gps-active[data-theme="dark"] .live-gps-obj-menu,
+html.live-gps-active[data-theme="dark"] .live-gps-objects__filter-menu,
+html.live-gps-active[data-theme="dark"] .live-gps-history-device-field__menu,
+html.live-gps-active[data-theme="dark"] .live-gps-toolbar,
+html.live-gps-active[data-theme="dark"] .live-gps-date-modal__dialog,
+html.live-gps-active[data-theme="dark"] .live-gps-command-modal__dialog {
+  background: var(--lg-surface);
+  color: var(--lg-ink);
+  border-color: var(--lg-surface-border);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+@keyframes live-gps-history-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes live-gps-history-hint-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes live-gps-obj-speed-change {
+  0% { opacity: 1; color: var(--lg-ink-2); }
+  35% { opacity: 0.45; color: var(--lg-ink); }
+  100% { opacity: 1; color: var(--lg-ink-2); }
+}
+
+@keyframes live-gps-obj-dot-change {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+@keyframes lg-pulse-green {
+  0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.45); }
+  70% { box-shadow: 0 0 0 7px rgba(34, 197, 94, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+
+@keyframes lg-card-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes lg-tab-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live-gps-history-card--enter,
+  .live-gps-history-modal__hint--enter {
+    animation: none;
+  }
+  .live-gps-obj__speed-val.is-changing,
+  .live-gps-obj__speed-dot.is-changing {
+    animation: none;
+  }
+  .live-gps-obj__dot {
+    transition: none;
+  }
+  .live-gps-obj__menu-btn {
+    transition: none;
+  }
+  .live-gps-obj:hover .live-gps-obj__menu-btn,
+  .live-gps-obj.menu-open .live-gps-obj__menu-btn {
+    transform: none;
+  }
+  .live-gps-obj__dot--moving,
+  .live-gps-obj__speed-dot--moving,
+  .live-gps-toolbar__dot--live {
+    animation: none;
+  }
+  .live-gps-poi-pin {
+    transition: none;
+  }
+  .live-gps-history-modal:not(.is-hidden),
+  .live-gps-objects__list:not(.is-hidden),
+  .live-gps-follow,
+  .live-gps-history:not(.is-hidden) {
+    animation: none;
+  }
+  .live-gps-objects,
+  .live-gps-dock-wrap,
+  .live-gps-history:not(.is-hidden) {
+    transition: none !important;
+  }
+}
+
+.live-gps-follow,
+.live-gps-history:not(.is-hidden) {
+  animation: lg-card-in 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.live-gps-history-modal:not(.is-hidden),
+.live-gps-objects__list:not(.is-hidden) {
+  animation: lg-tab-in 0.22s ease-out both;
+}

@@ -1,0 +1,2063 @@
+<!DOCTYPE html>
+
+<html lang="en-us" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="static/demo/demo-shim.css?v=mv5a1jhl">
+<script src="static/demo/api-data.js?v=mv5a1jhl"></script>
+<script src="static/demo/demo-shim.js?v=mv5a1jhl"></script>
+<script src="static/demo/master-seed.js?v=mv5a1jhl"></script>
+<script src="static/demo/master-crud.js?v=mv5a1jhl"></script>
+<title>Change user | Demo Agro Ltd Admin</title>
+<link rel="stylesheet" href="static/admin/css/base.css">
+
+
+  <link rel="stylesheet" href="static/admin/css/nav_sidebar.css">
+  <script src="static/admin/js/nav_sidebar.js" defer></script>
+
+<link rel="stylesheet" href="static/admin/css/forms.css">
+
+
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+
+
+<link rel="icon" href="favicon.ico?v=2" sizes="32x32">
+<link rel="icon" href="static/brand/optilogist/svg/favicon.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="static/brand/optilogist/png/apple-touch-icon.png?v=2">
+<link rel="stylesheet" href="static/admin/css/custom.css">
+
+<script>
+  (function(){
+    var t = localStorage.getItem('dfms-admin-theme');
+    if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+    // Keep native date/time picker icons visible: match DFMS theme, not OS preference alone.
+    document.documentElement.style.colorScheme = t === 'dark' ? 'dark' : 'light';
+
+    var collapsed = localStorage.getItem('dfms-sidebar-collapsed') === 'true';
+    var mobile    = window.innerWidth < 768;
+    if (collapsed && !mobile) {
+      document.documentElement.setAttribute('data-sidebar-collapsed', 'true');
+    }
+  })();
+</script>
+
+<script src="static/admin/js/dfms_theme.js" defer></script>
+
+<script src="static/admin/js/dfms_sidebar.js" defer></script>
+
+<script src="static/admin/js/dfms_actions.js" defer></script>
+
+<script src="static/js/password_toggle.js" defer></script>
+
+<script src="static/admin/js/dfms_timepicker.js" defer></script>
+
+<script src="static/admin/js/dfms_labels.js" defer></script>
+
+
+<script src="static/admin/jsi18n.js"></script>
+<link href="static/admin/css/vendor/select2/select2.min.css" media="all" rel="stylesheet">
+<link href="static/admin/css/role_checklist_grid.css" media="all" rel="stylesheet">
+<script src="static/admin/js/vendor/jquery/jquery.min.js"></script>
+<script src="static/admin/js/dfms_poi_select2.js"></script>
+<script src="static/admin/js/calendar.js"></script>
+<script src="static/admin/js/jquery.init.js"></script>
+<script src="static/admin/js/admin/DateTimeShortcuts.js"></script>
+<script src="static/admin/js/core.js"></script>
+<script src="static/admin/js/admin/RelatedObjectLookups.js"></script>
+<script src="static/admin/js/actions.js"></script>
+<script src="static/admin/js/urlify.js"></script>
+<script src="static/admin/js/prepopulate.js"></script>
+<script src="static/admin/js/vendor/xregexp/xregexp.min.js"></script>
+
+
+
+
+<script>
+(function () {
+  var roleMap = {"425f510c-1779-43e4-bc8f-108a37ae290d": {"id": "425f510c-1779-43e4-bc8f-108a37ae290d", "role_code": "tenant_admin", "role_name": "Tenant Admin", "department": "administration", "department_label": "Administration (tenant admin)"}, "850e5173-e3ca-4788-b8f6-78dd24f9ecf7": {"id": "850e5173-e3ca-4788-b8f6-78dd24f9ecf7", "role_code": "depot_officer", "role_name": "Depot Officer", "department": "depot_feed_mill_commercial", "department_label": "Depot / Feed Mill / Commercial"}, "5388bc76-ddec-4404-9b45-61c1bcf301f7": {"id": "5388bc76-ddec-4404-9b45-61c1bcf301f7", "role_code": "feed_mill_officer", "role_name": "Feed Mill Officer", "department": "depot_feed_mill_commercial", "department_label": "Depot / Feed Mill / Commercial"}, "7fedf88e-6a7d-47d6-ae0d-b44e5fbf09cc": {"id": "7fedf88e-6a7d-47d6-ae0d-b44e5fbf09cc", "role_code": "poi_admin", "role_name": "POI-Admin", "department": "operations", "department_label": "Operations"}, "498b46a5-cb93-4551-bb40-8fc5a30659c8": {"id": "498b46a5-cb93-4551-bb40-8fc5a30659c8", "role_code": "commercial_officer", "role_name": "Commercial Officer", "department": "depot_feed_mill_commercial", "department_label": "Depot / Feed Mill / Commercial"}, "02a82909-1580-4c99-98dc-6a66d4485f30": {"id": "02a82909-1580-4c99-98dc-6a66d4485f30", "role_code": "procurement_officer", "role_name": "Procurement Officer", "department": "procurement", "department_label": "Procurement"}, "35116a94-3758-4be6-8016-2e33b9419760": {"id": "35116a94-3758-4be6-8016-2e33b9419760", "role_code": "distribution_officer", "role_name": "Distribution Officer (DO)", "department": "distribution", "department_label": "Distribution"}, "9b007b66-055e-49f6-be0b-ad617b3ea19c": {"id": "9b007b66-055e-49f6-be0b-ad617b3ea19c", "role_code": "distribution_manager", "role_name": "Distribution Manager (DM)", "department": "distribution", "department_label": "Distribution"}, "82e35454-9122-436f-8483-9776dd4f9294": {"id": "82e35454-9122-436f-8483-9776dd4f9294", "role_code": "transport_planner", "role_name": "Transport Planner (TP)", "department": "transport", "department_label": "Transport"}, "9c7d923b-fddd-4920-9973-e692e82599a2": {"id": "9c7d923b-fddd-4920-9973-e692e82599a2", "role_code": "tdo_vendor_fleet", "role_name": "Transport Distribution Officer (TDO) \u2013 Vendor Fleet", "department": "transport", "department_label": "Transport"}, "fe344cb5-1fa5-4aa8-92a1-870b5adf8ec1": {"id": "fe344cb5-1fa5-4aa8-92a1-870b5adf8ec1", "role_code": "command_center_officer", "role_name": "Command Center Officer", "department": "operations", "department_label": "Operations"}, "5d47cdc7-fd64-4f1d-b743-f8c103d8c1c2": {"id": "5d47cdc7-fd64-4f1d-b743-f8c103d8c1c2", "role_code": "gateman", "role_name": "Gateman", "department": "gate_operations", "department_label": "Gate Operations"}, "b65aa882-1e05-433b-af31-30b90f4a0142": {"id": "b65aa882-1e05-433b-af31-30b90f4a0142", "role_code": "scaling_operator", "role_name": "Scaling Operator", "department": "scaling_weight", "department_label": "Scaling / Weight"}, "33ce46f3-4240-466d-b506-3f7c4179d10e": {"id": "33ce46f3-4240-466d-b506-3f7c4179d10e", "role_code": "loading_personnel", "role_name": "Loading Personnel", "department": "operations", "department_label": "Operations"}, "0c9bc89c-8e42-41e3-b9b4-9cbba625e83c": {"id": "0c9bc89c-8e42-41e3-b9b4-9cbba625e83c", "role_code": "unloading_personnel", "role_name": "Unloading Personnel", "department": "operations", "department_label": "Operations"}, "31211600-8777-4731-b3fe-7fc00cad2be9": {"id": "31211600-8777-4731-b3fe-7fc00cad2be9", "role_code": "qc_inspector_physical", "role_name": "QC Inspector \u2013 Physical", "department": "qa_qc", "department_label": "QA / QC"}, "16db9cd5-9263-4abc-acba-60ed80b4c8d1": {"id": "16db9cd5-9263-4abc-acba-60ed80b4c8d1", "role_code": "qa_lab_technician", "role_name": "QA Lab Technician", "department": "qa_qc", "department_label": "QA / QC"}, "e366c0c7-4fe2-483a-b3f1-55456682797e": {"id": "e366c0c7-4fe2-483a-b3f1-55456682797e", "role_code": "driver_supervisor", "role_name": "Driver Supervisor", "department": "operations", "department_label": "Operations"}, "2e855839-31e1-47a4-86e6-6f4fe6adc3a9": {"id": "2e855839-31e1-47a4-86e6-6f4fe6adc3a9", "role_code": "account_officer", "role_name": "Account Officer", "department": "costing_finance", "department_label": "Costing & Finance"}};
+  var poiScopedRoles = ["command_center_officer", "depot_officer", "feed_mill_officer", "gateman", "loading_personnel", "poi_admin", "qc_inspector_physical", "scaling_operator", "unloading_personnel"];
+  // roleId -> "id_poi_role_<roleId>" for every POI-scoped role in the
+  // catalog (AC-5). Each dropdown is moved inline next to its role's
+  // checkbox and only shown once that checkbox is checked.
+  var poiRoleFieldMap = {"fe344cb5-1fa5-4aa8-92a1-870b5adf8ec1": "id_poi_role_fe344cb5-1fa5-4aa8-92a1-870b5adf8ec1", "850e5173-e3ca-4788-b8f6-78dd24f9ecf7": "id_poi_role_850e5173-e3ca-4788-b8f6-78dd24f9ecf7", "5388bc76-ddec-4404-9b45-61c1bcf301f7": "id_poi_role_5388bc76-ddec-4404-9b45-61c1bcf301f7", "5d47cdc7-fd64-4f1d-b743-f8c103d8c1c2": "id_poi_role_5d47cdc7-fd64-4f1d-b743-f8c103d8c1c2", "33ce46f3-4240-466d-b506-3f7c4179d10e": "id_poi_role_33ce46f3-4240-466d-b506-3f7c4179d10e", "7fedf88e-6a7d-47d6-ae0d-b44e5fbf09cc": "id_poi_role_7fedf88e-6a7d-47d6-ae0d-b44e5fbf09cc", "31211600-8777-4731-b3fe-7fc00cad2be9": "id_poi_role_31211600-8777-4731-b3fe-7fc00cad2be9", "b65aa882-1e05-433b-af31-30b90f4a0142": "id_poi_role_b65aa882-1e05-433b-af31-30b90f4a0142", "0c9bc89c-8e42-41e3-b9b4-9cbba625e83c": "id_poi_role_0c9bc89c-8e42-41e3-b9b4-9cbba625e83c"};
+  function fieldRow(el) {
+    if (!el) return null;
+    return el.closest(".form-row") || el.closest("div.field-" + el.id.replace(/^id_/, "")) || el.parentNode;
+  }
+  function roleCheckboxes() {
+    return Array.prototype.slice.call(document.querySelectorAll('input[name="role"]'));
+  }
+  function selectedRoleIds() {
+    return roleCheckboxes().filter(function (cb) { return cb.checked; }).map(function (cb) { return cb.value; });
+  }
+  // Grid cell for a role checkbox. Django 5 has no <li> — parent of the
+  // input is the <label>, so walk up to #id_role > div, not the label.
+  function roleCell(rid) {
+    var checkbox = document.querySelector('input[name="role"][value="' + rid + '"]');
+    if (!checkbox) return null;
+    var root = document.getElementById("id_role");
+    var node = checkbox.parentNode;
+    while (node && node !== root) {
+      if (node.parentNode === root) return node;
+      node = node.parentNode;
+    }
+    return checkbox.closest("li") || checkbox.parentNode;
+  }
+  // AC-5: move each role's Site (POI) field under that role's checkbox cell,
+  // stacked below the label — never inside the <label> (that overlaps the
+  // other grid column).
+  function inlinePoiFields() {
+    Object.keys(poiRoleFieldMap).forEach(function (rid) {
+      var field = document.getElementById(poiRoleFieldMap[rid]);
+      var row = fieldRow(field);
+      var cell = roleCell(rid);
+      if (!field || !row || !cell) return;
+      if (row.parentNode !== cell) {
+        cell.appendChild(row);
+      }
+    });
+  }
+  function updateUserDept() {
+    var selectedIds = selectedRoleIds();
+    var deptIn = document.getElementById("id_department");
+    var seen = {};
+    var items = [];
+    selectedIds.forEach(function (rid) {
+      var info = roleMap[rid] || {};
+      var slug = info.department || "";
+      if (!slug || seen[slug]) return;
+      seen[slug] = true;
+      items.push(info.department_label || slug.replace(/_/g, " "));
+    });
+    items.sort(function (a, b) {
+      var al = a.toLowerCase();
+      var bl = b.toLowerCase();
+      if (al < bl) return -1;
+      if (al > bl) return 1;
+      return 0;
+    });
+    if (deptIn) deptIn.value = items.join(", ");
+
+    var fallbackNeeded = false;
+    selectedIds.forEach(function (rid) {
+      var info = roleMap[rid] || {};
+      if (poiScopedRoles.indexOf(info.role_code || "") === -1) return;
+      var fieldId = poiRoleFieldMap[rid];
+      var cell = roleCell(rid);
+      if (cell) cell.classList.add("dfms-role-has-sites");
+      if (fieldId) {
+        var field = document.getElementById(fieldId);
+        var row = fieldRow(field);
+        if (field && row) {
+          row.style.display = "";
+          field.removeAttribute("required");
+        }
+      } else {
+        fallbackNeeded = true;
+      }
+    });
+    // Hide per-role fields for roles no longer selected.
+    Object.keys(poiRoleFieldMap).forEach(function (rid) {
+      if (selectedIds.indexOf(rid) !== -1) return;
+      var field = document.getElementById(poiRoleFieldMap[rid]);
+      var row = fieldRow(field);
+      var cell = roleCell(rid);
+      if (cell) cell.classList.remove("dfms-role-has-sites");
+      if (field && row) {
+        row.style.display = "none";
+        field.removeAttribute("required");
+      }
+    });
+    var fallbackField = document.getElementById("id_operational_poi");
+    var fallbackRow = fieldRow(fallbackField);
+    if (fallbackField && fallbackRow) {
+      fallbackRow.style.display = fallbackNeeded ? "" : "none";
+      fallbackField.removeAttribute("required");
+    }
+  }
+  function bootUserRoleUi() {
+    inlinePoiFields();
+    if (typeof window.dfmsInitPoiSelect2 === "function") {
+      window.dfmsInitPoiSelect2();
+    }
+    roleCheckboxes().forEach(function (cb) { cb.addEventListener("change", updateUserDept); });
+    updateUserDept();
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bootUserRoleUi);
+  } else {
+    bootUserRoleUi();
+  }
+})();
+</script>
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/admin/css/responsive.css">
+    
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+<body class=" app-users model-user change-form"
+  data-admin-utc-offset="21600">
+<a href="#content-start" class="skip-to-content-link">Skip to main content</a>
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    
+      <header id="header">
+        <div id="branding">
+        
+        </div>
+        
+
+<div id="dfms-topbar-tools">
+
+  
+  <button
+    id="dfms-sidebar-toggle"
+    class="dfms-content-toggle"
+    aria-label="Toggle sidebar"
+    title="Collapse sidebar"
+    type="button"
+  >
+    <i class="bi bi-list"></i>
+  </button>
+
+  
+  <div style="flex:1;"></div>
+
+  
+  <div class="dfms-topbar-right">
+
+    
+    <button
+      id="dfms-theme-toggle"
+      class="dfms-topbar-icon-btn"
+      title="Switch theme"
+      aria-label="Switch theme"
+      type="button"
+    >
+      <i class="toggle-icon bi bi-moon"></i>
+    </button>
+
+    
+    
+    
+    <div class="dfms-user-menu" id="dfms-user-menu">
+      <button
+        class="dfms-user-avatar-btn"
+        aria-haspopup="true"
+        aria-expanded="false"
+        aria-controls="dfms-user-dropdown"
+        type="button"
+        id="dfms-user-avatar-btn"
+      >
+        
+        <span class="dfms-avatar" aria-hidden="true"> DA </span>
+        <span class="dfms-user-name">Demo Admin</span>
+        <i class="bi bi-chevron-down dfms-user-chevron"></i>
+      </button>
+
+      
+      <div class="dfms-user-dropdown dfms-user-dropdown--with-poi" id="dfms-user-dropdown" role="menu" aria-labelledby="dfms-user-avatar-btn">
+
+        
+        <div class="dfms-dropdown-header">
+          <div class="dfms-dropdown-header__avatar"> DA </div>
+          <div class="dfms-dropdown-header__info">
+            <span class="dfms-dropdown-name">Demo Admin</span>
+            
+            <span class="dfms-dropdown-email">admin@example.com</span>
+            
+            
+              
+              
+              <span class="dfms-dropdown-meta">
+                <i class="bi bi-person-badge"></i>
+                Tenant Admin
+              </span>
+              
+              
+            
+            
+            <span class="dfms-dropdown-meta">
+              <i class="bi bi-diagram-3"></i>
+              Administration (tenant admin)
+            </span>
+            
+            
+            
+            <span class="dfms-dropdown-meta dfms-dropdown-meta--poi-warn">
+              <i class="bi bi-exclamation-circle"></i>
+              No site selected
+            </span>
+            
+            
+            
+            
+            <span class="dfms-dropdown-meta">
+              <i class="bi bi-building"></i>
+              Demo Agro Ltd
+            </span>
+            
+            
+          </div>
+        </div>
+
+        
+
+
+        
+
+<div class="dfms-dropdown-divider"></div>
+<div class="dfms-dropdown-poi" id="dfms-poi-profile">
+  <form
+    method="post"
+    action="#" data-demo-form="1"
+    id="dfms-poi-switcher-form"
+    class="dfms-dropdown-poi__form"
+  >
+    <input type="hidden" name="csrfmiddlewaretoken" value="demo">
+    <input type="hidden" name="next" value="/admin/users/user/e6109ae0-ffff-42b7-ab09-6ba8c451d6d3/change/">
+
+    <div class="dfms-dropdown-poi__field">
+      <label for="dfms-poi-select" class="dfms-dropdown-poi__label">
+        <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
+        Working site
+        
+        <span class="dfms-badge dfms-badge--warning dfms-dropdown-poi__badge">Required</span>
+        
+      </label>
+
+      <div class="dfms-dropdown-poi__select-wrap">
+        <i class="bi bi-building dfms-dropdown-poi__select-icon" aria-hidden="true"></i>
+        <select
+          name="poi_id"
+          id="dfms-poi-select"
+          class="dfms-dropdown-poi__select"
+          aria-label="Select working site"
+          onchange="this.form.submit()"
+        >
+          <option value="" selected>
+            Select a site…
+          </option>
+          
+          <option
+            value="6f1c2c64-97d6-4d2a-9768-9f13b2129737"
+            
+          >Barishal Aquaculture Site</option>
+          
+          <option
+            value="1dd0e4ae-98dd-4d1c-8673-1b330130cfc1"
+            
+          >Barishal Green Field Farm</option>
+          
+          <option
+            value="3f8e8b11-b539-4595-90cf-bccea625b61b"
+            
+          >Barishal Production Unit</option>
+          
+          <option
+            value="1dd20b37-df96-46aa-b27a-92dd38053fe7"
+            
+          >Bhola Vendor Office</option>
+          
+          <option
+            value="2e5b71e9-d800-4fce-a921-a09dcd6e3758"
+            
+          >Bhola Waste Management Unit</option>
+          
+          <option
+            value="b267f13b-8731-44d5-b045-59613974ef7a"
+            
+          >Bhaluka Hub</option>
+          
+          <option
+            value="521b59c5-95cc-433d-9fc0-71658c3c17de"
+            
+          >Bhola Hub</option>
+          
+          <option
+            value="4019a94e-c5c2-4f80-b643-adfc7c1dd1ce"
+            
+          >Chittagong Hub</option>
+          
+          <option
+            value="5a77b607-c6b7-4e3b-a277-1534fe7e6a4e"
+            
+          >Chittagong Hub</option>
+          
+          <option
+            value="314c4410-eef7-41d9-a44d-4dbeb909f8ea"
+            
+          >Chottogram Hub</option>
+          
+        </select>
+        <i class="bi bi-chevron-down dfms-dropdown-poi__select-chevron" aria-hidden="true"></i>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="dfms-dropdown-divider"></div>
+
+
+
+        
+        
+        <a href="#" data-demo-missing="1" class="dfms-dropdown-item" role="menuitem">
+          <i class="bi bi-key"></i>
+          Change password
+        </a>
+        
+
+        <div class="dfms-dropdown-divider"></div>
+
+        <form id="logout-form" method="post" action="#" data-demo-form="1">
+          <input type="hidden" name="csrfmiddlewaretoken" value="demo">
+          <button type="submit" class="dfms-dropdown-item dfms-dropdown-item--danger" role="menuitem">
+            <i class="bi bi-box-arrow-right"></i>
+            Log out
+          </button>
+        </form>
+        <script>
+        (function () {
+          var form = document.getElementById("logout-form");
+          if (!form) return;
+          form.addEventListener("submit", function () {
+            var match = document.cookie.split("; ").find(function (row) {
+              return row.indexOf("csrftoken=") === 0;
+            });
+            if (!match) return;
+            var token = decodeURIComponent(match.split("=").slice(1).join("="));
+            var input = form.querySelector('input[name="csrfmiddlewaretoken"]');
+            if (token && input) input.value = token;
+          });
+        })();
+        </script>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+        
+      </header>
+    
+    <!-- END Header -->
+    
+    
+
+    <div class="main" id="main">
+      
+        
+  
+
+<nav id="dfms-nav-sidebar" class="dfms-nav-sidebar" aria-label="Sidebar">
+
+  
+  <div class="dfms-sidebar-brand">
+    <a href="admin.html" class="dfms-sidebar-brand-link" aria-label="Home">
+      <div class="dfms-sidebar-logo-mark">
+        
+
+<span class="dfms-brand-mark" aria-hidden="true">
+  <img
+    class="dfms-brand-mark__img dfms-brand-mark__img--light"
+    src="static/brand/optilogist/svg/mark-light.svg"
+    alt=""
+    width="32"
+    height="32"
+    decoding="async"
+  >
+  <img
+    class="dfms-brand-mark__img dfms-brand-mark__img--dark"
+    src="static/brand/optilogist/svg/mark-dark.svg"
+    alt=""
+    width="32"
+    height="32"
+    decoding="async"
+  >
+</span>
+
+      </div>
+      <div class="dfms-sidebar-brand-text">
+        <span class="dfms-sidebar-brand-name">Optilogist</span>
+        <span class="dfms-sidebar-brand-sub">Demo Agro Ltd Admin</span>
+      </div>
+    </a>
+    
+    <button
+      type="button"
+      id="dfms-sidebar-close"
+      class="dfms-sidebar-close"
+      aria-label="Close menu"
+      title="Close menu"
+    >
+      <i class="bi bi-x-lg" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  
+  <div class="dfms-nav-search">
+    <i class="bi bi-search dfms-nav-search-icon"></i>
+    <input
+      type="search"
+      id="dfms-nav-filter"
+      class="dfms-nav-filter-input"
+      placeholder="Filter…"
+      aria-label="Filter navigation items"
+      autocomplete="off"
+    >
+  </div>
+
+  
+  <div class="dfms-nav-body" id="dfms-nav-body">
+
+    
+    
+    
+      
+        <div class="dfms-nav-group" data-app="portal-overview">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-overview"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-speedometer2"></i>
+            </span>
+            <span class="dfms-nav-group-label">Overview</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="dashboard">
+                <a href="admin.html" class="dfms-nav-link" data-nav-id="dashboard">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Dashboard</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-requisition">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-requisition"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-clipboard-check"></i>
+            </span>
+            <span class="dfms-nav-group-label">Requisition</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="finished goods">
+                <a href="admin_requisitions_productrequisition.html" class="dfms-nav-link" data-nav-id="requisition_fg">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Finished Goods</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-port-shipments">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-port-shipments"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-box-seam"></i>
+            </span>
+            <span class="dfms-nav-group-label">Port Shipments</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="port shipments">
+                <a href="admin_requisitions_portshipmentproxy.html" class="dfms-nav-link" data-nav-id="port_shipments">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Port Shipments</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-distribution">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-distribution"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-arrow-right-circle"></i>
+            </span>
+            <span class="dfms-nav-group-label">Distribution</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="product requisitions">
+                <a href="admin_requisitions_productrequisition_pr_type_FINISHED_GOODS.html" class="dfms-nav-link" data-nav-id="distribution_pr_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Product requisitions</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="transport requests">
+                <a href="admin_requisitions_transportrequisition_tr_type_FG.html" class="dfms-nav-link" data-nav-id="distribution_transport_requests">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Transport requests</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-procurement">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-procurement"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-box-arrow-in-right"></i>
+            </span>
+            <span class="dfms-nav-group-label">Procurement</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="port shipments">
+                <a href="admin_requisitions_portshipmentproxy.html" class="dfms-nav-link" data-nav-id="procurement_port_shipments">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Port Shipments</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="transport requests">
+                <a href="admin_requisitions_transportrequisition_tr_type_PORT_CONSIGNMENT.html" class="dfms-nav-link" data-nav-id="procurement_transport_requests">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Transport requests</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-transport">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-transport"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-truck"></i>
+            </span>
+            <span class="dfms-nav-group-label">Transport</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="live gps">
+                <a href="admin_tracking_live_gps.html" class="dfms-nav-link" data-nav-id="live_gps">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Live GPS</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="transport requests">
+                <a href="admin_requisitions_transportrequisition.html" class="dfms-nav-link" data-nav-id="transport_requests">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Transport requests</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="transport orders">
+                <a href="admin_transport_transportorder.html" class="dfms-nav-link" data-nav-id="transport_orders">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Transport orders</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="vehicle planning">
+                <a href="admin_transport_vehicle_planning.html" class="dfms-nav-link" data-nav-id="vehicle_planning">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicle planning</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="bids management">
+                <a href="admin_vendors_biddingsession.html" class="dfms-nav-link" data-nav-id="bids_management">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Bids management</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-master-data">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-master-data"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-database"></i>
+            </span>
+            <span class="dfms-nav-group-label">Master Data</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="points of interest">
+                <a href="admin_master_data_poi.html" class="dfms-nav-link" data-nav-id="pois">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Points of Interest</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="loading/unloading points">
+                <a href="admin_master_data_loadingunloadingpoint.html" class="dfms-nav-link" data-nav-id="loading_unloading_points">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Loading/Unloading Points</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="vehicle brands">
+                <a href="admin_master_data_brand.html" class="dfms-nav-link" data-nav-id="vehicle_brands">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicle Brands</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="vehicles">
+                <a href="admin_master_data_vehicle.html" class="dfms-nav-link" data-nav-id="vehicles">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicles</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="helpers">
+                <a href="admin_users_helper.html" class="dfms-nav-link" data-nav-id="helpers">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Helpers</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="dealers">
+                <a href="admin_master_data_dealer.html" class="dfms-nav-link" data-nav-id="dealers">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Dealers</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="suppliers">
+                <a href="admin_master_data_supplier.html" class="dfms-nav-link" data-nav-id="suppliers">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Suppliers</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="product categories">
+                <a href="admin_master_data_productcategory.html" class="dfms-nav-link" data-nav-id="product_categories">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Product Categories</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="product sub-category">
+                <a href="admin_master_data_productsubcategory.html" class="dfms-nav-link" data-nav-id="product_sub_categories">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Product Sub-category</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="products">
+                <a href="admin_master_data_product.html" class="dfms-nav-link" data-nav-id="products">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Products</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-gate">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-gate"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-door-open"></i>
+            </span>
+            <span class="dfms-nav-group-label">Gate</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="vehicle entry (gate-in)">
+                <a href="admin_operations_gatein_add.html" class="dfms-nav-link" data-nav-id="gate_in">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicle Entry (Gate-In)</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="vehicle exit (gate-out)">
+                <a href="admin_operations_gateout_add.html" class="dfms-nav-link" data-nav-id="gate_out">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicle Exit (Gate-Out)</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="active visits">
+                <a href="admin_operations_gatevisitsession_status_exact_active.html" class="dfms-nav-link" data-nav-id="gate_active_visits">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Active Visits</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="visit history">
+                <a href="admin_operations_gatevisitsession.html" class="dfms-nav-link" data-nav-id="gate_visit_history">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Visit History</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="on-demand to">
+                <a href="admin_operations_gateondemandtorequest.html" class="dfms-nav-link" data-nav-id="gate_on_demand_to">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">On-Demand TO</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-command-center">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-command-center"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-speedometer2"></i>
+            </span>
+            <span class="dfms-nav-group-label">Command Center</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="queue">
+                <a href="admin_operations_queueentry_status_exact_waiting.html" class="dfms-nav-link" data-nav-id="cc_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Queue</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="bay assignments">
+                <a href="admin_operations_bayassignment.html" class="dfms-nav-link" data-nav-id="cc_bay_assignments">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Bay Assignments</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="waiting serials">
+                <a href="admin_operations_waitingserial.html" class="dfms-nav-link" data-nav-id="cc_waiting_serials">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Waiting Serials</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-loading">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-loading"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-box-arrow-up"></i>
+            </span>
+            <span class="dfms-nav-group-label">Loading</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="load events">
+                <a href="admin_operations_loadevent.html" class="dfms-nav-link" data-nav-id="ld_load_events">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Load Events</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="start loading">
+                <a href="admin_operations_loadevent_add.html" class="dfms-nav-link" data-nav-id="ld_new_load_event">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Start Loading</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-unloading">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-unloading"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-box-arrow-down"></i>
+            </span>
+            <span class="dfms-nav-group-label">Unloading</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="unload events">
+                <a href="admin_operations_unloadevent.html" class="dfms-nav-link" data-nav-id="ld_unload_events">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Unload Events</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="start unloading">
+                <a href="admin_operations_unloadevent_add.html" class="dfms-nav-link" data-nav-id="ld_new_unload_event">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Start Unloading</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-qc-checkpoint">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-qc-checkpoint"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-clipboard2-pulse"></i>
+            </span>
+            <span class="dfms-nav-group-label">QC Checkpoint</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="qc queue">
+                <a href="admin_quality_qcqueuetransportorder.html" class="dfms-nav-link" data-nav-id="qc_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">QC Queue</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-scaling">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-scaling"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-speedometer"></i>
+            </span>
+            <span class="dfms-nav-group-label">Scaling</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="scale-in">
+                <a href="admin_operations_scalein_add.html" class="dfms-nav-link" data-nav-id="scale_in">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Scale-In</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="scale-out">
+                <a href="admin_operations_scaleout_add.html" class="dfms-nav-link" data-nav-id="scale_out">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Scale-Out</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="queue tokens">
+                <a href="admin_operations_queuetoken.html" class="dfms-nav-link" data-nav-id="queue_tokens">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Queue Tokens</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="gate passes">
+                <a href="admin_operations_scaleout.html" class="dfms-nav-link" data-nav-id="gate_passes_scaling">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Gate Passes</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-fleet-operations">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-fleet-operations"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-clipboard2-check"></i>
+            </span>
+            <span class="dfms-nav-group-label">Fleet operations</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="dispatch queue">
+                <a href="admin_fleet_supervisor_vehicleinspection_dispatch_queue.html" class="dfms-nav-link" data-nav-id="fleet_dispatch_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Dispatch queue</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="under maintenance">
+                <a href="admin_fleet_supervisor_vehicleinspection_maintenance_queue.html" class="dfms-nav-link" data-nav-id="fleet_maintenance_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Under Maintenance</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="inspection records">
+                <a href="admin_fleet_supervisor_vehicleinspection.html" class="dfms-nav-link" data-nav-id="fleet_inspection_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Inspection records</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-driver-management">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-driver-management"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-person-badge"></i>
+            </span>
+            <span class="dfms-nav-group-label">Driver Management</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="driver attendance">
+                <a href="admin_fleet_supervisor_driverattendance.html" class="dfms-nav-link" data-nav-id="fleet_attendance">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Driver Attendance</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="driver leave management">
+                <a href="admin_fleet_supervisor_driverleave.html" class="dfms-nav-link" data-nav-id="fleet_leave">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Driver Leave Management</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-trips">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-trips"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-phone"></i>
+            </span>
+            <span class="dfms-nav-group-label">Trips</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="my trips">
+                <a href="admin_transport_drivertransportorder_assigned_driver_me.html" class="dfms-nav-link" data-nav-id="driver_my_tos">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">My Trips</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="pod records">
+                <a href="admin_transport_proofofdelivery.html" class="dfms-nav-link" data-nav-id="driver_pod_records">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">POD Records</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-vendors">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-vendors"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-building"></i>
+            </span>
+            <span class="dfms-nav-group-label">Vendors</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="vendors">
+                <a href="vendors.html" class="dfms-nav-link" data-nav-id="vendors">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vendors</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group dfms-nav-group--active" data-app="portal-users-access">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-users-access"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-people"></i>
+            </span>
+            <span class="dfms-nav-group-label">Users &amp; Access</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item dfms-nav-item--active" data-label="users">
+                <a href="admin_users_user.html" class="dfms-nav-link" data-nav-id="users" aria-current="page">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Users</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="drivers">
+                <a href="admin_users_driver.html" class="dfms-nav-link" data-nav-id="drivers">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Drivers</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="audit logs">
+                <a href="admin_audit_auditlog.html" class="dfms-nav-link" data-nav-id="audit_logs">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Audit Logs</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+    
+
+    
+    
+    
+
+  </div>
+
+  
+  <div class="dfms-nav-footer">
+    <span class="dfms-nav-footer-text">Optilogist</span>
+  </div>
+
+</nav>
+
+
+      
+      <main id="content-start" class="content" tabindex="-1">
+        
+          
+        
+        <!-- Content -->
+        <div id="content" class="colM">
+          
+  
+  <nav aria-label="Breadcrumbs" class="dfms-breadcrumbs">
+    
+<div class="breadcrumbs">
+  <a href="admin.html">Home</a>
+  
+    &rsaquo; <a href="#" data-demo-missing="1">Users</a>
+    &rsaquo; <a href="admin_users_user.html">Users</a>
+  
+  &rsaquo; Delwar Uddin &lt;user08@example.com&gt;
+</div>
+
+  </nav>
+  
+
+          
+          
+          <div id="content-main">
+
+<div class="dfms-page-header">
+
+  <div class="dfms-page-header__title">
+    
+    
+    
+    <a href="admin_users_user.html" class="dfms-page-header__back" title="Back to list">
+      <i class="bi bi-arrow-left"></i>
+    </a>
+    
+
+    <h1>
+      
+        User
+      
+    </h1>
+  </div>
+
+  
+  <div class="dfms-page-header__actions">
+    
+    
+    <a href="#" data-demo-missing="1" class="dfms-btn-secondary">
+      <i class="bi bi-clock-history"></i>
+      History
+    </a>
+
+    
+    
+  </div>
+  
+
+</div>
+
+<form method="post" id="user_form" novalidate><input type="hidden" name="csrfmiddlewaretoken" value="demo">
+<div>
+
+
+
+
+
+
+
+  <fieldset class="module aligned ">
+    <h2>User</h2>
+    
+    
+        <div class="form-row field-email">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label for="id_email">Email:</label>
+                                
+                                    <input type="email" name="email" value="user08@example.com" class="vTextField" maxlength="254" id="id_email">
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-employee_id">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label for="id_employee_id">Employee id:</label>
+                                
+                                    <input type="text" name="employee_id" value="EMD001" class="vTextField" maxlength="50" id="id_employee_id">
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-first_name">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label class="required" for="id_first_name">First name:</label>
+                                
+                                    <input type="text" name="first_name" value="Nusrat Majumder" class="vTextField" maxlength="100" required id="id_first_name">
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-last_name">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label for="id_last_name">Last name:</label>
+                                
+                                    <input type="text" name="last_name" value="distribution1" class="vTextField" maxlength="100" id="id_last_name">
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-phone_number">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label for="id_phone_number">Phone number:</label>
+                                
+                                    <input type="text" name="phone_number" class="vTextField" maxlength="20" id="id_phone_number">
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+</fieldset>
+
+
+  <fieldset class="module aligned ">
+    <h2>Access</h2>
+    
+    
+        <div class="form-row field-role">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Roles:</label>
+                                
+                                    <div id="id_role"><div>
+    <label for="id_role_0"><input type="checkbox" name="role" value="2e855839-31e1-47a4-86e6-6f4fe6adc3a9" id="id_role_0">
+ Account Officer</label>
+
+</div><div>
+    <label for="id_role_1"><input type="checkbox" name="role" value="fe344cb5-1fa5-4aa8-92a1-870b5adf8ec1" id="id_role_1">
+ Command Center Officer</label>
+
+</div><div>
+    <label for="id_role_2"><input type="checkbox" name="role" value="498b46a5-cb93-4551-bb40-8fc5a30659c8" id="id_role_2">
+ Commercial Officer</label>
+
+</div><div>
+    <label for="id_role_3"><input type="checkbox" name="role" value="850e5173-e3ca-4788-b8f6-78dd24f9ecf7" id="id_role_3">
+ Depot Officer</label>
+
+</div><div>
+    <label for="id_role_4"><input type="checkbox" name="role" value="9b007b66-055e-49f6-be0b-ad617b3ea19c" id="id_role_4">
+ Distribution Manager (DM)</label>
+
+</div><div>
+    <label for="id_role_5"><input type="checkbox" name="role" value="35116a94-3758-4be6-8016-2e33b9419760" id="id_role_5" checked>
+ Distribution Officer (DO)</label>
+
+</div><div>
+    <label for="id_role_6"><input type="checkbox" name="role" value="e366c0c7-4fe2-483a-b3f1-55456682797e" id="id_role_6">
+ Driver Supervisor</label>
+
+</div><div>
+    <label for="id_role_7"><input type="checkbox" name="role" value="5388bc76-ddec-4404-9b45-61c1bcf301f7" id="id_role_7">
+ Feed Mill Officer</label>
+
+</div><div>
+    <label for="id_role_8"><input type="checkbox" name="role" value="5d47cdc7-fd64-4f1d-b743-f8c103d8c1c2" id="id_role_8">
+ Gateman</label>
+
+</div><div>
+    <label for="id_role_9"><input type="checkbox" name="role" value="33ce46f3-4240-466d-b506-3f7c4179d10e" id="id_role_9">
+ Loading Personnel</label>
+
+</div><div>
+    <label for="id_role_10"><input type="checkbox" name="role" value="7fedf88e-6a7d-47d6-ae0d-b44e5fbf09cc" id="id_role_10">
+ POI-Admin</label>
+
+</div><div>
+    <label for="id_role_11"><input type="checkbox" name="role" value="02a82909-1580-4c99-98dc-6a66d4485f30" id="id_role_11">
+ Procurement Officer</label>
+
+</div><div>
+    <label for="id_role_12"><input type="checkbox" name="role" value="16db9cd5-9263-4abc-acba-60ed80b4c8d1" id="id_role_12">
+ QA Lab Technician</label>
+
+</div><div>
+    <label for="id_role_13"><input type="checkbox" name="role" value="31211600-8777-4731-b3fe-7fc00cad2be9" id="id_role_13">
+ QC Inspector – Physical</label>
+
+</div><div>
+    <label for="id_role_14"><input type="checkbox" name="role" value="b65aa882-1e05-433b-af31-30b90f4a0142" id="id_role_14">
+ Scaling Operator</label>
+
+</div><div>
+    <label for="id_role_15"><input type="checkbox" name="role" value="9c7d923b-fddd-4920-9973-e692e82599a2" id="id_role_15">
+ Transport Distribution Officer (TDO) – Vendor Fleet</label>
+
+</div><div>
+    <label for="id_role_16"><input type="checkbox" name="role" value="82e35454-9122-436f-8483-9776dd4f9294" id="id_role_16">
+ Transport Planner (TP)</label>
+
+</div><div>
+    <label for="id_role_17"><input type="checkbox" name="role" value="0c9bc89c-8e42-41e3-b9b4-9cbba625e83c" id="id_role_17">
+ Unloading Personnel</label>
+
+</div>
+</div>
+                                
+                            
+                        </div>
+                    
+                        <div class="help">
+                            <div>Select one or more roles. Some combinations (e.g. Tenant Admin) are exclusive.</div>
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-department">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label for="id_department">Department:</label>
+                                
+                                    <input type="text" name="department" value="Distribution" disabled id="id_department">
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-two_fa_setting">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label for="id_two_fa_setting">2FA:</label>
+                                
+                                    <select name="two_fa_setting" aria-describedby="id_two_fa_setting_helptext" id="id_two_fa_setting">
+  <option value="none" selected>None</option>
+
+  <option value="email">Email</option>
+
+  <option value="phone">Phone</option>
+
+</select>
+                                
+                            
+                        </div>
+                    
+                        <div class="help" id="id_two_fa_setting_helptext">
+                            <div>Controls whether OTP is required during invitation activation / login for this user.</div>
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-poi_role_fe344cb5-1fa5-4aa8-92a1-870b5adf8ec1">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label for="id_poi_role_fe344cb5-1fa5-4aa8-92a1-870b5adf8ec1">Sites — Command Center Officer:</label>
+                                
+                                    <select name="poi_role_fe344cb5-1fa5-4aa8-92a1-870b5adf8ec1" class="dfms-poi-multiselect" data-placeholder="Select sites…" id="id_poi_role_fe344cb5-1fa5-4aa8-92a1-870b5adf8ec1" multiple>
+  <option value="6f1c2c64-97d6-4d2a-9768-9f13b2129737">Barishal Aquaculture Site (POI-0018)</option>
+
+  <option value="1dd0e4ae-98dd-4d1c-8673-1b330130cfc1">Barishal Green Field Farm (POI-0014)</option>
+
+  <option value="3f8e8b11-b539-4595-90cf-bccea625b61b">Barishal Production Unit (POI-0016)</option>
+
+  <option value="1dd20b37-df96-46aa-b27a-92dd38053fe7">Bhola Vendor Office (POI-0017)</option>
+
+  <option value="2e5b71e9-d800-4fce-a921-a09dcd6e3758">Bhola Waste Management Unit (POI-0015)</option>
+
+  <option value="b267f13b-8731-44d5-b045-59613974ef7a">Bhaluka Hub (POI-0003)</option>
+
+  <option value="521b59c5-95cc-433d-9fc0-71658c3c17de">Bhola Hub (POI-0001)</option>
+
+  <option value="4019a94e-c5c2-4f80-b643-adfc7c1dd1ce">Chittagong Hub (POI-0002)</option>
+
+  <option value="5a77b607-c6b7-4e3b-a277-1534fe7e6a4e">Chittagong Hub (POI-0004)</option>
+
+  <option value="314c4410-eef7-41d9-a44d-4dbeb909f8ea">Chottogram Hub (POI-0005)</option>
+
+</select>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-poi_role_850e5173-e3ca-4788-b8f6-78dd24f9ecf7">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label for="id_poi_role_850e5173-e3ca-4788-b8f6-78dd24f9ecf7">Sites — Depot Officer:</label>
+                                
+                                    <select name="poi_role_850e5173-e3ca-4788-b8f6-78dd24f9ecf7" class="dfms-poi-multiselect" data-placeholder="Select sites…" id="id_poi_role_850e5173-e3ca-4788-b8f6-78dd24f9ecf7" multiple>
+  <option value="6f1c2c64-97d6-4d2a-9768-9f13b2129737">Barishal Aquaculture Site (POI-0018)</option>
+
+  <option value="1dd0e4ae-98dd-4d1c-8673-1b330130cfc1">Barishal Green Field Farm (POI-0014)</option>
+
+  <option value="3f8e8b11-b539-4595-90cf-bccea625b61b">Barishal Production Unit (POI-0016)</option>
+
+  <option value="1dd20b37-df96-46aa-b27a-92dd38053fe7">Bhola Vendor Office (POI-0017)</option>
+
+  <option value="2e5b71e9-d800-4fce-a921-a09dcd6e3758">Bhola Waste Management Unit (POI-0015)</option>
+
+  <option value="b267f13b-8731-44d5-b045-59613974ef7a">Bhaluka Hub (POI-0003)</option>
+
+  <option value="521b59c5-95cc-433d-9fc0-71658c3c17de">Bhola Hub (POI-0001)</option>
+
+  <option value="4019a94e-c5c2-4f80-b643-adfc7c1dd1ce">Chittagong Hub (POI-0002)</option>
+
+  <option value="5a77b607-c6b7-4e3b-a277-1534fe7e6a4e">Chittagong Hub (POI-0004)</option>
+
+  <option value="314c4410-eef7-41d9-a44d-4dbeb909f8ea">Chottogram Hub (POI-0005)</option>
+
+</select>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-poi_role_5388bc76-ddec-4404-9b45-61c1bcf301f7">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label for="id_poi_role_5388bc76-ddec-4404-9b45-61c1bcf301f7">Sites — Feed Mill Officer:</label>
+                                
+                                    <select name="poi_role_5388bc76-ddec-4404-9b45-61c1bcf301f7" class="dfms-poi-multiselect" data-placeholder="Select sites…" id="id_poi_role_5388bc76-ddec-4404-9b45-61c1bcf301f7" multiple>
+  <option value="6f1c2c64-97d6-4d2a-9768-9f13b2129737">Barishal Aquaculture Site (POI-0018)</option>
+
+  <option value="1dd0e4ae-98dd-4d1c-8673-1b330130cfc1">Barishal Green Field Farm (POI-0014)</option>
+
+  <option value="3f8e8b11-b539-4595-90cf-bccea625b61b">Barishal Production Unit (POI-0016)</option>
+
+  <option value="1dd20b37-df96-46aa-b27a-92dd38053fe7">Bhola Vendor Office (POI-0017)</option>
+
+  <option value="2e5b71e9-d800-4fce-a921-a09dcd6e3758">Bhola Waste Management Unit (POI-0015)</option>
+
+  <option value="b267f13b-8731-44d5-b045-59613974ef7a">Bhaluka Hub (POI-0003)</option>
+
+  <option value="521b59c5-95cc-433d-9fc0-71658c3c17de">Bhola Hub (POI-0001)</option>
+
+  <option value="4019a94e-c5c2-4f80-b643-adfc7c1dd1ce">Chittagong Hub (POI-0002)</option>
+
+  <option value="5a77b607-c6b7-4e3b-a277-1534fe7e6a4e">Chittagong Hub (POI-0004)</option>
+
+  <option value="314c4410-eef7-41d9-a44d-4dbeb909f8ea">Chottogram Hub (POI-0005)</option>
+
+</select>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-poi_role_5d47cdc7-fd64-4f1d-b743-f8c103d8c1c2">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label for="id_poi_role_5d47cdc7-fd64-4f1d-b743-f8c103d8c1c2">Sites — Gateman:</label>
+                                
+                                    <select name="poi_role_5d47cdc7-fd64-4f1d-b743-f8c103d8c1c2" class="dfms-poi-multiselect" data-placeholder="Select sites…" id="id_poi_role_5d47cdc7-fd64-4f1d-b743-f8c103d8c1c2" multiple>
+  <option value="6f1c2c64-97d6-4d2a-9768-9f13b2129737">Barishal Aquaculture Site (POI-0018)</option>
+
+  <option value="1dd0e4ae-98dd-4d1c-8673-1b330130cfc1">Barishal Green Field Farm (POI-0014)</option>
+
+  <option value="3f8e8b11-b539-4595-90cf-bccea625b61b">Barishal Production Unit (POI-0016)</option>
+
+  <option value="1dd20b37-df96-46aa-b27a-92dd38053fe7">Bhola Vendor Office (POI-0017)</option>
+
+  <option value="2e5b71e9-d800-4fce-a921-a09dcd6e3758">Bhola Waste Management Unit (POI-0015)</option>
+
+  <option value="b267f13b-8731-44d5-b045-59613974ef7a">Bhaluka Hub (POI-0003)</option>
+
+  <option value="521b59c5-95cc-433d-9fc0-71658c3c17de">Bhola Hub (POI-0001)</option>
+
+  <option value="4019a94e-c5c2-4f80-b643-adfc7c1dd1ce">Chittagong Hub (POI-0002)</option>
+
+  <option value="5a77b607-c6b7-4e3b-a277-1534fe7e6a4e">Chittagong Hub (POI-0004)</option>
+
+  <option value="314c4410-eef7-41d9-a44d-4dbeb909f8ea">Chottogram Hub (POI-0005)</option>
+
+</select>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-poi_role_33ce46f3-4240-466d-b506-3f7c4179d10e">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label for="id_poi_role_33ce46f3-4240-466d-b506-3f7c4179d10e">Sites — Loading Personnel:</label>
+                                
+                                    <select name="poi_role_33ce46f3-4240-466d-b506-3f7c4179d10e" class="dfms-poi-multiselect" data-placeholder="Select sites…" id="id_poi_role_33ce46f3-4240-466d-b506-3f7c4179d10e" multiple>
+  <option value="6f1c2c64-97d6-4d2a-9768-9f13b2129737">Barishal Aquaculture Site (POI-0018)</option>
+
+  <option value="1dd0e4ae-98dd-4d1c-8673-1b330130cfc1">Barishal Green Field Farm (POI-0014)</option>
+
+  <option value="3f8e8b11-b539-4595-90cf-bccea625b61b">Barishal Production Unit (POI-0016)</option>
+
+  <option value="1dd20b37-df96-46aa-b27a-92dd38053fe7">Bhola Vendor Office (POI-0017)</option>
+
+  <option value="2e5b71e9-d800-4fce-a921-a09dcd6e3758">Bhola Waste Management Unit (POI-0015)</option>
+
+  <option value="b267f13b-8731-44d5-b045-59613974ef7a">Bhaluka Hub (POI-0003)</option>
+
+  <option value="521b59c5-95cc-433d-9fc0-71658c3c17de">Bhola Hub (POI-0001)</option>
+
+  <option value="4019a94e-c5c2-4f80-b643-adfc7c1dd1ce">Chittagong Hub (POI-0002)</option>
+
+  <option value="5a77b607-c6b7-4e3b-a277-1534fe7e6a4e">Chittagong Hub (POI-0004)</option>
+
+  <option value="314c4410-eef7-41d9-a44d-4dbeb909f8ea">Chottogram Hub (POI-0005)</option>
+
+</select>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-poi_role_7fedf88e-6a7d-47d6-ae0d-b44e5fbf09cc">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label for="id_poi_role_7fedf88e-6a7d-47d6-ae0d-b44e5fbf09cc">Sites — POI-Admin:</label>
+                                
+                                    <select name="poi_role_7fedf88e-6a7d-47d6-ae0d-b44e5fbf09cc" class="dfms-poi-multiselect" data-placeholder="Select sites…" id="id_poi_role_7fedf88e-6a7d-47d6-ae0d-b44e5fbf09cc" multiple>
+  <option value="6f1c2c64-97d6-4d2a-9768-9f13b2129737">Barishal Aquaculture Site (POI-0018)</option>
+
+  <option value="1dd0e4ae-98dd-4d1c-8673-1b330130cfc1">Barishal Green Field Farm (POI-0014)</option>
+
+  <option value="3f8e8b11-b539-4595-90cf-bccea625b61b">Barishal Production Unit (POI-0016)</option>
+
+  <option value="1dd20b37-df96-46aa-b27a-92dd38053fe7">Bhola Vendor Office (POI-0017)</option>
+
+  <option value="2e5b71e9-d800-4fce-a921-a09dcd6e3758">Bhola Waste Management Unit (POI-0015)</option>
+
+  <option value="b267f13b-8731-44d5-b045-59613974ef7a">Bhaluka Hub (POI-0003)</option>
+
+  <option value="521b59c5-95cc-433d-9fc0-71658c3c17de">Bhola Hub (POI-0001)</option>
+
+  <option value="4019a94e-c5c2-4f80-b643-adfc7c1dd1ce">Chittagong Hub (POI-0002)</option>
+
+  <option value="5a77b607-c6b7-4e3b-a277-1534fe7e6a4e">Chittagong Hub (POI-0004)</option>
+
+  <option value="314c4410-eef7-41d9-a44d-4dbeb909f8ea">Chottogram Hub (POI-0005)</option>
+
+</select>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-poi_role_31211600-8777-4731-b3fe-7fc00cad2be9">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label for="id_poi_role_31211600-8777-4731-b3fe-7fc00cad2be9">Sites — QC Inspector – Physical:</label>
+                                
+                                    <select name="poi_role_31211600-8777-4731-b3fe-7fc00cad2be9" class="dfms-poi-multiselect" data-placeholder="Select sites…" id="id_poi_role_31211600-8777-4731-b3fe-7fc00cad2be9" multiple>
+  <option value="6f1c2c64-97d6-4d2a-9768-9f13b2129737">Barishal Aquaculture Site (POI-0018)</option>
+
+  <option value="1dd0e4ae-98dd-4d1c-8673-1b330130cfc1">Barishal Green Field Farm (POI-0014)</option>
+
+  <option value="3f8e8b11-b539-4595-90cf-bccea625b61b">Barishal Production Unit (POI-0016)</option>
+
+  <option value="1dd20b37-df96-46aa-b27a-92dd38053fe7">Bhola Vendor Office (POI-0017)</option>
+
+  <option value="2e5b71e9-d800-4fce-a921-a09dcd6e3758">Bhola Waste Management Unit (POI-0015)</option>
+
+  <option value="b267f13b-8731-44d5-b045-59613974ef7a">Bhaluka Hub (POI-0003)</option>
+
+  <option value="521b59c5-95cc-433d-9fc0-71658c3c17de">Bhola Hub (POI-0001)</option>
+
+  <option value="4019a94e-c5c2-4f80-b643-adfc7c1dd1ce">Chittagong Hub (POI-0002)</option>
+
+  <option value="5a77b607-c6b7-4e3b-a277-1534fe7e6a4e">Chittagong Hub (POI-0004)</option>
+
+  <option value="314c4410-eef7-41d9-a44d-4dbeb909f8ea">Chottogram Hub (POI-0005)</option>
+
+</select>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-poi_role_b65aa882-1e05-433b-af31-30b90f4a0142">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label for="id_poi_role_b65aa882-1e05-433b-af31-30b90f4a0142">Sites — Scaling Operator:</label>
+                                
+                                    <select name="poi_role_b65aa882-1e05-433b-af31-30b90f4a0142" class="dfms-poi-multiselect" data-placeholder="Select sites…" id="id_poi_role_b65aa882-1e05-433b-af31-30b90f4a0142" multiple>
+  <option value="6f1c2c64-97d6-4d2a-9768-9f13b2129737">Barishal Aquaculture Site (POI-0018)</option>
+
+  <option value="1dd0e4ae-98dd-4d1c-8673-1b330130cfc1">Barishal Green Field Farm (POI-0014)</option>
+
+  <option value="3f8e8b11-b539-4595-90cf-bccea625b61b">Barishal Production Unit (POI-0016)</option>
+
+  <option value="1dd20b37-df96-46aa-b27a-92dd38053fe7">Bhola Vendor Office (POI-0017)</option>
+
+  <option value="2e5b71e9-d800-4fce-a921-a09dcd6e3758">Bhola Waste Management Unit (POI-0015)</option>
+
+  <option value="b267f13b-8731-44d5-b045-59613974ef7a">Bhaluka Hub (POI-0003)</option>
+
+  <option value="521b59c5-95cc-433d-9fc0-71658c3c17de">Bhola Hub (POI-0001)</option>
+
+  <option value="4019a94e-c5c2-4f80-b643-adfc7c1dd1ce">Chittagong Hub (POI-0002)</option>
+
+  <option value="5a77b607-c6b7-4e3b-a277-1534fe7e6a4e">Chittagong Hub (POI-0004)</option>
+
+  <option value="314c4410-eef7-41d9-a44d-4dbeb909f8ea">Chottogram Hub (POI-0005)</option>
+
+</select>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-poi_role_0c9bc89c-8e42-41e3-b9b4-9cbba625e83c">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label for="id_poi_role_0c9bc89c-8e42-41e3-b9b4-9cbba625e83c">Sites — Unloading Personnel:</label>
+                                
+                                    <select name="poi_role_0c9bc89c-8e42-41e3-b9b4-9cbba625e83c" class="dfms-poi-multiselect" data-placeholder="Select sites…" id="id_poi_role_0c9bc89c-8e42-41e3-b9b4-9cbba625e83c" multiple>
+  <option value="6f1c2c64-97d6-4d2a-9768-9f13b2129737">Barishal Aquaculture Site (POI-0018)</option>
+
+  <option value="1dd0e4ae-98dd-4d1c-8673-1b330130cfc1">Barishal Green Field Farm (POI-0014)</option>
+
+  <option value="3f8e8b11-b539-4595-90cf-bccea625b61b">Barishal Production Unit (POI-0016)</option>
+
+  <option value="1dd20b37-df96-46aa-b27a-92dd38053fe7">Bhola Vendor Office (POI-0017)</option>
+
+  <option value="2e5b71e9-d800-4fce-a921-a09dcd6e3758">Bhola Waste Management Unit (POI-0015)</option>
+
+  <option value="b267f13b-8731-44d5-b045-59613974ef7a">Bhaluka Hub (POI-0003)</option>
+
+  <option value="521b59c5-95cc-433d-9fc0-71658c3c17de">Bhola Hub (POI-0001)</option>
+
+  <option value="4019a94e-c5c2-4f80-b643-adfc7c1dd1ce">Chittagong Hub (POI-0002)</option>
+
+  <option value="5a77b607-c6b7-4e3b-a277-1534fe7e6a4e">Chittagong Hub (POI-0004)</option>
+
+  <option value="314c4410-eef7-41d9-a44d-4dbeb909f8ea">Chottogram Hub (POI-0005)</option>
+
+</select>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+</fieldset>
+
+
+  <fieldset class="module aligned ">
+    <h2>Activity</h2>
+    
+    
+        <div class="form-row field-last_active_at">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Last active at:</label>
+                                
+                                    <p class="datetime">
+  Date: <input type="text" name="last_active_at_0" class="vDateField" size="10" id="id_last_active_at_0">
+
+<br>
+  Time: <input type="text" name="last_active_at_1" class="vTimeField" size="8" id="id_last_active_at_1">
+
+
+</p>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-last_login_ip">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label for="id_last_login_ip">Last login ip:</label>
+                                
+                                    <input type="text" name="last_login_ip" id="id_last_login_ip">
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+</fieldset>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="submit-row">
+
+
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;width:100%;">
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+      
+      
+
+      
+        
+          <button type="submit" name="_reinvite" value="1" class="dfms-btn-secondary">
+            Reinvite
+          </button>
+        
+        
+          
+            <a href="md_user_suspend.html#e6109ae0-ffff-42b7-ab09-6ba8c451d6d3" class="deletelink dfms-btn-secondary">
+              Deactivate user
+            </a>
+          
+        
+      
+
+      
+        <a href="#" data-demo-missing="1" class="dfms-btn-secondary">
+          Reset password
+        </a>
+      
+    </div>
+
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+      
+      
+        
+        <a href="admin_users_user.html" class="dfms-btn-secondary dfms-btn-cancel">
+          Cancel
+        </a>
+      
+
+      
+        <input type="submit" value="Save" class="default dfms-btn-save" name="_save">
+      
+    </div>
+  </div>
+
+
+</div>
+
+
+
+    <script id="django-admin-form-add-constants"
+            src="static/admin/js/change_form.js"
+            
+            async>
+    </script>
+
+
+
+
+<script id="django-admin-prepopulated-fields-constants"
+        src="static/admin/js/prepopulate_init.js"
+        data-prepopulated-fields="[]">
+</script>
+
+
+</div>
+</form></div>
+
+          
+          <br class="clear">
+        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
+      </main>
+    </div>
+</div>
+<!-- END Container -->
+
+<!-- SVGs -->
+<svg xmlns="http://www.w3.org/2000/svg" class="base-svgs">
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"/></symbol>
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"/></symbol>
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></symbol>
+</svg>
+<!-- END SVGs -->
+</body>
+</html>

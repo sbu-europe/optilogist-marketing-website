@@ -1,0 +1,376 @@
+/**
+ * Driver Operations (DM-01) — mobile-responsive admin UI.
+ * Scoped to driver-facing transport models; loaded via ModelAdmin.Media.
+ */
+
+.dfms-btn-touch-target {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-sizing: border-box;
+}
+
+/* ─── Tab bar (changelist) ─────────────────────────────────────────────────── */
+
+.driver-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.driver-tabs a {
+  flex: 1 1 auto;
+  min-width: fit-content;
+  text-align: center;
+}
+
+/* ─── Detail sections (change form) ────────────────────────────────────────── */
+
+.driver-detail-section {
+  margin: 1.25rem 0;
+  padding: 1rem;
+  border: 1px solid var(--dfms-border-color, #dee2e6);
+  border-radius: var(--dfms-radius-md, 8px);
+  background: var(--dfms-card-bg, #fff);
+}
+
+.driver-dispatch-gate {
+  background: var(--dfms-warning-bg, #fff3cd);
+  padding: 1rem;
+  border-radius: var(--dfms-radius-md, 8px);
+  margin-bottom: 1rem;
+  border-left: 4px solid var(--dfms-warning, #d97706);
+}
+
+.driver-detail-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0;
+}
+
+.driver-detail-section ul li {
+  padding: 0.5rem 0.75rem;
+  margin: 0.5rem 0;
+  border-left: 3px solid var(--dfms-grey-200, #e5e7eb);
+  background: var(--dfms-grey-50, #f9fafb);
+  border-radius: 0 var(--dfms-radius-sm, 4px) var(--dfms-radius-sm, 4px) 0;
+  font-size: 0.875rem;
+}
+
+.driver-detail-section form p {
+  margin: 0.75rem 0;
+}
+
+.driver-detail-section form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.375rem;
+  color: var(--dfms-grey-700, #374151);
+}
+
+.driver-detail-section form input[type="file"] {
+  width: 100%;
+  padding: 0.625rem;
+  border: 1px solid var(--dfms-border-color, #dee2e6);
+  border-radius: var(--dfms-radius-sm, 4px);
+  background: var(--dfms-input-bg, #f9fafb);
+  font-size: 0.875rem;
+  box-sizing: border-box;
+}
+
+.driver-transition-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.driver-transition-submit {
+  width: 100%;
+}
+
+[data-theme="dark"] .driver-detail-section {
+  background: var(--dfms-grey-100, #161929);
+  border-color: var(--dfms-grey-200, #1e2340);
+}
+
+[data-theme="dark"] .driver-dispatch-gate {
+  background: rgba(245, 158, 11, 0.15);
+  border-left-color: var(--dfms-warning, #f59e0b);
+}
+
+[data-theme="dark"] .driver-detail-section ul li {
+  background: var(--dfms-grey-200, #1e2340);
+  border-left-color: var(--dfms-grey-300, #2a3050);
+}
+
+[data-theme="dark"] .driver-detail-section form input[type="file"] {
+  background: var(--dfms-grey-200, #1e2340);
+  border-color: var(--dfms-grey-300, #2a3050);
+  color: var(--dfms-grey-900, #f9fafb);
+}
+
+/* ─── Mobile & tablet (≤ 767px) ─────────────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  /* Prevent horizontal page scroll */
+  body.model-drivertransportorder #content,
+  body.model-proofofdelivery #content {
+    overflow-x: hidden;
+  }
+
+  /* Changelist: tabs stack full-width */
+  .driver-tabs {
+    flex-direction: column;
+  }
+
+  .driver-tabs a {
+    width: 100%;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Hide redundant filter sidebar (tabs cover execution status) */
+  body.model-drivertransportorder.change-list #changelist-filter {
+    display: none;
+  }
+
+  body.model-drivertransportorder.change-list #changelist.filtered #changelist-form {
+    margin-right: 0;
+  }
+
+  /* Hide bulk-selection UI on driver list */
+  body.model-drivertransportorder.change-list #dfms-selection-toolbar,
+  body.model-drivertransportorder.change-list .action-checkbox-column,
+  body.model-drivertransportorder.change-list td.action-checkbox {
+    display: none !important;
+  }
+
+  /* Scroll hint (hidden on desktop) */
+  .dfms-driver-table-scroll-hint {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 0.75rem;
+    padding: 0.625rem 0.75rem;
+    font-size: 0.8125rem;
+    color: var(--dfms-text-muted, #6b7280);
+    background: var(--dfms-grey-50, #f9fafb);
+    border: 1px solid var(--dfms-border-color, #dee2e6);
+    border-radius: var(--dfms-radius-sm, 4px);
+  }
+
+  [data-theme="dark"] .dfms-driver-table-scroll-hint {
+    background: var(--dfms-grey-100, #161929);
+    border-color: var(--dfms-grey-200, #1e2340);
+  }
+
+  /* Horizontally scrollable table inside the changelist (not the whole page) */
+  body.model-drivertransportorder.change-list .dfms-driver-changelist-scroll .results {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+    border: 1px solid var(--dfms-border-color, #dee2e6);
+    border-radius: var(--dfms-radius-md, 8px);
+    background: var(--dfms-card-bg, #fff);
+  }
+
+  body.model-drivertransportorder.change-list .dfms-driver-changelist-scroll #result_list {
+    display: table;
+    width: max-content;
+    min-width: 58rem;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  body.model-drivertransportorder.change-list .dfms-driver-changelist-scroll #result_list thead {
+    display: table-header-group;
+  }
+
+  body.model-drivertransportorder.change-list .dfms-driver-changelist-scroll #result_list tbody {
+    display: table-row-group;
+  }
+
+  body.model-drivertransportorder.change-list .dfms-driver-changelist-scroll #result_list tr {
+    display: table-row;
+  }
+
+  body.model-drivertransportorder.change-list .dfms-driver-changelist-scroll #result_list th,
+  body.model-drivertransportorder.change-list .dfms-driver-changelist-scroll #result_list td {
+    display: table-cell;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8125rem;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+
+  body.model-drivertransportorder.change-list .dfms-driver-changelist-scroll #result_list td::before {
+    content: none;
+    display: none;
+  }
+
+  /* Sticky TO number while scrolling columns */
+  body.model-drivertransportorder.change-list .dfms-driver-changelist-scroll #result_list th.field-to_number,
+  body.model-drivertransportorder.change-list .dfms-driver-changelist-scroll #result_list td.field-to_number {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background: var(--dfms-card-bg, #fff);
+    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.06);
+  }
+
+  body.model-drivertransportorder.change-list .dfms-driver-changelist-scroll #result_list thead th.field-to_number {
+    z-index: 3;
+    background: var(--dfms-grey-50, #f9fafb);
+  }
+
+  body.model-drivertransportorder.change-list .dfms-driver-changelist-scroll #result_list td.field-to_number a {
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+
+  body.model-drivertransportorder.change-list .dfms-driver-changelist-scroll #result_list .dfms-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  [data-theme="dark"] body.model-drivertransportorder.change-list .dfms-driver-changelist-scroll .results {
+    background: var(--dfms-grey-100, #161929);
+    border-color: var(--dfms-grey-200, #1e2340);
+  }
+
+  [data-theme="dark"] body.model-drivertransportorder.change-list .dfms-driver-changelist-scroll #result_list th.field-to_number,
+  [data-theme="dark"] body.model-drivertransportorder.change-list .dfms-driver-changelist-scroll #result_list td.field-to_number {
+    background: var(--dfms-grey-100, #161929);
+  }
+
+  [data-theme="dark"] body.model-drivertransportorder.change-list .dfms-driver-changelist-scroll #result_list thead th.field-to_number {
+    background: var(--dfms-grey-200, #1e2340);
+  }
+
+  /* Change form: stack aligned field rows */
+  body.model-drivertransportorder.change-form fieldset .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    padding: 0.875rem 1rem;
+  }
+
+  body.model-drivertransportorder.change-form fieldset .form-row > label {
+    float: none !important;
+    width: auto !important;
+    padding: 0 !important;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--dfms-text-muted, #6b7280);
+  }
+
+  body.model-drivertransportorder.change-form fieldset .form-row > div,
+  body.model-drivertransportorder.change-form fieldset .form-row .readonly {
+    margin-left: 0 !important;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  body.model-drivertransportorder.change-form .dfms-page-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  body.model-drivertransportorder.change-form .dfms-page-header__title {
+    min-width: 0;
+  }
+
+  body.model-drivertransportorder.change-form .dfms-page-header__title h1 {
+    font-size: 1.25rem;
+    word-break: break-word;
+  }
+
+  body.model-drivertransportorder.change-form .dfms-page-header__actions {
+    width: 100%;
+  }
+
+  body.model-drivertransportorder.change-form .dfms-page-header__actions .dfms-btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Detail sections */
+  .driver-detail-section {
+    margin: 1rem 0;
+    padding: 0.875rem;
+  }
+
+  .driver-detail-section h2,
+  .driver-detail-section h3 {
+    font-size: 1.125rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .driver-dispatch-gate {
+    padding: 0.875rem;
+    font-size: 0.875rem;
+  }
+
+  .driver-dispatch-gate strong {
+    display: block;
+    margin-bottom: 0.375rem;
+  }
+
+  .driver-detail-section form input[type="file"],
+  .driver-detail-section form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 1rem;
+  }
+
+  .driver-detail-section form textarea {
+    min-height: 80px;
+    padding: 0.625rem;
+  }
+
+  .driver-detail-section form button[type="submit"] {
+    width: 100%;
+    min-height: 48px;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  /* POD block sits outside fieldsets */
+  body.model-drivertransportorder.change-form .driver-detail-section--pod {
+    max-width: none !important;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+/* Hide scroll hint on desktop */
+@media (min-width: 768px) {
+  .dfms-driver-table-scroll-hint {
+    display: none;
+  }
+}
+
+/* ─── Tablet (768px – 1024px): scrollable table fallback for POD list ─────── */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  body.model-proofofdelivery.change-list .results {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body.model-proofofdelivery.change-list #result_list {
+    min-width: 720px;
+  }
+}

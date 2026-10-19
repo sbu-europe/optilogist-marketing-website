@@ -1,0 +1,3599 @@
+<!DOCTYPE html>
+
+<html lang="en-us" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="static/demo/demo-shim.css?v=mv5a1jhl">
+<script src="static/demo/api-data.js?v=mv5a1jhl"></script>
+<script src="static/demo/demo-shim.js?v=mv5a1jhl"></script>
+<script src="static/demo/master-seed.js?v=mv5a1jhl"></script>
+<script src="static/demo/master-crud.js?v=mv5a1jhl"></script>
+<title>Change Vehicle Inspection | Demo Agro Ltd Admin</title>
+<link rel="stylesheet" href="static/admin/css/base.css">
+
+
+  <link rel="stylesheet" href="static/admin/css/nav_sidebar.css">
+  <script src="static/admin/js/nav_sidebar.js" defer></script>
+
+<link rel="stylesheet" href="static/admin/css/forms.css">
+
+
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+
+
+<link rel="icon" href="favicon.ico?v=2" sizes="32x32">
+<link rel="icon" href="static/brand/optilogist/svg/favicon.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="static/brand/optilogist/png/apple-touch-icon.png?v=2">
+<link rel="stylesheet" href="static/admin/css/custom.css">
+
+<script>
+  (function(){
+    var t = localStorage.getItem('dfms-admin-theme');
+    if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+    // Keep native date/time picker icons visible: match DFMS theme, not OS preference alone.
+    document.documentElement.style.colorScheme = t === 'dark' ? 'dark' : 'light';
+
+    var collapsed = localStorage.getItem('dfms-sidebar-collapsed') === 'true';
+    var mobile    = window.innerWidth < 768;
+    if (collapsed && !mobile) {
+      document.documentElement.setAttribute('data-sidebar-collapsed', 'true');
+    }
+  })();
+</script>
+
+<script src="static/admin/js/dfms_theme.js" defer></script>
+
+<script src="static/admin/js/dfms_sidebar.js" defer></script>
+
+<script src="static/admin/js/dfms_actions.js" defer></script>
+
+<script src="static/js/password_toggle.js" defer></script>
+
+<script src="static/admin/js/dfms_timepicker.js" defer></script>
+
+<script src="static/admin/js/dfms_labels.js" defer></script>
+
+
+<script src="static/admin/jsi18n.js"></script>
+<script src="static/admin/js/vendor/jquery/jquery.min.js"></script>
+<script src="static/admin/js/collapse.js"></script>
+<script src="static/admin/js/jquery.init.js"></script>
+<script src="static/admin/js/core.js"></script>
+<script src="static/admin/js/inlines.js"></script>
+<script src="static/admin/js/admin/RelatedObjectLookups.js"></script>
+<script src="static/admin/js/actions.js"></script>
+<script src="static/admin/js/urlify.js"></script>
+<script src="static/admin/js/prepopulate.js"></script>
+<script src="static/admin/js/vendor/xregexp/xregexp.min.js"></script>
+
+
+
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/admin/css/responsive.css">
+    
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+<body class=" app-fleet_supervisor model-vehicleinspection change-form"
+  data-admin-utc-offset="21600">
+<a href="#content-start" class="skip-to-content-link">Skip to main content</a>
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    
+      <header id="header">
+        <div id="branding">
+        
+        </div>
+        
+
+<div id="dfms-topbar-tools">
+
+  
+  <button
+    id="dfms-sidebar-toggle"
+    class="dfms-content-toggle"
+    aria-label="Toggle sidebar"
+    title="Collapse sidebar"
+    type="button"
+  >
+    <i class="bi bi-list"></i>
+  </button>
+
+  
+  <div style="flex:1;"></div>
+
+  
+  <div class="dfms-topbar-right">
+
+    
+    <button
+      id="dfms-theme-toggle"
+      class="dfms-topbar-icon-btn"
+      title="Switch theme"
+      aria-label="Switch theme"
+      type="button"
+    >
+      <i class="toggle-icon bi bi-moon"></i>
+    </button>
+
+    
+    
+    
+    <div class="dfms-user-menu" id="dfms-user-menu">
+      <button
+        class="dfms-user-avatar-btn"
+        aria-haspopup="true"
+        aria-expanded="false"
+        aria-controls="dfms-user-dropdown"
+        type="button"
+        id="dfms-user-avatar-btn"
+      >
+        
+        <span class="dfms-avatar" aria-hidden="true"> DA </span>
+        <span class="dfms-user-name">Demo Admin</span>
+        <i class="bi bi-chevron-down dfms-user-chevron"></i>
+      </button>
+
+      
+      <div class="dfms-user-dropdown dfms-user-dropdown--with-poi" id="dfms-user-dropdown" role="menu" aria-labelledby="dfms-user-avatar-btn">
+
+        
+        <div class="dfms-dropdown-header">
+          <div class="dfms-dropdown-header__avatar"> DA </div>
+          <div class="dfms-dropdown-header__info">
+            <span class="dfms-dropdown-name">Demo Admin</span>
+            
+            <span class="dfms-dropdown-email">admin@example.com</span>
+            
+            
+              
+              
+              <span class="dfms-dropdown-meta">
+                <i class="bi bi-person-badge"></i>
+                Tenant Admin
+              </span>
+              
+              
+            
+            
+            <span class="dfms-dropdown-meta">
+              <i class="bi bi-diagram-3"></i>
+              Administration (tenant admin)
+            </span>
+            
+            
+            
+            <span class="dfms-dropdown-meta dfms-dropdown-meta--poi-warn">
+              <i class="bi bi-exclamation-circle"></i>
+              No site selected
+            </span>
+            
+            
+            
+            
+            <span class="dfms-dropdown-meta">
+              <i class="bi bi-building"></i>
+              Demo Agro Ltd
+            </span>
+            
+            
+          </div>
+        </div>
+
+        
+
+
+        
+
+<div class="dfms-dropdown-divider"></div>
+<div class="dfms-dropdown-poi" id="dfms-poi-profile">
+  <form
+    method="post"
+    action="#" data-demo-form="1"
+    id="dfms-poi-switcher-form"
+    class="dfms-dropdown-poi__form"
+  >
+    <input type="hidden" name="csrfmiddlewaretoken" value="demo">
+    <input type="hidden" name="next" value="/admin/fleet_supervisor/vehicleinspection/7a7bf31a-85bc-4097-a0e0-8aa7b3bc863e/change/">
+
+    <div class="dfms-dropdown-poi__field">
+      <label for="dfms-poi-select" class="dfms-dropdown-poi__label">
+        <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
+        Working site
+        
+        <span class="dfms-badge dfms-badge--warning dfms-dropdown-poi__badge">Required</span>
+        
+      </label>
+
+      <div class="dfms-dropdown-poi__select-wrap">
+        <i class="bi bi-building dfms-dropdown-poi__select-icon" aria-hidden="true"></i>
+        <select
+          name="poi_id"
+          id="dfms-poi-select"
+          class="dfms-dropdown-poi__select"
+          aria-label="Select working site"
+          onchange="this.form.submit()"
+        >
+          <option value="" selected>
+            Select a site…
+          </option>
+          
+          <option
+            value="6f1c2c64-97d6-4d2a-9768-9f13b2129737"
+            
+          >Barishal Aquaculture Site</option>
+          
+          <option
+            value="1dd0e4ae-98dd-4d1c-8673-1b330130cfc1"
+            
+          >Barishal Green Field Farm</option>
+          
+          <option
+            value="3f8e8b11-b539-4595-90cf-bccea625b61b"
+            
+          >Barishal Production Unit</option>
+          
+          <option
+            value="1dd20b37-df96-46aa-b27a-92dd38053fe7"
+            
+          >Bhola Vendor Office</option>
+          
+          <option
+            value="2e5b71e9-d800-4fce-a921-a09dcd6e3758"
+            
+          >Bhola Waste Management Unit</option>
+          
+          <option
+            value="b267f13b-8731-44d5-b045-59613974ef7a"
+            
+          >Bhaluka Hub</option>
+          
+          <option
+            value="521b59c5-95cc-433d-9fc0-71658c3c17de"
+            
+          >Bhola Hub</option>
+          
+          <option
+            value="4019a94e-c5c2-4f80-b643-adfc7c1dd1ce"
+            
+          >Chittagong Hub</option>
+          
+          <option
+            value="5a77b607-c6b7-4e3b-a277-1534fe7e6a4e"
+            
+          >Chittagong Hub</option>
+          
+          <option
+            value="314c4410-eef7-41d9-a44d-4dbeb909f8ea"
+            
+          >Chottogram Hub</option>
+          
+        </select>
+        <i class="bi bi-chevron-down dfms-dropdown-poi__select-chevron" aria-hidden="true"></i>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="dfms-dropdown-divider"></div>
+
+
+
+        
+        
+        <a href="#" data-demo-missing="1" class="dfms-dropdown-item" role="menuitem">
+          <i class="bi bi-key"></i>
+          Change password
+        </a>
+        
+
+        <div class="dfms-dropdown-divider"></div>
+
+        <form id="logout-form" method="post" action="#" data-demo-form="1">
+          <input type="hidden" name="csrfmiddlewaretoken" value="demo">
+          <button type="submit" class="dfms-dropdown-item dfms-dropdown-item--danger" role="menuitem">
+            <i class="bi bi-box-arrow-right"></i>
+            Log out
+          </button>
+        </form>
+        <script>
+        (function () {
+          var form = document.getElementById("logout-form");
+          if (!form) return;
+          form.addEventListener("submit", function () {
+            var match = document.cookie.split("; ").find(function (row) {
+              return row.indexOf("csrftoken=") === 0;
+            });
+            if (!match) return;
+            var token = decodeURIComponent(match.split("=").slice(1).join("="));
+            var input = form.querySelector('input[name="csrfmiddlewaretoken"]');
+            if (token && input) input.value = token;
+          });
+        })();
+        </script>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+        
+      </header>
+    
+    <!-- END Header -->
+    
+    
+
+    <div class="main" id="main">
+      
+        
+  
+
+<nav id="dfms-nav-sidebar" class="dfms-nav-sidebar" aria-label="Sidebar">
+
+  
+  <div class="dfms-sidebar-brand">
+    <a href="admin.html" class="dfms-sidebar-brand-link" aria-label="Home">
+      <div class="dfms-sidebar-logo-mark">
+        
+
+<span class="dfms-brand-mark" aria-hidden="true">
+  <img
+    class="dfms-brand-mark__img dfms-brand-mark__img--light"
+    src="static/brand/optilogist/svg/mark-light.svg"
+    alt=""
+    width="32"
+    height="32"
+    decoding="async"
+  >
+  <img
+    class="dfms-brand-mark__img dfms-brand-mark__img--dark"
+    src="static/brand/optilogist/svg/mark-dark.svg"
+    alt=""
+    width="32"
+    height="32"
+    decoding="async"
+  >
+</span>
+
+      </div>
+      <div class="dfms-sidebar-brand-text">
+        <span class="dfms-sidebar-brand-name">Optilogist</span>
+        <span class="dfms-sidebar-brand-sub">Demo Agro Ltd Admin</span>
+      </div>
+    </a>
+    
+    <button
+      type="button"
+      id="dfms-sidebar-close"
+      class="dfms-sidebar-close"
+      aria-label="Close menu"
+      title="Close menu"
+    >
+      <i class="bi bi-x-lg" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  
+  <div class="dfms-nav-search">
+    <i class="bi bi-search dfms-nav-search-icon"></i>
+    <input
+      type="search"
+      id="dfms-nav-filter"
+      class="dfms-nav-filter-input"
+      placeholder="Filter…"
+      aria-label="Filter navigation items"
+      autocomplete="off"
+    >
+  </div>
+
+  
+  <div class="dfms-nav-body" id="dfms-nav-body">
+
+    
+    
+    
+      
+        <div class="dfms-nav-group" data-app="portal-overview">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-overview"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-speedometer2"></i>
+            </span>
+            <span class="dfms-nav-group-label">Overview</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="dashboard">
+                <a href="admin.html" class="dfms-nav-link" data-nav-id="dashboard">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Dashboard</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-requisition">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-requisition"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-clipboard-check"></i>
+            </span>
+            <span class="dfms-nav-group-label">Requisition</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="finished goods">
+                <a href="admin_requisitions_productrequisition.html" class="dfms-nav-link" data-nav-id="requisition_fg">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Finished Goods</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-port-shipments">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-port-shipments"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-box-seam"></i>
+            </span>
+            <span class="dfms-nav-group-label">Port Shipments</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="port shipments">
+                <a href="admin_requisitions_portshipmentproxy.html" class="dfms-nav-link" data-nav-id="port_shipments">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Port Shipments</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-distribution">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-distribution"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-arrow-right-circle"></i>
+            </span>
+            <span class="dfms-nav-group-label">Distribution</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="product requisitions">
+                <a href="admin_requisitions_productrequisition_pr_type_FINISHED_GOODS.html" class="dfms-nav-link" data-nav-id="distribution_pr_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Product requisitions</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="transport requests">
+                <a href="admin_requisitions_transportrequisition_tr_type_FG.html" class="dfms-nav-link" data-nav-id="distribution_transport_requests">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Transport requests</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-procurement">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-procurement"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-box-arrow-in-right"></i>
+            </span>
+            <span class="dfms-nav-group-label">Procurement</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="port shipments">
+                <a href="admin_requisitions_portshipmentproxy.html" class="dfms-nav-link" data-nav-id="procurement_port_shipments">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Port Shipments</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="transport requests">
+                <a href="admin_requisitions_transportrequisition_tr_type_PORT_CONSIGNMENT.html" class="dfms-nav-link" data-nav-id="procurement_transport_requests">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Transport requests</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-transport">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-transport"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-truck"></i>
+            </span>
+            <span class="dfms-nav-group-label">Transport</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="live gps">
+                <a href="admin_tracking_live_gps.html" class="dfms-nav-link" data-nav-id="live_gps">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Live GPS</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="transport requests">
+                <a href="admin_requisitions_transportrequisition.html" class="dfms-nav-link" data-nav-id="transport_requests">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Transport requests</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="transport orders">
+                <a href="admin_transport_transportorder.html" class="dfms-nav-link" data-nav-id="transport_orders">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Transport orders</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="vehicle planning">
+                <a href="admin_transport_vehicle_planning.html" class="dfms-nav-link" data-nav-id="vehicle_planning">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicle planning</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="bids management">
+                <a href="admin_vendors_biddingsession.html" class="dfms-nav-link" data-nav-id="bids_management">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Bids management</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-master-data">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-master-data"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-database"></i>
+            </span>
+            <span class="dfms-nav-group-label">Master Data</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="points of interest">
+                <a href="admin_master_data_poi.html" class="dfms-nav-link" data-nav-id="pois">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Points of Interest</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="loading/unloading points">
+                <a href="admin_master_data_loadingunloadingpoint.html" class="dfms-nav-link" data-nav-id="loading_unloading_points">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Loading/Unloading Points</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="vehicle brands">
+                <a href="admin_master_data_brand.html" class="dfms-nav-link" data-nav-id="vehicle_brands">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicle Brands</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="vehicles">
+                <a href="admin_master_data_vehicle.html" class="dfms-nav-link" data-nav-id="vehicles">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicles</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="helpers">
+                <a href="admin_users_helper.html" class="dfms-nav-link" data-nav-id="helpers">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Helpers</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="dealers">
+                <a href="admin_master_data_dealer.html" class="dfms-nav-link" data-nav-id="dealers">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Dealers</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="suppliers">
+                <a href="admin_master_data_supplier.html" class="dfms-nav-link" data-nav-id="suppliers">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Suppliers</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="product categories">
+                <a href="admin_master_data_productcategory.html" class="dfms-nav-link" data-nav-id="product_categories">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Product Categories</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="product sub-category">
+                <a href="admin_master_data_productsubcategory.html" class="dfms-nav-link" data-nav-id="product_sub_categories">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Product Sub-category</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="products">
+                <a href="admin_master_data_product.html" class="dfms-nav-link" data-nav-id="products">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Products</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-gate">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-gate"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-door-open"></i>
+            </span>
+            <span class="dfms-nav-group-label">Gate</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="vehicle entry (gate-in)">
+                <a href="admin_operations_gatein_add.html" class="dfms-nav-link" data-nav-id="gate_in">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicle Entry (Gate-In)</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="vehicle exit (gate-out)">
+                <a href="admin_operations_gateout_add.html" class="dfms-nav-link" data-nav-id="gate_out">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vehicle Exit (Gate-Out)</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="active visits">
+                <a href="admin_operations_gatevisitsession_status_exact_active.html" class="dfms-nav-link" data-nav-id="gate_active_visits">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Active Visits</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="visit history">
+                <a href="admin_operations_gatevisitsession.html" class="dfms-nav-link" data-nav-id="gate_visit_history">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Visit History</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="on-demand to">
+                <a href="admin_operations_gateondemandtorequest.html" class="dfms-nav-link" data-nav-id="gate_on_demand_to">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">On-Demand TO</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-command-center">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-command-center"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-speedometer2"></i>
+            </span>
+            <span class="dfms-nav-group-label">Command Center</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="queue">
+                <a href="admin_operations_queueentry_status_exact_waiting.html" class="dfms-nav-link" data-nav-id="cc_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Queue</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="bay assignments">
+                <a href="admin_operations_bayassignment.html" class="dfms-nav-link" data-nav-id="cc_bay_assignments">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Bay Assignments</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="waiting serials">
+                <a href="admin_operations_waitingserial.html" class="dfms-nav-link" data-nav-id="cc_waiting_serials">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Waiting Serials</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-loading">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-loading"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-box-arrow-up"></i>
+            </span>
+            <span class="dfms-nav-group-label">Loading</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="load events">
+                <a href="admin_operations_loadevent.html" class="dfms-nav-link" data-nav-id="ld_load_events">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Load Events</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="start loading">
+                <a href="admin_operations_loadevent_add.html" class="dfms-nav-link" data-nav-id="ld_new_load_event">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Start Loading</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-unloading">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-unloading"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-box-arrow-down"></i>
+            </span>
+            <span class="dfms-nav-group-label">Unloading</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="unload events">
+                <a href="admin_operations_unloadevent.html" class="dfms-nav-link" data-nav-id="ld_unload_events">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Unload Events</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="start unloading">
+                <a href="admin_operations_unloadevent_add.html" class="dfms-nav-link" data-nav-id="ld_new_unload_event">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Start Unloading</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-qc-checkpoint">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-qc-checkpoint"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-clipboard2-pulse"></i>
+            </span>
+            <span class="dfms-nav-group-label">QC Checkpoint</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="qc queue">
+                <a href="admin_quality_qcqueuetransportorder.html" class="dfms-nav-link" data-nav-id="qc_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">QC Queue</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-scaling">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-scaling"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-speedometer"></i>
+            </span>
+            <span class="dfms-nav-group-label">Scaling</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="scale-in">
+                <a href="admin_operations_scalein_add.html" class="dfms-nav-link" data-nav-id="scale_in">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Scale-In</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="scale-out">
+                <a href="admin_operations_scaleout_add.html" class="dfms-nav-link" data-nav-id="scale_out">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Scale-Out</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="queue tokens">
+                <a href="admin_operations_queuetoken.html" class="dfms-nav-link" data-nav-id="queue_tokens">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Queue Tokens</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="gate passes">
+                <a href="admin_operations_scaleout.html" class="dfms-nav-link" data-nav-id="gate_passes_scaling">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Gate Passes</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group dfms-nav-group--active" data-app="portal-fleet-operations">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-fleet-operations"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-clipboard2-check"></i>
+            </span>
+            <span class="dfms-nav-group-label">Fleet operations</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="dispatch queue">
+                <a href="admin_fleet_supervisor_vehicleinspection_dispatch_queue.html" class="dfms-nav-link" data-nav-id="fleet_dispatch_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Dispatch queue</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="under maintenance">
+                <a href="admin_fleet_supervisor_vehicleinspection_maintenance_queue.html" class="dfms-nav-link" data-nav-id="fleet_maintenance_queue">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Under Maintenance</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item dfms-nav-item--active" data-label="inspection records">
+                <a href="admin_fleet_supervisor_vehicleinspection.html" class="dfms-nav-link" data-nav-id="fleet_inspection_queue" aria-current="page">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Inspection records</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-driver-management">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-driver-management"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-person-badge"></i>
+            </span>
+            <span class="dfms-nav-group-label">Driver Management</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="driver attendance">
+                <a href="admin_fleet_supervisor_driverattendance.html" class="dfms-nav-link" data-nav-id="fleet_attendance">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Driver Attendance</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="driver leave management">
+                <a href="admin_fleet_supervisor_driverleave.html" class="dfms-nav-link" data-nav-id="fleet_leave">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Driver Leave Management</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-trips">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-trips"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-phone"></i>
+            </span>
+            <span class="dfms-nav-group-label">Trips</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="my trips">
+                <a href="admin_transport_drivertransportorder_assigned_driver_me.html" class="dfms-nav-link" data-nav-id="driver_my_tos">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">My Trips</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="pod records">
+                <a href="admin_transport_proofofdelivery.html" class="dfms-nav-link" data-nav-id="driver_pod_records">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">POD Records</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-vendors">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-vendors"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-building"></i>
+            </span>
+            <span class="dfms-nav-group-label">Vendors</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="vendors">
+                <a href="vendors.html" class="dfms-nav-link" data-nav-id="vendors">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Vendors</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="dfms-nav-group" data-app="portal-users-access">
+          <button
+            class="dfms-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-users-access"
+            type="button"
+          >
+            <span class="dfms-nav-group-icon">
+              <i class="bi bi-people"></i>
+            </span>
+            <span class="dfms-nav-group-label">Users &amp; Access</span>
+            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+          </button>
+          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+            
+              <li class="dfms-nav-item" data-label="users">
+                <a href="admin_users_user.html" class="dfms-nav-link" data-nav-id="users">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Users</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="drivers">
+                <a href="admin_users_driver.html" class="dfms-nav-link" data-nav-id="drivers">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Drivers</span>
+                </a>
+              </li>
+            
+              <li class="dfms-nav-item" data-label="audit logs">
+                <a href="admin_audit_auditlog.html" class="dfms-nav-link" data-nav-id="audit_logs">
+                  <i class="bi bi-dot dfms-nav-item-dot"></i>
+                  <span class="dfms-nav-item-label">Audit Logs</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+    
+
+    
+    
+    
+
+  </div>
+
+  
+  <div class="dfms-nav-footer">
+    <span class="dfms-nav-footer-text">Optilogist</span>
+  </div>
+
+</nav>
+
+
+      
+      <main id="content-start" class="content" tabindex="-1">
+        
+          
+        
+        <!-- Content -->
+        <div id="content" class="colM">
+          
+  
+  <nav aria-label="Breadcrumbs" class="dfms-breadcrumbs">
+    
+<div class="breadcrumbs">
+  <a href="admin.html">Home</a>
+  
+    &rsaquo; <a href="admin_fleet_supervisor_vehicleinspection.html">Vehicle Inspections</a>
+  
+  &rsaquo; Clearance Bhola-Ta-15-3345 — pending
+</div>
+
+  </nav>
+  
+
+          
+          
+          <div id="content-main">
+
+<div class="dfms-page-header">
+
+  <div class="dfms-page-header__title">
+    
+    
+    
+    <a href="admin_fleet_supervisor_vehicleinspection.html" class="dfms-page-header__back" title="Back to list">
+      <i class="bi bi-arrow-left"></i>
+    </a>
+    
+
+    <h1>
+      
+        Vehicle Inspection
+      
+    </h1>
+  </div>
+
+  
+  <div class="dfms-page-header__actions">
+    
+    
+    <a href="#" data-demo-missing="1" class="dfms-btn-secondary">
+      <i class="bi bi-clock-history"></i>
+      History
+    </a>
+
+    
+    
+  </div>
+  
+
+</div>
+
+<form method="post" id="vehicleinspection_form" novalidate><input type="hidden" name="csrfmiddlewaretoken" value="demo">
+
+  
+  <p class="help">
+    Re-inspection checklist. Set each line to OK, Issue, or N/A and add remarks where needed. When all items are reviewed, click <strong>Mark vehicle as No Active TO</strong> — only the vehicle status is changed, no transport order is affected.
+  </p>
+  
+
+
+
+<div>
+
+
+
+
+
+
+
+  <fieldset class="module aligned ">
+    
+    
+        <div class="description">For each checklist line below, set outcome (OK / Issue / N/A) and optional remarks. Then click “Complete inspection & dispatch” (not only Save).</div>
+    
+    
+        <div class="form-row field-transport_order">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Transport order:</label>
+                                
+                                    <div class="readonly">-</div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-vehicle">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Vehicle:</label>
+                                
+                                    <div class="readonly"><a href="md_vehicle_change.html#0bd5ea57-4e0f-403a-a355-a9d6acb71fa8">Bhola-Ta-15-3345</a></div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-supervisor">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Supervisor:</label>
+                                
+                                    <div class="readonly"><a href="md_user_change.html#720aba03-376e-423b-82ab-026e59d3ebeb">Demo Admin &lt;admin@example.com&gt;</a></div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-status">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Status:</label>
+                                
+                                    <div class="readonly">Pending</div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-completion_remarks">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label for="id_completion_remarks">Completion remarks:</label>
+                                
+                                    <textarea name="completion_remarks" cols="40" rows="10" class="vLargeTextField" id="id_completion_remarks">
+</textarea>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-rejection_reason">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Rejection reason:</label>
+                                
+                                    <div class="readonly"></div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+</fieldset>
+
+
+  <fieldset class="module aligned collapse">
+    <h2>Timestamps</h2>
+    
+    
+        <div class="form-row field-inspection_completed_at">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Inspection completed at:</label>
+                                
+                                    <div class="readonly">-</div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-created_at">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Created at:</label>
+                                
+                                    <div class="readonly">Aug. 27, 2026, 8:36 p.m.</div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-updated_at">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label>Updated at:</label>
+                                
+                                    <div class="readonly">Aug. 27, 2026, 8:36 p.m.</div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+</fieldset>
+
+
+
+
+
+
+
+
+    
+
+<div class="inline-group" id="responses-group">
+<div class="tabular inline-related checklist-inspection-inline">
+
+  
+  <input type="hidden" name="responses-TOTAL_FORMS" value="54" id="id_responses-TOTAL_FORMS"><input type="hidden" name="responses-INITIAL_FORMS" value="54" id="id_responses-INITIAL_FORMS"><input type="hidden" name="responses-MIN_NUM_FORMS" value="0" id="id_responses-MIN_NUM_FORMS"><input type="hidden" name="responses-MAX_NUM_FORMS" value="0" id="id_responses-MAX_NUM_FORMS">
+
+  <fieldset class="module">
+    <h2>Vehicle Checklist</h2>
+
+    
+
+    
+
+    
+
+    <div class="checklist-inspection-sections">
+      
+      <section class="checklist-section" aria-label="Engine">
+        <header class="checklist-section__head">
+          <i class="bi bi-clipboard2-check checklist-section__icon" aria-hidden="true"></i>
+          <span class="checklist-section__title">Engine</span>
+        </header>
+        <table class="checklist-inspection-table">
+          <thead>
+            <tr class="checklist-section__columns">
+              <th scope="col" class="checklist-section__col-num">#</th>
+              <th scope="col">Check Item</th>
+              <th scope="col" class="checklist-section__col-result">Result</th>
+              <th scope="col">Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-0-id" value="d0e7280f-c0b7-43ed-87cc-2a20133fc296" id="id_responses-0-id">
+                1
+              </td>
+              <td class="field-name">Engine Oil</td>
+              <td class="field-status">
+                
+                  <select name="responses-0-status" class="checklist-status-select" id="id_responses-0-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-0-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-0-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-1-id" value="401fa6c5-5733-4240-92b5-2300a99d3f0b" id="id_responses-1-id">
+                2
+              </td>
+              <td class="field-name">Air Filter</td>
+              <td class="field-status">
+                
+                  <select name="responses-1-status" class="checklist-status-select" id="id_responses-1-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-1-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-1-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-2-id" value="123dc056-706b-44dc-bd7b-2dbc3a93fc6e" id="id_responses-2-id">
+                3
+              </td>
+              <td class="field-name">Fuel Pump</td>
+              <td class="field-status">
+                
+                  <select name="responses-2-status" class="checklist-status-select" id="id_responses-2-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-2-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-2-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-3-id" value="1cde198d-5696-4db9-9335-29dcbbb27b47" id="id_responses-3-id">
+                4
+              </td>
+              <td class="field-name">Fuel System</td>
+              <td class="field-status">
+                
+                  <select name="responses-3-status" class="checklist-status-select" id="id_responses-3-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-3-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-3-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-4-id" value="d113e276-5d4c-4287-afed-c606be5bf326" id="id_responses-4-id">
+                5
+              </td>
+              <td class="field-name">Brake System</td>
+              <td class="field-status">
+                
+                  <select name="responses-4-status" class="checklist-status-select" id="id_responses-4-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-4-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-4-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-5-id" value="8ad7adf0-764e-4b3e-99f3-9a7835cb47e3" id="id_responses-5-id">
+                6
+              </td>
+              <td class="field-name">R.P.M</td>
+              <td class="field-status">
+                
+                  <select name="responses-5-status" class="checklist-status-select" id="id_responses-5-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-5-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-5-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-6-id" value="3ef91960-54e3-4f00-9ac8-24df4a73d85a" id="id_responses-6-id">
+                7
+              </td>
+              <td class="field-name">Brake Oil</td>
+              <td class="field-status">
+                
+                  <select name="responses-6-status" class="checklist-status-select" id="id_responses-6-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-6-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-6-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-7-id" value="00676d3a-093a-42d0-8895-d2b02bf8abbf" id="id_responses-7-id">
+                8
+              </td>
+              <td class="field-name">Radiator Water</td>
+              <td class="field-status">
+                
+                  <select name="responses-7-status" class="checklist-status-select" id="id_responses-7-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-7-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-7-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-8-id" value="c3d9d0f8-7ddc-4055-a53f-86d7de9c4108" id="id_responses-8-id">
+                9
+              </td>
+              <td class="field-name">Air System</td>
+              <td class="field-status">
+                
+                  <select name="responses-8-status" class="checklist-status-select" id="id_responses-8-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-8-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-8-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </section>
+      
+      <section class="checklist-section" aria-label="Clutch">
+        <header class="checklist-section__head">
+          <i class="bi bi-clipboard2-check checklist-section__icon" aria-hidden="true"></i>
+          <span class="checklist-section__title">Clutch</span>
+        </header>
+        <table class="checklist-inspection-table">
+          <thead>
+            <tr class="checklist-section__columns">
+              <th scope="col" class="checklist-section__col-num">#</th>
+              <th scope="col">Check Item</th>
+              <th scope="col" class="checklist-section__col-result">Result</th>
+              <th scope="col">Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-9-id" value="b61526c5-ed12-4267-96e8-29b8ab8371c5" id="id_responses-9-id">
+                1
+              </td>
+              <td class="field-name">Ease in Engagement</td>
+              <td class="field-status">
+                
+                  <select name="responses-9-status" class="checklist-status-select" id="id_responses-9-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-9-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-9-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-10-id" value="ff93aed3-7dbe-46da-ae52-90d3d679c856" id="id_responses-10-id">
+                2
+              </td>
+              <td class="field-name">Lubrications</td>
+              <td class="field-status">
+                
+                  <select name="responses-10-status" class="checklist-status-select" id="id_responses-10-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-10-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-10-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-11-id" value="f0764b80-57e6-44c8-a4f6-605484f90505" id="id_responses-11-id">
+                3
+              </td>
+              <td class="field-name">Paddle Free Play</td>
+              <td class="field-status">
+                
+                  <select name="responses-11-status" class="checklist-status-select" id="id_responses-11-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-11-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-11-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-12-id" value="ed69e17b-8989-43cf-9e14-665374cfaec3" id="id_responses-12-id">
+                4
+              </td>
+              <td class="field-name">Clutch Master Cylinder</td>
+              <td class="field-status">
+                
+                  <select name="responses-12-status" class="checklist-status-select" id="id_responses-12-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-12-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-12-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-13-id" value="ece90bdb-10d0-40d2-b08d-060ec74964a7" id="id_responses-13-id">
+                5
+              </td>
+              <td class="field-name">Clutch Release Cylinder</td>
+              <td class="field-status">
+                
+                  <select name="responses-13-status" class="checklist-status-select" id="id_responses-13-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-13-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-13-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-14-id" value="ef19432c-c3f3-4e7c-8c13-ed5afecbc4ec" id="id_responses-14-id">
+                6
+              </td>
+              <td class="field-name">Clutch Paddle</td>
+              <td class="field-status">
+                
+                  <select name="responses-14-status" class="checklist-status-select" id="id_responses-14-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-14-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-14-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </section>
+      
+      <section class="checklist-section" aria-label="Gear Box">
+        <header class="checklist-section__head">
+          <i class="bi bi-clipboard2-check checklist-section__icon" aria-hidden="true"></i>
+          <span class="checklist-section__title">Gear Box</span>
+        </header>
+        <table class="checklist-inspection-table">
+          <thead>
+            <tr class="checklist-section__columns">
+              <th scope="col" class="checklist-section__col-num">#</th>
+              <th scope="col">Check Item</th>
+              <th scope="col" class="checklist-section__col-result">Result</th>
+              <th scope="col">Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-15-id" value="7d1624aa-15eb-4dce-8c00-ce3f731bc19d" id="id_responses-15-id">
+                1
+              </td>
+              <td class="field-name">Different Types</td>
+              <td class="field-status">
+                
+                  <select name="responses-15-status" class="checklist-status-select" id="id_responses-15-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-15-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-15-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-16-id" value="02c3e7c1-a4c2-41e1-8902-cd12fa02de61" id="id_responses-16-id">
+                2
+              </td>
+              <td class="field-name">Temperature</td>
+              <td class="field-status">
+                
+                  <select name="responses-16-status" class="checklist-status-select" id="id_responses-16-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-16-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-16-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-17-id" value="e76b7d32-ccf4-4710-add2-5bbbfbd8e22f" id="id_responses-17-id">
+                3
+              </td>
+              <td class="field-name">Noise</td>
+              <td class="field-status">
+                
+                  <select name="responses-17-status" class="checklist-status-select" id="id_responses-17-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-17-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-17-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-18-id" value="b4781092-dd23-498c-876a-95f7ecab348a" id="id_responses-18-id">
+                4
+              </td>
+              <td class="field-name">Oil Leakage</td>
+              <td class="field-status">
+                
+                  <select name="responses-18-status" class="checklist-status-select" id="id_responses-18-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-18-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-18-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-19-id" value="a91b06ed-a9f9-4195-8e5a-99ceb6f69668" id="id_responses-19-id">
+                5
+              </td>
+              <td class="field-name">Gear Shifting</td>
+              <td class="field-status">
+                
+                  <select name="responses-19-status" class="checklist-status-select" id="id_responses-19-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-19-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-19-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </section>
+      
+      <section class="checklist-section" aria-label="Container">
+        <header class="checklist-section__head">
+          <i class="bi bi-clipboard2-check checklist-section__icon" aria-hidden="true"></i>
+          <span class="checklist-section__title">Container</span>
+        </header>
+        <table class="checklist-inspection-table">
+          <thead>
+            <tr class="checklist-section__columns">
+              <th scope="col" class="checklist-section__col-num">#</th>
+              <th scope="col">Check Item</th>
+              <th scope="col" class="checklist-section__col-result">Result</th>
+              <th scope="col">Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-20-id" value="57490e5c-f899-4132-be48-65634fa192dc" id="id_responses-20-id">
+                1
+              </td>
+              <td class="field-name">Inside of Container</td>
+              <td class="field-status">
+                
+                  <select name="responses-20-status" class="checklist-status-select" id="id_responses-20-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-20-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-20-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-21-id" value="5f380ef0-5d14-4845-8554-33b1f4fa6592" id="id_responses-21-id">
+                2
+              </td>
+              <td class="field-name">Container Door</td>
+              <td class="field-status">
+                
+                  <select name="responses-21-status" class="checklist-status-select" id="id_responses-21-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-21-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-21-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-22-id" value="a7a8e399-f875-456b-bef4-76d1b6ea6c28" id="id_responses-22-id">
+                3
+              </td>
+              <td class="field-name">Container Floor</td>
+              <td class="field-status">
+                
+                  <select name="responses-22-status" class="checklist-status-select" id="id_responses-22-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-22-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-22-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-23-id" value="2cce9003-7571-49ca-b4f4-a05a0de3a897" id="id_responses-23-id">
+                4
+              </td>
+              <td class="field-name">Rear Bumper</td>
+              <td class="field-status">
+                
+                  <select name="responses-23-status" class="checklist-status-select" id="id_responses-23-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-23-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-23-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-24-id" value="23769d6d-4512-4921-83ff-4efaf9c26788" id="id_responses-24-id">
+                5
+              </td>
+              <td class="field-name">Mudguard R/S</td>
+              <td class="field-status">
+                
+                  <select name="responses-24-status" class="checklist-status-select" id="id_responses-24-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-24-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-24-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-25-id" value="d1e31313-23c6-4f3a-bfe6-242b7a32a8c2" id="id_responses-25-id">
+                6
+              </td>
+              <td class="field-name">Air Cutter</td>
+              <td class="field-status">
+                
+                  <select name="responses-25-status" class="checklist-status-select" id="id_responses-25-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-25-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-25-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </section>
+      
+      <section class="checklist-section" aria-label="Electric">
+        <header class="checklist-section__head">
+          <i class="bi bi-clipboard2-check checklist-section__icon" aria-hidden="true"></i>
+          <span class="checklist-section__title">Electric</span>
+        </header>
+        <table class="checklist-inspection-table">
+          <thead>
+            <tr class="checklist-section__columns">
+              <th scope="col" class="checklist-section__col-num">#</th>
+              <th scope="col">Check Item</th>
+              <th scope="col" class="checklist-section__col-result">Result</th>
+              <th scope="col">Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-26-id" value="43cde83d-ddb9-4912-ab51-35b6035bad63" id="id_responses-26-id">
+                1
+              </td>
+              <td class="field-name">Head Light R/S</td>
+              <td class="field-status">
+                
+                  <select name="responses-26-status" class="checklist-status-select" id="id_responses-26-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-26-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-26-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-27-id" value="6f645a89-8038-4b52-8d6c-17dbc5be4f42" id="id_responses-27-id">
+                2
+              </td>
+              <td class="field-name">Battery Water</td>
+              <td class="field-status">
+                
+                  <select name="responses-27-status" class="checklist-status-select" id="id_responses-27-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-27-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-27-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-28-id" value="004f8dc9-16ec-42cb-8616-e822d3df362d" id="id_responses-28-id">
+                3
+              </td>
+              <td class="field-name">Parking Light Front RS &amp; LS</td>
+              <td class="field-status">
+                
+                  <select name="responses-28-status" class="checklist-status-select" id="id_responses-28-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-28-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-28-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-29-id" value="5acb1dcd-61a1-4812-b94d-a89423b21202" id="id_responses-29-id">
+                4
+              </td>
+              <td class="field-name">Parking Light Rear RS &amp; LS</td>
+              <td class="field-status">
+                
+                  <select name="responses-29-status" class="checklist-status-select" id="id_responses-29-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-29-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-29-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-30-id" value="9d776bb9-cfe4-4c99-a916-fa3b326e2c2e" id="id_responses-30-id">
+                5
+              </td>
+              <td class="field-name">Indicator Light Front RS &amp; LS</td>
+              <td class="field-status">
+                
+                  <select name="responses-30-status" class="checklist-status-select" id="id_responses-30-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-30-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-30-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-31-id" value="bdd7ce44-aaec-474a-bc7d-82c511ce1003" id="id_responses-31-id">
+                6
+              </td>
+              <td class="field-name">Indicator Light Rear RS &amp; LS</td>
+              <td class="field-status">
+                
+                  <select name="responses-31-status" class="checklist-status-select" id="id_responses-31-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-31-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-31-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-32-id" value="7141a083-e36c-4dfc-a2ef-263ef2da5f91" id="id_responses-32-id">
+                7
+              </td>
+              <td class="field-name">Back Light RS &amp; LS</td>
+              <td class="field-status">
+                
+                  <select name="responses-32-status" class="checklist-status-select" id="id_responses-32-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-32-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-32-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-33-id" value="6b558d7e-e162-4aee-9b04-1514fd6a4032" id="id_responses-33-id">
+                8
+              </td>
+              <td class="field-name">Brake Light RS &amp; LS</td>
+              <td class="field-status">
+                
+                  <select name="responses-33-status" class="checklist-status-select" id="id_responses-33-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-33-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-33-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-34-id" value="7aecad7f-14ea-476e-95b0-6f498bb0aa60" id="id_responses-34-id">
+                9
+              </td>
+              <td class="field-name">Fuse Board</td>
+              <td class="field-status">
+                
+                  <select name="responses-34-status" class="checklist-status-select" id="id_responses-34-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-34-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-34-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-35-id" value="35194a94-412c-4db2-a36d-c82f2a0f3094" id="id_responses-35-id">
+                10
+              </td>
+              <td class="field-name">Alternator</td>
+              <td class="field-status">
+                
+                  <select name="responses-35-status" class="checklist-status-select" id="id_responses-35-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-35-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-35-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-36-id" value="f15e3f2e-6498-4dfd-9775-cf0e07801f74" id="id_responses-36-id">
+                11
+              </td>
+              <td class="field-name">Self</td>
+              <td class="field-status">
+                
+                  <select name="responses-36-status" class="checklist-status-select" id="id_responses-36-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-36-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-36-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-37-id" value="3fdea4d5-10fe-4b35-a0ac-0a8b68fe023e" id="id_responses-37-id">
+                12
+              </td>
+              <td class="field-name">Cabin Light</td>
+              <td class="field-status">
+                
+                  <select name="responses-37-status" class="checklist-status-select" id="id_responses-37-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-37-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-37-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-38-id" value="338d0731-d1b5-4fb7-b1e2-64a2ce4969b4" id="id_responses-38-id">
+                13
+              </td>
+              <td class="field-name">Container Inside Light</td>
+              <td class="field-status">
+                
+                  <select name="responses-38-status" class="checklist-status-select" id="id_responses-38-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-38-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-38-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </section>
+      
+      <section class="checklist-section" aria-label="Chassis">
+        <header class="checklist-section__head">
+          <i class="bi bi-clipboard2-check checklist-section__icon" aria-hidden="true"></i>
+          <span class="checklist-section__title">Chassis</span>
+        </header>
+        <table class="checklist-inspection-table">
+          <thead>
+            <tr class="checklist-section__columns">
+              <th scope="col" class="checklist-section__col-num">#</th>
+              <th scope="col">Check Item</th>
+              <th scope="col" class="checklist-section__col-result">Result</th>
+              <th scope="col">Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-39-id" value="e2393dc0-5ffd-435a-a481-798c6298a61a" id="id_responses-39-id">
+                1
+              </td>
+              <td class="field-name">Chassis</td>
+              <td class="field-status">
+                
+                  <select name="responses-39-status" class="checklist-status-select" id="id_responses-39-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-39-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-39-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-40-id" value="e1a39bd6-74ac-44de-94ff-8138f1a18be2" id="id_responses-40-id">
+                2
+              </td>
+              <td class="field-name">Chassis Nut &amp; Bolt</td>
+              <td class="field-status">
+                
+                  <select name="responses-40-status" class="checklist-status-select" id="id_responses-40-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-40-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-40-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-41-id" value="188f5ae3-78b1-4ab5-a0b0-9d0c0f467c3b" id="id_responses-41-id">
+                3
+              </td>
+              <td class="field-name">All U Bolt</td>
+              <td class="field-status">
+                
+                  <select name="responses-41-status" class="checklist-status-select" id="id_responses-41-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-41-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-41-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-42-id" value="18bfd78c-add9-4205-b951-cb85ac27e5d4" id="id_responses-42-id">
+                4
+              </td>
+              <td class="field-name">Leaf Spring</td>
+              <td class="field-status">
+                
+                  <select name="responses-42-status" class="checklist-status-select" id="id_responses-42-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-42-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-42-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-43-id" value="54eeb108-b108-4231-8d7e-24f4d812c7fb" id="id_responses-43-id">
+                5
+              </td>
+              <td class="field-name">Leaf Spring Hanger</td>
+              <td class="field-status">
+                
+                  <select name="responses-43-status" class="checklist-status-select" id="id_responses-43-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-43-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-43-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </section>
+      
+      <section class="checklist-section" aria-label="Cabin">
+        <header class="checklist-section__head">
+          <i class="bi bi-clipboard2-check checklist-section__icon" aria-hidden="true"></i>
+          <span class="checklist-section__title">Cabin</span>
+        </header>
+        <table class="checklist-inspection-table">
+          <thead>
+            <tr class="checklist-section__columns">
+              <th scope="col" class="checklist-section__col-num">#</th>
+              <th scope="col">Check Item</th>
+              <th scope="col" class="checklist-section__col-result">Result</th>
+              <th scope="col">Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-44-id" value="542c374e-6a36-4644-84e6-be5de60743de" id="id_responses-44-id">
+                1
+              </td>
+              <td class="field-name">Door RS &amp; LS</td>
+              <td class="field-status">
+                
+                  <select name="responses-44-status" class="checklist-status-select" id="id_responses-44-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-44-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-44-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-45-id" value="e62be49a-335e-4958-8f9b-cc47e477ce37" id="id_responses-45-id">
+                2
+              </td>
+              <td class="field-name">Door Lock RS &amp; LS</td>
+              <td class="field-status">
+                
+                  <select name="responses-45-status" class="checklist-status-select" id="id_responses-45-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-45-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-45-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-46-id" value="c9487d96-f1fb-43e4-bb37-298daaa30b25" id="id_responses-46-id">
+                3
+              </td>
+              <td class="field-name">Foot Rest RS &amp; LS</td>
+              <td class="field-status">
+                
+                  <select name="responses-46-status" class="checklist-status-select" id="id_responses-46-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-46-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-46-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-47-id" value="7bade464-e2d8-4d8c-b851-4e31bc0764b2" id="id_responses-47-id">
+                4
+              </td>
+              <td class="field-name">Looking Glass RS &amp; LS</td>
+              <td class="field-status">
+                
+                  <select name="responses-47-status" class="checklist-status-select" id="id_responses-47-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-47-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-47-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-48-id" value="67833891-954f-4983-b0bd-06a700bf1312" id="id_responses-48-id">
+                5
+              </td>
+              <td class="field-name">Door Glass RS &amp; LS</td>
+              <td class="field-status">
+                
+                  <select name="responses-48-status" class="checklist-status-select" id="id_responses-48-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-48-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-48-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-49-id" value="352462a2-6b18-4714-b51b-e039e07596dc" id="id_responses-49-id">
+                6
+              </td>
+              <td class="field-name">Cabin Ventilator Glass</td>
+              <td class="field-status">
+                
+                  <select name="responses-49-status" class="checklist-status-select" id="id_responses-49-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-49-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-49-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-50-id" value="6c469e83-9bc1-4cae-826d-478ed04cee53" id="id_responses-50-id">
+                7
+              </td>
+              <td class="field-name">Windshield</td>
+              <td class="field-status">
+                
+                  <select name="responses-50-status" class="checklist-status-select" id="id_responses-50-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-50-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-50-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-51-id" value="7ca92347-2349-41fe-a3f7-1c27b6845fac" id="id_responses-51-id">
+                8
+              </td>
+              <td class="field-name">Front Bumper</td>
+              <td class="field-status">
+                
+                  <select name="responses-51-status" class="checklist-status-select" id="id_responses-51-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-51-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-51-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-52-id" value="73581ee3-de56-4611-9b0f-d3c2d47b144c" id="id_responses-52-id">
+                9
+              </td>
+              <td class="field-name">Front Plastic Bonnet</td>
+              <td class="field-status">
+                
+                  <select name="responses-52-status" class="checklist-status-select" id="id_responses-52-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-52-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-52-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+            <tr class="item-row">
+              <td class="field-num">
+                <input type="hidden" name="responses-53-id" value="ab97a294-8b08-4d1b-8f7f-d2e88c193f6e" id="id_responses-53-id">
+                10
+              </td>
+              <td class="field-name">Driver and Helper Sit</td>
+              <td class="field-status">
+                
+                  <select name="responses-53-status" class="checklist-status-select" id="id_responses-53-status">
+  <option value="">---------</option>
+
+  <option value="ok" selected>OK</option>
+
+  <option value="issue">Issue</option>
+
+  <option value="na">N/A</option>
+
+</select>
+                
+                
+              </td>
+              <td class="field-remarks">
+                
+                  <textarea name="responses-53-remarks" cols="40" rows="2" placeholder="Optional — describe any issue or note" style="width:100%;resize:vertical;" id="id_responses-53-remarks">
+</textarea>
+                
+                
+              </td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </section>
+      
+    </div>
+  </fieldset>
+
+</div>
+</div>
+
+<style>
+/* Checklist — one bordered section card per checklist group (DFMS data-display). */
+.checklist-inspection-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  margin-top: 0.75rem;
+  padding: 0.25rem 1rem 1.25rem;
+}
+
+.checklist-section {
+  border: 1px solid var(--dfms-grey-300, var(--dfms-border-color));
+  border-radius: var(--dfms-radius-md, 8px);
+  overflow: hidden;
+  background: var(--dfms-card-bg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+.checklist-section__head {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin: 0;
+  padding: 0.875rem 1.25rem;
+  background: var(--dfms-table-header-bg);
+  border-bottom: 1px solid var(--dfms-grey-300, var(--dfms-border-color));
+}
+
+.checklist-section__icon {
+  flex-shrink: 0;
+  font-size: 15px;
+  color: var(--dfms-primary);
+  line-height: 1;
+}
+
+.checklist-section__title {
+  margin: 0;
+  padding: 0;
+  background: none;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dfms-grey-900);
+  line-height: 1.4;
+}
+
+.checklist-inspection-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  color: var(--dfms-grey-900);
+  background: var(--dfms-card-bg);
+}
+
+.checklist-inspection-table .checklist-section__columns th {
+  background: var(--dfms-card-bg);
+  color: var(--dfms-grey-600);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 0.625rem 12px;
+  border-bottom: 1px solid var(--dfms-grey-300, var(--dfms-border-color));
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-align: left;
+}
+
+.checklist-section__col-num {
+  width: 3ch;
+  text-align: center;
+}
+
+.checklist-section__col-result {
+  width: 115px;
+}
+
+.checklist-inspection-table .item-row td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--dfms-border-color);
+  vertical-align: middle;
+  color: var(--dfms-grey-900);
+  background: var(--dfms-card-bg);
+}
+
+.checklist-inspection-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.checklist-inspection-table .item-row:hover td {
+  background: var(--dfms-primary-light);
+}
+
+.checklist-inspection-table .item-row.errors td {
+  background: var(--dfms-danger-bg);
+}
+
+.checklist-inspection-table .field-num {
+  color: var(--dfms-grey-500);
+  text-align: center;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.checklist-inspection-table .field-status {
+  position: relative;
+  overflow: visible;
+}
+
+.checklist-status-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.checklist-inspection-table .field-status select.checklist-status-select {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  pointer-events: none;
+}
+
+.checklist-status-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+  width: 100%;
+  min-height: 36px;
+  padding: 0.35rem 0.55rem 0.35rem 0.65rem;
+  border: 1px solid var(--dfms-border-color);
+  border-radius: 6px;
+  background: var(--dfms-input-bg);
+  color: var(--dfms-primary);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: left;
+  cursor: pointer;
+}
+
+.checklist-status-trigger:hover {
+  border-color: var(--dfms-grey-400, var(--dfms-border-color));
+}
+
+.checklist-status-trigger[aria-expanded="true"] {
+  border-color: var(--dfms-primary);
+  box-shadow: 0 0 0 3px rgba(91, 101, 220, 0.18);
+}
+
+.checklist-status-trigger__chevron {
+  flex-shrink: 0;
+  font-size: 11px;
+  color: var(--dfms-grey-500);
+}
+
+.checklist-status-menu {
+  position: fixed;
+  z-index: 10050;
+  min-width: 132px;
+  padding: 0.35rem;
+  border: 1px solid var(--dfms-grey-300, var(--dfms-border-color));
+  border-radius: 8px;
+  background: var(--dfms-card-bg);
+  box-shadow: var(--dfms-shadow-md, 0 8px 24px rgba(0, 0, 0, 0.18));
+}
+
+.checklist-status-menu__item {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0.55rem 0.7rem;
+  border: 0;
+  border-radius: 6px;
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: transparent;
+  background-image: none;
+  box-shadow: none;
+  color: var(--dfms-grey-900);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: left;
+  cursor: pointer;
+}
+
+.checklist-status-menu__item:hover {
+  background-color: var(--dfms-primary-dark, #122056) !important;
+  color: #fff !important;
+}
+
+.checklist-status-menu__item.is-selected {
+  background-color: transparent !important;
+  color: var(--dfms-grey-900) !important;
+  font-weight: 500;
+}
+
+.checklist-status-menu__item.is-selected:hover {
+  background-color: var(--dfms-primary-dark, #122056) !important;
+  color: #fff !important;
+}
+
+.checklist-inspection-table .field-remarks textarea {
+  width: 100%;
+  resize: vertical;
+  font-size: 12px;
+  min-height: 36px;
+}
+
+.remarks-readonly {
+  color: var(--dfms-grey-700);
+  font-size: 12px;
+  white-space: pre-wrap;
+}
+</style>
+<script>
+(function () {
+  var SELECTOR = ".checklist-inspection-table select.checklist-status-select, .checklist-inspection-table .field-status select";
+  var open = null;
+
+  function selectedLabel(select) {
+    var opt = select.options[select.selectedIndex];
+    if (opt && opt.value) return opt.text;
+    return "Select";
+  }
+
+  function closeMenu() {
+    if (!open) return;
+    open.trigger.setAttribute("aria-expanded", "false");
+    open.menu.remove();
+    open = null;
+    document.removeEventListener("mousedown", onDocDown, true);
+    document.removeEventListener("keydown", onKeyDown);
+    window.removeEventListener("scroll", closeMenu, true);
+    window.removeEventListener("resize", closeMenu);
+  }
+
+  function onDocDown(e) {
+    if (!open) return;
+    if (open.menu.contains(e.target) || open.trigger.contains(e.target)) return;
+    closeMenu();
+  }
+
+  function onKeyDown(e) {
+    if (e.key === "Escape") closeMenu();
+  }
+
+  function placeMenu(menu, trigger) {
+    var rect = trigger.getBoundingClientRect();
+    var width = Math.max(rect.width, 132);
+    menu.style.minWidth = width + "px";
+    var top = rect.bottom + 6;
+    if (top + menu.offsetHeight > window.innerHeight - 8) {
+      top = Math.max(8, rect.top - menu.offsetHeight - 6);
+    }
+    var left = rect.left;
+    if (left + width > window.innerWidth - 8) {
+      left = Math.max(8, window.innerWidth - width - 8);
+    }
+    menu.style.top = top + "px";
+    menu.style.left = left + "px";
+  }
+
+  function openMenu(select, trigger) {
+    closeMenu();
+    var menu = document.createElement("div");
+    menu.className = "checklist-status-menu";
+    menu.setAttribute("role", "listbox");
+
+    Array.prototype.forEach.call(select.options, function (opt) {
+      if (!opt.value) return;
+      var item = document.createElement("button");
+      item.type = "button";
+      item.className = "checklist-status-menu__item";
+      if (opt.selected) item.classList.add("is-selected");
+      item.setAttribute("role", "option");
+      item.textContent = opt.text;
+      item.addEventListener("click", function () {
+        select.value = opt.value;
+        select.dispatchEvent(new Event("change", { bubbles: true }));
+        trigger.querySelector(".checklist-status-trigger__label").textContent = opt.text;
+        closeMenu();
+      });
+      menu.appendChild(item);
+    });
+
+    document.body.appendChild(menu);
+    trigger.setAttribute("aria-expanded", "true");
+    open = { menu: menu, trigger: trigger, select: select };
+    placeMenu(menu, trigger);
+    document.addEventListener("mousedown", onDocDown, true);
+    document.addEventListener("keydown", onKeyDown);
+    window.addEventListener("scroll", closeMenu, true);
+    window.addEventListener("resize", closeMenu);
+  }
+
+  function enhance(select) {
+    if (select.dataset.checklistEnhanced === "1") return;
+    select.dataset.checklistEnhanced = "1";
+    select.classList.add("checklist-status-select");
+
+    var wrap = document.createElement("div");
+    wrap.className = "checklist-status-wrap";
+    select.parentNode.insertBefore(wrap, select);
+    wrap.appendChild(select);
+
+    var trigger = document.createElement("button");
+    trigger.type = "button";
+    trigger.className = "checklist-status-trigger";
+    trigger.setAttribute("aria-haspopup", "listbox");
+    trigger.setAttribute("aria-expanded", "false");
+    trigger.innerHTML =
+      '<span class="checklist-status-trigger__label"></span>' +
+      '<i class="bi bi-chevron-down checklist-status-trigger__chevron" aria-hidden="true"></i>';
+    trigger.querySelector(".checklist-status-trigger__label").textContent = selectedLabel(select);
+    wrap.appendChild(trigger);
+
+    trigger.addEventListener("click", function (e) {
+      e.preventDefault();
+      if (open && open.trigger === trigger) {
+        closeMenu();
+        return;
+      }
+      openMenu(select, trigger);
+    });
+  }
+
+  document.querySelectorAll(SELECTOR).forEach(enhance);
+})();
+</script>
+
+
+
+
+
+
+
+
+<div class="submit-row">
+
+
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;width:100%;">
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+      
+      
+        
+        <a href="#" data-demo-missing="1" class="deletelink dfms-btn-secondary">
+          Delete
+        </a>
+      
+
+      
+        
+        
+          
+        
+      
+
+      
+    </div>
+
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+      
+      
+        
+        <a href="admin_fleet_supervisor_vehicleinspection.html" class="dfms-btn-secondary dfms-btn-cancel">
+          Cancel
+        </a>
+      
+
+      
+        <input type="submit" value="Save" class="default dfms-btn-save" name="_save">
+      
+    </div>
+  </div>
+
+
+</div>
+
+
+<div class="submit-row" style="margin-top: 1em;">
+  
+    <input type="submit" class="default" name="_submit_clearance"
+      value="Mark vehicle as No Active TO"
+      onclick="return confirm('Checklist passed — set this vehicle back to No Active TO? No transport order will be affected.');">
+    <a class="closelink" href="#" data-demo-missing="1">
+      Fail re-inspection
+    </a>
+  
+</div>
+
+
+
+
+    <script id="django-admin-form-add-constants"
+            src="static/admin/js/change_form.js"
+            
+            async>
+    </script>
+
+
+
+
+<script id="django-admin-prepopulated-fields-constants"
+        src="static/admin/js/prepopulate_init.js"
+        data-prepopulated-fields="[]">
+</script>
+
+
+</div>
+</form></div>
+
+          
+          <br class="clear">
+        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
+      </main>
+    </div>
+</div>
+<!-- END Container -->
+
+<!-- SVGs -->
+<svg xmlns="http://www.w3.org/2000/svg" class="base-svgs">
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"/></symbol>
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"/></symbol>
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></symbol>
+</svg>
+<!-- END SVGs -->
+</body>
+</html>

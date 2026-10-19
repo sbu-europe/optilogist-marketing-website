@@ -1,0 +1,11 @@
+/* Live demo banner and toast. Kept separate from the app's own styles. */
+.demo-banner { position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 100000; display: flex; align-items: center; gap: 14px; padding: 8px 10px 8px 16px; border-radius: 999px; background: #1f2340; color: #fff; font: 500 13px/1.3 Inter, system-ui, sans-serif; box-shadow: 0 10px 30px rgba(0,0,0,.25); max-width: calc(100% - 24px); }
+.demo-banner b { color: #b9c0ff; }
+.demo-banner__btn { flex: none; color: #1f2340 !important; background: #fff; border-radius: 999px; padding: 5px 12px; font-weight: 600; text-decoration: none !important; }
+.demo-banner__btn:hover { background: #e7e9ff; }
+#demo-toast { position: fixed; left: 50%; bottom: 72px; transform: translate(-50%, 10px); z-index: 100001; max-width: min(520px, calc(100% - 24px)); padding: 10px 16px; border-radius: 10px; background: #111827; color: #fff; font: 500 14px/1.4 Inter, system-ui, sans-serif; box-shadow: 0 10px 30px rgba(0,0,0,.25); opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; }
+#demo-toast.is-on { opacity: 1; transform: translate(-50%, 0); }
+@media (max-width: 640px) { .demo-banner { font-size: 12px; gap: 8px; bottom: 10px; } }
+
+/* QA's "Select a working site…" warning: hidden from the first paint once a site is chosen (demo-shim.js sets the class) */
+html.demo-site-set [data-demo-site-warning] { display: none !important; }

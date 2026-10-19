@@ -1,0 +1,85 @@
+/* InviteUserAdmin — Invitation via radios
+   Native radios + Django's padded `input` defaults double-draw a circle.
+   Force a single custom control on this page. */
+
+.field-invite_channel .radiolist,
+#id_invite_channel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.field-invite_channel .radiolist > div,
+#id_invite_channel > div {
+  margin: 0;
+  padding: 0;
+}
+
+.field-invite_channel .radiolist label,
+#id_invite_channel label {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 10px;
+  width: auto !important;
+  min-width: 0 !important;
+  float: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: 1.35;
+  cursor: pointer;
+}
+
+/* Django adds an empty ::after spacer on .aligned labels — kill it here */
+.field-invite_channel .radiolist label::before,
+.field-invite_channel .radiolist label::after,
+#id_invite_channel label::before,
+#id_invite_channel label::after,
+.field-invite_channel .radiolist label:not(.vCheckboxLabel)::after {
+  content: none !important;
+  display: none !important;
+}
+
+.field-invite_channel input[type="radio"],
+#id_invite_channel input[type="radio"] {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  box-sizing: border-box !important;
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 2px solid #8b93a7 !important;
+  border-radius: 50% !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  outline-offset: 0 !important;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.field-invite_channel input[type="radio"]:checked,
+#id_invite_channel input[type="radio"]:checked {
+  border-color: #5b65dc !important;
+  background-image: radial-gradient(
+    circle at center,
+    #5b65dc 0 38%,
+    transparent 40%
+  ) !important;
+  background-color: transparent !important;
+}
+
+/* Page loads with Email focused (label for= first option) — kill the fat focus halo */
+.field-invite_channel input[type="radio"]:focus,
+.field-invite_channel input[type="radio"]:focus-visible,
+#id_invite_channel input[type="radio"]:focus,
+#id_invite_channel input[type="radio"]:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
