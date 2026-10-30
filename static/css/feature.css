@@ -9,16 +9,16 @@
 .crumbs [aria-current] { color: var(--ink); font-weight: 500; }
 
 /* ---------- Feature hero: text left, product view right ---------- */
-.fhero { padding: 2.5rem 0 5rem; background: radial-gradient(55% 60% at 8% 30%, var(--brand-soft), transparent 70%), radial-gradient(45% 50% at 95% 10%, #F3F4FE, transparent 70%), #fff; }
+.fhero { padding: 2.5rem 0 5rem; background: radial-gradient(55% 60% at 8% 30%, var(--brand-soft), transparent 70%), radial-gradient(45% 50% at 95% 10%, var(--glow), transparent 70%), var(--page); }
 .fhero__grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 3.5rem; align-items: center; margin-top: 2rem; }
 .fhero h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); margin: .3rem 0 1.1rem; }
 .fhero__lead { color: var(--muted); font-size: 1.15rem; max-width: 52ch; margin-bottom: 2rem; }
 .fhero .actions { justify-content: flex-start; }
 .fhero__roles { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1.75rem; }
-.fhero__roles span { font-size: .78rem; font-weight: 600; padding: .25rem .7rem; border-radius: 999px; background: #fff; border: 1px solid var(--line); color: var(--body); }
+.fhero__roles span { font-size: .78rem; font-weight: 600; padding: .25rem .7rem; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); color: var(--body); }
 
 /* Product view drawn in HTML (replace with real screenshots later) */
-.window { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: 0 30px 60px -20px rgba(17,24,39,.25); overflow: hidden; font-size: .85rem; }
+.window { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: 0 30px 60px -20px rgba(17,24,39,.25); overflow: hidden; font-size: .85rem; }
 .window__bar { display: flex; align-items: center; gap: .4rem; padding: .6rem .9rem; background: var(--brand-dark); color: #fff; font-weight: 600; font-size: .8rem; }
 .window__bar i { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,.3); }
 .window__bar i:last-of-type { margin-right: .4rem; }
@@ -40,10 +40,11 @@
 .capbox small { color: var(--muted); }
 .window__actions { display: flex; justify-content: flex-end; gap: .5rem; margin-top: 1rem; }
 .window__actions span { padding: .4rem .8rem; border-radius: var(--radius); font-weight: 500; font-size: .8rem; border: 1.5px solid var(--line-2); color: var(--brand); }
-.window__actions span:last-child { background: var(--brand-strong); border-color: var(--brand-strong); color: #fff; }
+.window__actions span:last-child { background: var(--brand-fill); border-color: var(--brand-fill); color: #fff; }
 .window__actions { flex-wrap: wrap; }
 .window__actions span.is-ok { background: var(--success); border-color: var(--success); color: #fff; }
-.window__actions span.is-danger { background: #fff; border-color: var(--red); color: var(--red); }
+html[data-theme="dark"] .window__actions span.is-ok { color: #0D0F1A; }
+.window__actions span.is-danger { background: var(--surface); border-color: var(--red); color: var(--red); }
 .note { display: grid; gap: .15rem; padding: .7rem .9rem; border-left: 3px solid var(--brand); border-radius: var(--radius-md); background: var(--gray-bg); }
 .note small { color: var(--muted); font-size: .72rem; }
 
