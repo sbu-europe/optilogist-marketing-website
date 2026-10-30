@@ -85,7 +85,7 @@
     content.parentNode.insertBefore(ul, content);
   }
   function applyWorkingSite() {
-    var sel = document.getElementById("dfms-poi-select");
+    var sel = document.getElementById("ux-poi-select");
     if (!sel) return;
     var id = readPoi();
     var opt = id && sel.querySelector('option[value="' + id.replace(/"/g, "") + '"]');
@@ -96,11 +96,11 @@
     document.querySelectorAll(".messagelist li.warning").forEach(function (li) {
       if (/^Select a working site/.test(li.textContent.trim())) { var ul = li.parentNode; li.remove(); if (!ul.children.length) ul.remove(); }
     });
-    var badge = document.querySelector(".dfms-dropdown-poi__badge");
+    var badge = document.querySelector(".ux-dropdown-poi__badge");
     if (badge) badge.remove();
-    var warn = document.querySelector(".dfms-dropdown-meta--poi-warn");
+    var warn = document.querySelector(".ux-dropdown-meta--poi-warn");
     if (warn) {
-      warn.classList.remove("dfms-dropdown-meta--poi-warn");
+      warn.classList.remove("ux-dropdown-meta--poi-warn");
       warn.innerHTML = '<i class="bi bi-geo-alt"></i> ';
       warn.appendChild(document.createTextNode(name));
     }
@@ -109,7 +109,7 @@
 
     var hooks = window.DEMO_SUBMIT_HANDLERS || [];
     for (var i = 0; i < hooks.length; i++) if (hooks[i](f, submitter)) return true;
-    if (f.id === "dfms-poi-switcher-form") {
+    if (f.id === "ux-poi-switcher-form") {
       var sel = f.querySelector("select[name=poi_id]");
       var opt = sel && sel.selectedIndex >= 0 ? sel.options[sel.selectedIndex] : null;
       try {
@@ -131,7 +131,7 @@
     var f = e.target;
     e.preventDefault(); e.stopImmediatePropagation();
     if (handleSubmit(f, e.submitter)) return;
-    if (f.id === "changelist-search") {
+    if (f.id === "listing-search") {
 
       var q = ((f.querySelector("input[name=q]") || {}).value || "").trim().toLowerCase(), shown = 0;
       document.querySelectorAll("#result_list tbody tr").forEach(function (tr) {

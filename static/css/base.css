@@ -56,7 +56,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 .section--dark .muted, .section--dark .intro p { color: #B4BAE6; }
 .section--dark .eyebrow, .section--dark .intro .eyebrow { color: #A5ABF5; }
 
-/* ---------- Buttons & badges (the app's .dfms-btn-add / .dfms-btn-secondary) ---------- */
+/* ---------- Buttons & badges ---------- */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; padding: .75rem 1.25rem; border-radius: var(--radius); border: 1.5px solid transparent; font: inherit; font-weight: 500; text-decoration: none; white-space: nowrap; cursor: pointer; transition: background .15s, border-color .15s, box-shadow .15s; }
 .btn--sm { padding: .5rem 1rem; }
 .btn--primary { background: var(--brand-strong); color: #fff; }
@@ -68,7 +68,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 .btn-text { display: inline-flex; gap: .35rem; font-weight: 600; color: var(--brand); text-decoration: none; background: none; border: 0; padding: 0; font: inherit; font-weight: 600; cursor: pointer; }
 .arrow { display: inline-block; transition: transform .3s; }
 .btn:hover .arrow, .btn-text:hover .arrow { transform: translateX(.35rem); }
-/* Status pills: the app's .dfms-badge (uppercase, pill, tinted with a matching border) */
+/* Status pills (uppercase, pill, tinted with a matching border) */
 .tag { display: inline-block; padding: .12rem .55rem; border-radius: 9999px; border: 1px solid transparent; font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
 .tag--ok { background: var(--success-bg); color: var(--success); border-color: rgba(30,138,76,.25); }
 .tag--warn { background: var(--amber-bg); color: var(--amber); border-color: rgba(217,119,6,.25); }

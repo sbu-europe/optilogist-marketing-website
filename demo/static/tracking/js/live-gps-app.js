@@ -229,13 +229,13 @@ window.LiveGpsApp = (function () {
   const TERMINAL_TO_STATUSES = new Set(['cancelled', 'completed', 'closed']);
 
   function hasActiveTo(v) {
-    if (!v || !v.to_status || v.to_status === 'no_to') return false;
-    return !TERMINAL_TO_STATUSES.has(String(v.to_status));
+    if (!v || !v.order_state || v.order_state === 'no_to') return false;
+    return !TERMINAL_TO_STATUSES.has(String(v.order_state));
   }
 
   function vehicleToStatusKey(v) {
     if (!hasActiveTo(v)) return '';
-    return String(v.to_status);
+    return String(v.order_state);
   }
 
   function vehicleOperationalStatusKey(v) {
@@ -251,15 +251,15 @@ window.LiveGpsApp = (function () {
 
   function operationalStatusLabel(v) {
     if (!isVehicleStatusUiVisible(v)) return '';
-    if (v.operational_status_label) return v.operational_status_label;
+    if (v.op_state_text) return v.op_state_text;
     if (v.operational_status) return String(v.operational_status).replace(/_/g, ' ');
     return '—';
   }
 
   function toStatusLabel(v) {
     if (!hasActiveTo(v)) return '';
-    if (v.to_status_label) return v.to_status_label;
-    if (v.to_status) return v.to_status;
+    if (v.order_state_text) return v.order_state_text;
+    if (v.order_state) return v.order_state;
     return '';
   }
 
@@ -277,7 +277,7 @@ window.LiveGpsApp = (function () {
   function listRowTimeLabel(v) {
     const when = v.last_update_at || v.received_at || v.recorded_at;
     if (when) return formatListTimeCompact(when);
-    if (v.connection_status === 'signal_lost' || v.connection_status === 'stale') {
+    if (v.link_state === 'signal_lost' || v.link_state === 'stale') {
       return CONFIG.i18n.no_recent_signal;
     }
     return '—';
@@ -333,7 +333,7 @@ window.LiveGpsApp = (function () {
   }
 
   function speedChipDotClass(v) {
-    const m = (v && v.movement_status) || 'offline';
+    const m = (v && v.motion) || 'offline';
     return 'live-gps-obj__speed-dot live-gps-obj__speed-dot--' + m;
   }
 
@@ -384,21 +384,21 @@ window.LiveGpsApp = (function () {
   }
 
   function tripStatusLabel(v) {
-    if (v.trip_status_label) return v.trip_status_label;
-    if (v.trip_status) return v.trip_status;
+    if (v.run_state_text) return v.run_state_text;
+    if (v.run_state) return v.run_state;
     return CONFIG.i18n.no_trip;
   }
 
   function popupToStatusLabel(v) {
     const label = toStatusLabel(v);
     if (label) return label;
-    if (v.to_status_label) return v.to_status_label;
+    if (v.order_state_text) return v.order_state_text;
     return CONFIG.i18n.no_active_to;
   }
 
   function popupToNumberHtml(v) {
     const toNumber = objectToNumberLabel(v) || (v.to_number ? String(v.to_number).trim() : '');
-    const toUrl = adminTransportOrderUrl(v.transport_order_id);
+    const toUrl = adminTransportOrderUrl(v.order_ref);
     if (toNumber && toUrl) {
       return '<a href="' + escHtml(toUrl) + '" class="live-gps-popup__position-link">'
         + escHtml(toNumber) + '</a>';
@@ -408,15 +408,15 @@ window.LiveGpsApp = (function () {
   }
 
   function tripReferenceLabel(v) {
-    if (v.trip_number && v.to_number) return v.trip_number + ' · ' + v.to_number;
-    if (v.trip_number) return v.trip_number;
+    if (v.run_no && v.to_number) return v.run_no + ' · ' + v.to_number;
+    if (v.run_no) return v.run_no;
     return CONFIG.i18n.no_trip;
   }
 
   function isInFlightVehicle(v) {
     if (!v) return false;
-    if (v.trip_id) return true;
-    return TO_STATUS_PILL_TIER[v.to_status] === 'progress';
+    if (v.run_ref) return true;
+    return TO_STATUS_PILL_TIER[v.order_state] === 'progress';
   }
 
   function vehiclesForList() {
@@ -641,12 +641,12 @@ window.LiveGpsApp = (function () {
       if (el) el.textContent = text;
     };
     setField('time', formatListTime(when));
-    setField('stop', dash(v.stop_duration_label));
+    setField('stop', dash(v.halt_text));
     const angle = resolveMarkerHeading(v);
     setField('angle', angle != null ? Math.round(angle) + '°' : '—');
     setField('source', formatPoiLabel(v.origin_poi));
     setField('destination', formatPoiLabel(v.destination_poi));
-    setField('to_status', popupToStatusLabel(v));
+    setField('order_state', popupToStatusLabel(v));
     const toNumberEl = box.querySelector('[data-field="to_number"]');
     if (toNumberEl) toNumberEl.innerHTML = popupToNumberHtml(v);
     setField('geofence', insidePoisLabel(v));
@@ -707,12 +707,12 @@ window.LiveGpsApp = (function () {
   }
 
   function movementDotClass(v) {
-    const m = v.movement_status || 'offline';
+    const m = v.motion || 'offline';
     return 'live-gps-obj__dot--' + m;
   }
 
   function markerStatusClass(v) {
-    const m = v.movement_status || 'offline';
+    const m = v.motion || 'offline';
     return 'live-gps-marker__truck-wrap--' + m;
   }
 
@@ -751,12 +751,12 @@ window.LiveGpsApp = (function () {
     if (lastHeadingByTrip[vehicleKey(v)] != null) {
       return lastHeadingByTrip[vehicleKey(v)];
     }
-    return v.heading_degrees;
+    return v.bearing;
   }
 
   function connectionHint(v) {
-    if (v.connection_status === 'stale') return ' (' + CONFIG.i18n.stale_feed + ')';
-    if (v.connection_status === 'signal_lost') return ' (' + CONFIG.i18n.no_signal + ')';
+    if (v.link_state === 'stale') return ' (' + CONFIG.i18n.stale_feed + ')';
+    if (v.link_state === 'signal_lost') return ' (' + CONFIG.i18n.no_signal + ')';
     return '';
   }
 
@@ -815,13 +815,13 @@ window.LiveGpsApp = (function () {
   }
 
   function insidePoisLabel(v) {
-    const list = v && v.inside_pois;
+    const list = v && v.in_sites;
     if (!list || !list.length) return CONFIG.i18n.outside_geofence;
     return list.map(function (poi) { return poi.name || poi.poi_code; }).join(', ');
   }
 
   function dockGeofenceValue(v) {
-    const list = v && v.inside_pois;
+    const list = v && v.in_sites;
     if (!list || !list.length) return '';
     const names = list.map(function (poi) { return poi.name || poi.poi_code; }).join(', ');
     return CONFIG.i18n.geofence_inside + ' (' + names + ')';
@@ -830,7 +830,7 @@ window.LiveGpsApp = (function () {
   function buildPoiOccupancyMap() {
     const occ = new Map();
     vehicles.forEach(function (v) {
-      const inside = v.inside_pois || [];
+      const inside = v.in_sites || [];
       const isSel = selectedVehicleId && vehicleKey(v) === String(selectedVehicleId);
       inside.forEach(function (poi) {
         const id = String(poi.id);
@@ -877,13 +877,13 @@ window.LiveGpsApp = (function () {
       + '<button type="button" class="live-gps-popup__eye" data-action="maps" title="' + escHtml(CONFIG.i18n.open_in_maps) + '">' + liveGpsIcon('eye-fill', 'sm') + '</button>'
       + '</div></div>'
       + '<div class="live-gps-popup__row"><strong>' + CONFIG.i18n.time + '</strong><span data-field="time">' + formatListTime(when) + '</span></div>'
-      + '<div class="live-gps-popup__row"><strong>' + CONFIG.i18n.stop_duration + '</strong><span data-field="stop">' + dash(v.stop_duration_label) + '</span></div>'
+      + '<div class="live-gps-popup__row"><strong>' + CONFIG.i18n.stop_duration + '</strong><span data-field="stop">' + dash(v.halt_text) + '</span></div>'
       + '<div class="live-gps-popup__row"><strong>' + CONFIG.i18n.geofence + '</strong><span data-field="geofence">' + escHtml(insidePoisLabel(v)) + '</span></div>'
       + '<div class="live-gps-popup__row"><strong>' + CONFIG.i18n.position + '</strong>'
       + '<a href="#" class="live-gps-popup__position-link" data-action="position">' + positionText(v) + '</a></div>'
       + '<div class="live-gps-popup__row"><strong>' + CONFIG.i18n.angle + '</strong><span data-field="angle">' + angleText + '</span></div>'
       + '<div class="live-gps-popup__row"><strong>' + CONFIG.i18n.driver + '</strong><span>' + dash(v.driver_name) + '</span></div>'
-      + '<div class="live-gps-popup__row"><strong>' + CONFIG.i18n.to_status + '</strong><span data-field="to_status">' + escHtml(popupToStatusLabel(v)) + '</span></div>'
+      + '<div class="live-gps-popup__row"><strong>' + CONFIG.i18n.order_state + '</strong><span data-field="order_state">' + escHtml(popupToStatusLabel(v)) + '</span></div>'
       + '<div class="live-gps-popup__row"><strong>' + CONFIG.i18n.to_number + '</strong><span data-field="to_number">' + popupToNumberHtml(v) + '</span></div>'
       + '<div class="live-gps-popup__row"><strong>' + CONFIG.i18n.source + '</strong><span data-field="source">' + escHtml(formatPoiLabel(v.origin_poi)) + '</span></div>'
       + '<div class="live-gps-popup__row"><strong>' + CONFIG.i18n.destination + '</strong><span data-field="destination">' + escHtml(formatPoiLabel(v.destination_poi)) + '</span></div>'
@@ -1099,7 +1099,7 @@ window.LiveGpsApp = (function () {
 
   function findVehicleByTripId(tripId) {
     const id = String(tripId);
-    return vehicles.find(v => v.trip_id && String(v.trip_id) === id);
+    return vehicles.find(v => v.run_ref && String(v.run_ref) === id);
   }
 
   function isVehicleMarkerOnMap(tripId) {
@@ -1626,7 +1626,7 @@ window.LiveGpsApp = (function () {
       const isHistoryFocus = isHistoryDetailFocusActive()
         && historyFocusVehicleId
         && vehicleKey(v) === String(historyFocusVehicleId);
-      if (isHistoryFocus || (historyTripId && String(v.trip_id) === historyTripId)) {
+      if (isHistoryFocus || (historyTripId && String(v.run_ref) === historyTripId)) {
         if (trails[vehicleKey(v)]) {
           map.removeLayer(trails[vehicleKey(v)]);
           delete trails[vehicleKey(v)];
@@ -1909,10 +1909,10 @@ window.LiveGpsApp = (function () {
     fetchReverseAddress(v);
     const when = v.last_update_at || v.received_at || v.recorded_at;
     document.getElementById('detail-time').textContent = formatListTime(when) + connectionHint(v);
-    document.getElementById('detail-stop').textContent = v.stop_duration_label || '0s';
+    document.getElementById('detail-stop').textContent = v.halt_text || '0s';
     const geofenceRow = document.getElementById('live-gps-dock-geofence-row');
     const geofenceEl = document.getElementById('detail-geofence');
-    const inside = !!(v.inside_pois && v.inside_pois.length);
+    const inside = !!(v.in_sites && v.in_sites.length);
     if (geofenceRow) {
       geofenceRow.hidden = !inside;
       geofenceRow.classList.toggle('is-inside', inside);
@@ -2193,7 +2193,7 @@ window.LiveGpsApp = (function () {
 
     const menu = document.getElementById('live-gps-obj-menu');
     const vehicleId = v.vehicle_id || id;
-    const toUrl = adminTransportOrderUrl(v.transport_order_id);
+    const toUrl = adminTransportOrderUrl(v.order_ref);
     const vehicleUrl = adminVehicleUrl(vehicleId);
     const vehiclePlanningUrl = adminVehiclePlanningUrl(vehicleId);
     menu.innerHTML = ''
@@ -2322,7 +2322,7 @@ window.LiveGpsApp = (function () {
     if (!select) return;
     const fleet = commandableVehicles();
     select.innerHTML = fleet.map(function(v) {
-      const label = v.registration_number || v.trip_number || vehicleKey(v);
+      const label = v.registration_number || v.run_no || vehicleKey(v);
       return '<option value="' + vehicleKey(v) + '">' + escHtml(label) + '</option>';
     }).join('');
     if (!fleet.length) {
@@ -2383,7 +2383,7 @@ window.LiveGpsApp = (function () {
     if (connection === 'sms') return;
 
     const v = findVehicle(vehicleId);
-    if (!v || !v.trip_id) return;
+    if (!v || !v.run_ref) return;
     if (isCommandSpeedTooFast(v, type)) return;
 
     commandModalBusy = true;
@@ -2391,7 +2391,7 @@ window.LiveGpsApp = (function () {
     setCommandModalStatus(CONFIG.i18n.sending_command_to_device, 'info');
 
     const payload = {
-      trip_id: v.trip_id,
+      run_ref: v.run_ref,
       connection: connection,
       command_type: type,
       auto_send_when_online: Boolean(autoSend),
@@ -3111,16 +3111,16 @@ window.LiveGpsApp = (function () {
       const data = await res.json();
       vehicles = data.vehicles || [];
       mapPois = data.pois || [];
-      if (toStatusFilter && data.to_status_filters) {
-        toStatusFilter.setOptionsFromApi(data.to_status_filters);
+      if (toStatusFilter && data.order_state_opts) {
+        toStatusFilter.setOptionsFromApi(data.order_state_opts);
       }
-      if (vehicleStatusFilter && data.vehicle_status_filters) {
-        vehicleStatusFilter.setOptionsFromApi(data.vehicle_status_filters);
+      if (vehicleStatusFilter && data.unit_state_opts) {
+        vehicleStatusFilter.setOptionsFromApi(data.unit_state_opts);
       }
       renderList();
       populateHistoryDeviceSelect(selectedVehicleId);
       updateMap();
-      const intervalSec = data.refresh_interval_seconds || Math.round(refreshMs / 1000);
+      const intervalSec = data.poll_secs || Math.round(refreshMs / 1000);
       scheduleRefresh(intervalSec);
       const refreshed = data.refreshed_at ? new Date(data.refreshed_at).toLocaleTimeString() : '';
       setStatusChip('live', CONFIG.i18n.updated + ' ' + refreshed + ' · ' + intervalSec + 's');
@@ -3566,8 +3566,8 @@ window.LiveGpsApp = (function () {
     let rows = '';
     rows += historyPopupRow(CONFIG.i18n.to_number, escHtml(to.to_number || historyToNumber || '—'));
     rows += historyPopupRow(
-      CONFIG.i18n.to_status,
-      escHtml(to.to_status_label || to.to_status || '—'),
+      CONFIG.i18n.order_state,
+      escHtml(to.order_state_text || to.order_state || '—'),
     );
     rows += historyPopupRow(CONFIG.i18n.source, escHtml(formatPoiLabel(to.origin_poi)));
     rows += historyPopupRow(CONFIG.i18n.destination, escHtml(formatPoiLabel(to.destination_poi)));
@@ -5511,8 +5511,8 @@ window.LiveGpsApp = (function () {
   }
 
   function historyRowToStatusLineHtml(row) {
-    const label = row.to_status_label || row.trip_status_label || '—';
-    return historyToStatusLineHtml(row.to_status || 'no_to', label);
+    const label = row.order_state_text || row.run_state_text || '—';
+    return historyToStatusLineHtml(row.order_state || 'no_to', label);
   }
 
   function setHistoryDevicePickerOpen(open) {
@@ -5766,7 +5766,7 @@ window.LiveGpsApp = (function () {
   }
 
   async function fetchGeofenceEvents(tripId) {
-    const url = CONFIG.urls.geofenceEvents + '?trip_id=' + encodeURIComponent(tripId) + '&limit=100';
+    const url = CONFIG.urls.geofenceEvents + '?run_ref=' + encodeURIComponent(tripId) + '&limit=100';
     const res = await fetch(url, { credentials: 'same-origin' });
     if (!res.ok) throw new Error('geofence events ' + res.status);
     const data = await res.json();
@@ -5817,7 +5817,7 @@ window.LiveGpsApp = (function () {
   }
 
   async function fetchHistorySummary(tripId, fromIso, toIso) {
-    const url = CONFIG.urls.historySummary + '?trip_id=' + encodeURIComponent(tripId)
+    const url = CONFIG.urls.historySummary + '?run_ref=' + encodeURIComponent(tripId)
       + '&from=' + encodeURIComponent(fromIso) + '&to=' + encodeURIComponent(toIso);
     const res = await fetch(url, { credentials: 'same-origin' });
     if (!res.ok) throw new Error('history summary ' + res.status);
@@ -5888,7 +5888,7 @@ window.LiveGpsApp = (function () {
 
     if (toolbarSubtitle) {
       if (isToDetail) {
-        const label = historySelectedTo.to_status_label || historySelectedTo.to_status || '';
+        const label = historySelectedTo.order_state_text || historySelectedTo.order_state || '';
         if (label) {
           toolbarSubtitle.innerHTML = historyRowToStatusLineHtml(historySelectedTo);
           toolbarSubtitle.classList.remove('is-hidden');
@@ -5926,7 +5926,7 @@ window.LiveGpsApp = (function () {
     }
 
     if (openToBtn) {
-      const toId = historySelectedTo && historySelectedTo.transport_order_id;
+      const toId = historySelectedTo && historySelectedTo.order_ref;
       const toUrl = isToDetail ? adminTransportOrderUrl(toId) : '';
       if (toUrl) {
         openToBtn.href = toUrl;
@@ -6049,7 +6049,7 @@ window.LiveGpsApp = (function () {
     head.classList.remove('is-hidden');
     const tripN = counts && typeof counts.trips === 'number'
       ? counts.trips
-      : (rows || []).filter((r) => r.kind === 'trip' || r.trip_id).length;
+      : (rows || []).filter((r) => r.kind === 'trip' || r.run_ref).length;
     const idleN = counts && typeof counts.idle_periods === 'number'
       ? counts.idle_periods
       : (rows || []).filter((r) => r.kind === 'idle').length;
@@ -6079,7 +6079,7 @@ window.LiveGpsApp = (function () {
   }
 
   function renderHistoryTripRowHtml(row) {
-    const selectedCls = historySelectedTo && String(historySelectedTo.trip_id) === String(row.trip_id)
+    const selectedCls = historySelectedTo && String(historySelectedTo.run_ref) === String(row.run_ref)
       ? ' is-selected' : '';
     const windowLabel = formatHistoryTripWindowCompact(
       row.effective_from || row.window_from,
@@ -6088,7 +6088,7 @@ window.LiveGpsApp = (function () {
     const ptsLabel = String(row.point_count || 0) + ' ' + CONFIG.i18n.points_short;
     const srcLabel = formatPoiLabel(row.origin_poi);
     const dstLabel = formatPoiLabel(row.destination_poi);
-    return '<button type="button" class="live-gps-history-to-row' + selectedCls + '" data-trip-id="' + escHtml(String(row.trip_id)) + '">'
+    return '<button type="button" class="live-gps-history-to-row' + selectedCls + '" data-trip-id="' + escHtml(String(row.run_ref)) + '">'
       + '<div class="live-gps-history-to-row__head">'
       + '<span class="live-gps-history-to-row__number">' + escHtml(row.to_number || '—') + '</span>'
       + '<span class="live-gps-history-to-row__pts">' + escHtml(ptsLabel) + '</span>'
@@ -6229,7 +6229,7 @@ window.LiveGpsApp = (function () {
       'kind',
       'registration_number',
       'to_number',
-      'to_status',
+      'order_state',
       'origin',
       'destination',
       'from',
@@ -6248,7 +6248,7 @@ window.LiveGpsApp = (function () {
         isIdle ? 'idle' : 'trip',
         historyRegistration || '',
         isIdle ? '' : (row.to_number || ''),
-        isIdle ? '' : (row.to_status_label || row.to_status || ''),
+        isIdle ? '' : (row.order_state_text || row.order_state || ''),
         isIdle ? '' : formatPoiLabel(row.origin_poi).replace(/^—$/, ''),
         isIdle ? '' : formatPoiLabel(row.destination_poi).replace(/^—$/, ''),
         row.effective_from || row.window_from || '',
@@ -6313,7 +6313,7 @@ window.LiveGpsApp = (function () {
     try {
       let url;
       if (tripId) {
-        url = CONFIG.urls.vehicleHistory + '?trip_id=' + encodeURIComponent(tripId)
+        url = CONFIG.urls.vehicleHistory + '?run_ref=' + encodeURIComponent(tripId)
           + '&from=' + encodeURIComponent(fromIso) + '&to=' + encodeURIComponent(toIso);
       } else if (idleScope) {
         url = CONFIG.urls.vehicleIdleHistory + '?vehicle_id=' + encodeURIComponent(vehicleId)
@@ -6430,10 +6430,10 @@ window.LiveGpsApp = (function () {
     historySelectedTo = toRow;
     historySelectedIdle = null;
     historyToNumber = toRow.to_number || '';
-    historyTripId = String(toRow.trip_id);
+    historyTripId = String(toRow.run_ref);
     historyFocusVehicleId = vehicleId ? String(vehicleId) : null;
-    if (!historyFocusVehicleId && toRow.trip_id) {
-      const hv = findVehicleByTripId(toRow.trip_id);
+    if (!historyFocusVehicleId && toRow.run_ref) {
+      const hv = findVehicleByTripId(toRow.run_ref);
       if (hv) historyFocusVehicleId = vehicleKey(hv);
     }
     setHistoryView('to_detail');
@@ -6479,8 +6479,8 @@ window.LiveGpsApp = (function () {
   }
 
   function onHistoryToRowClick(tripId) {
-    const row = historyTimelineList.find((item) => item.kind === 'trip' && String(item.trip_id) === String(tripId))
-      || historyToList.find((item) => String(item.trip_id) === String(tripId));
+    const row = historyTimelineList.find((item) => item.kind === 'trip' && String(item.run_ref) === String(tripId))
+      || historyToList.find((item) => String(item.run_ref) === String(tripId));
     if (!row) return;
     const vehicleId = document.getElementById('live-gps-history-device')?.value;
     loadHistoryToDetail(row, vehicleId);
@@ -7310,7 +7310,7 @@ window.LiveGpsApp = (function () {
       setTimeout(() => refreshMapSize({ alignViewport: false }), 200);
       setTimeout(() => refreshMapSize({ alignViewport: false }), 800);
     });
-    const sidebarToggle = document.getElementById('dfms-sidebar-toggle');
+    const sidebarToggle = document.getElementById('ux-sidebar-toggle');
     if (sidebarToggle) {
       sidebarToggle.addEventListener('click', () => {
         setTimeout(() => refreshMapSize({ alignViewport: false }), 0);

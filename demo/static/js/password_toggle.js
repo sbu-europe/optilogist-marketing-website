@@ -27,14 +27,14 @@
   }
 
   document.addEventListener("click", function (e) {
-    var btn = e.target && e.target.closest ? e.target.closest(".dfms-password-toggle") : null;
+    var btn = e.target && e.target.closest ? e.target.closest(".ux-password-toggle") : null;
     if (!btn) return;
     e.preventDefault();
     toggle(btn);
   });
 
   document.addEventListener("DOMContentLoaded", function () {
-    var btns = document.querySelectorAll(".dfms-password-toggle[data-target]");
+    var btns = document.querySelectorAll(".ux-password-toggle[data-target]");
     for (var i = 0; i < btns.length; i++) {
       var btn = btns[i];
       var input = document.getElementById(btn.getAttribute("data-target") || "");

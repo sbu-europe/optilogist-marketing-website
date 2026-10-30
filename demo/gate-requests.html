@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+
+<html lang="en-us" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="static/demo/demo-shim.css?v=mock3">
+<script src="static/demo/api-data.js?v=mock3"></script>
+<script src="static/demo/demo-shim.js?v=mock3"></script>
+<script src="static/demo/master-seed.js?v=mock3"></script>
+<script src="static/demo/master-crud.js?v=mock3"></script>
+<title>Select On-Demand TO Request to view | Demo Agro Ltd Admin</title>
+<link rel="stylesheet" href="static/app/css/base.css">
+
+
+  <link rel="stylesheet" href="static/app/css/side-nav.css">
+  <script src="static/app/js/side-nav.js" defer></script>
+
+
+  
+  
+  <link rel="stylesheet" href="static/app/css/listings.css">
+  
+  
+  
+  
+
+  <style>
+    .ux-pagination-parent {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    .ux-pagination-numbers .paginator {
+      margin: 0;
+    }
+
+    .ux-pagination-controls {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .per-page-selector {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0;
+    }
+
+    .per-page-selector__label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ux-grey-700, #334155);
+    }
+
+    .per-page-selector__select {
+      min-width: 78px;
+      height: 34px;
+      padding: 0 10px;
+      border: 1px solid var(--ux-grey-300, #cbd5e1);
+      border-radius: 8px;
+      font-size: 13px;
+      background: var(--ux-input-bg);
+      color: var(--ux-grey-900);
+    }
+
+    .per-page-selector__select:focus {
+      outline: none;
+      border-color: var(--ux-primary, #5B65DC);
+      box-shadow: 0 0 0 3px rgba(91, 101, 220, 0.16);
+    }
+
+    #listing .paginator {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+  </style>
+
+
+
+  
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+
+
+<link rel="icon" href="favicon.ico?v=2" sizes="32x32">
+<link rel="icon" href="static/brand/optilogist/svg/favicon.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="static/brand/optilogist/png/apple-touch-icon.png?v=2">
+<link rel="stylesheet" href="static/app/css/custom.css">
+
+<script>
+  (function(){
+    var t = localStorage.getItem('ux-admin-theme');
+    if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+
+    document.documentElement.style.colorScheme = t === 'dark' ? 'dark' : 'light';
+
+    var collapsed = localStorage.getItem('ux-sidebar-collapsed') === 'true';
+    var mobile    = window.innerWidth < 768;
+    if (collapsed && !mobile) {
+      document.documentElement.setAttribute('data-sidebar-collapsed', 'true');
+    }
+  })();
+</script>
+
+<script src="static/app/js/ux_theme.js" defer></script>
+
+<script src="static/app/js/ux_sidebar.js" defer></script>
+
+<script src="static/app/js/ux_actions.js" defer></script>
+
+<script src="static/js/password_toggle.js" defer></script>
+
+<script src="static/app/js/ux_timepicker.js" defer></script>
+
+<script src="static/app/js/ux_labels.js" defer></script>
+
+
+<script src="static/app/js/vendor/jquery/jquery.min.js"></script>
+<script src="static/app/js/jquery.init.js"></script>
+<script src="static/app/js/core.js"></script>
+<script src="static/app/js/widgets/related-lookups.js"></script>
+<script src="static/app/js/actions.js"></script>
+<script src="static/app/js/urlify.js"></script>
+<script src="static/app/js/prepopulate.js"></script>
+<script src="static/app/js/vendor/xregexp/xregexp.min.js"></script>
+<script src="static/app/js/filters.js" defer></script>
+
+  <script>
+    (function () {
+      function toAbsoluteUrl(url) {
+        return new URL(url, window.location.href).toString();
+      }
+
+      function reinitAdminActionToggle() {
+
+        var toggle = document.getElementById("action-toggle");
+        if (!toggle) return;
+
+        var fresh = toggle.cloneNode(true);
+        toggle.parentNode.replaceChild(fresh, toggle);
+
+        fresh.checked = false;
+        fresh.addEventListener("change", function () {
+          var boxes = document.querySelectorAll(
+            "#listing-form input.action-select"
+          );
+          for (var i = 0; i < boxes.length; i++) {
+            boxes[i].checked = fresh.checked;
+          }
+
+          boxes.forEach(function (b) {
+            b.dispatchEvent(new Event("change", { bubbles: true }));
+          });
+        });
+
+        var rows = document.querySelectorAll(
+          "#listing-form input.action-select"
+        );
+        rows.forEach(function (box) {
+          var b = box.cloneNode(true);
+          box.parentNode.replaceChild(b, box);
+          b.addEventListener("change", function () {
+            var all = document.querySelectorAll(
+              "#listing-form input.action-select"
+            );
+            var checked = document.querySelectorAll(
+              "#listing-form input.action-select:checked"
+            );
+            var hdr = document.getElementById("action-toggle");
+            if (hdr) hdr.checked = all.length === checked.length;
+          });
+        });
+      }
+
+      function replaceChangelist(html) {
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(html, "text/html");
+        var incoming = doc.getElementById("listing");
+        var current = document.getElementById("listing");
+        if (!incoming || !current) return false;
+        current.innerHTML = incoming.innerHTML;
+        reinitAdminActionToggle();
+        if (typeof window.uxInitAdminActions === "function") {
+          window.uxInitAdminActions();
+        }
+        return true;
+      }
+
+      function fetchAndReplace(url) {
+        return fetch(url, {
+          method: "GET",
+          headers: { "X-Requested-With": "XMLHttpRequest" },
+          credentials: "same-origin"
+        })
+          .then(function (response) { return response.text(); })
+          .then(function (html) {
+            var replaced = replaceChangelist(html);
+            if (replaced) {
+              window.history.pushState({}, "", url);
+              document.dispatchEvent(new CustomEvent("ux:listing-replaced"));
+              return;
+            }
+            window.location.href = url;
+          })
+          .catch(function () {
+            window.location.href = url;
+          });
+      }
+
+      function onPaginationClick(event) {
+        var link = event.target && event.target.closest("#listing .paginator a");
+        if (!link) return;
+        event.preventDefault();
+        fetchAndReplace(toAbsoluteUrl(link.getAttribute("href")));
+      }
+
+      function onPerPageChange(event) {
+        var select = event.target;
+        if (!select || select.id !== "per-page-select") return;
+        var form = select.form;
+        if (!form) return;
+        var formData = new FormData(form);
+        var params = new URLSearchParams(formData);
+        params.set("per_page", select.value);
+        params.delete("p");
+        var url = window.location.pathname + "?" + params.toString();
+        fetchAndReplace(toAbsoluteUrl(url));
+      }
+
+      function initAjaxPaginationControls() {
+        document.removeEventListener("click", onPaginationClick);
+        document.removeEventListener("change", onPerPageChange);
+        document.addEventListener("click", onPaginationClick);
+        document.addEventListener("change", onPerPageChange);
+      }
+
+      window.addEventListener("popstate", function () {
+        fetchAndReplace(window.location.href);
+      });
+
+      document.addEventListener("DOMContentLoaded", initAjaxPaginationControls);
+    })();
+</script>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/app/css/responsive.css">
+    
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+<body class=" app-operations model-gaterequest change-list"
+  data-admin-utc-offset="21600">
+<a href="#content-start" class="skip-to-content-link">Skip to main content</a>
+
+<div id="container">
+
+    
+    
+    
+      <header id="header">
+        <div id="branding">
+        
+        </div>
+        
+
+<div id="ux-topbar-tools">
+
+  
+  <button
+    id="ux-sidebar-toggle"
+    class="ux-content-toggle"
+    aria-label="Toggle sidebar"
+    title="Collapse sidebar"
+    type="button"
+  >
+    <i class="bi bi-list"></i>
+  </button>
+
+  
+  <div style="flex:1;"></div>
+
+  
+  <div class="ux-topbar-right">
+
+    
+    <button
+      id="ux-theme-toggle"
+      class="ux-topbar-icon-btn"
+      title="Switch theme"
+      aria-label="Switch theme"
+      type="button"
+    >
+      <i class="toggle-icon bi bi-moon"></i>
+    </button>
+
+    
+    
+    
+    <div class="ux-user-menu" id="ux-user-menu">
+      <button
+        class="ux-user-avatar-btn"
+        aria-haspopup="true"
+        aria-expanded="false"
+        aria-controls="ux-user-dropdown"
+        type="button"
+        id="ux-user-avatar-btn"
+      >
+        
+        <span class="ux-avatar" aria-hidden="true"> DA </span>
+        <span class="ux-user-name">Demo Admin</span>
+        <i class="bi bi-chevron-down ux-user-chevron"></i>
+      </button>
+
+      
+      <div class="ux-user-dropdown ux-user-dropdown--with-poi" id="ux-user-dropdown" role="menu" aria-labelledby="ux-user-avatar-btn">
+
+        
+        <div class="ux-dropdown-header">
+          <div class="ux-dropdown-header__avatar"> DA </div>
+          <div class="ux-dropdown-header__info">
+            <span class="ux-dropdown-name">Demo Admin</span>
+            
+            <span class="ux-dropdown-email">admin@example.com</span>
+            
+            
+              
+              
+              <span class="ux-dropdown-meta">
+                <i class="bi bi-person-badge"></i>
+                Company Admin
+              </span>
+              
+              
+            
+            
+            <span class="ux-dropdown-meta">
+              <i class="bi bi-diagram-3"></i>
+              Administration (company admin)
+            </span>
+            
+            
+            
+            <span class="ux-dropdown-meta ux-dropdown-meta--poi-warn">
+              <i class="bi bi-exclamation-circle"></i>
+              No site selected
+            </span>
+            
+            
+            
+            
+            <span class="ux-dropdown-meta">
+              <i class="bi bi-building"></i>
+              Demo Agro Ltd
+            </span>
+            
+            
+          </div>
+        </div>
+
+        
+
+
+        
+
+<div class="ux-dropdown-divider"></div>
+<div class="ux-dropdown-poi" id="ux-poi-profile">
+  <form
+    method="post"
+    action="#" data-demo-form="1"
+    id="ux-poi-switcher-form"
+    class="ux-dropdown-poi__form"
+  >
+    <input type="hidden" name="next" value="">
+
+    <div class="ux-dropdown-poi__field">
+      <label for="ux-poi-select" class="ux-dropdown-poi__label">
+        <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
+        Working site
+        
+        <span class="ux-badge ux-badge--warning ux-dropdown-poi__badge">Required</span>
+        
+      </label>
+
+      <div class="ux-dropdown-poi__select-wrap">
+        <i class="bi bi-building ux-dropdown-poi__select-icon" aria-hidden="true"></i>
+        <select
+          name="poi_id"
+          id="ux-poi-select"
+          class="ux-dropdown-poi__select"
+          aria-label="Select working site"
+          onchange="this.form.submit()"
+        >
+          <option value="" selected>
+            Select a site…
+          </option>
+          
+          <option
+            value="6f1c2c64-97d6-4d2a-9768-9f13b2129737"
+            
+          >Barishal Aquaculture Site</option>
+          
+          <option
+            value="1dd0e4ae-98dd-4d1c-8673-1b330130cfc1"
+            
+          >Barishal Green Field Farm</option>
+          
+          <option
+            value="3f8e8b11-b539-4595-90cf-bccea625b61b"
+            
+          >Barishal Production Unit</option>
+          
+          <option
+            value="1dd20b37-df96-46aa-b27a-92dd38053fe7"
+            
+          >Bhola Vendor Office</option>
+          
+          <option
+            value="2e5b71e9-d800-4fce-a921-a09dcd6e3758"
+            
+          >Bhola Waste Management Unit</option>
+          
+          <option
+            value="b267f13b-8731-44d5-b045-59613974ef7a"
+            
+          >Bhaluka Hub</option>
+          
+          <option
+            value="521b59c5-95cc-433d-9fc0-71658c3c17de"
+            
+          >Bhola Hub</option>
+          
+          <option
+            value="4019a94e-c5c2-4f80-b643-adfc7c1dd1ce"
+            
+          >Chittagong Hub</option>
+          
+          <option
+            value="5a77b607-c6b7-4e3b-a277-1534fe7e6a4e"
+            
+          >Chittagong Hub</option>
+          
+          <option
+            value="314c4410-eef7-41d9-a44d-4dbeb909f8ea"
+            
+          >Chottogram Hub</option>
+          
+        </select>
+        <i class="bi bi-chevron-down ux-dropdown-poi__select-chevron" aria-hidden="true"></i>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="ux-dropdown-divider"></div>
+
+
+
+        
+        
+        <a href="#" data-demo-missing="1" class="ux-dropdown-item" role="menuitem">
+          <i class="bi bi-key"></i>
+          Change password
+        </a>
+        
+
+        <div class="ux-dropdown-divider"></div>
+
+        <form id="logout-form" method="post" action="#" data-demo-form="1">
+          <button type="submit" class="ux-dropdown-item ux-dropdown-item--danger" role="menuitem">
+            <i class="bi bi-box-arrow-right"></i>
+            Log out
+          </button>
+        </form>
+        <script>
+        (function () {
+          var form = document.getElementById("logout-form");
+          if (!form) return;
+          form.addEventListener("submit", function () {
+            var match = document.cookie.split("; ").find(function (row) {
+              return row.indexOf("formtoken=") === 0;
+            });
+            if (!match) return;
+            var token = decodeURIComponent(match.split("=").slice(1).join("="));
+            var input = form.querySelector('input[name="formtoken"]');
+            if (token && input) input.value = token;
+          });
+        })();
+</script>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+        
+      </header>
+    
+    
+    
+    
+
+    <div class="main" id="main">
+      
+        
+  
+
+<nav id="ux-nav-sidebar" class="ux-nav-sidebar" aria-label="Sidebar">
+
+  
+  <div class="ux-sidebar-brand">
+    <a href="dashboard.html" class="ux-sidebar-brand-link" aria-label="Home">
+      <div class="ux-sidebar-logo-mark">
+        
+
+<span class="ux-brand-mark" aria-hidden="true">
+  <img
+    class="ux-brand-mark__img ux-brand-mark__img--light"
+    src="static/brand/optilogist/svg/mark-light.svg"
+    alt=""
+    width="32"
+    height="32"
+    decoding="async"
+  >
+  <img
+    class="ux-brand-mark__img ux-brand-mark__img--dark"
+    src="static/brand/optilogist/svg/mark-dark.svg"
+    alt=""
+    width="32"
+    height="32"
+    decoding="async"
+  >
+</span>
+
+      </div>
+      <div class="ux-sidebar-brand-text">
+        <span class="ux-sidebar-brand-name">Optilogist</span>
+        <span class="ux-sidebar-brand-sub">Demo Agro Ltd Admin</span>
+      </div>
+    </a>
+    
+    <button
+      type="button"
+      id="ux-sidebar-close"
+      class="ux-sidebar-close"
+      aria-label="Close menu"
+      title="Close menu"
+    >
+      <i class="bi bi-x-lg" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  
+  <div class="ux-nav-search">
+    <i class="bi bi-search ux-nav-search-icon"></i>
+    <input
+      type="search"
+      id="ux-nav-filter"
+      class="ux-nav-filter-input"
+      placeholder="Filter…"
+      aria-label="Filter navigation items"
+      autocomplete="off"
+    >
+  </div>
+
+  
+  <div class="ux-nav-body" id="ux-nav-body">
+
+    
+    
+    
+      
+        <div class="ux-nav-group" data-app="portal-overview">
+          <button
+            class="ux-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-overview"
+            type="button"
+          >
+            <span class="ux-nav-group-icon">
+              <i class="bi bi-speedometer2"></i>
+            </span>
+            <span class="ux-nav-group-label">Overview</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
+          </button>
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
+            
+              <li class="ux-nav-item" data-label="dashboard">
+                <a href="dashboard.html" class="ux-nav-link" data-nav-id="n1">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Dashboard</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="ux-nav-group" data-app="portal-requisition">
+          <button
+            class="ux-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-requisition"
+            type="button"
+          >
+            <span class="ux-nav-group-icon">
+              <i class="bi bi-clipboard-check"></i>
+            </span>
+            <span class="ux-nav-group-label">Requisition</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
+          </button>
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
+            
+              <li class="ux-nav-item" data-label="finished goods">
+                <a href="requisitions.html" class="ux-nav-link" data-nav-id="n2">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Finished Goods</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="ux-nav-group" data-app="portal-port-shipments">
+          <button
+            class="ux-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-port-shipments"
+            type="button"
+          >
+            <span class="ux-nav-group-icon">
+              <i class="bi bi-box-seam"></i>
+            </span>
+            <span class="ux-nav-group-label">Port Shipments</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
+          </button>
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
+            
+              <li class="ux-nav-item" data-label="port shipments">
+                <a href="shipments.html" class="ux-nav-link" data-nav-id="n3">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Port Shipments</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="ux-nav-group" data-app="portal-distribution">
+          <button
+            class="ux-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-distribution"
+            type="button"
+          >
+            <span class="ux-nav-group-icon">
+              <i class="bi bi-arrow-right-circle"></i>
+            </span>
+            <span class="ux-nav-group-label">Distribution</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
+          </button>
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
+            
+              <li class="ux-nav-item" data-label="product requisitions">
+                <a href="requisitions-goods.html" class="ux-nav-link" data-nav-id="n4">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Product requisitions</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="transport requests">
+                <a href="transport-requests-goods.html" class="ux-nav-link" data-nav-id="n5">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Transport requests</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="ux-nav-group" data-app="portal-procurement">
+          <button
+            class="ux-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-procurement"
+            type="button"
+          >
+            <span class="ux-nav-group-icon">
+              <i class="bi bi-box-arrow-in-right"></i>
+            </span>
+            <span class="ux-nav-group-label">Procurement</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
+          </button>
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
+            
+              <li class="ux-nav-item" data-label="port shipments">
+                <a href="shipments.html" class="ux-nav-link" data-nav-id="n6">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Port Shipments</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="transport requests">
+                <a href="transport-requests-port.html" class="ux-nav-link" data-nav-id="n7">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Transport requests</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="ux-nav-group" data-app="portal-transport">
+          <button
+            class="ux-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-transport"
+            type="button"
+          >
+            <span class="ux-nav-group-icon">
+              <i class="bi bi-truck"></i>
+            </span>
+            <span class="ux-nav-group-label">Transport</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
+          </button>
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
+            
+              <li class="ux-nav-item" data-label="live gps">
+                <a href="live-gps.html" class="ux-nav-link" data-nav-id="n8">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Live GPS</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="transport requests">
+                <a href="transport-requests.html" class="ux-nav-link" data-nav-id="n9">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Transport requests</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="transport orders">
+                <a href="transport-orders.html" class="ux-nav-link" data-nav-id="n10">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Transport orders</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="vehicle planning">
+                <a href="vehicle-planning.html" class="ux-nav-link" data-nav-id="n11">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Vehicle planning</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="bids management">
+                <a href="bidding.html" class="ux-nav-link" data-nav-id="n12">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Bids management</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="ux-nav-group" data-app="portal-master-data">
+          <button
+            class="ux-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-master-data"
+            type="button"
+          >
+            <span class="ux-nav-group-icon">
+              <i class="bi bi-database"></i>
+            </span>
+            <span class="ux-nav-group-label">Master Data</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
+          </button>
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
+            
+              <li class="ux-nav-item" data-label="points of interest">
+                <a href="sites.html" class="ux-nav-link" data-nav-id="n13">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Points of Interest</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="loading/unloading points">
+                <a href="load-points.html" class="ux-nav-link" data-nav-id="n14">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Loading/Unloading Points</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="vehicle brands">
+                <a href="brands.html" class="ux-nav-link" data-nav-id="n15">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Vehicle Brands</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="vehicles">
+                <a href="vehicles.html" class="ux-nav-link" data-nav-id="n16">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Vehicles</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="helpers">
+                <a href="helpers.html" class="ux-nav-link" data-nav-id="n17">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Helpers</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="dealers">
+                <a href="dealers.html" class="ux-nav-link" data-nav-id="n18">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Dealers</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="suppliers">
+                <a href="suppliers.html" class="ux-nav-link" data-nav-id="n19">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Suppliers</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="product categories">
+                <a href="categories.html" class="ux-nav-link" data-nav-id="n20">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Product Categories</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="product sub-category">
+                <a href="subcategories.html" class="ux-nav-link" data-nav-id="n21">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Product Sub-category</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="products">
+                <a href="products.html" class="ux-nav-link" data-nav-id="n22">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Products</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="ux-nav-group ux-nav-group--active" data-app="portal-gate">
+          <button
+            class="ux-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-gate"
+            type="button"
+          >
+            <span class="ux-nav-group-icon">
+              <i class="bi bi-door-open"></i>
+            </span>
+            <span class="ux-nav-group-label">Gate</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
+          </button>
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
+            
+              <li class="ux-nav-item" data-label="vehicle entry (gate-in)">
+                <a href="gate-entry-new.html" class="ux-nav-link" data-nav-id="n23">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Vehicle Entry (Gate-In)</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="vehicle exit (gate-out)">
+                <a href="gate-exit-new.html" class="ux-nav-link" data-nav-id="n24">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Vehicle Exit (Gate-Out)</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="active visits">
+                <a href="gate-visits-active.html" class="ux-nav-link" data-nav-id="n25">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Active Visits</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="visit history">
+                <a href="gate-visits.html" class="ux-nav-link" data-nav-id="n26">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Visit History</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item ux-nav-item--active" data-label="on-demand to">
+                <a href="gate-requests.html" class="ux-nav-link" data-nav-id="n27" aria-current="page">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">On-Demand TO</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="ux-nav-group" data-app="portal-command-center">
+          <button
+            class="ux-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-command-center"
+            type="button"
+          >
+            <span class="ux-nav-group-icon">
+              <i class="bi bi-speedometer2"></i>
+            </span>
+            <span class="ux-nav-group-label">Command Center</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
+          </button>
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
+            
+              <li class="ux-nav-item" data-label="queue">
+                <a href="queue-waiting.html" class="ux-nav-link" data-nav-id="n28">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Queue</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="bay assignments">
+                <a href="bays.html" class="ux-nav-link" data-nav-id="n29">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Bay Assignments</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="waiting serials">
+                <a href="waiting-serial.html" class="ux-nav-link" data-nav-id="n30">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Waiting Serials</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="ux-nav-group" data-app="portal-loading">
+          <button
+            class="ux-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-loading"
+            type="button"
+          >
+            <span class="ux-nav-group-icon">
+              <i class="bi bi-box-arrow-up"></i>
+            </span>
+            <span class="ux-nav-group-label">Loading</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
+          </button>
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
+            
+              <li class="ux-nav-item" data-label="load events">
+                <a href="loading.html" class="ux-nav-link" data-nav-id="n31">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Load Events</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="start loading">
+                <a href="loading-new.html" class="ux-nav-link" data-nav-id="n32">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Start Loading</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="ux-nav-group" data-app="portal-unloading">
+          <button
+            class="ux-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-unloading"
+            type="button"
+          >
+            <span class="ux-nav-group-icon">
+              <i class="bi bi-box-arrow-down"></i>
+            </span>
+            <span class="ux-nav-group-label">Unloading</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
+          </button>
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
+            
+              <li class="ux-nav-item" data-label="unload events">
+                <a href="unloading.html" class="ux-nav-link" data-nav-id="n33">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Unload Events</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="start unloading">
+                <a href="unloading-new.html" class="ux-nav-link" data-nav-id="n34">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Start Unloading</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="ux-nav-group" data-app="portal-qc-checkpoint">
+          <button
+            class="ux-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-qc-checkpoint"
+            type="button"
+          >
+            <span class="ux-nav-group-icon">
+              <i class="bi bi-clipboard2-pulse"></i>
+            </span>
+            <span class="ux-nav-group-label">QC Checkpoint</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
+          </button>
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
+            
+              <li class="ux-nav-item" data-label="qc queue">
+                <a href="quality-queue.html" class="ux-nav-link" data-nav-id="n35">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">QC Queue</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="ux-nav-group" data-app="portal-scaling">
+          <button
+            class="ux-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-scaling"
+            type="button"
+          >
+            <span class="ux-nav-group-icon">
+              <i class="bi bi-speedometer"></i>
+            </span>
+            <span class="ux-nav-group-label">Scaling</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
+          </button>
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
+            
+              <li class="ux-nav-item" data-label="scale-in">
+                <a href="scale-in-new.html" class="ux-nav-link" data-nav-id="n36">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Scale-In</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="scale-out">
+                <a href="scale-out-new.html" class="ux-nav-link" data-nav-id="n37">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Scale-Out</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="queue tokens">
+                <a href="queue-tokens.html" class="ux-nav-link" data-nav-id="n38">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Queue Tokens</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="gate passes">
+                <a href="scale-out.html" class="ux-nav-link" data-nav-id="n39">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Gate Passes</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="ux-nav-group" data-app="portal-fleet-operations">
+          <button
+            class="ux-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-fleet-operations"
+            type="button"
+          >
+            <span class="ux-nav-group-icon">
+              <i class="bi bi-clipboard2-check"></i>
+            </span>
+            <span class="ux-nav-group-label">Fleet operations</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
+          </button>
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
+            
+              <li class="ux-nav-item" data-label="dispatch queue">
+                <a href="inspections-dispatch.html" class="ux-nav-link" data-nav-id="n40">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Dispatch queue</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="under maintenance">
+                <a href="inspections-maintenance.html" class="ux-nav-link" data-nav-id="n41">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Under Maintenance</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="inspection records">
+                <a href="inspections.html" class="ux-nav-link" data-nav-id="n42">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Inspection records</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="ux-nav-group" data-app="portal-driver-management">
+          <button
+            class="ux-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-driver-management"
+            type="button"
+          >
+            <span class="ux-nav-group-icon">
+              <i class="bi bi-person-badge"></i>
+            </span>
+            <span class="ux-nav-group-label">Driver Management</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
+          </button>
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
+            
+              <li class="ux-nav-item" data-label="driver attendance">
+                <a href="attendance.html" class="ux-nav-link" data-nav-id="n43">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Driver Attendance</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="driver leave management">
+                <a href="leave.html" class="ux-nav-link" data-nav-id="n44">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Driver Leave Management</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="ux-nav-group" data-app="portal-trips">
+          <button
+            class="ux-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-trips"
+            type="button"
+          >
+            <span class="ux-nav-group-icon">
+              <i class="bi bi-phone"></i>
+            </span>
+            <span class="ux-nav-group-label">Trips</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
+          </button>
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
+            
+              <li class="ux-nav-item" data-label="my trips">
+                <a href="my-orders.html" class="ux-nav-link" data-nav-id="n45">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">My Trips</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="pod records">
+                <a href="deliveries.html" class="ux-nav-link" data-nav-id="n46">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">POD Records</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="ux-nav-group" data-app="portal-vendors">
+          <button
+            class="ux-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-vendors"
+            type="button"
+          >
+            <span class="ux-nav-group-icon">
+              <i class="bi bi-building"></i>
+            </span>
+            <span class="ux-nav-group-label">Vendors</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
+          </button>
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
+            
+              <li class="ux-nav-item" data-label="vendors">
+                <a href="vendors.html" class="ux-nav-link" data-nav-id="n47">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Vendors</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="ux-nav-group" data-app="portal-users-access">
+          <button
+            class="ux-nav-group-header"
+            aria-expanded="false"
+            data-group="portal-users-access"
+            type="button"
+          >
+            <span class="ux-nav-group-icon">
+              <i class="bi bi-people"></i>
+            </span>
+            <span class="ux-nav-group-label">Users &amp; Access</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
+          </button>
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
+            
+              <li class="ux-nav-item" data-label="users">
+                <a href="users.html" class="ux-nav-link" data-nav-id="n48">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Users</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="drivers">
+                <a href="drivers.html" class="ux-nav-link" data-nav-id="n49">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Drivers</span>
+                </a>
+              </li>
+            
+              <li class="ux-nav-item" data-label="audit logs">
+                <a href="activity-log.html" class="ux-nav-link" data-nav-id="n50">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Audit Logs</span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      
+    
+
+    
+    
+    
+
+  </div>
+
+  
+  <div class="ux-nav-footer">
+    <span class="ux-nav-footer-text">Optilogist</span>
+  </div>
+
+</nav>
+
+
+      
+      <main id="content-start" class="content" tabindex="-1">
+        
+          
+            <ul class="messagelist" data-demo-site-warning>
+              <li class="warning">Select a working site from the sidebar before performing operations at a POI.</li>
+            </ul>
+          
+        
+        
+        <div id="content" class="">
+          
+  
+  <nav aria-label="Breadcrumbs" class="ux-breadcrumbs">
+    
+<div class="breadcrumbs">
+  <a href="dashboard.html">Home</a>
+  
+    &rsaquo; On-Demand TO Requests
+  
+</div>
+
+  </nav>
+  
+
+          
+          
+          
+  <div id="content-main">
+    
+<div class="ux-page-header">
+  <div class="ux-page-header__title">
+    <h1>On-Demand TO Requests</h1>
+  </div>
+  <div class="ux-page-header__actions">
+    
+      
+      
+    
+  </div>
+</div>
+
+
+    
+    <div class="module filtered" id="listing">
+      <div class="listing-form-container">
+        
+
+<div id="toolbar">
+  <form id="listing-search" method="get">
+
+    <div class="ux-search-wrap">
+      
+      <i class="bi bi-search ux-search-icon"></i>
+
+      <input
+        type="text"
+        name="q"
+        value=""
+        id="searchbar"
+        class="ux-search-input"
+        placeholder="Search…"
+        autocomplete="off"
+        spellcheck="false"
+        
+      >
+
+      
+      
+
+      
+      <input type="submit" value="Search" class="ux-search-submit">
+    </div>
+
+    
+    
+
+    
+    
+
+  </form>
+
+  
+</div>
+
+
+        
+
+        <form id="listing-form" method="post" novalidate>        
+
+        
+  
+  <div
+    class="ux-selection-toolbar"
+    id="ux-selection-toolbar"
+    hidden
+  >
+    <span class="ux-selection-count">
+      <span class="ux-selection-count-badge" id="ux-selected-badge">0</span>
+      <span id="ux-selected-count">0</span>
+      selected
+    </span>
+
+    <div class="ux-toolbar-actions" id="ux-toolbar-actions">
+      
+    </div>
+
+    <button type="button" class="ux-clear-selection" id="ux-clear-selection">
+      <i class="bi bi-x"></i>
+      Clear
+    </button>
+  </div>
+
+  
+          
+          
+
+
+
+          
+        
+
+        
+  <div class="ux-pagination-parent">
+    <div class="ux-pagination-numbers">
+      
+
+<p class="paginator">
+
+0 On-Demand TO Requests
+
+
+</p>
+
+    </div>
+    <div class="ux-pagination-controls">
+      <form method="get" class="per-page-selector" id="ux-per-page-form">
+        
+
+        <label for="per-page-select" class="per-page-selector__label">
+          Rows per page:
+        </label>
+        <select
+          id="per-page-select"
+          name="per_page"
+          class="per-page-selector__select"
+        >
+          
+            <option value="15" >
+              15
+            </option>
+          
+            <option value="25" selected>
+              25
+            </option>
+          
+            <option value="50" >
+              50
+            </option>
+          
+            <option value="100" >
+              100
+            </option>
+          
+            <option value="200" >
+              200
+            </option>
+          
+        </select>
+      </form>
+    </div>
+  </div>
+
+        </form>
+      </div>
+      
+        
+          <div id="listing-filter">
+            <h2>Filter</h2>
+            <div id="listing-filter-extra-actions">
+              <h3>
+                <a href="#" data-demo-missing="1" class="viewlink">Show counts</a>
+              </h3>
+              
+            </div>
+            
+<details data-filter-title="product" open>
+  <summary>
+     By product 
+  </summary>
+  <ul>
+  
+    <li class="selected">
+    <a href="gate-requests.html">All</a></li>
+  
+    <li>
+    <a href="#" data-demo-missing="1">Finished Goods</a></li>
+  
+    <li>
+    <a href="#" data-demo-missing="1">Raw Material</a></li>
+  
+  </ul>
+</details>
+
+<details data-filter-title="Gate POI" open>
+  <summary>
+     By Gate POI 
+  </summary>
+  <ul>
+  
+    <li class="selected">
+    <a href="gate-requests.html">All</a></li>
+  
+    <li>
+    <a href="#" data-demo-missing="1">Barishal Aquaculture Site (POI-0018)</a></li>
+  
+    <li>
+    <a href="#" data-demo-missing="1">Barishal Green Field Farm (POI-0014)</a></li>
+  
+    <li>
+    <a href="#" data-demo-missing="1">Barishal Production Unit (POI-0016)</a></li>
+  
+    <li>
+    <a href="#" data-demo-missing="1">Bhola Vendor Office (POI-0017)</a></li>
+  
+    <li>
+    <a href="#" data-demo-missing="1">Bhola Waste Management Unit (POI-0015)</a></li>
+  
+    <li>
+    <a href="#" data-demo-missing="1">Bhaluka Hub (POI-0003)</a></li>
+  
+    <li>
+    <a href="#" data-demo-missing="1">Bhola Hub (POI-0001)</a></li>
+  
+    <li>
+    <a href="#" data-demo-missing="1">Chittagong Hub (POI-0002)</a></li>
+  
+    <li>
+    <a href="#" data-demo-missing="1">Chittagong Hub (POI-0004)</a></li>
+  
+    <li>
+    <a href="#" data-demo-missing="1">Chottogram Hub (POI-0005)</a></li>
+  
+  </ul>
+</details>
+
+          </div>
+        
+      
+    </div>
+  </div>
+
+          
+          <br class="clear">
+        </div>
+        
+        <div id="footer"></div>
+      </main>
+    </div>
+</div>
+
+
+
+<svg xmlns="http://www.w3.org/2000/svg" class="base-svgs">
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"/></symbol>
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"/></symbol>
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></symbol>
+</svg>
+
+</body>
+</html>

@@ -4,17 +4,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
-<link rel="stylesheet" href="static/demo/demo-shim.css?v=mock2">
-<script src="static/demo/api-data.js?v=mock2"></script>
-<script src="static/demo/demo-shim.js?v=mock2"></script>
-<script src="static/demo/master-seed.js?v=mock2"></script>
-<script src="static/demo/master-crud.js?v=mock2"></script>
+<link rel="stylesheet" href="static/demo/demo-shim.css?v=mock3">
+<script src="static/demo/api-data.js?v=mock3"></script>
+<script src="static/demo/demo-shim.js?v=mock3"></script>
+<script src="static/demo/master-seed.js?v=mock3"></script>
+<script src="static/demo/master-crud.js?v=mock3"></script>
 <title>Vendors</title>
-<link rel="stylesheet" href="static/admin/css/base.css">
+<link rel="stylesheet" href="static/app/css/base.css">
 
 
-  <link rel="stylesheet" href="static/admin/css/nav_sidebar.css">
-  <script src="static/admin/js/nav_sidebar.js" defer></script>
+  <link rel="stylesheet" href="static/app/css/side-nav.css">
+  <script src="static/app/js/side-nav.js" defer></script>
 
 
 
@@ -36,17 +36,17 @@
 <link rel="icon" href="favicon.ico?v=2" sizes="32x32">
 <link rel="icon" href="static/brand/optilogist/svg/favicon.svg?v=2" type="image/svg+xml">
 <link rel="apple-touch-icon" href="static/brand/optilogist/png/apple-touch-icon.png?v=2">
-<link rel="stylesheet" href="static/admin/css/custom.css">
+<link rel="stylesheet" href="static/app/css/custom.css">
 
 <script>
   (function(){
-    var t = localStorage.getItem('dfms-admin-theme');
+    var t = localStorage.getItem('ux-admin-theme');
     if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', t);
 
     document.documentElement.style.colorScheme = t === 'dark' ? 'dark' : 'light';
 
-    var collapsed = localStorage.getItem('dfms-sidebar-collapsed') === 'true';
+    var collapsed = localStorage.getItem('ux-sidebar-collapsed') === 'true';
     var mobile    = window.innerWidth < 768;
     if (collapsed && !mobile) {
       document.documentElement.setAttribute('data-sidebar-collapsed', 'true');
@@ -54,17 +54,17 @@
   })();
 </script>
 
-<script src="static/admin/js/dfms_theme.js" defer></script>
+<script src="static/app/js/ux_theme.js" defer></script>
 
-<script src="static/admin/js/dfms_sidebar.js" defer></script>
+<script src="static/app/js/ux_sidebar.js" defer></script>
 
-<script src="static/admin/js/dfms_actions.js" defer></script>
+<script src="static/app/js/ux_actions.js" defer></script>
 
 <script src="static/js/password_toggle.js" defer></script>
 
-<script src="static/admin/js/dfms_timepicker.js" defer></script>
+<script src="static/app/js/ux_timepicker.js" defer></script>
 
-<script src="static/admin/js/dfms_labels.js" defer></script>
+<script src="static/app/js/ux_labels.js" defer></script>
 
 
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -89,13 +89,13 @@
   .vm-vendors #result_list td {
     max-width: none;
   }
-  .vm-vendors #result_list td .dfms-badge {
+  .vm-vendors #result_list td .ux-badge {
     white-space: nowrap;
     text-transform: none;
     letter-spacing: 0;
   }
   .vm-panel {
-    background: var(--dfms-card-bg, var(--body-bg));
+    background: var(--ux-card-bg, var(--body-bg));
     border: 1px solid var(--border-color);
     border-radius: 8px;
     overflow: hidden;
@@ -105,7 +105,7 @@
     cursor: pointer;
   }
   .vm-row-link:hover td {
-    background: var(--dfms-row-hover, rgba(91, 101, 220, 0.06));
+    background: var(--ux-row-hover, rgba(91, 101, 220, 0.06));
   }
   .vm-actions {
     display: flex;
@@ -114,7 +114,7 @@
     gap: 0.5rem;
   }
   .vm-alert {
-    border-radius: var(--dfms-radius-sm);
+    border-radius: var(--ux-radius-sm);
     display: flex;
     align-items: center;
     font-size: 14px;
@@ -123,14 +123,14 @@
     padding: 10px 16px;
   }
   .vm-alert--error {
-    background: var(--dfms-danger-bg);
-    border-left: 4px solid var(--dfms-danger);
-    color: var(--dfms-danger);
+    background: var(--ux-danger-bg);
+    border-left: 4px solid var(--ux-danger);
+    color: var(--ux-danger);
   }
   .vm-alert--success {
-    background: var(--dfms-success-bg);
-    border-left: 4px solid var(--dfms-success);
-    color: var(--dfms-success);
+    background: var(--ux-success-bg);
+    border-left: 4px solid var(--ux-success);
+    color: var(--ux-success);
   }
   .vm-overlay {
     align-items: center;
@@ -145,7 +145,7 @@
     z-index: 10001;
   }
   .vm-dialog {
-    background: var(--dfms-card-bg, var(--body-bg));
+    background: var(--ux-card-bg, var(--body-bg));
     border: 1px solid var(--border-color);
     border-radius: 10px;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
@@ -352,7 +352,7 @@
   .vm-grid .full { grid-column: 1 / -1; }
   .vm-dialog__actions {
     align-items: center;
-    background: var(--dfms-card-bg, var(--body-bg));
+    background: var(--ux-card-bg, var(--body-bg));
     border-top: 1px solid var(--border-color);
     display: flex;
     flex-wrap: wrap;
@@ -374,13 +374,13 @@
       justify-content: flex-start;
     }
   }
-  .vm-vendors .dfms-selection-toolbar {
+  .vm-vendors .ux-selection-toolbar {
     margin: 0 0 10px;
     border-radius: 8px;
   }
-  .vm-vendors .dfms-toolbar-actions .dfms-btn-approve,
-  .vm-vendors .dfms-toolbar-actions .dfms-btn-modify,
-  .vm-vendors .dfms-toolbar-actions .dfms-btn-reject {
+  .vm-vendors .ux-toolbar-actions .ux-btn-approve,
+  .vm-vendors .ux-toolbar-actions .ux-btn-modify,
+  .vm-vendors .ux-toolbar-actions .ux-btn-reject {
     height: 30px;
     padding: 0 12px;
     font-size: 12px;
@@ -388,7 +388,7 @@
   .vm-vendors #result_list td.action-checkbox {
     cursor: default;
   }
-  .vm-vendors .dfms-pagination-parent {
+  .vm-vendors .ux-pagination-parent {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -397,10 +397,10 @@
     width: 100%;
     margin-top: 0;
   }
-  .vm-vendors .dfms-pagination-numbers .paginator {
+  .vm-vendors .ux-pagination-numbers .paginator {
     margin: 0;
   }
-  .vm-vendors .dfms-pagination-controls {
+  .vm-vendors .ux-pagination-controls {
     display: inline-flex;
     align-items: center;
   }
@@ -413,24 +413,24 @@
   .vm-vendors .per-page-selector__label {
     font-size: 13px;
     font-weight: 500;
-    color: var(--dfms-grey-700, #334155);
+    color: var(--ux-grey-700, #334155);
   }
   .vm-vendors .per-page-selector__select {
     min-width: 78px;
     height: 34px;
     padding: 0 10px;
-    border: 1px solid var(--dfms-grey-300, #cbd5e1);
+    border: 1px solid var(--ux-grey-300, #cbd5e1);
     border-radius: 8px;
     font-size: 13px;
-    background: var(--dfms-input-bg);
-    color: var(--dfms-grey-900);
+    background: var(--ux-input-bg);
+    color: var(--ux-grey-900);
   }
   .vm-vendors .per-page-selector__select:focus {
     outline: none;
-    border-color: var(--dfms-primary, #5B65DC);
+    border-color: var(--ux-primary, #5B65DC);
     box-shadow: 0 0 0 3px rgba(91, 101, 220, 0.16);
   }
-  .vm-vendors #changelist .paginator {
+  .vm-vendors #listing .paginator {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -446,7 +446,7 @@
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/admin/css/responsive.css">
+    <link rel="stylesheet" href="static/app/css/responsive.css">
     
 
 <meta name="robots" content="NONE,NOARCHIVE">
@@ -467,12 +467,12 @@
         </div>
         
 
-<div id="dfms-topbar-tools">
+<div id="ux-topbar-tools">
 
   
   <button
-    id="dfms-sidebar-toggle"
-    class="dfms-content-toggle"
+    id="ux-sidebar-toggle"
+    class="ux-content-toggle"
     aria-label="Toggle sidebar"
     title="Collapse sidebar"
     type="button"
@@ -484,12 +484,12 @@
   <div style="flex:1;"></div>
 
   
-  <div class="dfms-topbar-right">
+  <div class="ux-topbar-right">
 
     
     <button
-      id="dfms-theme-toggle"
-      class="dfms-topbar-icon-btn"
+      id="ux-theme-toggle"
+      class="ux-topbar-icon-btn"
       title="Switch theme"
       aria-label="Switch theme"
       type="button"
@@ -500,51 +500,51 @@
     
     
     
-    <div class="dfms-user-menu" id="dfms-user-menu">
+    <div class="ux-user-menu" id="ux-user-menu">
       <button
-        class="dfms-user-avatar-btn"
+        class="ux-user-avatar-btn"
         aria-haspopup="true"
         aria-expanded="false"
-        aria-controls="dfms-user-dropdown"
+        aria-controls="ux-user-dropdown"
         type="button"
-        id="dfms-user-avatar-btn"
+        id="ux-user-avatar-btn"
       >
         
-        <span class="dfms-avatar" aria-hidden="true"> DA </span>
-        <span class="dfms-user-name">Demo Admin</span>
-        <i class="bi bi-chevron-down dfms-user-chevron"></i>
+        <span class="ux-avatar" aria-hidden="true"> DA </span>
+        <span class="ux-user-name">Demo Admin</span>
+        <i class="bi bi-chevron-down ux-user-chevron"></i>
       </button>
 
       
-      <div class="dfms-user-dropdown dfms-user-dropdown--with-poi" id="dfms-user-dropdown" role="menu" aria-labelledby="dfms-user-avatar-btn">
+      <div class="ux-user-dropdown ux-user-dropdown--with-poi" id="ux-user-dropdown" role="menu" aria-labelledby="ux-user-avatar-btn">
 
         
-        <div class="dfms-dropdown-header">
-          <div class="dfms-dropdown-header__avatar"> DA </div>
-          <div class="dfms-dropdown-header__info">
-            <span class="dfms-dropdown-name">Demo Admin</span>
+        <div class="ux-dropdown-header">
+          <div class="ux-dropdown-header__avatar"> DA </div>
+          <div class="ux-dropdown-header__info">
+            <span class="ux-dropdown-name">Demo Admin</span>
             
-            <span class="dfms-dropdown-email">admin@example.com</span>
+            <span class="ux-dropdown-email">admin@example.com</span>
             
             
               
               
-              <span class="dfms-dropdown-meta">
+              <span class="ux-dropdown-meta">
                 <i class="bi bi-person-badge"></i>
-                Tenant Admin
+                Company Admin
               </span>
               
               
             
             
-            <span class="dfms-dropdown-meta">
+            <span class="ux-dropdown-meta">
               <i class="bi bi-diagram-3"></i>
-              Administration (tenant admin)
+              Administration (company admin)
             </span>
             
             
             
-            <span class="dfms-dropdown-meta dfms-dropdown-meta--poi-warn">
+            <span class="ux-dropdown-meta ux-dropdown-meta--poi-warn">
               <i class="bi bi-exclamation-circle"></i>
               No site selected
             </span>
@@ -552,7 +552,7 @@
             
             
             
-            <span class="dfms-dropdown-meta">
+            <span class="ux-dropdown-meta">
               <i class="bi bi-building"></i>
               Demo Agro Ltd
             </span>
@@ -566,32 +566,31 @@
 
         
 
-<div class="dfms-dropdown-divider"></div>
-<div class="dfms-dropdown-poi" id="dfms-poi-profile">
+<div class="ux-dropdown-divider"></div>
+<div class="ux-dropdown-poi" id="ux-poi-profile">
   <form
     method="post"
     action="#" data-demo-form="1"
-    id="dfms-poi-switcher-form"
-    class="dfms-dropdown-poi__form"
+    id="ux-poi-switcher-form"
+    class="ux-dropdown-poi__form"
   >
-    <input type="hidden" name="csrfmiddlewaretoken" value="demo">
     <input type="hidden" name="next" value="/vendors/">
 
-    <div class="dfms-dropdown-poi__field">
-      <label for="dfms-poi-select" class="dfms-dropdown-poi__label">
+    <div class="ux-dropdown-poi__field">
+      <label for="ux-poi-select" class="ux-dropdown-poi__label">
         <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
         Working site
         
-        <span class="dfms-badge dfms-badge--warning dfms-dropdown-poi__badge">Required</span>
+        <span class="ux-badge ux-badge--warning ux-dropdown-poi__badge">Required</span>
         
       </label>
 
-      <div class="dfms-dropdown-poi__select-wrap">
-        <i class="bi bi-building dfms-dropdown-poi__select-icon" aria-hidden="true"></i>
+      <div class="ux-dropdown-poi__select-wrap">
+        <i class="bi bi-building ux-dropdown-poi__select-icon" aria-hidden="true"></i>
         <select
           name="poi_id"
-          id="dfms-poi-select"
-          class="dfms-dropdown-poi__select"
+          id="ux-poi-select"
+          class="ux-dropdown-poi__select"
           aria-label="Select working site"
           onchange="this.form.submit()"
         >
@@ -650,28 +649,27 @@
           >Chottogram Hub</option>
           
         </select>
-        <i class="bi bi-chevron-down dfms-dropdown-poi__select-chevron" aria-hidden="true"></i>
+        <i class="bi bi-chevron-down ux-dropdown-poi__select-chevron" aria-hidden="true"></i>
       </div>
     </div>
   </form>
 </div>
-<div class="dfms-dropdown-divider"></div>
+<div class="ux-dropdown-divider"></div>
 
 
 
         
         
-        <a href="#" data-demo-missing="1" class="dfms-dropdown-item" role="menuitem">
+        <a href="#" data-demo-missing="1" class="ux-dropdown-item" role="menuitem">
           <i class="bi bi-key"></i>
           Change password
         </a>
         
 
-        <div class="dfms-dropdown-divider"></div>
+        <div class="ux-dropdown-divider"></div>
 
         <form id="logout-form" method="post" action="#" data-demo-form="1">
-          <input type="hidden" name="csrfmiddlewaretoken" value="demo">
-          <button type="submit" class="dfms-dropdown-item dfms-dropdown-item--danger" role="menuitem">
+          <button type="submit" class="ux-dropdown-item ux-dropdown-item--danger" role="menuitem">
             <i class="bi bi-box-arrow-right"></i>
             Log out
           </button>
@@ -682,11 +680,11 @@
           if (!form) return;
           form.addEventListener("submit", function () {
             var match = document.cookie.split("; ").find(function (row) {
-              return row.indexOf("csrftoken=") === 0;
+              return row.indexOf("formtoken=") === 0;
             });
             if (!match) return;
             var token = decodeURIComponent(match.split("=").slice(1).join("="));
-            var input = form.querySelector('input[name="csrfmiddlewaretoken"]');
+            var input = form.querySelector('input[name="formtoken"]');
             if (token && input) input.value = token;
           });
         })();
@@ -711,17 +709,17 @@
         
   
 
-<nav id="dfms-nav-sidebar" class="dfms-nav-sidebar" aria-label="Sidebar">
+<nav id="ux-nav-sidebar" class="ux-nav-sidebar" aria-label="Sidebar">
 
   
-  <div class="dfms-sidebar-brand">
-    <a href="admin.html" class="dfms-sidebar-brand-link" aria-label="Home">
-      <div class="dfms-sidebar-logo-mark">
+  <div class="ux-sidebar-brand">
+    <a href="dashboard.html" class="ux-sidebar-brand-link" aria-label="Home">
+      <div class="ux-sidebar-logo-mark">
         
 
-<span class="dfms-brand-mark" aria-hidden="true">
+<span class="ux-brand-mark" aria-hidden="true">
   <img
-    class="dfms-brand-mark__img dfms-brand-mark__img--light"
+    class="ux-brand-mark__img ux-brand-mark__img--light"
     src="static/brand/optilogist/svg/mark-light.svg"
     alt=""
     width="32"
@@ -729,7 +727,7 @@
     decoding="async"
   >
   <img
-    class="dfms-brand-mark__img dfms-brand-mark__img--dark"
+    class="ux-brand-mark__img ux-brand-mark__img--dark"
     src="static/brand/optilogist/svg/mark-dark.svg"
     alt=""
     width="32"
@@ -739,16 +737,16 @@
 </span>
 
       </div>
-      <div class="dfms-sidebar-brand-text">
-        <span class="dfms-sidebar-brand-name">Optilogist</span>
-        <span class="dfms-sidebar-brand-sub">Demo Agro Ltd Admin</span>
+      <div class="ux-sidebar-brand-text">
+        <span class="ux-sidebar-brand-name">Optilogist</span>
+        <span class="ux-sidebar-brand-sub">Demo Agro Ltd Admin</span>
       </div>
     </a>
     
     <button
       type="button"
-      id="dfms-sidebar-close"
-      class="dfms-sidebar-close"
+      id="ux-sidebar-close"
+      class="ux-sidebar-close"
       aria-label="Close menu"
       title="Close menu"
     >
@@ -757,12 +755,12 @@
   </div>
 
   
-  <div class="dfms-nav-search">
-    <i class="bi bi-search dfms-nav-search-icon"></i>
+  <div class="ux-nav-search">
+    <i class="bi bi-search ux-nav-search-icon"></i>
     <input
       type="search"
-      id="dfms-nav-filter"
-      class="dfms-nav-filter-input"
+      id="ux-nav-filter"
+      class="ux-nav-filter-input"
       placeholder="Filter…"
       aria-label="Filter navigation items"
       autocomplete="off"
@@ -770,680 +768,680 @@
   </div>
 
   
-  <div class="dfms-nav-body" id="dfms-nav-body">
+  <div class="ux-nav-body" id="ux-nav-body">
 
     
     
     
       
-        <div class="dfms-nav-group" data-app="portal-overview">
+        <div class="ux-nav-group" data-app="portal-overview">
           <button
-            class="dfms-nav-group-header"
+            class="ux-nav-group-header"
             aria-expanded="false"
             data-group="portal-overview"
             type="button"
           >
-            <span class="dfms-nav-group-icon">
+            <span class="ux-nav-group-icon">
               <i class="bi bi-speedometer2"></i>
             </span>
-            <span class="dfms-nav-group-label">Overview</span>
-            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+            <span class="ux-nav-group-label">Overview</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
           </button>
-          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
             
-              <li class="dfms-nav-item" data-label="dashboard">
-                <a href="admin.html" class="dfms-nav-link" data-nav-id="dashboard">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Dashboard</span>
+              <li class="ux-nav-item" data-label="dashboard">
+                <a href="dashboard.html" class="ux-nav-link" data-nav-id="n1">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Dashboard</span>
                 </a>
               </li>
             
           </ul>
         </div>
       
-        <div class="dfms-nav-group" data-app="portal-requisition">
+        <div class="ux-nav-group" data-app="portal-requisition">
           <button
-            class="dfms-nav-group-header"
+            class="ux-nav-group-header"
             aria-expanded="false"
             data-group="portal-requisition"
             type="button"
           >
-            <span class="dfms-nav-group-icon">
+            <span class="ux-nav-group-icon">
               <i class="bi bi-clipboard-check"></i>
             </span>
-            <span class="dfms-nav-group-label">Requisition</span>
-            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+            <span class="ux-nav-group-label">Requisition</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
           </button>
-          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
             
-              <li class="dfms-nav-item" data-label="finished goods">
-                <a href="admin_requisitions_productrequisition.html" class="dfms-nav-link" data-nav-id="requisition_fg">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Finished Goods</span>
+              <li class="ux-nav-item" data-label="finished goods">
+                <a href="requisitions.html" class="ux-nav-link" data-nav-id="n2">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Finished Goods</span>
                 </a>
               </li>
             
           </ul>
         </div>
       
-        <div class="dfms-nav-group" data-app="portal-port-shipments">
+        <div class="ux-nav-group" data-app="portal-port-shipments">
           <button
-            class="dfms-nav-group-header"
+            class="ux-nav-group-header"
             aria-expanded="false"
             data-group="portal-port-shipments"
             type="button"
           >
-            <span class="dfms-nav-group-icon">
+            <span class="ux-nav-group-icon">
               <i class="bi bi-box-seam"></i>
             </span>
-            <span class="dfms-nav-group-label">Port Shipments</span>
-            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+            <span class="ux-nav-group-label">Port Shipments</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
           </button>
-          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
             
-              <li class="dfms-nav-item" data-label="port shipments">
-                <a href="admin_requisitions_portshipmentproxy.html" class="dfms-nav-link" data-nav-id="port_shipments">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Port Shipments</span>
+              <li class="ux-nav-item" data-label="port shipments">
+                <a href="shipments.html" class="ux-nav-link" data-nav-id="n3">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Port Shipments</span>
                 </a>
               </li>
             
           </ul>
         </div>
       
-        <div class="dfms-nav-group" data-app="portal-distribution">
+        <div class="ux-nav-group" data-app="portal-distribution">
           <button
-            class="dfms-nav-group-header"
+            class="ux-nav-group-header"
             aria-expanded="false"
             data-group="portal-distribution"
             type="button"
           >
-            <span class="dfms-nav-group-icon">
+            <span class="ux-nav-group-icon">
               <i class="bi bi-arrow-right-circle"></i>
             </span>
-            <span class="dfms-nav-group-label">Distribution</span>
-            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+            <span class="ux-nav-group-label">Distribution</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
           </button>
-          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
             
-              <li class="dfms-nav-item" data-label="product requisitions">
-                <a href="admin_requisitions_productrequisition_pr_type_FINISHED_GOODS.html" class="dfms-nav-link" data-nav-id="distribution_pr_queue">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Product requisitions</span>
+              <li class="ux-nav-item" data-label="product requisitions">
+                <a href="requisitions-goods.html" class="ux-nav-link" data-nav-id="n4">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Product requisitions</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="transport requests">
-                <a href="admin_requisitions_transportrequisition_tr_type_FG.html" class="dfms-nav-link" data-nav-id="distribution_transport_requests">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Transport requests</span>
+              <li class="ux-nav-item" data-label="transport requests">
+                <a href="transport-requests-goods.html" class="ux-nav-link" data-nav-id="n5">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Transport requests</span>
                 </a>
               </li>
             
           </ul>
         </div>
       
-        <div class="dfms-nav-group" data-app="portal-procurement">
+        <div class="ux-nav-group" data-app="portal-procurement">
           <button
-            class="dfms-nav-group-header"
+            class="ux-nav-group-header"
             aria-expanded="false"
             data-group="portal-procurement"
             type="button"
           >
-            <span class="dfms-nav-group-icon">
+            <span class="ux-nav-group-icon">
               <i class="bi bi-box-arrow-in-right"></i>
             </span>
-            <span class="dfms-nav-group-label">Procurement</span>
-            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+            <span class="ux-nav-group-label">Procurement</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
           </button>
-          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
             
-              <li class="dfms-nav-item" data-label="port shipments">
-                <a href="admin_requisitions_portshipmentproxy.html" class="dfms-nav-link" data-nav-id="procurement_port_shipments">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Port Shipments</span>
+              <li class="ux-nav-item" data-label="port shipments">
+                <a href="shipments.html" class="ux-nav-link" data-nav-id="n6">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Port Shipments</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="transport requests">
-                <a href="admin_requisitions_transportrequisition_tr_type_PORT_CONSIGNMENT.html" class="dfms-nav-link" data-nav-id="procurement_transport_requests">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Transport requests</span>
+              <li class="ux-nav-item" data-label="transport requests">
+                <a href="transport-requests-port.html" class="ux-nav-link" data-nav-id="n7">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Transport requests</span>
                 </a>
               </li>
             
           </ul>
         </div>
       
-        <div class="dfms-nav-group" data-app="portal-transport">
+        <div class="ux-nav-group" data-app="portal-transport">
           <button
-            class="dfms-nav-group-header"
+            class="ux-nav-group-header"
             aria-expanded="false"
             data-group="portal-transport"
             type="button"
           >
-            <span class="dfms-nav-group-icon">
+            <span class="ux-nav-group-icon">
               <i class="bi bi-truck"></i>
             </span>
-            <span class="dfms-nav-group-label">Transport</span>
-            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+            <span class="ux-nav-group-label">Transport</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
           </button>
-          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
             
-              <li class="dfms-nav-item" data-label="live gps">
-                <a href="admin_tracking_live_gps.html" class="dfms-nav-link" data-nav-id="live_gps">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Live GPS</span>
+              <li class="ux-nav-item" data-label="live gps">
+                <a href="live-gps.html" class="ux-nav-link" data-nav-id="n8">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Live GPS</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="transport requests">
-                <a href="admin_requisitions_transportrequisition.html" class="dfms-nav-link" data-nav-id="transport_requests">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Transport requests</span>
+              <li class="ux-nav-item" data-label="transport requests">
+                <a href="transport-requests.html" class="ux-nav-link" data-nav-id="n9">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Transport requests</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="transport orders">
-                <a href="admin_transport_transportorder.html" class="dfms-nav-link" data-nav-id="transport_orders">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Transport orders</span>
+              <li class="ux-nav-item" data-label="transport orders">
+                <a href="transport-orders.html" class="ux-nav-link" data-nav-id="n10">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Transport orders</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="vehicle planning">
-                <a href="admin_transport_vehicle_planning.html" class="dfms-nav-link" data-nav-id="vehicle_planning">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Vehicle planning</span>
+              <li class="ux-nav-item" data-label="vehicle planning">
+                <a href="vehicle-planning.html" class="ux-nav-link" data-nav-id="n11">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Vehicle planning</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="bids management">
-                <a href="admin_vendors_biddingsession.html" class="dfms-nav-link" data-nav-id="bids_management">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Bids management</span>
+              <li class="ux-nav-item" data-label="bids management">
+                <a href="bidding.html" class="ux-nav-link" data-nav-id="n12">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Bids management</span>
                 </a>
               </li>
             
           </ul>
         </div>
       
-        <div class="dfms-nav-group" data-app="portal-master-data">
+        <div class="ux-nav-group" data-app="portal-master-data">
           <button
-            class="dfms-nav-group-header"
+            class="ux-nav-group-header"
             aria-expanded="false"
             data-group="portal-master-data"
             type="button"
           >
-            <span class="dfms-nav-group-icon">
+            <span class="ux-nav-group-icon">
               <i class="bi bi-database"></i>
             </span>
-            <span class="dfms-nav-group-label">Master Data</span>
-            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+            <span class="ux-nav-group-label">Master Data</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
           </button>
-          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
             
-              <li class="dfms-nav-item" data-label="points of interest">
-                <a href="admin_master_data_poi.html" class="dfms-nav-link" data-nav-id="pois">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Points of Interest</span>
+              <li class="ux-nav-item" data-label="points of interest">
+                <a href="sites.html" class="ux-nav-link" data-nav-id="n13">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Points of Interest</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="loading/unloading points">
-                <a href="admin_master_data_loadingunloadingpoint.html" class="dfms-nav-link" data-nav-id="loading_unloading_points">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Loading/Unloading Points</span>
+              <li class="ux-nav-item" data-label="loading/unloading points">
+                <a href="load-points.html" class="ux-nav-link" data-nav-id="n14">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Loading/Unloading Points</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="vehicle brands">
-                <a href="admin_master_data_brand.html" class="dfms-nav-link" data-nav-id="vehicle_brands">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Vehicle Brands</span>
+              <li class="ux-nav-item" data-label="vehicle brands">
+                <a href="brands.html" class="ux-nav-link" data-nav-id="n15">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Vehicle Brands</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="vehicles">
-                <a href="admin_master_data_vehicle.html" class="dfms-nav-link" data-nav-id="vehicles">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Vehicles</span>
+              <li class="ux-nav-item" data-label="vehicles">
+                <a href="vehicles.html" class="ux-nav-link" data-nav-id="n16">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Vehicles</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="helpers">
-                <a href="admin_users_helper.html" class="dfms-nav-link" data-nav-id="helpers">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Helpers</span>
+              <li class="ux-nav-item" data-label="helpers">
+                <a href="helpers.html" class="ux-nav-link" data-nav-id="n17">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Helpers</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="dealers">
-                <a href="admin_master_data_dealer.html" class="dfms-nav-link" data-nav-id="dealers">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Dealers</span>
+              <li class="ux-nav-item" data-label="dealers">
+                <a href="dealers.html" class="ux-nav-link" data-nav-id="n18">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Dealers</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="suppliers">
-                <a href="admin_master_data_supplier.html" class="dfms-nav-link" data-nav-id="suppliers">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Suppliers</span>
+              <li class="ux-nav-item" data-label="suppliers">
+                <a href="suppliers.html" class="ux-nav-link" data-nav-id="n19">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Suppliers</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="product categories">
-                <a href="admin_master_data_productcategory.html" class="dfms-nav-link" data-nav-id="product_categories">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Product Categories</span>
+              <li class="ux-nav-item" data-label="product categories">
+                <a href="categories.html" class="ux-nav-link" data-nav-id="n20">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Product Categories</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="product sub-category">
-                <a href="admin_master_data_productsubcategory.html" class="dfms-nav-link" data-nav-id="product_sub_categories">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Product Sub-category</span>
+              <li class="ux-nav-item" data-label="product sub-category">
+                <a href="subcategories.html" class="ux-nav-link" data-nav-id="n21">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Product Sub-category</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="products">
-                <a href="admin_master_data_product.html" class="dfms-nav-link" data-nav-id="products">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Products</span>
+              <li class="ux-nav-item" data-label="products">
+                <a href="products.html" class="ux-nav-link" data-nav-id="n22">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Products</span>
                 </a>
               </li>
             
           </ul>
         </div>
       
-        <div class="dfms-nav-group" data-app="portal-gate">
+        <div class="ux-nav-group" data-app="portal-gate">
           <button
-            class="dfms-nav-group-header"
+            class="ux-nav-group-header"
             aria-expanded="false"
             data-group="portal-gate"
             type="button"
           >
-            <span class="dfms-nav-group-icon">
+            <span class="ux-nav-group-icon">
               <i class="bi bi-door-open"></i>
             </span>
-            <span class="dfms-nav-group-label">Gate</span>
-            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+            <span class="ux-nav-group-label">Gate</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
           </button>
-          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
             
-              <li class="dfms-nav-item" data-label="vehicle entry (gate-in)">
-                <a href="admin_operations_gatein_add.html" class="dfms-nav-link" data-nav-id="gate_in">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Vehicle Entry (Gate-In)</span>
+              <li class="ux-nav-item" data-label="vehicle entry (gate-in)">
+                <a href="gate-entry-new.html" class="ux-nav-link" data-nav-id="n23">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Vehicle Entry (Gate-In)</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="vehicle exit (gate-out)">
-                <a href="admin_operations_gateout_add.html" class="dfms-nav-link" data-nav-id="gate_out">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Vehicle Exit (Gate-Out)</span>
+              <li class="ux-nav-item" data-label="vehicle exit (gate-out)">
+                <a href="gate-exit-new.html" class="ux-nav-link" data-nav-id="n24">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Vehicle Exit (Gate-Out)</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="active visits">
-                <a href="admin_operations_gatevisitsession_status_exact_active.html" class="dfms-nav-link" data-nav-id="gate_active_visits">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Active Visits</span>
+              <li class="ux-nav-item" data-label="active visits">
+                <a href="gate-visits-active.html" class="ux-nav-link" data-nav-id="n25">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Active Visits</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="visit history">
-                <a href="admin_operations_gatevisitsession.html" class="dfms-nav-link" data-nav-id="gate_visit_history">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Visit History</span>
+              <li class="ux-nav-item" data-label="visit history">
+                <a href="gate-visits.html" class="ux-nav-link" data-nav-id="n26">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Visit History</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="on-demand to">
-                <a href="admin_operations_gateondemandtorequest.html" class="dfms-nav-link" data-nav-id="gate_on_demand_to">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">On-Demand TO</span>
+              <li class="ux-nav-item" data-label="on-demand to">
+                <a href="gate-requests.html" class="ux-nav-link" data-nav-id="n27">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">On-Demand TO</span>
                 </a>
               </li>
             
           </ul>
         </div>
       
-        <div class="dfms-nav-group" data-app="portal-command-center">
+        <div class="ux-nav-group" data-app="portal-command-center">
           <button
-            class="dfms-nav-group-header"
+            class="ux-nav-group-header"
             aria-expanded="false"
             data-group="portal-command-center"
             type="button"
           >
-            <span class="dfms-nav-group-icon">
+            <span class="ux-nav-group-icon">
               <i class="bi bi-speedometer2"></i>
             </span>
-            <span class="dfms-nav-group-label">Command Center</span>
-            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+            <span class="ux-nav-group-label">Command Center</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
           </button>
-          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
             
-              <li class="dfms-nav-item" data-label="queue">
-                <a href="admin_operations_queueentry_status_exact_waiting.html" class="dfms-nav-link" data-nav-id="cc_queue">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Queue</span>
+              <li class="ux-nav-item" data-label="queue">
+                <a href="queue-waiting.html" class="ux-nav-link" data-nav-id="n28">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Queue</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="bay assignments">
-                <a href="admin_operations_bayassignment.html" class="dfms-nav-link" data-nav-id="cc_bay_assignments">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Bay Assignments</span>
+              <li class="ux-nav-item" data-label="bay assignments">
+                <a href="bays.html" class="ux-nav-link" data-nav-id="n29">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Bay Assignments</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="waiting serials">
-                <a href="admin_operations_waitingserial.html" class="dfms-nav-link" data-nav-id="cc_waiting_serials">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Waiting Serials</span>
+              <li class="ux-nav-item" data-label="waiting serials">
+                <a href="waiting-serial.html" class="ux-nav-link" data-nav-id="n30">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Waiting Serials</span>
                 </a>
               </li>
             
           </ul>
         </div>
       
-        <div class="dfms-nav-group" data-app="portal-loading">
+        <div class="ux-nav-group" data-app="portal-loading">
           <button
-            class="dfms-nav-group-header"
+            class="ux-nav-group-header"
             aria-expanded="false"
             data-group="portal-loading"
             type="button"
           >
-            <span class="dfms-nav-group-icon">
+            <span class="ux-nav-group-icon">
               <i class="bi bi-box-arrow-up"></i>
             </span>
-            <span class="dfms-nav-group-label">Loading</span>
-            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+            <span class="ux-nav-group-label">Loading</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
           </button>
-          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
             
-              <li class="dfms-nav-item" data-label="load events">
-                <a href="admin_operations_loadevent.html" class="dfms-nav-link" data-nav-id="ld_load_events">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Load Events</span>
+              <li class="ux-nav-item" data-label="load events">
+                <a href="loading.html" class="ux-nav-link" data-nav-id="n31">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Load Events</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="start loading">
-                <a href="admin_operations_loadevent_add.html" class="dfms-nav-link" data-nav-id="ld_new_load_event">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Start Loading</span>
+              <li class="ux-nav-item" data-label="start loading">
+                <a href="loading-new.html" class="ux-nav-link" data-nav-id="n32">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Start Loading</span>
                 </a>
               </li>
             
           </ul>
         </div>
       
-        <div class="dfms-nav-group" data-app="portal-unloading">
+        <div class="ux-nav-group" data-app="portal-unloading">
           <button
-            class="dfms-nav-group-header"
+            class="ux-nav-group-header"
             aria-expanded="false"
             data-group="portal-unloading"
             type="button"
           >
-            <span class="dfms-nav-group-icon">
+            <span class="ux-nav-group-icon">
               <i class="bi bi-box-arrow-down"></i>
             </span>
-            <span class="dfms-nav-group-label">Unloading</span>
-            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+            <span class="ux-nav-group-label">Unloading</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
           </button>
-          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
             
-              <li class="dfms-nav-item" data-label="unload events">
-                <a href="admin_operations_unloadevent.html" class="dfms-nav-link" data-nav-id="ld_unload_events">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Unload Events</span>
+              <li class="ux-nav-item" data-label="unload events">
+                <a href="unloading.html" class="ux-nav-link" data-nav-id="n33">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Unload Events</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="start unloading">
-                <a href="admin_operations_unloadevent_add.html" class="dfms-nav-link" data-nav-id="ld_new_unload_event">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Start Unloading</span>
+              <li class="ux-nav-item" data-label="start unloading">
+                <a href="unloading-new.html" class="ux-nav-link" data-nav-id="n34">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Start Unloading</span>
                 </a>
               </li>
             
           </ul>
         </div>
       
-        <div class="dfms-nav-group" data-app="portal-qc-checkpoint">
+        <div class="ux-nav-group" data-app="portal-qc-checkpoint">
           <button
-            class="dfms-nav-group-header"
+            class="ux-nav-group-header"
             aria-expanded="false"
             data-group="portal-qc-checkpoint"
             type="button"
           >
-            <span class="dfms-nav-group-icon">
+            <span class="ux-nav-group-icon">
               <i class="bi bi-clipboard2-pulse"></i>
             </span>
-            <span class="dfms-nav-group-label">QC Checkpoint</span>
-            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+            <span class="ux-nav-group-label">QC Checkpoint</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
           </button>
-          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
             
-              <li class="dfms-nav-item" data-label="qc queue">
-                <a href="admin_quality_qcqueuetransportorder.html" class="dfms-nav-link" data-nav-id="qc_queue">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">QC Queue</span>
+              <li class="ux-nav-item" data-label="qc queue">
+                <a href="quality-queue.html" class="ux-nav-link" data-nav-id="n35">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">QC Queue</span>
                 </a>
               </li>
             
           </ul>
         </div>
       
-        <div class="dfms-nav-group" data-app="portal-scaling">
+        <div class="ux-nav-group" data-app="portal-scaling">
           <button
-            class="dfms-nav-group-header"
+            class="ux-nav-group-header"
             aria-expanded="false"
             data-group="portal-scaling"
             type="button"
           >
-            <span class="dfms-nav-group-icon">
+            <span class="ux-nav-group-icon">
               <i class="bi bi-speedometer"></i>
             </span>
-            <span class="dfms-nav-group-label">Scaling</span>
-            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+            <span class="ux-nav-group-label">Scaling</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
           </button>
-          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
             
-              <li class="dfms-nav-item" data-label="scale-in">
-                <a href="admin_operations_scalein_add.html" class="dfms-nav-link" data-nav-id="scale_in">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Scale-In</span>
+              <li class="ux-nav-item" data-label="scale-in">
+                <a href="scale-in-new.html" class="ux-nav-link" data-nav-id="n36">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Scale-In</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="scale-out">
-                <a href="admin_operations_scaleout_add.html" class="dfms-nav-link" data-nav-id="scale_out">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Scale-Out</span>
+              <li class="ux-nav-item" data-label="scale-out">
+                <a href="scale-out-new.html" class="ux-nav-link" data-nav-id="n37">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Scale-Out</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="queue tokens">
-                <a href="admin_operations_queuetoken.html" class="dfms-nav-link" data-nav-id="queue_tokens">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Queue Tokens</span>
+              <li class="ux-nav-item" data-label="queue tokens">
+                <a href="queue-tokens.html" class="ux-nav-link" data-nav-id="n38">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Queue Tokens</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="gate passes">
-                <a href="admin_operations_scaleout.html" class="dfms-nav-link" data-nav-id="gate_passes_scaling">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Gate Passes</span>
+              <li class="ux-nav-item" data-label="gate passes">
+                <a href="scale-out.html" class="ux-nav-link" data-nav-id="n39">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Gate Passes</span>
                 </a>
               </li>
             
           </ul>
         </div>
       
-        <div class="dfms-nav-group" data-app="portal-fleet-operations">
+        <div class="ux-nav-group" data-app="portal-fleet-operations">
           <button
-            class="dfms-nav-group-header"
+            class="ux-nav-group-header"
             aria-expanded="false"
             data-group="portal-fleet-operations"
             type="button"
           >
-            <span class="dfms-nav-group-icon">
+            <span class="ux-nav-group-icon">
               <i class="bi bi-clipboard2-check"></i>
             </span>
-            <span class="dfms-nav-group-label">Fleet operations</span>
-            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+            <span class="ux-nav-group-label">Fleet operations</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
           </button>
-          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
             
-              <li class="dfms-nav-item" data-label="dispatch queue">
-                <a href="admin_fleet_supervisor_vehicleinspection_dispatch_queue.html" class="dfms-nav-link" data-nav-id="fleet_dispatch_queue">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Dispatch queue</span>
+              <li class="ux-nav-item" data-label="dispatch queue">
+                <a href="inspections-dispatch.html" class="ux-nav-link" data-nav-id="n40">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Dispatch queue</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="under maintenance">
-                <a href="admin_fleet_supervisor_vehicleinspection_maintenance_queue.html" class="dfms-nav-link" data-nav-id="fleet_maintenance_queue">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Under Maintenance</span>
+              <li class="ux-nav-item" data-label="under maintenance">
+                <a href="inspections-maintenance.html" class="ux-nav-link" data-nav-id="n41">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Under Maintenance</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="inspection records">
-                <a href="admin_fleet_supervisor_vehicleinspection.html" class="dfms-nav-link" data-nav-id="fleet_inspection_queue">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Inspection records</span>
+              <li class="ux-nav-item" data-label="inspection records">
+                <a href="inspections.html" class="ux-nav-link" data-nav-id="n42">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Inspection records</span>
                 </a>
               </li>
             
           </ul>
         </div>
       
-        <div class="dfms-nav-group" data-app="portal-driver-management">
+        <div class="ux-nav-group" data-app="portal-driver-management">
           <button
-            class="dfms-nav-group-header"
+            class="ux-nav-group-header"
             aria-expanded="false"
             data-group="portal-driver-management"
             type="button"
           >
-            <span class="dfms-nav-group-icon">
+            <span class="ux-nav-group-icon">
               <i class="bi bi-person-badge"></i>
             </span>
-            <span class="dfms-nav-group-label">Driver Management</span>
-            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+            <span class="ux-nav-group-label">Driver Management</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
           </button>
-          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
             
-              <li class="dfms-nav-item" data-label="driver attendance">
-                <a href="admin_fleet_supervisor_driverattendance.html" class="dfms-nav-link" data-nav-id="fleet_attendance">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Driver Attendance</span>
+              <li class="ux-nav-item" data-label="driver attendance">
+                <a href="attendance.html" class="ux-nav-link" data-nav-id="n43">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Driver Attendance</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="driver leave management">
-                <a href="admin_fleet_supervisor_driverleave.html" class="dfms-nav-link" data-nav-id="fleet_leave">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Driver Leave Management</span>
+              <li class="ux-nav-item" data-label="driver leave management">
+                <a href="leave.html" class="ux-nav-link" data-nav-id="n44">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Driver Leave Management</span>
                 </a>
               </li>
             
           </ul>
         </div>
       
-        <div class="dfms-nav-group" data-app="portal-trips">
+        <div class="ux-nav-group" data-app="portal-trips">
           <button
-            class="dfms-nav-group-header"
+            class="ux-nav-group-header"
             aria-expanded="false"
             data-group="portal-trips"
             type="button"
           >
-            <span class="dfms-nav-group-icon">
+            <span class="ux-nav-group-icon">
               <i class="bi bi-phone"></i>
             </span>
-            <span class="dfms-nav-group-label">Trips</span>
-            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+            <span class="ux-nav-group-label">Trips</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
           </button>
-          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
             
-              <li class="dfms-nav-item" data-label="my trips">
-                <a href="admin_transport_drivertransportorder_assigned_driver_me.html" class="dfms-nav-link" data-nav-id="driver_my_tos">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">My Trips</span>
+              <li class="ux-nav-item" data-label="my trips">
+                <a href="my-orders.html" class="ux-nav-link" data-nav-id="n45">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">My Trips</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="pod records">
-                <a href="admin_transport_proofofdelivery.html" class="dfms-nav-link" data-nav-id="driver_pod_records">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">POD Records</span>
+              <li class="ux-nav-item" data-label="pod records">
+                <a href="deliveries.html" class="ux-nav-link" data-nav-id="n46">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">POD Records</span>
                 </a>
               </li>
             
           </ul>
         </div>
       
-        <div class="dfms-nav-group dfms-nav-group--active" data-app="portal-vendors">
+        <div class="ux-nav-group ux-nav-group--active" data-app="portal-vendors">
           <button
-            class="dfms-nav-group-header"
+            class="ux-nav-group-header"
             aria-expanded="false"
             data-group="portal-vendors"
             type="button"
           >
-            <span class="dfms-nav-group-icon">
+            <span class="ux-nav-group-icon">
               <i class="bi bi-building"></i>
             </span>
-            <span class="dfms-nav-group-label">Vendors</span>
-            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+            <span class="ux-nav-group-label">Vendors</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
           </button>
-          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
             
-              <li class="dfms-nav-item dfms-nav-item--active" data-label="vendors">
-                <a href="vendors.html" class="dfms-nav-link" data-nav-id="vendors" aria-current="page">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Vendors</span>
+              <li class="ux-nav-item ux-nav-item--active" data-label="vendors">
+                <a href="vendors.html" class="ux-nav-link" data-nav-id="n47" aria-current="page">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Vendors</span>
                 </a>
               </li>
             
           </ul>
         </div>
       
-        <div class="dfms-nav-group" data-app="portal-users-access">
+        <div class="ux-nav-group" data-app="portal-users-access">
           <button
-            class="dfms-nav-group-header"
+            class="ux-nav-group-header"
             aria-expanded="false"
             data-group="portal-users-access"
             type="button"
           >
-            <span class="dfms-nav-group-icon">
+            <span class="ux-nav-group-icon">
               <i class="bi bi-people"></i>
             </span>
-            <span class="dfms-nav-group-label">Users &amp; Access</span>
-            <i class="bi bi-chevron-down dfms-nav-group-chevron"></i>
+            <span class="ux-nav-group-label">Users &amp; Access</span>
+            <i class="bi bi-chevron-down ux-nav-group-chevron"></i>
           </button>
-          <ul class="dfms-nav-items dfms-nav-items--hidden" role="list">
+          <ul class="ux-nav-items ux-nav-items--hidden" role="list">
             
-              <li class="dfms-nav-item" data-label="users">
-                <a href="admin_users_user.html" class="dfms-nav-link" data-nav-id="users">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Users</span>
+              <li class="ux-nav-item" data-label="users">
+                <a href="users.html" class="ux-nav-link" data-nav-id="n48">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Users</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="drivers">
-                <a href="admin_users_driver.html" class="dfms-nav-link" data-nav-id="drivers">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Drivers</span>
+              <li class="ux-nav-item" data-label="drivers">
+                <a href="drivers.html" class="ux-nav-link" data-nav-id="n49">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Drivers</span>
                 </a>
               </li>
             
-              <li class="dfms-nav-item" data-label="audit logs">
-                <a href="admin_audit_auditlog.html" class="dfms-nav-link" data-nav-id="audit_logs">
-                  <i class="bi bi-dot dfms-nav-item-dot"></i>
-                  <span class="dfms-nav-item-label">Audit Logs</span>
+              <li class="ux-nav-item" data-label="audit logs">
+                <a href="activity-log.html" class="ux-nav-link" data-nav-id="n50">
+                  <i class="bi bi-dot ux-nav-item-dot"></i>
+                  <span class="ux-nav-item-label">Audit Logs</span>
                 </a>
               </li>
             
@@ -1459,8 +1457,8 @@
   </div>
 
   
-  <div class="dfms-nav-footer">
-    <span class="dfms-nav-footer-text">Optilogist</span>
+  <div class="ux-nav-footer">
+    <span class="ux-nav-footer-text">Optilogist</span>
   </div>
 
 </nav>
@@ -1475,10 +1473,10 @@
         <div id="content" class="colM">
           
   
-  <nav aria-label="Breadcrumbs" class="dfms-breadcrumbs">
+  <nav aria-label="Breadcrumbs" class="ux-breadcrumbs">
     
       <div class="breadcrumbs">
-        <a href="admin.html">Home</a>
+        <a href="dashboard.html">Home</a>
          &rsaquo; Vendors
       </div>
     
@@ -1493,7 +1491,7 @@
     <h1 style="margin: 0 0 6px; font-size: 20px; font-weight: 700;">Vendors</h1>
     <p class="vm-vendors__lead">
       
-      Review vendor join requests and manage vendors for this tenant. Vendor type is set once at approval. Suspend and reactivate apply to this tenant only and do not affect the vendor on other tenants.
+      Review vendor join requests and manage vendors for this company. Vendor type is set once at approval. Suspend and reactivate apply to this company only and do not affect the vendor on other companys.
       
     </p>
   </div>
@@ -1501,17 +1499,17 @@
   <div class="vm-alert vm-alert--error" x-show="error" x-text="error"></div>
   <div class="vm-alert vm-alert--success" x-show="success" x-text="success"></div>
 
-  <div id="changelist" class="module filtered">
+  <div id="listing" class="module filtered">
     <div id="toolbar">
-      <form id="changelist-search" method="get" x-on:submit.prevent="onSearchSubmit()">
-        <div class="dfms-search-wrap">
-          <i class="bi bi-search dfms-search-icon"></i>
+      <form id="listing-search" method="get" x-on:submit.prevent="onSearchSubmit()">
+        <div class="ux-search-wrap">
+          <i class="bi bi-search ux-search-icon"></i>
           <input
             type="text"
             name="q"
             x-model="q"
             id="searchbar"
-            class="dfms-search-input"
+            class="ux-search-input"
             placeholder="Search…"
             autocomplete="off"
             spellcheck="false"
@@ -1519,34 +1517,34 @@
           <a
             x-show="q"
             href="#"
-            class="dfms-search-clear"
+            class="ux-search-clear"
             title="Clear search"
             aria-label="Clear search"
             x-on:click.prevent="clearSearch()"
           ><i class="bi bi-x"></i></a>
-          <input type="submit" value="Search" class="dfms-search-submit">
+          <input type="submit" value="Search" class="ux-search-submit">
         </div>
-        <span class="dfms-search-count" x-text="resultCountText()"></span>
+        <span class="ux-search-count" x-text="resultCountText()"></span>
       </form>
     </div>
 
     <div style="display:flex; gap:16px; align-items:flex-start;">
       <div style="flex:1; min-width:0;">
         <div
-          class="dfms-selection-toolbar"
-          id="dfms-selection-toolbar"
+          class="ux-selection-toolbar"
+          id="ux-selection-toolbar"
           x-show="canManage && selectedIds.length > 0"
           x-cloak
         >
-          <span class="dfms-selection-count">
-            <span class="dfms-selection-count-badge" x-text="selectedIds.length">0</span>
+          <span class="ux-selection-count">
+            <span class="ux-selection-count-badge" x-text="selectedIds.length">0</span>
             <span x-text="selectedIds.length">0</span>
             selected
           </span>
-          <div class="dfms-toolbar-actions">
+          <div class="ux-toolbar-actions">
             <button
               type="button"
-              class="dfms-btn-approve"
+              class="ux-btn-approve"
               :disabled="loading || !canBulkApprove()"
               x-show="canBulkApprove()"
               x-on:click="bulkApprove('contractual')"
@@ -1555,7 +1553,7 @@
             </button>
             <button
               type="button"
-              class="dfms-btn-modify"
+              class="ux-btn-modify"
               :disabled="loading || !canBulkApprove()"
               x-show="canBulkApprove()"
               x-on:click="bulkApprove('non_contractual')"
@@ -1564,7 +1562,7 @@
             </button>
             <button
               type="button"
-              class="dfms-btn-reject"
+              class="ux-btn-reject"
               :disabled="loading || !canBulkReject()"
               x-show="canBulkReject()"
               x-on:click="openBulkReject()"
@@ -1573,7 +1571,7 @@
             </button>
             <button
               type="button"
-              class="dfms-toolbar-action-btn dfms-toolbar-action-btn--danger"
+              class="ux-toolbar-action-btn ux-toolbar-action-btn--danger"
               :disabled="loading || !canBulkSuspend()"
               x-show="canBulkSuspend()"
               x-on:click="bulkSuspend()"
@@ -1582,7 +1580,7 @@
             </button>
             <button
               type="button"
-              class="dfms-btn-approve"
+              class="ux-btn-approve"
               :disabled="loading || !canBulkReactivate()"
               x-show="canBulkReactivate()"
               x-on:click="bulkReactivate()"
@@ -1590,7 +1588,7 @@
               <i class="bi bi-arrow-counterclockwise"></i> Reactivate
             </button>
           </div>
-          <button type="button" class="dfms-clear-selection" x-on:click="clearSelection()">
+          <button type="button" class="ux-clear-selection" x-on:click="clearSelection()">
             <i class="bi bi-x"></i>
             Clear
           </button>
@@ -1637,17 +1635,17 @@
                 <td>user25@example.com</td>
                 <td>01213345565</td>
                 <td>
-                  <span class="dfms-badge dfms-badge--approved">
+                  <span class="ux-badge ux-badge--approved">
                     Approved
                   </span>
                 </td>
                 <td>
-                  <span class="dfms-badge dfms-badge--active">
+                  <span class="ux-badge ux-badge--active">
                     Active
                   </span>
                 </td>
                 <td>
-                  <span class="dfms-badge dfms-badge--approved">
+                  <span class="ux-badge ux-badge--approved">
                     Contractual
                   </span>
                 </td>
@@ -1668,17 +1666,17 @@
                 <td>user29@example.com</td>
                 <td>01700100042</td>
                 <td>
-                  <span class="dfms-badge dfms-badge--approved">
+                  <span class="ux-badge ux-badge--approved">
                     Approved
                   </span>
                 </td>
                 <td>
-                  <span class="dfms-badge dfms-badge--active">
+                  <span class="ux-badge ux-badge--active">
                     Active
                   </span>
                 </td>
                 <td>
-                  <span class="dfms-badge dfms-badge--submitted">
+                  <span class="ux-badge ux-badge--submitted">
                     Non-Contractual
                   </span>
                 </td>
@@ -1699,17 +1697,17 @@
                 <td>user28@example.com</td>
                 <td>01700100045</td>
                 <td>
-                  <span class="dfms-badge dfms-badge--approved">
+                  <span class="ux-badge ux-badge--approved">
                     Approved
                   </span>
                 </td>
                 <td>
-                  <span class="dfms-badge dfms-badge--active">
+                  <span class="ux-badge ux-badge--active">
                     Active
                   </span>
                 </td>
                 <td>
-                  <span class="dfms-badge dfms-badge--submitted">
+                  <span class="ux-badge ux-badge--submitted">
                     Non-Contractual
                   </span>
                 </td>
@@ -1730,17 +1728,17 @@
                 <td>user26@example.com</td>
                 <td>01700100044</td>
                 <td>
-                  <span class="dfms-badge dfms-badge--approved">
+                  <span class="ux-badge ux-badge--approved">
                     Approved
                   </span>
                 </td>
                 <td>
-                  <span class="dfms-badge dfms-badge--active">
+                  <span class="ux-badge ux-badge--active">
                     Active
                   </span>
                 </td>
                 <td>
-                  <span class="dfms-badge dfms-badge--submitted">
+                  <span class="ux-badge ux-badge--submitted">
                     Non-Contractual
                   </span>
                 </td>
@@ -1761,17 +1759,17 @@
                 <td>admin@example.com</td>
                 <td>01700100043</td>
                 <td>
-                  <span class="dfms-badge dfms-badge--approved">
+                  <span class="ux-badge ux-badge--approved">
                     Approved
                   </span>
                 </td>
                 <td>
-                  <span class="dfms-badge dfms-badge--active">
+                  <span class="ux-badge ux-badge--active">
                     Active
                   </span>
                 </td>
                 <td>
-                  <span class="dfms-badge dfms-badge--approved">
+                  <span class="ux-badge ux-badge--approved">
                     Contractual
                   </span>
                 </td>
@@ -1792,17 +1790,17 @@
                 <td>user21@example.com</td>
                 <td>01700100046</td>
                 <td>
-                  <span class="dfms-badge dfms-badge--approved">
+                  <span class="ux-badge ux-badge--approved">
                     Approved
                   </span>
                 </td>
                 <td>
-                  <span class="dfms-badge dfms-badge--active">
+                  <span class="ux-badge ux-badge--active">
                     Active
                   </span>
                 </td>
                 <td>
-                  <span class="dfms-badge dfms-badge--approved">
+                  <span class="ux-badge ux-badge--approved">
                     Contractual
                   </span>
                 </td>
@@ -1813,35 +1811,35 @@
           </table>
         </div>
 
-        <div class="dfms-pagination-parent">
-          <div class="dfms-pagination-numbers">
+        <div class="ux-pagination-parent">
+          <div class="ux-pagination-numbers">
             <p class="paginator">
-              <span class="dfms-paginator-meta" x-text="paginatorMetaText()"></span>
-              <span class="dfms-paginator-nav" x-show="totalPages > 1">
+              <span class="ux-paginator-meta" x-text="paginatorMetaText()"></span>
+              <span class="ux-paginator-nav" x-show="totalPages > 1">
                 <template x-if="page <= 1">
-                  <span class="disabled dfms-page-prev">‹ Prev</span>
+                  <span class="disabled ux-page-prev">‹ Prev</span>
                 </template>
                 <template x-if="page > 1">
-                  <a href="#" class="dfms-page-prev" x-on:click.prevent="goToPage(page - 1)">‹ Prev</a>
+                  <a href="#" class="ux-page-prev" x-on:click.prevent="goToPage(page - 1)">‹ Prev</a>
                 </template>
                 <template x-for="item in pageItems()" :key="item.key">
                   <span>
-                    <span class="dfms-page-ellipsis" x-show="item.type === 'ellipsis'">…</span>
+                    <span class="ux-page-ellipsis" x-show="item.type === 'ellipsis'">…</span>
                     <span class="this-page" x-show="item.type === 'page' && item.n === page" x-text="item.n"></span>
                     <a href="#" x-show="item.type === 'page' && item.n !== page"
                        x-on:click.prevent="goToPage(item.n)" x-text="item.n"></a>
                   </span>
                 </template>
                 <template x-if="page >= totalPages">
-                  <span class="disabled dfms-page-next">Next ›</span>
+                  <span class="disabled ux-page-next">Next ›</span>
                 </template>
                 <template x-if="page < totalPages">
-                  <a href="#" class="dfms-page-next" x-on:click.prevent="goToPage(page + 1)">Next ›</a>
+                  <a href="#" class="ux-page-next" x-on:click.prevent="goToPage(page + 1)">Next ›</a>
                 </template>
               </span>
             </p>
           </div>
-          <div class="dfms-pagination-controls">
+          <div class="ux-pagination-controls">
             <div class="per-page-selector">
               <label for="per-page-select" class="per-page-selector__label">
                 Rows per page:
@@ -1871,7 +1869,7 @@
         <div class="vm-help" x-text="filterHelpText()"></div>
       </div>
 
-      <div id="changelist-filter" style="width:260px;">
+      <div id="listing-filter" style="width:260px;">
         <h2>Filter</h2>
         <h3>By status</h3>
         <ul>
@@ -1918,10 +1916,10 @@
         </div>
       </div>
       <div class="vm-dialog__actions">
-        <button type="button" class="dfms-btn-secondary dfms-btn-cancel" x-on:click="closeReject()">
+        <button type="button" class="ux-btn-secondary ux-btn-cancel" x-on:click="closeReject()">
           Cancel
         </button>
-        <button type="button" class="dfms-btn-reject" :disabled="loading" x-on:click="confirmReject()">
+        <button type="button" class="ux-btn-reject" :disabled="loading" x-on:click="confirmReject()">
           <i class="bi bi-x-octagon"></i> Reject
         </button>
       </div>
@@ -1938,11 +1936,11 @@
             <code class="vm-dialog__code" x-text="selected?.vendor_code"></code>
           </div>
           <div class="vm-dialog__badges">
-            <span class="dfms-badge" :class="statusBadgeModifier(selected?.status || '')"
+            <span class="ux-badge" :class="statusBadgeModifier(selected?.status || '')"
                   x-text="formatStatus(selected?.status || '')"></span>
-            <span class="dfms-badge" :class="platformStatusBadgeModifier(selected || {})"
+            <span class="ux-badge" :class="platformStatusBadgeModifier(selected || {})"
                   x-text="formatPlatformStatus(selected || {})"></span>
-            <span class="dfms-badge" x-show="selected?.status === 'approved' || selected?.status === 'suspended'"
+            <span class="ux-badge" x-show="selected?.status === 'approved' || selected?.status === 'suspended'"
                   :class="vendorTypeBadgeModifier(vendorType)"
                   x-text="formatVendorType(vendorType)"></span>
           </div>
@@ -2034,15 +2032,15 @@
       <div class="vm-dialog__actions">
         <template x-if="canManage && selected?.status === 'pending' && !selected?.vendor_account_deleted">
           <div class="vm-actions" style="margin-right: auto;">
-            <button type="button" class="dfms-btn-approve" :disabled="loading"
+            <button type="button" class="ux-btn-approve" :disabled="loading"
                     x-on:click="approve(selected.id, 'contractual')">
               <i class="bi bi-check-circle"></i> Approve — Contractual
             </button>
-            <button type="button" class="dfms-btn-modify" :disabled="loading"
+            <button type="button" class="ux-btn-modify" :disabled="loading"
                     x-on:click="approve(selected.id, 'non_contractual')">
               <i class="bi bi-check2-all"></i> Approve — Non-Contractual
             </button>
-            <button type="button" class="dfms-btn-reject" :disabled="loading"
+            <button type="button" class="ux-btn-reject" :disabled="loading"
                     x-on:click="openReject(selected)">
               <i class="bi bi-x-octagon"></i> Reject
             </button>
@@ -2050,24 +2048,24 @@
         </template>
         <template x-if="canManage && selected?.status === 'approved' && !selected?.vendor_account_deleted">
           <div class="vm-actions" style="margin-right: auto;">
-            <button type="button" class="dfms-btn-reject" :disabled="loading"
+            <button type="button" class="ux-btn-reject" :disabled="loading"
                     x-on:click="suspendMembership()">
-              <i class="bi bi-pause-circle"></i> Suspend for this tenant
+              <i class="bi bi-pause-circle"></i> Suspend for this company
             </button>
           </div>
         </template>
         <template x-if="canManage && selected?.status === 'suspended'">
           <div class="vm-actions" style="margin-right: auto;">
-            <button type="button" class="dfms-btn-approve" :disabled="loading"
+            <button type="button" class="ux-btn-approve" :disabled="loading"
                     x-on:click="reactivateMembership()">
-              <i class="bi bi-arrow-counterclockwise"></i> Reactivate for this tenant
+              <i class="bi bi-arrow-counterclockwise"></i> Reactivate for this company
             </button>
           </div>
         </template>
-        <button type="button" class="dfms-btn-secondary dfms-btn-cancel" x-on:click="closeVendor()">
+        <button type="button" class="ux-btn-secondary ux-btn-cancel" x-on:click="closeVendor()">
           Close
         </button>
-        <button type="button" class="dfms-btn-modify" :disabled="loading" x-on:click="saveVendor()"
+        <button type="button" class="ux-btn-modify" :disabled="loading" x-on:click="saveVendor()"
                 x-show="canManage && (selected?.status === 'approved' || selected?.status === 'suspended')">
           <i class="bi bi-save"></i> Save changes
         </button>
@@ -2290,11 +2288,11 @@ function vendorsPage() {
     },
 
     platformStatusBadgeModifier(row) {
-      if (row.vendor_account_deleted) return 'dfms-badge--cancelled';
+      if (row.vendor_account_deleted) return 'ux-badge--cancelled';
       const s = (row.vendor_platform_status || '').toLowerCase();
-      if (s === 'active') return 'dfms-badge--active';
-      if (s === 'suspended' || s === 'deleted') return 'dfms-badge--suspended';
-      return 'dfms-badge--neutral';
+      if (s === 'active') return 'ux-badge--active';
+      if (s === 'suspended' || s === 'deleted') return 'ux-badge--suspended';
+      return 'ux-badge--neutral';
     },
 
     formatVendorType(t) {
@@ -2312,16 +2310,16 @@ function vendorsPage() {
     },
 
     statusBadgeModifier(s) {
-      if (s === 'approved') return 'dfms-badge--approved';
-      if (s === 'suspended') return 'dfms-badge--suspended';
-      if (s === 'rejected') return 'dfms-badge--rejected';
-      return 'dfms-badge--pending-approval';
+      if (s === 'approved') return 'ux-badge--approved';
+      if (s === 'suspended') return 'ux-badge--suspended';
+      if (s === 'rejected') return 'ux-badge--rejected';
+      return 'ux-badge--pending-approval';
     },
 
     vendorTypeBadgeModifier(t) {
-      if (t === 'contractual') return 'dfms-badge--approved';
-      if (t === 'non_contractual') return 'dfms-badge--submitted';
-      return 'dfms-badge--neutral';
+      if (t === 'contractual') return 'ux-badge--approved';
+      if (t === 'non_contractual') return 'ux-badge--submitted';
+      return 'ux-badge--neutral';
     },
 
     formatDate(iso) {
@@ -2339,11 +2337,11 @@ function vendorsPage() {
 
     filterHelpText() {
       const map = {
-        pending: 'Pending join requests for this tenant.',
-        approved: 'Active vendors for this tenant (click to edit or suspend).',
-        suspended: 'Vendors suspended for this tenant only (click to reactivate).',
-        rejected: 'Rejected join requests for this tenant.',
-        all: 'All vendor memberships for this tenant.',
+        pending: 'Pending join requests for this company.',
+        approved: 'Active vendors for this company (click to edit or suspend).',
+        suspended: 'Vendors suspended for this company only (click to reactivate).',
+        rejected: 'Rejected join requests for this company.',
+        all: 'All vendor memberships for this company.',
       };
       return map[this.statusFilter] || '';
     },
@@ -2556,7 +2554,7 @@ function vendorsPage() {
         this.error = 'Select only approved vendors to suspend.';
         return;
       }
-      if (!window.confirm('Suspend ' + this.selectedIds.length + ' vendor(s) for this tenant?')) return;
+      if (!window.confirm('Suspend ' + this.selectedIds.length + ' vendor(s) for this company?')) return;
       await this.runBulk(
         '/demo-data/vendors/bulk-suspend/',
         { ids: this.selectedIds },
@@ -2569,7 +2567,7 @@ function vendorsPage() {
         this.error = 'Select only suspended vendors to reactivate.';
         return;
       }
-      if (!window.confirm('Reactivate ' + this.selectedIds.length + ' vendor(s) for this tenant?')) return;
+      if (!window.confirm('Reactivate ' + this.selectedIds.length + ' vendor(s) for this company?')) return;
       await this.runBulk(
         '/demo-data/vendors/bulk-reactivate/',
         { ids: this.selectedIds },
@@ -2659,9 +2657,9 @@ function vendorsPage() {
           + '<td>' + this.escapeHtml(row.contact_person || '—') + '</td>'
           + '<td>' + this.escapeHtml(row.email || '—') + '</td>'
           + '<td>' + this.escapeHtml(row.phone || '—') + '</td>'
-          + '<td><span class="dfms-badge ' + this.statusBadgeModifier(row.status) + '">' + this.escapeHtml(this.formatStatus(row.status)) + '</span></td>'
-          + '<td><span class="dfms-badge ' + this.platformStatusBadgeModifier(row) + '">' + this.escapeHtml(this.formatPlatformStatus(row)) + '</span></td>'
-          + '<td><span class="dfms-badge ' + this.vendorTypeBadgeModifier(row.vendor_type) + '">' + this.escapeHtml(this.formatVendorType(row.vendor_type)) + '</span></td>'
+          + '<td><span class="ux-badge ' + this.statusBadgeModifier(row.status) + '">' + this.escapeHtml(this.formatStatus(row.status)) + '</span></td>'
+          + '<td><span class="ux-badge ' + this.platformStatusBadgeModifier(row) + '">' + this.escapeHtml(this.formatPlatformStatus(row)) + '</span></td>'
+          + '<td><span class="ux-badge ' + this.vendorTypeBadgeModifier(row.vendor_type) + '">' + this.escapeHtml(this.formatVendorType(row.vendor_type)) + '</span></td>'
           + '<td class="quiet">' + this.escapeHtml(this.formatDate(row.requested_at)) + '</td>'
           + '</tr>';
       }).join('');
@@ -2782,7 +2780,7 @@ function vendorsPage() {
         this.error = this.apiErrorDetail(d) || 'Approve failed.';
         return;
       }
-      this.success = 'Vendor approved for this tenant.';
+      this.success = 'Vendor approved for this company.';
       this.closeVendor();
       await this.loadRows(false);
     },
@@ -2892,7 +2890,7 @@ function vendorsPage() {
       }
       const data = await res.json();
       this.selected.status = data.status;
-      this.success = 'Vendor suspended for this tenant.';
+      this.success = 'Vendor suspended for this company.';
       await this.loadRows(false);
     },
 
@@ -2913,7 +2911,7 @@ function vendorsPage() {
       }
       const data = await res.json();
       this.selected.status = data.status;
-      this.success = 'Vendor reactivated for this tenant.';
+      this.success = 'Vendor reactivated for this company.';
       await this.loadRows(false);
     },
 

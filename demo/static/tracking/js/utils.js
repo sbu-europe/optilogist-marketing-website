@@ -75,10 +75,10 @@ window.LiveGpsUtils = (function () {
   function liveGpsCsrfToken() {
     const meta = document.querySelector('meta[name="csrf-token"]');
     if (meta && meta.content) return meta.content;
-    const input = document.querySelector('[name=csrfmiddlewaretoken]');
+    const input = document.querySelector('[name=formtoken]');
     if (input && input.value) return input.value;
     const match = document.cookie.split('; ').find(function (row) {
-      return row.startsWith('csrftoken=');
+      return row.startsWith('formtoken=');
     });
     return match ? decodeURIComponent(match.split('=').slice(1).join('=')) : '';
   }
@@ -87,7 +87,7 @@ window.LiveGpsUtils = (function () {
     const baseHeaders = {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      'X-CSRFToken': liveGpsCsrfToken(),
+      'X-Form-Token': liveGpsCsrfToken(),
     };
     const opts = Object.assign({ credentials: 'same-origin' }, extra || {});
     opts.headers = Object.assign(baseHeaders, (opts.headers || {}));

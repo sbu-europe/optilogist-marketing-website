@@ -1,0 +1,62 @@
+.ux-poi-stock-panel {
+  margin: 0.75rem 0 1.25rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border-color, #ddd);
+  border-radius: 6px;
+  background: var(--body-bg, #fff);
+}
+
+.ux-poi-stock-panel__head {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.ux-poi-stock-panel__head i {
+  color: var(--ux-primary, #2563eb);
+}
+
+.ux-poi-stock-panel__hint {
+  color: var(--body-quiet-color, #666);
+  font-size: 0.85rem;
+}
+
+.ux-poi-stock-panel__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  gap: 0.65rem 1rem;
+  margin-top: 0.65rem;
+}
+
+.ux-poi-stock-item label {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--body-quiet-color, #666);
+  margin-bottom: 0.15rem;
+}
+
+.ux-poi-stock-item span {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.ux-poi-stock-panel__warning {
+  margin-top: 0.65rem;
+  padding: 0.45rem 0.65rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  background: var(--ux-warning-bg, #fff7ed);
+  color: var(--ux-warning-fg, #9a3412);
+  border-left: 3px solid #f59e0b;
+}
+
+.ux-poi-stock-panel .quiet {
+  color: var(--body-quiet-color, #666);
+  font-weight: 400;
+  font-size: 0.85rem;
+  margin-left: 0.25rem;
+}

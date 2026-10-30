@@ -1,0 +1,337 @@
+
+
+#listing {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+#listing .listing-form-container {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+#listing table {
+    width: 100%;
+}
+
+.change-list .hiddenfields { display:none; }
+
+.change-list .filtered table {
+    border-right: none;
+}
+
+.change-list .filtered {
+    min-height: 400px;
+}
+
+.change-list .filtered .results, .change-list .filtered .paginator,
+.filtered #toolbar, .filtered div.xfull {
+    width: auto;
+}
+
+.change-list .filtered table tbody th {
+    padding-right: 1em;
+}
+
+#listing-form .results {
+    overflow-x: auto;
+    width: 100%;
+}
+
+#listing .toplinks {
+    border-bottom: 1px solid var(--hairline-color);
+}
+
+#listing .paginator {
+    color: var(--body-quiet-color);
+    border-bottom: 1px solid var(--hairline-color);
+    background: var(--body-bg);
+    overflow: hidden;
+}
+
+
+
+#listing table thead th {
+    padding: 0;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+#listing table thead th.action-checkbox-column {
+    width: 1.5em;
+    text-align: center;
+}
+
+#listing table tbody td.action-checkbox {
+    text-align: center;
+}
+
+#listing table tfoot {
+    color: var(--body-quiet-color);
+}
+
+
+
+#toolbar {
+    padding: 8px 10px;
+    margin-bottom: 15px;
+    border-top: 1px solid var(--hairline-color);
+    border-bottom: 1px solid var(--hairline-color);
+    background: var(--darkened-bg);
+    color: var(--body-quiet-color);
+}
+
+#toolbar form input {
+    border-radius: 4px;
+    font-size: 0.875rem;
+    padding: 5px;
+    color: var(--body-fg);
+}
+
+#toolbar #searchbar {
+    height: 1.1875rem;
+    border: 1px solid var(--border-color);
+    padding: 2px 5px;
+    margin: 0;
+    vertical-align: top;
+    font-size: 0.8125rem;
+    max-width: 100%;
+}
+
+#toolbar #searchbar:focus {
+    border-color: var(--body-quiet-color);
+}
+
+#toolbar form input[type="submit"] {
+    border: 1px solid var(--border-color);
+    font-size: 0.8125rem;
+    padding: 4px 8px;
+    margin: 0;
+    vertical-align: middle;
+    background: var(--body-bg);
+    box-shadow: 0 -15px 20px -10px rgba(0, 0, 0, 0.15) inset;
+    cursor: pointer;
+    color: var(--body-fg);
+}
+
+#toolbar form input[type="submit"]:focus,
+#toolbar form input[type="submit"]:hover {
+    border-color: var(--body-quiet-color);
+}
+
+#listing-search img {
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+#listing-search .help {
+    word-break: break-word;
+}
+
+
+
+#listing-filter {
+    flex: 0 0 240px;
+    order: 1;
+    background: var(--darkened-bg);
+    border-left: none;
+    margin: 0 0 0 30px;
+}
+
+#listing-filter h2 {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 5px 15px;
+    margin-bottom: 12px;
+    border-bottom: none;
+}
+
+#listing-filter h3,
+#listing-filter details summary {
+    font-weight: 400;
+    padding: 0 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+#listing-filter details summary > * {
+    display: inline;
+}
+
+#listing-filter details > summary {
+    list-style-type: none;
+}
+
+#listing-filter details > summary::-webkit-details-marker {
+    display: none;
+}
+
+#listing-filter details > summary::before {
+    content: '→';
+    font-weight: bold;
+    color: var(--link-hover-color);
+}
+
+#listing-filter details[open] > summary::before {
+    content: '↓';
+}
+
+#listing-filter ul {
+    margin: 5px 0;
+    padding: 0 15px 15px;
+    border-bottom: 1px solid var(--hairline-color);
+}
+
+#listing-filter ul:last-child {
+    border-bottom: none;
+}
+
+#listing-filter li {
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+#listing-filter a {
+    display: block;
+    color: var(--body-quiet-color);
+    word-break: break-word;
+}
+
+#listing-filter li.selected {
+    border-left: 5px solid var(--hairline-color);
+    padding-left: 10px;
+    margin-left: -15px;
+}
+
+#listing-filter li.selected a {
+    color: var(--link-selected-fg);
+}
+
+#listing-filter a:focus, #listing-filter a:hover,
+#listing-filter li.selected a:focus,
+#listing-filter li.selected a:hover {
+    color: var(--link-hover-color);
+}
+
+#listing-filter #listing-filter-extra-actions {
+    font-size: 0.8125rem;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--hairline-color);
+}
+
+
+
+.change-list .toplinks {
+    display: flex;
+    padding-bottom: 5px;
+    flex-wrap: wrap;
+    gap: 3px 17px;
+    font-weight: bold;
+}
+
+.change-list .toplinks a {
+    font-size: 0.8125rem;
+}
+
+.change-list .toplinks .date-back {
+    color: var(--body-quiet-color);
+}
+
+.change-list .toplinks .date-back:focus,
+.change-list .toplinks .date-back:hover {
+    color: var(--link-hover-color);
+}
+
+
+
+.filtered .actions {
+    border-right: none;
+}
+
+#listing table input {
+    margin: 0;
+    vertical-align: baseline;
+}
+
+
+#listing tbody tr.selected {
+    background-color: var(--selected-row);
+}
+
+#listing tbody tr:has(.action-select:checked) {
+    background-color: var(--selected-row);
+}
+
+@media (forced-colors: active) {
+    #listing tbody tr.selected {
+        background-color: SelectedItem;
+    }
+    #listing tbody tr:has(.action-select:checked) {
+        background-color: SelectedItem;
+    }
+}
+
+#listing .actions {
+    padding: 10px;
+    background: var(--body-bg);
+    border-top: none;
+    border-bottom: none;
+    line-height: 1.5rem;
+    color: var(--body-quiet-color);
+    width: 100%;
+}
+
+#listing .actions span.all,
+#listing .actions span.action-counter,
+#listing .actions span.clear,
+#listing .actions span.question {
+    font-size: 0.8125rem;
+    margin: 0 0.5em;
+}
+
+#listing .actions:last-child {
+    border-bottom: none;
+}
+
+#listing .actions select {
+    vertical-align: top;
+    height: 1.5rem;
+    color: var(--body-fg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.875rem;
+    padding: 0 0 0 4px;
+    margin: 0;
+    margin-left: 10px;
+}
+
+#listing .actions select:focus {
+    border-color: var(--body-quiet-color);
+}
+
+#listing .actions label {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 0.8125rem;
+}
+
+#listing .actions .button {
+    font-size: 0.8125rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--body-bg);
+    box-shadow: 0 -15px 20px -10px rgba(0, 0, 0, 0.15) inset;
+    cursor: pointer;
+    height: 1.5rem;
+    line-height: 1;
+    padding: 4px 8px;
+    margin: 0;
+    color: var(--body-fg);
+}
+
+#listing .actions .button:focus, #listing .actions .button:hover {
+    border-color: var(--body-quiet-color);
+}

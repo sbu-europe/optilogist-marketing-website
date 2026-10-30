@@ -47,7 +47,7 @@ html.live-gps-active #content {
   flex-direction: column;
 }
 
-html[data-sidebar-collapsed="true"].live-gps-active .live-gps-shell, html.live-gps-active body.dfms-sidebar-collapsed .live-gps-shell {
+html[data-sidebar-collapsed="true"].live-gps-active .live-gps-shell, html.live-gps-active body.ux-sidebar-collapsed .live-gps-shell {
   left: var(--sidebar-w-collapsed, 64px);
 }
 

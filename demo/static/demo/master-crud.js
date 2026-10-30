@@ -9,11 +9,11 @@
 
   function poiName(id) { var r = get("poi", id); return r ? (r.fields.name || r.label) : ""; }
   function poiLabel(id) { var r = get("poi", id); return r ? r.fields.name + " (" + r.fields.poi_code + ")" : ""; }
-  function catLabel(id) { var r = get("productcategory", id); return r ? r.fields.category_name + " (" + r.fields.category_code + ")" : ""; }
+  function catLabel(id) { var r = get("prodgroup", id); return r ? r.fields.category_name + " (" + r.fields.category_code + ")" : ""; }
   var E = {
     poi: { verbose: "poi", plural: "pois", title: "Pois", label: function (f) { return f.name + " (" + f.poi_code + ")"; },
       blockName: function (f) { return f.name; }, code: function (f) { return f.poi_code; }, unique: ["poi_code", "name"] },
-    loadingunloadingpoint: { verbose: "Loading/Unloading Point", plural: "Loading/Unloading Points", title: "Loading/Unloading Points",
+    loadpoint: { verbose: "Loading/Unloading Point", plural: "Loading/Unloading Points", title: "Loading/Unloading Points",
       label: function (f) { return f.short_code + " — " + f.name + " (" + poiName(f.poi) + ")"; }, code: function (f) { return f.short_code; }, unique: ["short_code"] },
     brand: { verbose: "brand", plural: "brands", title: "Vehicle Brands", label: function (f) { return f.brand_name; }, unique: ["brand_name"] },
     vehicle: { verbose: "vehicle", plural: "vehicles", title: "Vehicles", label: function (f) { return f.registration_number; },
@@ -24,14 +24,14 @@
       code: function (f) { return f.dealer_code; }, unique: ["dealer_code"] },
     supplier: { verbose: "supplier", plural: "suppliers", title: "Suppliers", label: function (f) { return f.supplier_name + " (" + f.supplier_code + ")"; },
       code: function (f) { return f.supplier_code; }, unique: ["supplier_code"] },
-    productcategory: { verbose: "product category", plural: "product categories", title: "Product Categories",
+    prodgroup: { verbose: "product category", plural: "product categories", title: "Product Categories",
       label: function (f) { return f.category_name + " (" + f.category_code + ")"; }, code: function (f) { return f.category_code; }, unique: ["category_code"] },
-    productsubcategory: { verbose: "product sub category", plural: "product sub categories", title: "Product Sub-category",
+    prodsubgroup: { verbose: "product sub category", plural: "product sub categories", title: "Product Sub-category",
       label: function (f) { return f.sub_category_name + " (" + f.sub_category_code + ")"; }, code: function (f) { return f.sub_category_code; }, unique: ["sub_category_code"] },
     product: { verbose: "product", plural: "products", title: "Products", label: function (f) { return "[" + f.product_item_code + "] " + f.product_name; },
       code: function (f) { return f.product_item_code; }, unique: ["product_sku_code", "product_item_code"] },
 
-    user: { verbose: "user", plural: "users", title: "Users", noDelete: true, addFormId: "invitationtoken_form",
+    user: { verbose: "user", plural: "users", title: "Users", noDelete: true, addFormId: "invite_form",
       aliases: { invitee_first_name: "first_name", invitee_last_name: "last_name", otp_type: "two_fa_setting" },
       label: function (f) { return fullName(f) + " <" + (f.email || f.phone_number || "None") + ">"; }, code: function (f) { return f.employee_id; },
       unique: ["email", "phone_number", "employee_id"] },
@@ -42,10 +42,10 @@
   function fullName(f) { return ((f.first_name || "") + " " + (f.last_name || "")).trim(); }
 
   var DEPENDENTS = {
-    poi: [["loadingunloadingpoint", "poi", "loading/unloading points"], ["dealer", "site_pois", "dealers"], ["supplier", "site_pois", "suppliers"]],
+    poi: [["loadpoint", "poi", "loading/unloading points"], ["dealer", "site_pois", "dealers"], ["supplier", "site_pois", "suppliers"]],
     brand: [["vehicle", "brand", "vehicles"]],
-    productcategory: [["product", "category", "products"], ["productsubcategory", "category", "product sub categories"]],
-    productsubcategory: [["product", "sub_category", "products"]]
+    prodgroup: [["product", "category", "products"], ["prodsubgroup", "category", "product sub categories"]],
+    prodsubgroup: [["product", "sub_category", "products"]]
   };
 
   var store;
@@ -66,11 +66,11 @@
 
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function toast(m) { if (window.demoToast) window.demoToast(m); }
-  function icon(on) { return '<img src="static/admin/img/icon-' + (on ? "yes" : "no") + '.svg" alt="' + (on ? "True" : "False") + '">'; }
+  function icon(on) { return '<img src="static/app/img/icon-' + (on ? "yes" : "no") + '.svg" alt="' + (on ? "True" : "False") + '">'; }
   function num(v, d) { var n = parseFloat(v); return isNaN(n) ? "-" : n.toFixed(d); }
   function meta() { var m = document.querySelector('meta[name="demo-md"]'); try { return m ? JSON.parse(m.content) : null; } catch (e) { return null; } }
   function listFile(model) { return SEED.entities[model].list; }
-  function changeUrl(model, id) { return "md_" + model + "_change.html#" + id; }
+  function changeUrl(model, id) { return model + "-edit.html#" + id; }
   function flash(level, html) { try { sessionStorage.setItem(FLASH, JSON.stringify({ level: level, html: html })); } catch (e) {} }
   function showFlash() {
     var f; try { f = JSON.parse(sessionStorage.getItem(FLASH) || "null"); sessionStorage.removeItem(FLASH); } catch (e) {}
@@ -85,7 +85,7 @@
   function labelOf(model, rec) { try { var l = E[model].label(rec.fields); return /undefined/.test(l) ? rec.label : l; } catch (e) { return rec.label; } }
 
   function skipField(el, reading) {
-    return /^(csrfmiddlewaretoken|_save|_reinvite|next)$/.test(el.name) || (el.name.indexOf("-") >= 0 && !/^poi_role_/.test(el.name)) ||
+    return /^(formtoken|_store|_reinvite|next)$/.test(el.name) || (el.name.indexOf("-") >= 0 && !/^poi_role_/.test(el.name)) ||
       el.type === "hidden" || el.type === "submit" || el.type === "file" || (reading && el.disabled);
   }
   function isGroup(form, el) { return el.type === "checkbox" && form.querySelectorAll('input[type=checkbox][name="' + el.name + '"]').length > 1; }
@@ -227,19 +227,19 @@
   var BADGE = { Invited: ["trial", "bi-clock-fill"], Active: ["active", "bi-check-circle-fill"], Suspended: ["suspended", "bi-x-octagon-fill"] };
   function statusBadge(st) {
     var b = BADGE[st] || BADGE.Active;
-    return '<span class="dfms-badge dfms-badge--' + b[0] + '"><i class="bi ' + b[1] + '" style="font-size:10px;"></i>' + esc(st) + "</span>";
+    return '<span class="ux-badge ux-badge--' + b[0] + '"><i class="bi ' + b[1] + '" style="font-size:10px;"></i>' + esc(st) + "</span>";
   }
 
   var MON = ["Jan.", "Feb.", "March", "April", "May", "June", "July", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."];
-  function djangoDate(s) { var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || ""); return m ? MON[m[2] - 1] + " " + (+m[3]) + ", " + m[1] : s; }
-  function djangoNow() {
+  function appDate(s) { var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || ""); return m ? MON[m[2] - 1] + " " + (+m[3]) + ", " + m[1] : s; }
+  function appNow() {
     var d = new Date(), h = d.getHours(), mi = d.getMinutes(), ap = h < 12 ? "a.m." : "p.m.", h12 = h % 12 || 12;
     var t = mi ? h12 + ":" + (mi < 10 ? "0" : "") + mi : String(h12);
     if (h === 0 && !mi) t = "midnight"; else if (h === 12 && !mi) t = "noon"; else t += " " + ap;
     return MON[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear() + ", " + t;
   }
 
-  function me() { var n = document.querySelector(".dfms-user-name"); return (n ? n.textContent.trim() : "Demo Admin") + " <admin@example.com>"; }
+  function me() { var n = document.querySelector(".ux-user-name"); return (n ? n.textContent.trim() : "Demo Admin") + " <admin@example.com>"; }
   function linkedDriver(userId) { return all("driver").filter(function (d) { return d.fields.user === userId; })[0] || null; }
   function contactOf(f) { return f.email || f.phone_number || ""; }
 
@@ -249,15 +249,15 @@
       case "poi.display_storage_capacity": return num(f.storage_capacity_mt, 2);
       case "poi.display_current_stock": return num(f.current_stock_mt != null && f.current_stock_mt !== "" ? f.current_stock_mt : (rec.readonly || {}).current_stock_mt || 0, 3);
       case "poi.display_free_capacity": return num((parseFloat(f.storage_capacity_mt) || 0) - (parseFloat(f.current_stock_mt) || 0), 3);
-      case "loadingunloadingpoint.poi": return esc(poiLabel(f.poi) || L.poi || "-");
-      case "loadingunloadingpoint.created_at": return esc(rec.createdAtText || "-");
+      case "loadpoint.poi": return esc(poiLabel(f.poi) || L.poi || "-");
+      case "loadpoint.created_at": return esc(rec.createdAtText || "-");
       case "vehicle.display_capacity": return f.capacity ? num(f.capacity, 3) + " " + esc(L.capacity_unit || "MT") : "-";
       case "vehicle.display_wheels": return esc(f.number_of_wheels || "-");
       case "vehicle.assigned_poi": return "-";
       case "vehicle.operational_status": return f.is_active === false ? "Inactive" : esc(rec.operationalStatus || "No Active TO");
       case "dealer.active_status": case "supplier.active_status": return icon(f.is_active !== false);
-      case "productcategory.sub_category_count": return String(all("productsubcategory").filter(function (s) { return s.fields.category === rec.id; }).length);
-      case "productsubcategory.category": return esc(catLabel(f.category) || L.category || "-");
+      case "prodgroup.sub_category_count": return String(all("prodsubgroup").filter(function (s) { return s.fields.category === rec.id; }).length);
+      case "prodsubgroup.category": return esc(catLabel(f.category) || L.category || "-");
       case "product.category": return esc(catLabel(f.category) || L.category || "-");
       case "product.product_type": return esc(L.product_type || "-");
       case "brand.is_active": return null;
@@ -268,7 +268,7 @@
       case "user.two_fa": return esc(L.two_fa_setting || "None");
       case "user.status": return statusBadge(rec.status || "Active");
       case "user.last_active_at": return esc(rec.lastActive || "-");
-      case "driver.license_expiry_date": return esc(djangoDate(f.license_expiry_date) || "-");
+      case "driver.license_expiry_date": return esc(appDate(f.license_expiry_date) || "-");
       case "driver.current_state": return esc(rec.state || "Available");
       case "driver.is_active": return icon(f.is_active !== false);
     }
@@ -283,7 +283,7 @@
     var rows = all(model);
     tbody.innerHTML = rows.map(function (rec, i) {
       var label = labelOf(model, rec);
-      var html = E[model].noCheckbox ? "<tr>" : '<tr><td class="action-checkbox"><input type="checkbox" name="_selected_action" value="' + esc(rec.id) + '" class="action-select" aria-label="Select this object for an action - ' + esc(label) + '"></td>';
+      var html = E[model].noCheckbox ? "<tr>" : '<tr><td class="action-checkbox"><input type="checkbox" name="_picked" value="' + esc(rec.id) + '" class="action-select" aria-label="Select this object for an action - ' + esc(label) + '"></td>';
       cfg.columns.forEach(function (c) {
         var inner;
         if (model === "brand" && c.col === "is_active") inner = '<input type="checkbox" name="form-' + i + '-is_active" id="id_form-' + i + '-is_active"' + (rec.fields.is_active !== false ? " checked" : "") + '><input type="hidden" name="form-' + i + '-id" value="' + esc(rec.id) + '">';
@@ -301,7 +301,7 @@
       pag.innerHTML = " " + n + " " + esc(word) + " ";
       if (save) pag.appendChild(save);
     }
-    document.querySelectorAll(".small.quiet, #changelist-search span, .dfms-results-count").forEach(function (el) {
+    document.querySelectorAll(".small.quiet, #listing-search span, .ux-results-count").forEach(function (el) {
       el.childNodes.forEach(function (t) { if (t.nodeType === 3 && /\d+\s+results?/.test(t.textContent)) t.textContent = t.textContent.replace(/\d+\s+results?/, n + (n === 1 ? " result" : " results")); });
     });
     var counter = document.querySelector(".action-counter");
@@ -312,7 +312,7 @@
     var action = (form.querySelector('select[name="action"]') || {}).value || "";
     var ids = [].map.call(form.querySelectorAll("input.action-select:checked"), function (c) { return c.value; });
 
-    if (!action && submitter && submitter.name === "_save" || (!action && form.querySelector('input[name^="form-"][name$="-is_active"]') && !ids.length)) {
+    if (!action && submitter && submitter.name === "_store" || (!action && form.querySelector('input[name^="form-"][name$="-is_active"]') && !ids.length)) {
       var changed = 0;
       form.querySelectorAll('input[name$="-id"][name^="form-"]').forEach(function (h) {
         var rec = get(model, h.value), cb = form.querySelector('[name="' + h.name.replace(/-id$/, "-is_active") + '"]');
@@ -327,7 +327,7 @@
 
     if (model === "user") {
       var picked = ids.map(function (id) { return get("user", id); }).filter(Boolean);
-      if (action === "deactivate_selected_accounts") { location.href = "md_user_suspend.html#" + ids.join(","); return true; }
+      if (action === "deactivate_selected_accounts") { location.href = "user-suspend.html#" + ids.join(","); return true; }
       if (action === "reactivate_selected_accounts") {
         var back = picked.filter(function (r) { return r.status === "Suspended"; });
         back.forEach(reactivate); save();
@@ -340,7 +340,7 @@
         location.reload(); return true;
       }
     }
-    if (action === "delete_permanently" || action === "delete_selected") { location.href = "md_" + model + "_delete.html#" + ids.join(","); return true; }
+    if (action === "delete_permanently" || action === "delete_selected") { location.href = model + "-delete.html#" + ids.join(","); return true; }
     var on = /(^|_)activate/.test(action) && !/deactivate/.test(action), off = /deactivate/.test(action);
     if (on || off) {
       ids.forEach(function (id) { var r = get(model, id); if (r) { r.fields.is_active = on; r.dirty = true; } });
@@ -359,7 +359,7 @@
   function setTitleBits(model, oldLabel, newLabel) {
     if (!oldLabel || !newLabel) return;
     document.title = document.title.split(oldLabel).join(newLabel);
-    document.querySelectorAll(".breadcrumbs, .dfms-page-header, #content h1, #content h2").forEach(function (root) {
+    document.querySelectorAll(".breadcrumbs, .ux-page-header, #content h1, #content h2").forEach(function (root) {
       var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
       while (w.nextNode()) if (w.currentNode.textContent.indexOf(oldLabel) >= 0) w.currentNode.textContent = w.currentNode.textContent.split(oldLabel).join(newLabel);
     });
@@ -376,7 +376,7 @@
     if (m.mode === "change") {
       if (/\/delete\/?$/.test(hash)) {
         if (E[model].noDelete) { location.replace(changeUrl(model, id)); return; }
-        location.replace("md_" + model + "_delete.html#" + id); return;
+        location.replace(model + "-delete.html#" + id); return;
       }
       var rec = get(model, id);
       if (!rec) { flash("warning", cap(E[model].verbose) + " with ID “" + esc(id) + "” doesn’t exist. Perhaps it was deleted?"); location.replace(listFile(model)); return; }
@@ -390,7 +390,7 @@
       if (tpl && model === "poi") setTitleBits(model, tpl.fields.name, rec.fields.name);
       pointLinksTo(model, m.templateId, id);
       fillForm(form, rec, model);
-      if (model === "productcategory") initSubcategoryInline(form, rec);
+      if (model === "prodgroup") initSubcategoryInline(form, rec);
       if (model === "user") initUserControls(form, rec);
       if (model === "driver") initDriverReadonly(form, rec);
     }
@@ -410,11 +410,11 @@
     var st = rec.status || "Active";
     if (deact) deact.style.display = st === "Suspended" ? "none" : "";
     if (st !== "Active" && !bar.querySelector('[name="_reinvite"]')) {
-      var b = document.createElement("button"); b.type = "submit"; b.name = "_reinvite"; b.value = "1"; b.className = "dfms-btn-secondary"; b.textContent = " Reinvite ";
+      var b = document.createElement("button"); b.type = "submit"; b.name = "_reinvite"; b.value = "1"; b.className = "ux-btn-secondary"; b.textContent = " Reinvite ";
       bar.insertBefore(b, bar.firstChild);
     }
     if (st === "Suspended" && !bar.querySelector(".demo-reactivate")) {
-      var a = document.createElement("a"); a.href = changeUrl("user", rec.id) + "/activate"; a.className = "dfms-btn-secondary demo-reactivate"; a.textContent = " Reactivate user ";
+      var a = document.createElement("a"); a.href = changeUrl("user", rec.id) + "/activate"; a.className = "ux-btn-secondary demo-reactivate"; a.textContent = " Reactivate user ";
       a.addEventListener("click", function (e) { e.preventDefault(); history.replaceState(null, "", "#" + rec.id + "/activate"); location.reload(); });
       bar.insertBefore(a, deact ? deact.nextSibling : null);
     }
@@ -434,7 +434,7 @@
     });
     ["created_at", "updated_at"].forEach(function (k) { var el = cell(k); if (el && ro[k]) el.textContent = ro[k]; });
 
-    var go = document.querySelector(".dfms-driver-account-hint a");
+    var go = document.querySelector(".ux-driver-account-hint a");
     if (go) { go.removeAttribute("data-demo-missing"); go.setAttribute("href", u ? changeUrl("user", u.id) : listFile("user")); }
   }
 
@@ -446,15 +446,15 @@
     form = form && form.form;
     if (!form) return;
     form.setAttribute("data-demo-ua-suspend", "1");
-    form.querySelectorAll('input[name="_selected_action"]').forEach(function (h) { h.remove(); });
+    form.querySelectorAll('input[name="_picked"]').forEach(function (h) { h.remove(); });
     var anchor = form.querySelector('input[type="submit"]').parentNode;
-    recs.forEach(function (r) { var h = document.createElement("input"); h.type = "hidden"; h.name = "_selected_action"; h.value = r.id; form.insertBefore(h, anchor); });
+    recs.forEach(function (r) { var h = document.createElement("input"); h.type = "hidden"; h.name = "_picked"; h.value = r.id; form.insertBefore(h, anchor); });
     var ul = document.querySelector("#content form ~ div ul, #content .content > div ul");
     if (ul) ul.innerHTML = recs.map(function (r) { return "<li>" + esc(r.fields.employee_id || "None") + " — " + esc(fullName(r.fields)) + "</li>"; }).join("");
     showFlash();
   }
   function handleSuspendSubmit(form) {
-    var ids = [].map.call(form.querySelectorAll('input[name="_selected_action"]'), function (h) { return h.value; });
+    var ids = [].map.call(form.querySelectorAll('input[name="_picked"]'), function (h) { return h.value; });
     var type = form.querySelector('[name="deactivation_type"]'), reason = form.querySelector('[name="reason"]'), remarks = form.querySelector('[name="admin_remarks"]');
     var recs = ids.map(function (id) { return get("user", id); }).filter(Boolean);
     recs.forEach(function (r) { suspend(r, type ? type.value : "temporary", reason ? reason.value.trim() : "", remarks ? remarks.value.trim() : ""); });
@@ -470,7 +470,7 @@
     if (!total) return;
     var rows = [].slice.call(form.querySelectorAll('tr.form-row[id^="sub_categories-"]:not(.empty-form), .inline-related[id^="sub_categories-"]:not(.empty-form)'))
       .filter(function (r) { return /^sub_categories-\d+$/.test(r.id); });
-    var tplRow = rows[0], subs = all("productsubcategory").filter(function (s) { return s.fields.category === cat.id; });
+    var tplRow = rows[0], subs = all("prodsubgroup").filter(function (s) { return s.fields.category === cat.id; });
     if (!tplRow) return;
     rows.forEach(function (r) { r.remove(); });
     var anchor = form.querySelector('[id="sub_categories-empty"]') || null, parent = (anchor && anchor.parentNode) || tplRow.parentNode || form;
@@ -483,7 +483,7 @@
       var set = function (n, v) { var el = row.querySelector('[name="sub_categories-' + i + "-" + n + '"]'); if (!el) return; if (el.type === "checkbox") el.checked = !!v; else el.value = v; };
       set("id", s.id); set("category", cat.id); set("sub_category_code", s.fields.sub_category_code || ""); set("sub_category_name", s.fields.sub_category_name || "");
       set("is_active", s.fields.is_active !== false); set("DELETE", false);
-      row.querySelectorAll(".original p, td.original p").forEach(function (p) { p.textContent = labelOf("productsubcategory", s); });
+      row.querySelectorAll(".original p, td.original p").forEach(function (p) { p.textContent = labelOf("prodsubgroup", s); });
       parent.insertBefore(row, anchor);
     });
     total.value = subs.length; if (initial) initial.value = subs.length;
@@ -495,10 +495,10 @@
       if (!g("sub_category_code")) continue;
       var sid = g("id") && g("id").value, code = g("sub_category_code").value.trim(), name = g("sub_category_name").value.trim();
       var del = g("DELETE") && g("DELETE").checked;
-      if (sid && del) { if (!blockedBy("productsubcategory", get("productsubcategory", sid))) removeRecords("productsubcategory", [sid]); continue; }
+      if (sid && del) { if (!blockedBy("prodsubgroup", get("prodsubgroup", sid))) removeRecords("prodsubgroup", [sid]); continue; }
       if (!code && !name) continue;
-      var rec = sid && get("productsubcategory", sid);
-      if (!rec) { rec = { id: uuid(), fields: {}, labels: {}, dirty: true }; all("productsubcategory").unshift(rec); }
+      var rec = sid && get("prodsubgroup", sid);
+      if (!rec) { rec = { id: uuid(), fields: {}, labels: {}, dirty: true }; all("prodsubgroup").unshift(rec); }
       rec.fields.category = cat.id; rec.fields.sub_category_code = code; rec.fields.sub_category_name = name;
       rec.fields.is_active = g("is_active") ? g("is_active").checked : true; rec.labels.category = catLabel(cat.id); rec.dirty = true;
     }
@@ -520,13 +520,13 @@
     if (errors.length) { showErrors(form, errors); return true; }
     rec.dirty = true;
     if (model === "product" && rec.fields.category) rec.labels.category = catLabel(rec.fields.category) || rec.labels.category;
-    if (model === "loadingunloadingpoint" && isAdd) rec.createdAtText = new Date().toLocaleString("en-US", { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit" }).replace(/(\w{3}) /, "$1. ").replace(" AM", " a.m.").replace(" PM", " p.m.");
+    if (model === "loadpoint" && isAdd) rec.createdAtText = new Date().toLocaleString("en-US", { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit" }).replace(/(\w{3}) /, "$1. ").replace(" AM", " a.m.").replace(" PM", " p.m.");
     if (model === "user") saveUserExtras(rec, isAdd);
     if (model === "driver") saveDriverExtras(rec, isAdd);
     rec.label = labelOf(model, rec);
     var list = all(model);
     if (isAdd) list.unshift(rec); else list.splice(list.indexOf(current), 1, rec);
-    if (model === "productcategory" && !isAdd) saveSubcategoryInline(form, rec);
+    if (model === "prodgroup" && !isAdd) saveSubcategoryInline(form, rec);
     save();
     var link = "“<a href=\"" + changeUrl(model, rec.id) + "\">" + esc(rec.label) + "</a>”";
     if (model === "user" && isAdd) flash("success", "Invitation sent to " + esc(contactOf(rec.fields)) + ". The user " + link + " was added successfully.");
@@ -559,7 +559,7 @@
     }
   }
   function saveDriverExtras(rec, isAdd) {
-    var f = rec.fields, now = djangoNow(), ro = rec.readonly = rec.readonly || {};
+    var f = rec.fields, now = appNow(), ro = rec.readonly = rec.readonly || {};
     ro.updated_by = me(); ro.updated_by_id = ""; ro.updated_at = now;
     if (isAdd) {
       ro.created_by = ro.updated_by; ro.created_by_id = ""; ro.created_at = now; rec.state = "Available";
@@ -604,7 +604,7 @@
     var labels = recs.map(function (r) { return labelOf(model, r); });
 
     var bc = document.querySelector(".breadcrumbs");
-    if (bc) bc.innerHTML = '<a href="admin.html">Home</a> › ' + (model === "helper" ? "Users" : "Master Data") + ' › <a href="' + listFile(model) + '">' + esc(V.title) + "</a> › " +
+    if (bc) bc.innerHTML = '<a href="dashboard.html">Home</a> › ' + (model === "helper" ? "Users" : "Master Data") + ' › <a href="' + listFile(model) + '">' + esc(V.title) + "</a> › " +
       (recs.length === 1 ? '<a href="' + changeUrl(model, recs[0].id) + '">' + esc(labels[0]) + "</a> › Delete" : "Delete multiple objects");
     document.title = (recs.length === 1 ? "Are you sure?" : "Delete multiple objects") + " | Demo Agro Ltd Admin";
     var p = content.querySelector("p");
@@ -614,7 +614,7 @@
       if (/summary/i.test(h.textContent)) ul.innerHTML = "<li>" + esc(cap(V.plural)) + ": " + recs.length + "</li>";
       if (/objects/i.test(h.textContent)) ul.innerHTML = recs.map(function (r, i) { return "<li>" + esc(cap(V.verbose)) + ': <a href="' + changeUrl(model, r.id) + '">' + esc(labels[i]) + "</a></li>"; }).join("");
     });
-    content.querySelectorAll("a.cancel-link, a.button.cancel-link, a[href*='_change.html']").forEach(function (a) {
+    content.querySelectorAll("a.cancel-link, a.button.cancel-link, a[href*='-edit.html']").forEach(function (a) {
       if (/take me back/i.test(a.textContent)) { a.setAttribute("href", recs.length === 1 ? changeUrl(model, recs[0].id) : listFile(model)); a.removeAttribute("data-demo-missing"); }
     });
     var form = content.querySelector("form");
@@ -640,9 +640,9 @@
       case "poi": base = f.name; return sample && /\([^)]*\)\s*$/.test(sample) ? base + " (" + f.poi_code + ")" : base;
       case "brand": return f.brand_name;
       case "vehicle": return f.registration_number;
-      case "productcategory": return f.category_name + " (" + f.category_code + ")";
-      case "productsubcategory": return f.sub_category_name + " (" + f.sub_category_code + ")";
-      case "loadingunloadingpoint": return labelOf(model, rec);
+      case "prodgroup": return f.category_name + " (" + f.category_code + ")";
+      case "prodsubgroup": return f.sub_category_name + " (" + f.sub_category_code + ")";
+      case "loadpoint": return labelOf(model, rec);
       default: return labelOf(model, rec);
     }
   }
@@ -654,11 +654,11 @@
       var opts = [].slice.call(sel.options), hit = opts.filter(function (o) { return idToModel[o.value]; })[0];
       if (!hit) return;
 
-      if (sel.classList.contains("admin-autocomplete")) { opts.forEach(function (o) { var r = idToModel[o.value] && get(idToModel[o.value], o.value); if (r) o.textContent = labelOf(idToModel[o.value], r); }); return; }
+      if (sel.classList.contains("auto-select")) { opts.forEach(function (o) { var r = idToModel[o.value] && get(idToModel[o.value], o.value); if (r) o.textContent = labelOf(idToModel[o.value], r); }); return; }
       var model = idToModel[hit.value], sample = hit.textContent.trim(), keep = sel.multiple ? [].map.call(sel.selectedOptions, function (o) { return o.value; }) : [sel.value];
       var placeholders = opts.filter(function (o) { return !o.value; });
       var recs = all(model).filter(function (r) { return (r.fields.is_active !== false && r.status !== "Suspended") || keep.indexOf(r.id) >= 0; });
-      if (model === "productsubcategory") { var catSel = document.querySelector('select[name="category"]'); if (catSel && catSel.value) recs = recs.filter(function (r) { return r.fields.category === catSel.value || keep.indexOf(r.id) >= 0; }); }
+      if (model === "prodsubgroup") { var catSel = document.querySelector('select[name="category"]'); if (catSel && catSel.value) recs = recs.filter(function (r) { return r.fields.category === catSel.value || keep.indexOf(r.id) >= 0; }); }
       sel.innerHTML = "";
       placeholders.forEach(function (o) { sel.add(o); });
       recs.forEach(function (r) { var o = new Option(optionText(model, r, sample), r.id); o.selected = keep.indexOf(r.id) >= 0; sel.add(o); });
@@ -681,23 +681,23 @@
   var H = window.DEMO_API_HANDLERS = window.DEMO_API_HANDLERS || [];
   H.push({ match: /\/demo-data\/categories\/$/, fn: function (u) {
     var t = u.searchParams.get("product_type");
-    return active("productcategory").filter(function (c) { var pt = (c.labels || {}).product_type || c.fields.product_type; return !t || pt === t || String(pt).replace(/\s/g, "") === t; })
+    return active("prodgroup").filter(function (c) { var pt = (c.labels || {}).product_type || c.fields.product_type; return !t || pt === t || String(pt).replace(/\s/g, "") === t; })
       .map(function (c) { return { id: c.id, label: catLabel(c.id) }; });
   } });
   H.push({ match: /\/demo-data\/subcategories\/$/, fn: function (u) {
     var c = u.searchParams.get("category_id");
-    return active("productsubcategory").filter(function (s) { return s.fields.category === c; }).map(function (s) { return { id: s.id, label: optionText("productsubcategory", s) }; });
+    return active("prodsubgroup").filter(function (s) { return s.fields.category === c; }).map(function (s) { return { id: s.id, label: optionText("prodsubgroup", s) }; });
   } });
   H.push({ match: /\/demo-data\/product-detail\/[0-9a-f-]+\/$/, fn: function (u, path) {
     var p = get("product", path.split("/")[3]); if (!p) return null;
     var f = p.fields;
-    return { product_item_code: f.product_item_code || "", product_name: f.product_name, product_category: (catLabel(f.category) || "").replace(/ \([^)]*\)$/, ""),
-      product_sub_category: ((p.labels || {}).sub_category || "").replace(/ \([^)]*\)$/, ""), type_of_packing: f.standard_pack_size || "", weight_per_unit: f.weight_per_unit || "", unit_of_measure: (p.labels || {}).unit_of_measure || f.unit_of_measure || "" };
+    return { product_item_code: f.product_item_code || "", product_name: f.product_name, prod_group: (catLabel(f.category) || "").replace(/ \([^)]*\)$/, ""),
+      prod_subgroup: ((p.labels || {}).sub_category || "").replace(/ \([^)]*\)$/, ""), type_of_packing: f.standard_pack_size || "", weight_per_unit: f.weight_per_unit || "", unit_of_measure: (p.labels || {}).unit_of_measure || f.unit_of_measure || "" };
   } });
   H.push({ match: /\/demo-data\/site-stock\/[0-9a-f-]+\/$/, fn: function (u, path, fallback) {
     var r = get("poi", path.split("/")[3]); if (!r) return null;
     var cap = parseFloat(r.fields.storage_capacity_mt) || 0, cur = parseFloat(r.fields.current_stock_mt || (r.readonly || {}).current_stock_mt) || (fallback ? fallback.current_stock_mt : 0) || 0;
-    return { poi_id: r.id, poi_name: r.fields.name, poi_type: r.fields.poi_type, storage_capacity_mt: cap, current_stock_mt: cur, free_capacity_mt: +(cap - cur).toFixed(3), last_updated: new Date().toISOString() };
+    return { poi_id: r.id, poi_name: r.fields.name, poi_type: r.fields.poi_type, storage_capacity_mt: cap, current_stock_mt: cur, site_free: +(cap - cur).toFixed(3), last_updated: new Date().toISOString() };
   } });
 
   var FLEET = (window.DEMO_API || {}).__demo_fleet;
@@ -736,14 +736,14 @@
     FLEET.trucks.forEach(function (t) {
       var v = byId[t.vehicle], rec = get("vehicle", t.vehicle);
       if (!v || !rec || rec.fields.is_active === false) return;
-      var base = { has_position: true, connection_status: "online", staleness_minutes: 0, position_source: "gps", recorded_at: stamp, received_at: stamp, last_update_at: stamp,
+      var base = { has_position: true, link_state: "online", age_min: 0, fix_source: "gps", recorded_at: stamp, received_at: stamp, last_update_at: stamp,
         device_id: v.device_id || t.device || "", tail_color: "#22c55e" };
       var parkAt = t.park || (rec.operationalStatus === "Under Maintenance" && FLEET.routes[t.route].from);
       if (parkAt) {
         var s = (data.pois || []).filter(function (x) { return x.id === parkAt; })[0] || siteRef(parkAt);
         var since = (now / 1000) % 5400;
-        Object.assign(v, base, { latitude: +s.latitude || v.latitude, longitude: +s.longitude || v.longitude, speed_kmh: 0, speed: "0", heading_degrees: 0, movement_status: "parked",
-          stop_duration_seconds: Math.round(since), stop_duration_label: durationLabel(since), inside_pois: [siteRef(parkAt)].filter(Boolean), inside_geofence: true,
+        Object.assign(v, base, { latitude: +s.latitude || v.latitude, longitude: +s.longitude || v.longitude, speed_kmh: 0, speed: "0", bearing: 0, motion: "parked",
+          halt_secs: Math.round(since), halt_text: durationLabel(since), in_sites: [siteRef(parkAt)].filter(Boolean), in_zone: true,
           trail: [], tail: [], origin_poi: null, destination_poi: null, planned_route: null });
         return;
       }
@@ -754,8 +754,8 @@
       var driver = nextDriver < drivers.length ? drivers[nextDriver++] : "";
       if (leg < t.dwell) {
         var here = pointAt(g, outbound ? 0 : g.len).p;
-        Object.assign(v, base, { latitude: here[0], longitude: here[1], speed_kmh: 0, speed: "0", heading_degrees: v.heading_degrees || 0, movement_status: leg < 60 ? "idle" : "parked",
-          stop_duration_seconds: Math.round(leg), stop_duration_label: durationLabel(leg), inside_pois: [siteRef(from)].filter(Boolean), inside_geofence: true,
+        Object.assign(v, base, { latitude: here[0], longitude: here[1], speed_kmh: 0, speed: "0", bearing: v.bearing || 0, motion: leg < 60 ? "idle" : "parked",
+          halt_secs: Math.round(leg), halt_text: durationLabel(leg), in_sites: [siteRef(from)].filter(Boolean), in_zone: true,
           driver_name: driver, origin_poi: siteRef(from), destination_poi: siteRef(to), trail: [], tail: [], planned_route: null });
         return;
       }
@@ -770,11 +770,11 @@
       if (outbound) { for (i = at.i + 1; i < g.pts.length; i += 3) plan.push(g.pts[i]); plan.push(g.pts[g.pts.length - 1]); }
       else { for (i = at.i; i >= 0; i -= 3) plan.push(g.pts[i]); plan.push(g.pts[0]); }
       var speed = Math.round(42 + 12 * Math.sin(now / 47000 + t.offset * 10));
-      Object.assign(v, base, { latitude: +at.p[0].toFixed(6), longitude: +at.p[1].toFixed(6), speed_kmh: speed, speed: String(speed), heading_degrees: Math.round(bearing(at.p, ahead)), movement_status: "moving",
-        stop_duration_seconds: 0, stop_duration_label: "0s", inside_pois: [], inside_geofence: false, driver_name: driver,
+      Object.assign(v, base, { latitude: +at.p[0].toFixed(6), longitude: +at.p[1].toFixed(6), speed_kmh: speed, speed: String(speed), bearing: Math.round(bearing(at.p, ahead)), motion: "moving",
+        halt_secs: 0, halt_text: "0s", in_sites: [], in_zone: false, driver_name: driver,
         origin_poi: siteRef(from), destination_poi: siteRef(to), trail: trail, tail: trail, planned_route: plan });
     });
-    data.map_vehicle_count = data.vehicles.filter(function (v) { return v.has_position; }).length;
+    data.map_units = data.vehicles.filter(function (v) { return v.has_position; }).length;
   }
 
   H.push({ match: /\/demo-data\/live-map\/$/, fn: function (u, path, base) {
@@ -791,12 +791,12 @@
     };
 
     data.vehicles = all("vehicle").map(function (r) {
-      var v = byId[r.id] || { vehicle_id: r.id, has_position: false, latitude: null, longitude: null, trail: [], connection_status: "signal_lost", movement_status: "offline", operational_status: "no_active_to", operational_status_label: "No Active TO", to_status: "no_to", to_status_label: "No active TO", driver_name: "", stop_duration_seconds: 0, is_active: true };
+      var v = byId[r.id] || { vehicle_id: r.id, has_position: false, latitude: null, longitude: null, trail: [], link_state: "signal_lost", motion: "offline", operational_status: "no_active_to", op_state_text: "No Active TO", order_state: "no_to", order_state_text: "No active TO", driver_name: "", halt_secs: 0, is_active: true };
       v.registration_number = v.vehicle_plate = r.fields.registration_number;
       v.is_active = r.fields.is_active !== false;
-      if (!v.is_active) { v.operational_status = "inactive"; v.operational_status_label = "Inactive"; }
-      else if (r.operationalStatus === "Under Maintenance") { v.operational_status = "under_maintenance"; v.operational_status_label = "Under Maintenance"; }
-      else if (v.operational_status === "inactive") { v.operational_status = "no_active_to"; v.operational_status_label = "No Active TO"; }
+      if (!v.is_active) { v.operational_status = "inactive"; v.op_state_text = "Inactive"; }
+      else if (r.operationalStatus === "Under Maintenance") { v.operational_status = "under_maintenance"; v.op_state_text = "Under Maintenance"; }
+      else if (v.operational_status === "inactive") { v.operational_status = "no_active_to"; v.op_state_text = "No Active TO"; }
       return v;
     });
     inOrder(data.vehicles, base.vehicles, "vehicle_id", "registration_number");
@@ -811,7 +811,7 @@
     inOrder(data.pois, base.pois || [], "id", "name");
     driveDemoFleet(data, Date.now());
     data.refreshed_at = new Date().toISOString();
-    data.vehicle_count = data.vehicles.length; data.map_vehicle_count = data.vehicles.filter(function (v) { return v.has_position; }).length;
+    data.units_total = data.vehicles.length; data.map_units = data.vehicles.filter(function (v) { return v.has_position; }).length;
     return data;
   } });
 
@@ -835,11 +835,11 @@
   }
 
   function updateVehiclePlanning() {
-    if (!/admin_transport_vehicle_planning\.html$/.test(location.pathname)) return;
+    if (!/vehicle-planning\.html$/.test(location.pathname)) return;
     var tbody = document.querySelector("#result_list tbody, table tbody");
     if (!tbody || !tbody.rows.length) return;
     var tpl = tbody.rows[0], badges = {};
-    [].forEach.call(tbody.rows, function (r) { var b = r.querySelector(".dfms-badge"); if (b) badges[b.textContent.trim()] = b.className; });
+    [].forEach.call(tbody.rows, function (r) { var b = r.querySelector(".ux-badge"); if (b) badges[b.textContent.trim()] = b.className; });
     var vehicles = active("vehicle");
     tbody.innerHTML = "";
     vehicles.forEach(function (v, i) {
@@ -849,19 +849,19 @@
       var a = c[0].querySelector("a"); if (a) a.textContent = " " + v.fields.registration_number + " ";
       c[1].textContent = (v.labels || {}).vehicle_type || v.fields.vehicle_type || "-";
       c[2].textContent = v.fields.capacity ? num(v.fields.capacity, 3) + " " + String((v.labels || {}).capacity_unit || "mt").toLowerCase() : "-";
-      var b = c[3].querySelector(".dfms-badge"); if (b) { b.textContent = st; b.className = badges[st] || b.className; }
+      var b = c[3].querySelector(".ux-badge"); if (b) { b.textContent = st; b.className = badges[st] || b.className; }
       tbody.appendChild(row);
     });
     document.querySelectorAll("p, span, div").forEach(function (el) { if (el.children.length === 0 && /^\s*\d+ vehicles?\s*$/.test(el.textContent)) el.textContent = el.textContent.replace(/\d+ vehicles?/, vehicles.length + (vehicles.length === 1 ? " vehicle" : " vehicles")); });
   }
 
   function activateSidebar(model) {
-    var a = [].filter.call(document.querySelectorAll("a.dfms-nav-link"), function (x) { return x.getAttribute("href") === listFile(model); })[0];
+    var a = [].filter.call(document.querySelectorAll("a.ux-nav-link"), function (x) { return x.getAttribute("href") === listFile(model); })[0];
     if (!a) return;
-    document.querySelectorAll(".dfms-nav-item--active").forEach(function (i) { i.classList.remove("dfms-nav-item--active"); });
-    var item = a.closest(".dfms-nav-item"); if (item) item.classList.add("dfms-nav-item--active");
+    document.querySelectorAll(".ux-nav-item--active").forEach(function (i) { i.classList.remove("ux-nav-item--active"); });
+    var item = a.closest(".ux-nav-item"); if (item) item.classList.add("ux-nav-item--active");
     a.setAttribute("aria-current", "page");
-    var group = a.closest(".dfms-nav-group"), btn = group && group.querySelector(".dfms-nav-group-header");
+    var group = a.closest(".ux-nav-group"), btn = group && group.querySelector(".ux-nav-group-header");
     if (btn && btn.getAttribute("aria-expanded") !== "true") btn.click();
   }
 
@@ -869,14 +869,12 @@
   var listModel = null;
   Object.keys(SEED.entities).forEach(function (m) { if (location.pathname.split("/").pop() === SEED.entities[m].list) listModel = m; });
 
-  var legacy = location.pathname.split("/").pop().match(/^admin_(master_data|users)_([a-z]+)_([0-9a-f_]{36})_(change|delete)\.html$/);
-  if (legacy && E[legacy[2]] && !M) { location.replace("md_" + legacy[2] + "_" + legacy[4] + ".html#" + legacy[3].replace(/_/g, "-")); return; }
 
   (window.DEMO_SUBMIT_HANDLERS = window.DEMO_SUBMIT_HANDLERS || []).push(function (form, submitter) {
     if (M && M.mode === "suspend" && form.getAttribute("data-demo-ua-suspend")) return handleSuspendSubmit(form);
     if (M && (M.mode === "add" || M.mode === "change") && form === formOf(M)) return handleFormSubmit(M, form, submitter);
     if (M && M.mode === "delete" && form.getAttribute("data-demo-md-delete")) return handleDeleteSubmit(M, form);
-    if (listModel && form.id === "changelist-form") return handleListSubmit(listModel, form, submitter);
+    if (listModel && form.id === "listing-form") return handleListSubmit(listModel, form, submitter);
     return false;
   });
 
