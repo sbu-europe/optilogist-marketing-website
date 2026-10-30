@@ -1,7 +1,5 @@
-/**
- * DFMS Material Time Picker
- * Clock-face picker with AM/PM toggle. Replaces Django's limited shortcuts.
- */
+
+
 (function () {
   'use strict';
 
@@ -10,7 +8,6 @@
   let overlay, picker, currentInput;
   let selHour = 0, selMinute = 0, selAmPm = 'AM', mode = 'hour';
 
-  // ── Build DOM ──────────────────────────────────────────────────────────────
   function buildPicker() {
     overlay = document.createElement('div');
     overlay.id = 'dfms-tp-overlay';
@@ -72,7 +69,6 @@
     renderFace();
   }
 
-  // ── Clock face ─────────────────────────────────────────────────────────────
   function renderFace() {
     const face = document.getElementById('dfms-tp-face');
     face.querySelectorAll('.dfms-tp-num').forEach(function (el) { el.remove(); });
@@ -107,8 +103,8 @@
   function updateHand() {
     const hand = document.getElementById('dfms-tp-hand');
     const face = document.getElementById('dfms-tp-face');
-    const radius = face.offsetWidth / 2; // px radius of face
-    const handLen = radius * 0.72;       // hand reaches ~72% toward edge
+    const radius = face.offsetWidth / 2;
+    const handLen = radius * 0.72;
 
     let val, total;
     if (mode === 'hour') {
@@ -119,8 +115,6 @@
       total = 60;
     }
 
-    // transform-origin is bottom-center; 0deg = hand points straight up = 12 o'clock
-    // val=0 (12) → 0deg, val=3 → 90deg, val=6 → 180deg, val=9 → 270deg
     const angleDeg = (val / total) * 360;
     hand.style.height    = handLen + 'px';
     hand.style.transform = `rotate(${angleDeg}deg)`;
@@ -154,7 +148,6 @@
     }
   }
 
-  // ── Open / close ───────────────────────────────────────────────────────────
   function openPicker(inputEl) {
     currentInput = inputEl;
 
@@ -163,7 +156,6 @@
     let h24 = parts ? parseInt(parts[1], 10) : 0;
     selMinute = parts ? parseInt(parts[2], 10) : 0;
 
-    // Convert 24h → 12h + AM/PM
     if (h24 === 0) {
       selHour = 12; selAmPm = 'AM';
     } else if (h24 < 12) {
@@ -188,7 +180,6 @@
     overlay.style.display = 'block';
     picker.style.display  = 'block';
 
-    // updateHand needs the face to be laid out (offsetWidth > 0)
     requestAnimationFrame(function () {
       requestAnimationFrame(updateHand);
     });
@@ -202,7 +193,7 @@
 
   function confirmPicker() {
     if (currentInput) {
-      // Convert 12h + AM/PM → 24h
+
       let h24 = selHour;
       if (selAmPm === 'AM') {
         if (h24 === 12) h24 = 0;
@@ -215,7 +206,6 @@
     closePicker();
   }
 
-  // ── Style calendar popup: inject month label + replace arrow text with icons ──
   function getCaption(calBox) {
     const cap = calBox.querySelector('caption');
     return cap ? cap.textContent.trim() : '';
@@ -248,7 +238,6 @@
     });
   }
 
-  /** Fill blank cells with previous/next month day numbers (reference design). */
   function setOutdayCell(td, dayNum) {
     var existing = td.querySelector('.dfms-cal-outday');
     if (existing) {
@@ -294,7 +283,6 @@
     });
   }
 
-  /** Soft-circle past days so planners can tell them from today and future. */
   function markPastCalendarDays(calBox) {
     var info = parseCaptionMonthYear(getCaption(calBox));
     if (!info) return;
@@ -317,7 +305,6 @@
 
   var stylingCalendar = false;
 
-  /** Place the popup next to the calendar icon (sidebar margin breaks Django findPosX). */
   function repositionCalendarBox(calBox) {
     if (!calBox || calBox.style.display === 'none') return;
     if (typeof window.DateTimeShortcuts === 'undefined') return;
@@ -415,8 +402,7 @@
             boxes.push(node);
             return;
           }
-          // Django redraws the month by replacing .calendar / table contents.
-          // Do not react to our own span/label inserts inside the box.
+
           if (
             node.classList &&
             (node.classList.contains('calendar') || node.tagName === 'TABLE')
@@ -438,7 +424,6 @@
     });
   }
 
-  // ── Intercept Django's clock link ──────────────────────────────────────────
   function interceptClockLinks() {
     document.addEventListener('click', function (e) {
       const link = e.target.closest('a[id^="clocklink"]');
@@ -454,7 +439,6 @@
     }, true);
   }
 
-  // ── Init ───────────────────────────────────────────────────────────────────
   function init() {
     buildPicker();
     interceptClockLinks();

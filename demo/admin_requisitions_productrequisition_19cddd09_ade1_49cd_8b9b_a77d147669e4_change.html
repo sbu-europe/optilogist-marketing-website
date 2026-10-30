@@ -4,11 +4,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
-<link rel="stylesheet" href="static/demo/demo-shim.css?v=mv5a1jhl">
-<script src="static/demo/api-data.js?v=mv5a1jhl"></script>
-<script src="static/demo/demo-shim.js?v=mv5a1jhl"></script>
-<script src="static/demo/master-seed.js?v=mv5a1jhl"></script>
-<script src="static/demo/master-crud.js?v=mv5a1jhl"></script>
+<link rel="stylesheet" href="static/demo/demo-shim.css?v=mock2">
+<script src="static/demo/api-data.js?v=mock2"></script>
+<script src="static/demo/demo-shim.js?v=mock2"></script>
+<script src="static/demo/master-seed.js?v=mock2"></script>
+<script src="static/demo/master-crud.js?v=mock2"></script>
 <title>Change Product Requisition | Demo Agro Ltd Admin</title>
 <link rel="stylesheet" href="static/admin/css/base.css">
 
@@ -44,7 +44,7 @@
     var t = localStorage.getItem('dfms-admin-theme');
     if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', t);
-    // Keep native date/time picker icons visible: match DFMS theme, not OS preference alone.
+
     document.documentElement.style.colorScheme = t === 'dark' ? 'dark' : 'light';
 
     var collapsed = localStorage.getItem('dfms-sidebar-collapsed') === 'true';
@@ -107,11 +107,11 @@
 <body class=" app-requisitions model-productrequisition change-form"
   data-admin-utc-offset="21600">
 <a href="#content-start" class="skip-to-content-link">Skip to main content</a>
-<!-- Container -->
+
 <div id="container">
 
     
-    <!-- Header -->
+    
     
       <header id="header">
         <div id="branding">
@@ -227,7 +227,7 @@
     class="dfms-dropdown-poi__form"
   >
     <input type="hidden" name="csrfmiddlewaretoken" value="demo">
-    <input type="hidden" name="next" value="/admin/requisitions/productrequisition/19cddd09-ade1-49cd-8b9b-a77d147669e4/change/">
+    <input type="hidden" name="next" value="">
 
     <div class="dfms-dropdown-poi__field">
       <label for="dfms-poi-select" class="dfms-dropdown-poi__label">
@@ -342,7 +342,7 @@
             if (token && input) input.value = token;
           });
         })();
-        </script>
+</script>
 
       </div>
     </div>
@@ -354,7 +354,7 @@
         
       </header>
     
-    <!-- END Header -->
+    
     
     
 
@@ -1123,7 +1123,7 @@
         
           
         
-        <!-- Content -->
+        
         <div id="content" class="colM">
           
   
@@ -1419,16 +1419,16 @@
 </select>
     
         <a class="related-widget-wrapper-link change-related" id="change_id_destination_poi"
-            data-href-template="/admin/master_data/poi/__fk__/change/?_to_field=id&amp;_popup=1"
+            data-href-template="#__fk__"
             data-popup="yes"
             title="Change selected poi"><img src="static/admin/img/icon-changelink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link add-related" id="add_id_destination_poi"
             data-popup="yes"
             href="md_poi_add.html"
             title="Add another poi"><img src="static/admin/img/icon-addlink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link delete-related" id="delete_id_destination_poi"
-            data-href-template="/admin/master_data/poi/__fk__/delete/?_to_field=id&amp;_popup=1"
+            data-href-template="#__fk__"
             data-popup="yes"
             title="Delete selected poi"><img src="static/admin/img/icon-deletelink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link view-related" id="view_id_destination_poi"
-             data-href-template="/admin/master_data/poi/__fk__/change/?_to_field=id"
+             data-href-template="#__fk__"
              title="View selected poi"><img src="static/admin/img/icon-viewlink.svg" alt="" width="20" height="20"></a>
     
 </div>
@@ -1809,19 +1809,19 @@
               
                   
                   <div class="related-widget-wrapper" data-model-ref="product">
-    <select name="line_items-0-product" id="id_line_items-0-product" class="admin-autocomplete" data-ajax--cache="true" data-ajax--delay="250" data-ajax--type="GET" data-ajax--url="/admin/autocomplete/" data-app-label="requisitions" data-model-name="prlineitem" data-field-name="product" data-theme="admin-autocomplete" data-allow-clear="true" data-placeholder="" lang="en"><option value=""></option><option value="20432cb2-dd2f-4193-992a-f906f88de18c" selected>[ITEM-0001] Broiler Starter Feed 25kg — Maize</option><option value="demo-0">[P-1001] Broiler Starter Feed</option><option value="demo-1">[P-1002] Broiler Grower Feed</option><option value="demo-2">[P-1003] Broiler Finisher Feed</option><option value="demo-3">[P-1004] Layer Starter Feed</option><option value="demo-4">[P-1005] Layer Grower Feed</option><option value="demo-5">[P-1006] Layer Mash</option><option value="demo-6">[P-1007] Breeder Starter Feed</option><option value="demo-7">[P-1008] Breeder Layer Feed</option><option value="demo-8">[P-1009] Fish Feed Floating 2mm</option><option value="demo-9">[P-1010] Fish Feed Sinking 3mm</option><option value="demo-10">[P-1011] Cattle Fattening Feed</option><option value="demo-11">[P-1012] Dairy Cattle Feed</option><option value="demo-12">[P-1013] Yellow Maize</option><option value="demo-13">[P-1014] Soybean Meal</option><option value="demo-14">[P-1015] Rice Polish</option><option value="demo-15">[P-1016] Wheat Bran</option><option value="demo-16">[P-1017] Mustard Oil Cake</option><option value="demo-17">[P-1018] Limestone Powder</option><option value="demo-18">[P-1019] Di-Calcium Phosphate</option><option value="demo-19">[P-1020] Feed Grade Salt</option><option value="demo-20">[P-1021] Vitamin Premix</option><option value="demo-21">[P-1022] Mineral Premix</option><option value="demo-22">[P-1023] Lysine HCl</option><option value="demo-23">[P-1024] DL-Methionine</option><option value="demo-24">[P-1025] Choline Chloride 60%</option></select>
+    <select name="line_items-0-product" id="id_line_items-0-product" class="admin-autocomplete" data-ajax--cache="true" data-ajax--delay="250" data-ajax--type="GET" data-ajax--url="/demo-data/lookup/" data-app-label="requisitions" data-model-name="prlineitem" data-field-name="product" data-theme="admin-autocomplete" data-allow-clear="true" data-placeholder="" lang="en"><option value=""></option><option value="20432cb2-dd2f-4193-992a-f906f88de18c" selected>[ITEM-0001] Broiler Starter Feed 25kg — Maize</option><option value="demo-0">[P-1001] Broiler Starter Feed</option><option value="demo-1">[P-1002] Broiler Grower Feed</option><option value="demo-2">[P-1003] Broiler Finisher Feed</option><option value="demo-3">[P-1004] Layer Starter Feed</option><option value="demo-4">[P-1005] Layer Grower Feed</option><option value="demo-5">[P-1006] Layer Mash</option><option value="demo-6">[P-1007] Breeder Starter Feed</option><option value="demo-7">[P-1008] Breeder Layer Feed</option><option value="demo-8">[P-1009] Fish Feed Floating 2mm</option><option value="demo-9">[P-1010] Fish Feed Sinking 3mm</option><option value="demo-10">[P-1011] Cattle Fattening Feed</option><option value="demo-11">[P-1012] Dairy Cattle Feed</option><option value="demo-12">[P-1013] Yellow Maize</option><option value="demo-13">[P-1014] Soybean Meal</option><option value="demo-14">[P-1015] Rice Polish</option><option value="demo-15">[P-1016] Wheat Bran</option><option value="demo-16">[P-1017] Mustard Oil Cake</option><option value="demo-17">[P-1018] Limestone Powder</option><option value="demo-18">[P-1019] Di-Calcium Phosphate</option><option value="demo-19">[P-1020] Feed Grade Salt</option><option value="demo-20">[P-1021] Vitamin Premix</option><option value="demo-21">[P-1022] Mineral Premix</option><option value="demo-22">[P-1023] Lysine HCl</option><option value="demo-23">[P-1024] DL-Methionine</option><option value="demo-24">[P-1025] Choline Chloride 60%</option></select>
     
         <a class="related-widget-wrapper-link change-related" id="change_id_line_items-0-product"
-            data-href-template="/admin/master_data/product/__fk__/change/?_to_field=id&amp;_popup=1"
+            data-href-template="#__fk__"
             data-popup="yes"
             title="Change selected product"><img src="static/admin/img/icon-changelink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link add-related" id="add_id_line_items-0-product"
             data-popup="yes"
             href="md_product_add.html"
             title="Add another product"><img src="static/admin/img/icon-addlink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link delete-related" id="delete_id_line_items-0-product"
-            data-href-template="/admin/master_data/product/__fk__/delete/?_to_field=id&amp;_popup=1"
+            data-href-template="#__fk__"
             data-popup="yes"
             title="Delete selected product"><img src="static/admin/img/icon-deletelink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link view-related" id="view_id_line_items-0-product"
-             data-href-template="/admin/master_data/product/__fk__/change/?_to_field=id"
+             data-href-template="#__fk__"
              title="View selected product"><img src="static/admin/img/icon-viewlink.svg" alt="" width="20" height="20"></a>
     
 </div>
@@ -1895,19 +1895,19 @@
               
                   
                   <div class="related-widget-wrapper" data-model-ref="product">
-    <select name="line_items-__prefix__-product" id="id_line_items-__prefix__-product" class="admin-autocomplete" data-ajax--cache="true" data-ajax--delay="250" data-ajax--type="GET" data-ajax--url="/admin/autocomplete/" data-app-label="requisitions" data-model-name="prlineitem" data-field-name="product" data-theme="admin-autocomplete" data-allow-clear="true" data-placeholder="" lang="en"><option value=""></option><option value="demo-0">[P-1001] Broiler Starter Feed</option><option value="demo-1">[P-1002] Broiler Grower Feed</option><option value="demo-2">[P-1003] Broiler Finisher Feed</option><option value="demo-3">[P-1004] Layer Starter Feed</option><option value="demo-4">[P-1005] Layer Grower Feed</option><option value="demo-5">[P-1006] Layer Mash</option><option value="demo-6">[P-1007] Breeder Starter Feed</option><option value="demo-7">[P-1008] Breeder Layer Feed</option><option value="demo-8">[P-1009] Fish Feed Floating 2mm</option><option value="demo-9">[P-1010] Fish Feed Sinking 3mm</option><option value="demo-10">[P-1011] Cattle Fattening Feed</option><option value="demo-11">[P-1012] Dairy Cattle Feed</option><option value="demo-12">[P-1013] Yellow Maize</option><option value="demo-13">[P-1014] Soybean Meal</option><option value="demo-14">[P-1015] Rice Polish</option><option value="demo-15">[P-1016] Wheat Bran</option><option value="demo-16">[P-1017] Mustard Oil Cake</option><option value="demo-17">[P-1018] Limestone Powder</option><option value="demo-18">[P-1019] Di-Calcium Phosphate</option><option value="demo-19">[P-1020] Feed Grade Salt</option><option value="demo-20">[P-1021] Vitamin Premix</option><option value="demo-21">[P-1022] Mineral Premix</option><option value="demo-22">[P-1023] Lysine HCl</option><option value="demo-23">[P-1024] DL-Methionine</option><option value="demo-24">[P-1025] Choline Chloride 60%</option></select>
+    <select name="line_items-__prefix__-product" id="id_line_items-__prefix__-product" class="admin-autocomplete" data-ajax--cache="true" data-ajax--delay="250" data-ajax--type="GET" data-ajax--url="/demo-data/lookup/" data-app-label="requisitions" data-model-name="prlineitem" data-field-name="product" data-theme="admin-autocomplete" data-allow-clear="true" data-placeholder="" lang="en"><option value=""></option><option value="demo-0">[P-1001] Broiler Starter Feed</option><option value="demo-1">[P-1002] Broiler Grower Feed</option><option value="demo-2">[P-1003] Broiler Finisher Feed</option><option value="demo-3">[P-1004] Layer Starter Feed</option><option value="demo-4">[P-1005] Layer Grower Feed</option><option value="demo-5">[P-1006] Layer Mash</option><option value="demo-6">[P-1007] Breeder Starter Feed</option><option value="demo-7">[P-1008] Breeder Layer Feed</option><option value="demo-8">[P-1009] Fish Feed Floating 2mm</option><option value="demo-9">[P-1010] Fish Feed Sinking 3mm</option><option value="demo-10">[P-1011] Cattle Fattening Feed</option><option value="demo-11">[P-1012] Dairy Cattle Feed</option><option value="demo-12">[P-1013] Yellow Maize</option><option value="demo-13">[P-1014] Soybean Meal</option><option value="demo-14">[P-1015] Rice Polish</option><option value="demo-15">[P-1016] Wheat Bran</option><option value="demo-16">[P-1017] Mustard Oil Cake</option><option value="demo-17">[P-1018] Limestone Powder</option><option value="demo-18">[P-1019] Di-Calcium Phosphate</option><option value="demo-19">[P-1020] Feed Grade Salt</option><option value="demo-20">[P-1021] Vitamin Premix</option><option value="demo-21">[P-1022] Mineral Premix</option><option value="demo-22">[P-1023] Lysine HCl</option><option value="demo-23">[P-1024] DL-Methionine</option><option value="demo-24">[P-1025] Choline Chloride 60%</option></select>
     
         <a class="related-widget-wrapper-link change-related" id="change_id_line_items-__prefix__-product"
-            data-href-template="/admin/master_data/product/__fk__/change/?_to_field=id&amp;_popup=1"
+            data-href-template="#__fk__"
             data-popup="yes"
             title="Change selected product"><img src="static/admin/img/icon-changelink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link add-related" id="add_id_line_items-__prefix__-product"
             data-popup="yes"
             href="md_product_add.html"
             title="Add another product"><img src="static/admin/img/icon-addlink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link delete-related" id="delete_id_line_items-__prefix__-product"
-            data-href-template="/admin/master_data/product/__fk__/delete/?_to_field=id&amp;_popup=1"
+            data-href-template="#__fk__"
             data-popup="yes"
             title="Delete selected product"><img src="static/admin/img/icon-deletelink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link view-related" id="view_id_line_items-__prefix__-product"
-             data-href-template="/admin/master_data/product/__fk__/change/?_to_field=id"
+             data-href-template="#__fk__"
              title="View selected product"><img src="static/admin/img/icon-viewlink.svg" alt="" width="20" height="20"></a>
     
 </div>
@@ -2126,19 +2126,19 @@
           
           <br class="clear">
         </div>
-        <!-- END Content -->
+        
         <div id="footer"></div>
       </main>
     </div>
 </div>
-<!-- END Container -->
 
-<!-- SVGs -->
+
+
 <svg xmlns="http://www.w3.org/2000/svg" class="base-svgs">
   <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"/></symbol>
   <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"/></symbol>
   <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></symbol>
 </svg>
-<!-- END SVGs -->
+
 </body>
 </html>

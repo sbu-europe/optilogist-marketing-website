@@ -1,7 +1,5 @@
-/**
- * Material Symbols glyphs for map POI pins — one icon per POIType (apps.master_data.models.POIType).
- * Loaded before live-gps-app.js; exposed as window.LiveGpsPoiIcons.
- */
+
+
 window.LiveGpsPoiIcons = (function () {
   'use strict';
 
@@ -10,7 +8,6 @@ window.LiveGpsPoiIcons = (function () {
       + ' aria-hidden="true">' + name + '</span>';
   }
 
-  /** DB value → Material Symbols ligature name (currentColor inherits pin bubble white). */
   const BY_TYPE = {
     aquaculture: materialIcon('set_meal'),
     breeder: materialIcon('egg'),
@@ -38,7 +35,6 @@ window.LiveGpsPoiIcons = (function () {
 
   const FALLBACK = BY_TYPE.other;
 
-  /** Pin bubble color per POIType — distinct hues for at-a-glance recognition. */
   const PIN_COLORS = {
     aquaculture: '#06b6d4',
     breeder: '#f97316',

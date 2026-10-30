@@ -1,15 +1,4 @@
-/**
- * DFMS Admin — Modern Sidebar
- *
- * Handles:
- * 1. Sidebar collapse/expand (240px <-> 64px icon-only)
- * 2. Per-app group expand/collapse with localStorage persistence
- * 3. Live filter/search across all nav items
- * 4. Mobile slide-in/out
- * 5. Active item detection from current URL
- *
- * Design spec: 11-design-system/02-components/navigation.md
- */
+
 
 (function () {
   'use strict';
@@ -18,10 +7,8 @@
   var GROUPS_KEY     = 'dfms-sidebar-groups';
   var MOBILE_BP      = 768;
 
-  /* ── DOM refs (resolved after DOMContentLoaded) ── */
   var sidebar, toggleBtn, closeBtn, filterInput, navBody, backdrop;
 
-  /* ── State ── */
   var isCollapsed = false;
   var isMobile    = window.innerWidth < MOBILE_BP;
 
@@ -64,10 +51,6 @@
     }
   }
 
-  /* ────────────────────────────────────────────────
-     Sidebar collapse
-     ──────────────────────────────────────────────── */
-
   function getSavedCollapsed() {
     return localStorage.getItem(SIDEBAR_KEY) === 'true';
   }
@@ -88,16 +71,13 @@
     closeMobileDrawer();
     sidebar.classList.toggle('dfms-nav-sidebar--collapsed', collapsed);
 
-    // Sync body class so the topbar toggle icon can animate via CSS
     document.body.classList.toggle('dfms-sidebar-collapsed', collapsed);
 
-    // Update topbar toggle tooltip
     if (toggleBtn) {
       toggleBtn.setAttribute('aria-label', collapsed ? 'Expand sidebar' : 'Collapse sidebar');
       toggleBtn.title = collapsed ? 'Expand sidebar' : 'Collapse sidebar';
     }
 
-    // Add title tooltips to group headers in collapsed mode (for discoverability)
     document.querySelectorAll('.dfms-nav-group-header').forEach(function (btn) {
       var label = btn.querySelector('.dfms-nav-group-label');
       btn.title = collapsed && label ? label.textContent.trim() : '';
@@ -109,15 +89,11 @@
   function toggleSidebar() {
     if (isMobile) {
       var open = sidebar.classList.contains('dfms-nav-sidebar--mobile-open');
-      applyCollapsed(open); // open → collapse/close; closed → expand/open
+      applyCollapsed(open);
     } else {
       applyCollapsed(!isCollapsed);
     }
   }
-
-  /* ────────────────────────────────────────────────
-     Group expand/collapse
-     ──────────────────────────────────────────────── */
 
   function getSavedGroups() {
     try {
@@ -144,7 +120,6 @@
     var savedState = getSavedGroups();
     var headers = document.querySelectorAll('.dfms-nav-group-header');
 
-    // Disable list transitions during initial open so there's no expand animation on load
     document.querySelectorAll('.dfms-nav-items').forEach(function (el) {
       el.style.transition = 'none';
     });
@@ -153,19 +128,15 @@
       var groupKey = btn.getAttribute('data-group');
       var groupEl  = btn.closest('.dfms-nav-group');
 
-      // Only expand a group if it contains the currently active page item.
-      // Saved state is intentionally ignored so all groups start collapsed on
-      // pages where nothing is active (e.g. the dashboard).
       var hasActive = groupEl && groupEl.querySelector('.dfms-nav-item--active');
       var expanded  = !!hasActive;
 
       applyGroupState(btn, expanded);
 
       btn.addEventListener('click', function () {
-        // Check DOM class directly — more reliable than the JS variable
+
         var sidebarCollapsed = sidebar && sidebar.classList.contains('dfms-nav-sidebar--collapsed');
 
-        // In icon-only mode: expand sidebar and open this group
         if (sidebarCollapsed && !isMobile) {
           applyCollapsed(false);
           applyGroupState(btn, true);
@@ -186,10 +157,6 @@
     });
   }
 
-  /* ────────────────────────────────────────────────
-     Filter / Search
-     ──────────────────────────────────────────────── */
-
   function filterNav(query) {
     var q = query.toLowerCase().trim();
     var groups = document.querySelectorAll('.dfms-nav-group');
@@ -207,10 +174,8 @@
         if (match) visible++;
       });
 
-      // Show/hide the whole group
       group.classList.toggle('dfms-nav-group--all-hidden', visible === 0);
 
-      // Auto-expand groups with matching items when filtering
       if (q && visible > 0 && header && list) {
         header.setAttribute('aria-expanded', 'true');
         list.classList.remove('dfms-nav-items--hidden');
@@ -218,16 +183,12 @@
     });
   }
 
-  /* ────────────────────────────────────────────────
-     Active item
-     ──────────────────────────────────────────────── */
-
   var LAST_NAV_KEY = 'dfms-nav-last-id';
   var ADMIN_QUERY_IGNORE = { e: 1, p: 1, o: 1, q: 1, all: 1 };
 
   function rememberNavId(id) {
     if (!id) return;
-    try { sessionStorage.setItem(LAST_NAV_KEY, id); } catch (e) { /* ignore */ }
+    try { sessionStorage.setItem(LAST_NAV_KEY, id); } catch (e) {  }
   }
 
   function lastNavId() {
@@ -266,7 +227,7 @@
   function markActive() {
     try {
       _markActive();
-    } catch (e) { /* never block group expand / nav clicks */ }
+    } catch (e) {  }
   }
 
   function _markActive() {
@@ -307,7 +268,7 @@
             scoreBest = score;
             match = a;
           }
-        } catch (e) { /* ignore */ }
+        } catch (e) {  }
       });
       return match;
     }
@@ -333,27 +294,15 @@
     }
   }
 
-  /* ────────────────────────────────────────────────
-     Responsive
-     ──────────────────────────────────────────────── */
-
   function handleResize() {
     var wasMobile = isMobile;
     isMobile = window.innerWidth < MOBILE_BP;
     if (wasMobile !== isMobile) {
-      // Reset classes when crossing breakpoint
+
       closeMobileDrawer();
       applyCollapsed(isMobile ? true : getSavedCollapsed());
     }
   }
-
-  /* ────────────────────────────────────────────────
-     Init
-     ──────────────────────────────────────────────── */
-
-  /* ────────────────────────────────────────────────
-     User dropdown
-     ──────────────────────────────────────────────── */
 
   function initUserDropdown() {
     var avatarBtn  = document.getElementById('dfms-user-avatar-btn');
@@ -383,28 +332,22 @@
       toggleDropdown();
     });
 
-    // Close when clicking outside
     document.addEventListener('click', function (e) {
       if (!avatarBtn.contains(e.target) && !dropdown.contains(e.target)) {
         closeDropdown();
       }
     });
 
-    // Close on Escape
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') closeDropdown();
     });
   }
 
-  /* ────────────────────────────────────────────────
-     POI / working-site picker (profile dropdown)
-     ──────────────────────────────────────────────── */
-
   function initPoiProfileForm() {
     ['dfms-role-select', 'dfms-poi-select'].forEach(function (id) {
       var select = document.getElementById(id);
       if (!select) return;
-      // Keep the profile menu open while opening the native select list.
+
       ['click', 'mousedown'].forEach(function (evt) {
         select.addEventListener(evt, function (e) {
           e.stopPropagation();
@@ -424,16 +367,13 @@
 
     ensureBackdrop();
 
-    // Apply saved collapse state (inline script already pre-painted the correct size)
     applyCollapsed(isMobile ? true : getSavedCollapsed());
 
-    // Remove pre-paint attribute and enable transitions now that JS state is synced
     document.documentElement.removeAttribute('data-sidebar-collapsed');
-    // Small rAF delay ensures the browser has committed the no-transition paint
-    // before we switch transitions on — prevents any residual flash
+
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
-        // Re-enable transitions now that initial state is painted
+
         sidebar.classList.add('dfms-nav-sidebar--ready');
         document.body.classList.add('dfms-js-ready');
         document.querySelectorAll('.dfms-nav-items').forEach(function (el) {
@@ -442,7 +382,6 @@
       });
     });
 
-    // Collapse toggle
     if (toggleBtn) {
       toggleBtn.addEventListener('click', toggleSidebar);
       if (isMobile) {
@@ -459,8 +398,6 @@
       });
     }
 
-    // Remember which menu item was clicked so change/add pages keep that
-    // section highlighted when several items share the same changelist path.
     sidebar.addEventListener('click', function (e) {
       var navLink = e.target.closest('a.dfms-nav-link');
       if (navLink) rememberNavId(navLink.getAttribute('data-nav-id'));
@@ -473,18 +410,15 @@
       if (e.key === 'Escape' && isMobile) closeMobileDrawer();
     });
 
-    // Mark active items first so initGroups can open the correct group
     markActive();
 
-    // Group expand/collapse
     initGroups();
 
-    // Filter input
     if (filterInput) {
       filterInput.addEventListener('input', function () {
         filterNav(this.value);
       });
-      // Clear filter on Escape
+
       filterInput.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
           this.value = '';
@@ -493,13 +427,10 @@
       });
     }
 
-    // User dropdown
     initUserDropdown();
 
-    // Working-site picker in profile dropdown
     initPoiProfileForm();
 
-    // Resize handler
     window.addEventListener('resize', handleResize);
   });
 

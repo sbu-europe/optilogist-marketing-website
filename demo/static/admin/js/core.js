@@ -1,7 +1,6 @@
-// Core JavaScript helper functions
+
 'use strict';
 
-// quickElement(tagType, parentReference [, textInChildNode, attribute, attributeValue ...]);
 function quickElement() {
     const obj = document.createElement(arguments[0]);
     if (arguments[2]) {
@@ -16,17 +15,12 @@ function quickElement() {
     return obj;
 }
 
-// "a" is reference to an object
 function removeChildren(a) {
     while (a.hasChildNodes()) {
         a.removeChild(a.lastChild);
     }
 }
 
-// ----------------------------------------------------------------------------
-// Find-position functions by PPK
-// See https://www.quirksmode.org/js/findpos.html
-// ----------------------------------------------------------------------------
 function findPosX(obj) {
     let curleft = 0;
     if (obj.offsetParent) {
@@ -53,9 +47,6 @@ function findPosY(obj) {
     return curtop;
 }
 
-//-----------------------------------------------------------------------------
-// Date object extensions
-// ----------------------------------------------------------------------------
 {
     Date.prototype.getTwelveHours = function() {
         return this.getHours() % 12 || 12;
@@ -144,9 +135,6 @@ function findPosY(obj) {
         return result;
     };
 
-    // ----------------------------------------------------------------------------
-    // String object extensions
-    // ----------------------------------------------------------------------------
     String.prototype.strptime = function(format) {
         const split_format = format.split(/[.\-/]/);
         const date = this.split(/[.\-/]/);
@@ -164,9 +152,7 @@ function findPosY(obj) {
                 year = date[i];
                 break;
             case "%y":
-                // A %y value in the range of [00, 68] is in the current
-                // century, while [69, 99] is in the previous century,
-                // according to the Open Group Specification.
+
                 if (parseInt(date[i], 10) >= 69) {
                     year = date[i];
                 } else {
@@ -176,9 +162,7 @@ function findPosY(obj) {
             }
             ++i;
         }
-        // Create Date object from UTC since the parsed value is supposed to be
-        // in UTC, not local time. Also, the calendar uses UTC functions for
-        // date extraction.
+
         return new Date(Date.UTC(year, month, day));
     };
 }

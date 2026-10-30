@@ -1,4 +1,4 @@
-/* Live GPS — shell, map, toolbar, Leaflet chrome. Requires live-gps-tokens.css */
+
 
 html.live-gps-active, html.live-gps-active body {
   overflow: hidden;
@@ -190,13 +190,13 @@ html[data-sidebar-collapsed="true"].live-gps-active .live-gps-shell, html.live-g
   padding: 2px 8px;
 }
 
-/* Map canvas stays light OSM even when admin UI is dark. */
+
 html.live-gps-active[data-theme="dark"] #live-gps-map,
 html.live-gps-active[data-theme="dark"] .live-gps-follow__map {
   background: #dfe5ea;
 }
 
-/* Opaque map chrome — translucent hover over the light basemap washes out icons. */
+
 html.live-gps-active[data-theme="dark"] .live-gps-shell .leaflet-bar a {
   background: var(--lg-surface-strong);
   color: var(--lg-ink-2);

@@ -1,29 +1,20 @@
-/*
- * DFMS Admin — Design System Override
- *
- * Applies the DFMS Design System tokens to Django's admin UI.
- * Loaded via templates/admin/base_site.html on every admin page.
- *
- * Design token source: DFMS-product-context/11-design-system/
- * Token reference:     01-foundation/design-tokens.md
- * Color reference:     01-foundation/colors.md
- */
 
-/* ─── Google Fonts ────────────────────────────────────────────────────────── */
+
+
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
-/* ─── Design Tokens ───────────────────────────────────────────────────────── */
+
 
 :root {
-  /* Brand */
+  
   --dfms-primary-dark:   #122056;
   --dfms-primary:        #5B65DC;
   --dfms-primary-light:  #EEEFFD;
   --dfms-primary-hover:  #4A53C4;
   --dfms-primary-press:  #3A42A8;
 
-  /* Semantic */
+  
   --dfms-success:        #1E8A4C;
   --dfms-success-bg:     #D1FAE5;
   --dfms-warning:        #D97706;
@@ -34,7 +25,7 @@
   --dfms-info-bg:        #EEEFFD;
   --dfms-success-dark:   #166534;
 
-  /* Neutrals */
+  
   --dfms-grey-50:        #F9FAFB;
   --dfms-grey-100:       #F3F4F6;
   --dfms-grey-200:       #E5E7EB;
@@ -46,13 +37,13 @@
   --dfms-grey-800:       #1F2937;
   --dfms-grey-900:       #111827;
 
-  /* Picker surface tokens (light mode) */
+  
   --dfms-surface:        #FFFFFF;
   --dfms-picker-face-bg: #F3F4F6;
   --dfms-picker-day-text: #374151;
   --dfms-picker-border:  #E5E7EB;
 
-  /* Semantic surface tokens used by admin templates */
+  
   --dfms-card-bg:        #FFFFFF;
   --dfms-border-color:   var(--dfms-grey-200);
   --dfms-secondary-bg:   var(--dfms-grey-100);
@@ -65,21 +56,21 @@
   --dfms-success-bg-subtle: rgba(30,138,76,.08);
   --dfms-danger-bg-subtle: rgba(192,57,43,.08);
 
-  /* Typography */
+  
   --dfms-font-sans:      'Inter', system-ui, -apple-system, sans-serif;
   --dfms-font-mono:      'JetBrains Mono', 'Fira Code', monospace;
 
-  /* Radius */
+  
   --dfms-radius-sm:      4px;
   --dfms-radius-md:      8px;
   --dfms-radius-lg:      12px;
   --dfms-radius-pill:    9999px;
 
-  /* Shadows */
+  
   --dfms-shadow-sm:      0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.05);
   --dfms-shadow-md:      0 4px 6px rgba(0,0,0,.07), 0 2px 4px rgba(0,0,0,.06);
 
-  /* Django admin CSS variable overrides */
+  
   --primary:             #5B65DC;
   --secondary:           #122056;
   --accent:              #5B65DC;
@@ -122,18 +113,17 @@
   --font-family-monospace: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
-/* ─── Dark Theme Tokens ───────────────────────────────────────────────────── */
-/* Activated by [data-theme="dark"] on <html>.
-   Colors from: 11-design-system/01-foundation/colors.md — Dark Theme Palette */
+
+
 
 [data-theme="dark"] {
-  /* Brand (brightened for dark surfaces) */
+  
   --dfms-primary:        #7580F0;
   --dfms-primary-light:  #1C2044;
   --dfms-primary-hover:  #8A94F5;
   --dfms-primary-press:  #9AA3F7;
 
-  /* Semantic */
+  
   --dfms-success:        #34D475;
   --dfms-success-bg:     rgba(52,212,117,.15);
   --dfms-warning:        #F59E0B;
@@ -144,7 +134,7 @@
   --dfms-info-bg:        rgba(117,128,240,.15);
   --dfms-success-dark:   #22C55E;
 
-  /* Neutrals inverted */
+  
   --dfms-grey-50:        #0D0F1A;
   --dfms-grey-100:       #161929;
   --dfms-grey-200:       #1E2340;
@@ -156,13 +146,13 @@
   --dfms-grey-800:       #E5E7EB;
   --dfms-grey-900:       #F9FAFB;
 
-  /* Picker surface tokens (dark mode) */
+  
   --dfms-surface:        #1e2030;
   --dfms-picker-face-bg: #252838;
   --dfms-picker-day-text: #D1D5DB;
   --dfms-picker-border:  #2a2d3e;
 
-  /* Semantic surface tokens used by admin templates */
+  
   --dfms-card-bg:        var(--dfms-grey-100);
   --dfms-border-color:   var(--dfms-grey-200);
   --dfms-secondary-bg:   var(--dfms-grey-200);
@@ -175,7 +165,7 @@
   --dfms-success-bg-subtle: rgba(52,212,117,.15);
   --dfms-danger-bg-subtle: rgba(248,113,113,.16);
 
-  /* Django admin variable overrides for dark */
+  
   --primary:             #7580F0;
   --secondary:           #122056;
   --primary-fg:          #fff;
@@ -212,7 +202,7 @@
   --message-error-bg:    rgba(248,113,113,.15);
 }
 
-/* Global scrollbar styling for dark mode */
+
 [data-theme="dark"] * {
   scrollbar-color: var(--dfms-grey-500) transparent;
   scrollbar-width: thin;
@@ -232,15 +222,14 @@
   background: var(--dfms-grey-600);
 }
 
-/* Apply dark surface colours to key structural elements */
+
 [data-theme="dark"] body              { background: var(--dfms-grey-50); color: var(--dfms-grey-900); }
 [data-theme="dark"] #header           { background: #0A1238; }
 [data-theme="dark"] div.breadcrumbs   { background: transparent; border-color: transparent; }
 [data-theme="dark"] .module           { background: var(--dfms-grey-100); border-color: var(--dfms-grey-200); }
 [data-theme="dark"] fieldset          { background: var(--dfms-grey-100); border-color: var(--dfms-grey-200); }
 [data-theme="dark"] #nav-sidebar      { background: var(--dfms-grey-100); border-color: var(--dfms-grey-200); }
-/* table/paginator/filter/toolbar/searchbar dark-mode overrides
-   are co-located with their respective sections further below */
+
 [data-theme="dark"] .form-row         { border-color: var(--dfms-grey-200); }
 [data-theme="dark"] input[type="text"],
 [data-theme="dark"] input[type="email"],
@@ -259,7 +248,7 @@
 [data-theme="dark"] .readonly         { color: var(--dfms-grey-800); }
 [data-theme="dark"] .field-schema_name .readonly { background: var(--dfms-grey-200); color: var(--dfms-grey-700); }
 
-/* Theme toggle button */
+
 .dfms-theme-toggle {
   background: rgba(255,255,255,.12);
   border: 1px solid rgba(255,255,255,.2);
@@ -290,7 +279,7 @@
   line-height: 1;
 }
 
-/* ─── Base / Typography ───────────────────────────────────────────────────── */
+
 
 body,
 input,
@@ -318,21 +307,7 @@ code, pre, .font-mono, .field-schema_name .readonly {
   font-size: 13px;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   DFMS Full Layout
-   ─────────────────────────────────────────────────────────────────────────
-   Django's DOM is:
-     #container
-       #header
-       .main
-         #dfms-nav-sidebar   ← nested inside .main, not #container
-         .content
 
-   We cannot use grid-area on #container to cover the sidebar since it is
-   one level too deep.  Solution: position: fixed the sidebar so it always
-   covers the full viewport height, then push #header and .main to the
-   right with margin-left equal to the sidebar width.
-   ═══════════════════════════════════════════════════════════════════════════ */
 
 :root {
   --sidebar-w: 240px;
@@ -340,24 +315,24 @@ code, pre, .font-mono, .field-schema_name .readonly {
   --topbar-h: 56px;
 }
 
-/* ── Sidebar: fixed, full height ── */
+
 .dfms-nav-sidebar {
   position: fixed !important;
   top: 0;
   left: 0;
   height: 100vh !important;
   z-index: 100;
-  /* width/overflow/transition already set in Sidebar Panel section below */
+  
 }
 
-/* ── Shift everything right to clear the fixed sidebar ── */
+
 #header,
 .main {
-  /* Default margin matches expanded sidebar — no transition until JS ready */
+  
   margin-left: var(--sidebar-w);
 }
 
-/* Collapsed pre-paint: applied via data-sidebar-collapsed on <html> from <head> script */
+
 :root[data-sidebar-collapsed="true"] #header,
 :root[data-sidebar-collapsed="true"] .main {
   margin-left: var(--sidebar-w-collapsed);
@@ -368,30 +343,30 @@ code, pre, .font-mono, .field-schema_name .readonly {
   min-width: var(--sidebar-w-collapsed);
 }
 
-/* Transitions enabled only after JS has initialised (JS adds body.dfms-js-ready) */
+
 body.dfms-js-ready #header,
 body.dfms-js-ready .main {
   transition: margin-left 0.22s ease;
 }
 
-/* Collapsed: shrink the margin to match */
+
 body.dfms-sidebar-collapsed #header,
 body.dfms-sidebar-collapsed .main {
   margin-left: var(--sidebar-w-collapsed);
 }
 
-/* ── Container: plain column ── */
+
 #container {
   display: flex !important;
   flex-direction: column !important;
   min-height: 100vh;
 }
 
-/* ── Topbar (#header) ── */
+
 #header {
   position: sticky;
   top: 0;
-  z-index: 90;    /* below sidebar (100) so sidebar overlaps on mobile */
+  z-index: 90;    
   background: #fff;
   border-bottom: 1px solid var(--dfms-grey-200);
   height: var(--topbar-h);
@@ -402,8 +377,7 @@ body.dfms-sidebar-collapsed .main {
   align-items: center;
   padding: 0 20px;
   gap: 0;
-  /* Profile menu hangs below the 56px bar. Django responsive.css sets
-     #user-tools { overflow: auto } at <=1024px, which clips that menu. */
+  
   overflow: visible;
 }
 
@@ -412,13 +386,13 @@ body.dfms-sidebar-collapsed .main {
   border-color: var(--dfms-grey-200);
 }
 
-/* Hide Django's branding block inside #header (logo now in sidebar) */
+
 #header #branding,
 #header #dfms-branding {
   display: none !important;
 }
 
-/* User tools takes full width since branding is hidden */
+
 #header #user-tools {
   flex: 1 1 auto;
   display: flex;
@@ -432,7 +406,7 @@ body.dfms-sidebar-collapsed .main {
   overflow: visible;
 }
 
-/* Topbar links */
+
 #header a:link,
 #header a:visited {
   color: var(--dfms-grey-700);
@@ -448,7 +422,7 @@ body.dfms-sidebar-collapsed .main {
   color: var(--dfms-grey-700);
 }
 
-/* ── .main row (sidebar inside it is fixed, so .main is just content) ── */
+
 .main {
   display: flex;
   flex-direction: row;
@@ -456,7 +430,7 @@ body.dfms-sidebar-collapsed .main {
   flex: 1 0 auto;
 }
 
-/* ── Hamburger toggle in topbar ── */
+
 .dfms-content-toggle {
   background: none;
   border: none;
@@ -492,12 +466,12 @@ body.dfms-sidebar-collapsed .main {
   background: var(--dfms-grey-200);
 }
 
-/* ── Content topbar row (breadcrumbs row below topbar) ── */
+
 .dfms-content-topbar {
-  display: none; /* breadcrumbs now live inline without a separate bar */
+  display: none; 
 }
 
-/* ── Logo mark ── */
+
 .dfms-logo-mark {
   width: 32px;
   height: 32px;
@@ -526,7 +500,7 @@ body.dfms-sidebar-collapsed .main {
   line-height: 1;
 }
 
-/* ── Vertical divider between logo and title ── */
+
 .dfms-topbar-divider {
   width: 1px;
   height: 20px;
@@ -535,7 +509,7 @@ body.dfms-sidebar-collapsed .main {
   flex-shrink: 0;
 }
 
-/* ── Site title ── */
+
 #branding h1,
 #site-name {
   font-size: 15px;
@@ -578,7 +552,7 @@ body.dfms-sidebar-collapsed .main {
   border-bottom-color: #fff;
 }
 
-/* ─── Sidebar Brand / Logo Section ───────────────────────────────────────── */
+
 
 .dfms-sidebar-brand {
   flex-shrink: 0;
@@ -603,7 +577,7 @@ body.dfms-sidebar-collapsed .main {
   width: auto;
 }
 
-/* Mobile drawer close — shown only in the max-width:767 media block */
+
 .dfms-sidebar-close {
   display: none;
   align-items: center;
@@ -636,12 +610,12 @@ body.dfms-sidebar-collapsed .main {
   color: #fff;
 }
 
-/* Scrim behind open mobile drawer */
+
 .dfms-nav-backdrop {
   display: none;
   position: fixed;
   inset: 0;
-  z-index: 99; /* below sidebar (100), above header (90) */
+  z-index: 99; 
   background: rgba(15, 23, 42, 0.45);
   border: none;
   padding: 0;
@@ -674,7 +648,7 @@ body.dfms-sidebar-collapsed .main {
   line-height: 1;
 }
 
-/* Optilogist brand mark (SVG) — theme-aware light/dark swap */
+
 .dfms-brand-mark {
   display: inline-flex;
   align-items: center;
@@ -733,7 +707,7 @@ body.dfms-sidebar-collapsed .main {
   line-height: 1.3;
 }
 
-/* Dark mode brand section */
+
 [data-theme="dark"] .dfms-sidebar-brand {
   background: #0E1630;
 }
@@ -746,7 +720,7 @@ body.dfms-sidebar-collapsed .main {
   color: rgba(255,255,255,.4);
 }
 
-/* Hide brand text in collapsed mode */
+
 .dfms-nav-sidebar--collapsed .dfms-sidebar-brand-text {
   opacity: 0;
   width: 0;
@@ -763,7 +737,7 @@ body.dfms-sidebar-collapsed .main {
   gap: 0;
 }
 
-/* ─── Topbar Tools (hamburger + right actions) ────────────────────────────── */
+
 
 #dfms-topbar-tools {
   display: flex;
@@ -773,7 +747,7 @@ body.dfms-sidebar-collapsed .main {
   gap: 0;
 }
 
-/* ─── Topbar icon buttons (theme toggle etc.) ─────────────────────────────── */
+
 
 .dfms-topbar-icon-btn {
   background: none;
@@ -801,7 +775,7 @@ body.dfms-sidebar-collapsed .main {
   color: var(--dfms-grey-900);
 }
 
-/* ─── Topbar right section ────────────────────────────────────────────────── */
+
 
 .dfms-topbar-right {
   display: flex;
@@ -809,7 +783,7 @@ body.dfms-sidebar-collapsed .main {
   gap: 4px;
 }
 
-/* ─── User avatar dropdown ────────────────────────────────────────────────── */
+
 
 .dfms-user-menu {
   position: relative;
@@ -845,7 +819,7 @@ body.dfms-sidebar-collapsed .main {
   background: var(--dfms-grey-200);
 }
 
-/* Avatar initials circle */
+
 .dfms-avatar {
   width: 28px;
   height: 28px;
@@ -878,7 +852,7 @@ body.dfms-sidebar-collapsed .main {
   transform: rotate(180deg);
 }
 
-/* Dropdown panel */
+
 .dfms-user-dropdown {
   position: absolute;
   top: calc(100% + 8px);
@@ -900,7 +874,7 @@ body.dfms-sidebar-collapsed .main {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
-  /* overflow:hidden on the closed panel clips native <select> lists. */
+  
   overflow: visible;
 }
 
@@ -909,7 +883,7 @@ body.dfms-sidebar-collapsed .main {
   border-color: var(--dfms-grey-200);
 }
 
-/* Dropdown header — identity card */
+
 .dfms-dropdown-header {
   padding: 16px;
   display: flex;
@@ -993,7 +967,7 @@ body.dfms-sidebar-collapsed .main {
   color: var(--dfms-grey-600);
 }
 
-/* Divider */
+
 .dfms-dropdown-divider {
   height: 1px;
   background: var(--dfms-grey-100);
@@ -1004,7 +978,7 @@ body.dfms-sidebar-collapsed .main {
   background: var(--dfms-grey-200);
 }
 
-/* Dropdown items */
+
 .dfms-dropdown-item {
   display: flex;
   align-items: center;
@@ -1043,14 +1017,14 @@ body.dfms-sidebar-collapsed .main {
   color: var(--dfms-grey-600);
 }
 
-/* Logout form — strip all form chrome so button fills the slot */
+
 .dfms-user-dropdown form {
   display: block;
   margin: 0;
   padding: 0;
 }
 
-/* Prevent Django admin global styles from breaking dropdown items */
+
 .dfms-dropdown-item,
 .dfms-dropdown-item:link,
 .dfms-dropdown-item:visited,
@@ -1083,7 +1057,7 @@ body.dfms-sidebar-collapsed .main {
   opacity: 0.85;
 }
 
-/* ─── Sidebar nav items — light mode (colour overrides) ──────────────────── */
+
 
 .dfms-nav-group-icon {
   color: var(--dfms-grey-400);
@@ -1126,7 +1100,7 @@ body.dfms-sidebar-collapsed .main {
   color: var(--dfms-grey-400);
 }
 
-/* ─── Sidebar nav items — dark mode ──────────────────────────────────────── */
+
 
 [data-theme="dark"] .dfms-nav-sidebar {
   background: #0E1630;
@@ -1219,9 +1193,9 @@ body.dfms-sidebar-collapsed .main {
   color: rgba(255,255,255,.35);
 }
 
-/* ─── Breadcrumbs ─────────────────────────────────────────────────────────── */
 
-/* Breadcrumbs — sit at top of content area above page title */
+
+
 .dfms-breadcrumbs {
   margin-bottom: 4px;
 }
@@ -1251,7 +1225,7 @@ div.breadcrumbs a:hover {
   color: var(--dfms-grey-500);
 }
 
-/* ─── Content Area ────────────────────────────────────────────────────────── */
+
 
 #content {
   padding: 24px;
@@ -1269,7 +1243,7 @@ div.breadcrumbs a:hover {
   margin-bottom: 6px;
 }
 
-/* ─── Changelist page header (title + Add button) ────────────────────────── */
+
 
 .dfms-page-header {
   display: flex;
@@ -1300,7 +1274,7 @@ div.breadcrumbs a:hover {
   margin: 0;
 }
 
-/* POST buttons in page headers — match link-styled dfms-btn-add / dfms-btn-secondary */
+
 .dfms-page-header__actions .dfms-inline-form button.dfms-btn-add,
 .dfms-page-header__actions button.dfms-btn-add,
 .dfms-page-header__actions .dfms-inline-form button.dfms-btn-secondary,
@@ -1332,7 +1306,7 @@ div.breadcrumbs a:hover {
   color: var(--dfms-grey-500) !important;
 }
 
-/* Primary "Add …" button */
+
 .dfms-btn-add {
   display: inline-flex;
   align-items: center;
@@ -1368,13 +1342,13 @@ div.breadcrumbs a:hover {
   line-height: 1;
 }
 
-/* Hide the now-replaced default object-tools list on changelist + change-form pages */
+
 .change-list ul.object-tools,
 .change-form ul.object-tools {
   display: none;
 }
 
-/* ── Back arrow link in page header ── */
+
 .dfms-page-header__back {
   display: inline-flex;
   align-items: center;
@@ -1394,7 +1368,7 @@ div.breadcrumbs a:hover {
   color: var(--dfms-grey-900);
 }
 
-/* ── Secondary outlined button (History, View on site) ── */
+
 .dfms-btn-secondary {
   display: inline-flex;
   align-items: center;
@@ -1428,28 +1402,27 @@ div.breadcrumbs a:hover {
   color: inherit;
 }
 
-/* ─── Change Form — layout & header ────────────────────────────────────── */
 
-/* Constrain form content to readable width */
+
+
 .change-form #content-main {
   max-width: 960px;
 }
 
-/* Suppress Django's auto-generated "Add X" / "Select X to change" h1 —
-   our dfms-page-header renders the title instead */
+
 .change-form #content > h1,
 .change-list #content > h1 {
   display: none;
 }
 
-/* Align the back arrow and h1 in the same row */
+
 .change-form .dfms-page-header__title {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-/* ─── Dark mode ── */
+
 [data-theme="dark"] .dfms-page-header__title h1 {
   color: var(--dfms-grey-900);
 }
@@ -1474,7 +1447,7 @@ div.breadcrumbs a:hover {
   border-color: var(--dfms-primary);
 }
 
-/* ─── Sidebar / Nav ───────────────────────────────────────────────────────── */
+
 
 #nav-sidebar {
   background: #fff;
@@ -1493,7 +1466,7 @@ div.breadcrumbs a:hover {
   background: var(--dfms-grey-50);
 }
 
-/* ─── Modules / Cards ─────────────────────────────────────────────────────── */
+
 
 .module {
   background: #fff;
@@ -1522,12 +1495,12 @@ div.breadcrumbs a:hover {
   border-bottom: 1px solid var(--dfms-grey-200);
 }
 
-/* App list on dashboard */
+
 #content-main .module > table {
   border: none;
 }
 
-/* ─── Tables ──────────────────────────────────────────────────────────────── */
+
 
 #result_list,
 .results table {
@@ -1539,7 +1512,7 @@ div.breadcrumbs a:hover {
   font-size: 13px;
 }
 
-/* ── Column headers ── */
+
 #result_list thead th,
 .results table thead th {
   background: var(--dfms-grey-50);
@@ -1568,7 +1541,7 @@ div.breadcrumbs a:hover {
   color: var(--dfms-primary);
 }
 
-/* Hide only the remove link and toggle anchor — keep the priority number */
+
 #result_list thead th .sortoptions .sortremove,
 #result_list thead th .sortoptions .toggle,
 .results table thead th .sortoptions .sortremove,
@@ -1576,7 +1549,7 @@ div.breadcrumbs a:hover {
   display: none !important;
 }
 
-/* Style the sort priority badge */
+
 #result_list thead th .sortoptions .sortpriority,
 .results table thead th .sortoptions .sortpriority {
   display: inline-flex !important;
@@ -1594,7 +1567,7 @@ div.breadcrumbs a:hover {
   vertical-align: middle;
 }
 
-/* Sort indicators using Bootstrap Icons font glyphs — scoped to the title link only */
+
 th.sorted .text a::after {
   font-family: "bootstrap-icons";
   font-size: 11px;
@@ -1602,19 +1575,19 @@ th.sorted .text a::after {
   opacity: 0.8;
 }
 
-th.ascending .text a::after  { content: "\f286"; }  /* bi-chevron-up */
-th.descending .text a::after { content: "\f282"; }  /* bi-chevron-down */
+th.ascending .text a::after  { content: "\f286"; }  
+th.descending .text a::after { content: "\f282"; }  
 
-/* Unsorted column hover hint */
+
 th:not(.sorted) .text a:hover::after {
   font-family: "bootstrap-icons";
   font-size: 11px;
-  content: "\f127";  /* bi-arrow-down-up */
+  content: "\f127";  
   color: var(--dfms-grey-300);
   margin-left: 2px;
 }
 
-/* ── Rows ── */
+
 #result_list tbody tr,
 .results table tbody tr {
   border-bottom: 1px solid var(--dfms-grey-100);
@@ -1631,7 +1604,7 @@ th:not(.sorted) .text a:hover::after {
   border-bottom: none;
 }
 
-/* ── Cells ── */
+
 #result_list td,
 .results table td {
   padding: 0 16px;
@@ -1642,8 +1615,7 @@ th:not(.sorted) .text a:hover::after {
   white-space: nowrap;
 }
 
-/* Transport Orders: TO number is the first column (rendered as <th>), keep it single-line.
-   We target the cell and the link because the <a> may receive wrapping styles. */
+
 #result_list tbody th.field-to_number,
 #result_list tbody th.field-to_number a {
   white-space: nowrap !important;
@@ -1652,7 +1624,7 @@ th:not(.sorted) .text a:hover::after {
   hyphens: none !important;
 }
 
-/* First link in a row (the object title) — primary colour */
+
 #result_list tbody td:first-of-type a,
 #result_list tbody th a {
   color: var(--dfms-primary);
@@ -1665,7 +1637,7 @@ th:not(.sorted) .text a:hover::after {
   text-decoration: underline;
 }
 
-/* ── Checkbox cells ── */
+
 #result_list th.action-checkbox-column,
 #result_list td.action-checkbox {
   width: 44px;
@@ -1674,13 +1646,13 @@ th:not(.sorted) .text a:hover::after {
   text-align: center;
 }
 
-/* ── Selected row ── */
+
 #result_list tr.selected,
 .results table tr.selected {
   background: var(--dfms-primary-light) !important;
 }
 
-/* ── Dark mode ── */
+
 [data-theme="dark"] #result_list,
 [data-theme="dark"] .results table {
   border-color: var(--dfms-grey-200);
@@ -1706,7 +1678,7 @@ th:not(.sorted) .text a:hover::after {
   color: var(--dfms-grey-700);
 }
 
-/* ─── Checkboxes ──────────────────────────────────────────────────────────── */
+
 
 input[type="checkbox"] {
   accent-color: var(--dfms-primary);
@@ -1716,7 +1688,7 @@ input[type="checkbox"] {
   vertical-align: middle;
 }
 
-/* ─── Pagination ──────────────────────────────────────────────────────────── */
+
 
 .paginator {
   display: flex;
@@ -1818,7 +1790,7 @@ input[type="checkbox"] {
   box-shadow: 0 2px 8px rgba(91, 101, 220, 0.24);
 }
 
-/* Hide Django's "Show all" control in changelist pagination. */
+
 .paginator .showall,
 .paginator a.showall,
 .paginator a[href*="all="] {
@@ -1860,7 +1832,7 @@ input[type="checkbox"] {
   background: var(--dfms-grey-200);
 }
 
-/* Design-system DynamicPagination footer (changelist + custom admin tables). */
+
 .dfms-pagination-parent {
   display: flex;
   justify-content: space-between;
@@ -1924,7 +1896,7 @@ input[type="checkbox"] {
   color: var(--dfms-grey-700) !important;
 }
 
-/* ─── Change List — Search toolbar ───────────────────────────────────────── */
+
 
 #toolbar {
   background: #fff !important;
@@ -1940,13 +1912,13 @@ input[type="checkbox"] {
   flex-wrap: wrap;
 }
 
-/* When there's no result list below, restore bottom border */
+
 #toolbar:last-child {
   border-radius: var(--dfms-radius-md);
   border-bottom: 1px solid var(--dfms-grey-200);
 }
 
-/* Reset Django's generic "#toolbar form input" rule that targets our searchbar */
+
 #toolbar #changelist-search input {
   border-radius: var(--dfms-radius-sm);
   font-size: 14px;
@@ -1954,10 +1926,7 @@ input[type="checkbox"] {
   color: var(--dfms-grey-900);
 }
 
-/* ── Search group wrapper ──
-   Renders as: [ 🔍  Search…          × ]
-   The icon is a non-interactive pseudo-element via the wrapper's ::before.
-   The submit button is visually hidden — Enter key submits. */
+
 .dfms-search-wrap {
   position: relative;
   display: inline-flex;
@@ -1967,7 +1936,7 @@ input[type="checkbox"] {
   gap: 0;
 }
 
-/* Search icon — sits inside the left of the input via absolute positioning on the wrapper */
+
 .dfms-search-icon {
   position: absolute;
   left: 11px;
@@ -1980,7 +1949,7 @@ input[type="checkbox"] {
   transform: translateY(-50%);
 }
 
-/* Input — use #toolbar #searchbar (2 IDs) to beat Django changelists.css specificity */
+
 #toolbar #searchbar,
 .dfms-search-input {
   width: 100%;
@@ -2007,7 +1976,7 @@ input[type="checkbox"] {
   box-shadow: 0 0 0 3px rgba(91,101,220,.15) !important;
 }
 
-/* Clear (×) link — only rendered when query is active */
+
 .dfms-search-clear {
   position: absolute;
   right: 8px;
@@ -2032,7 +2001,7 @@ input[type="checkbox"] {
   color: var(--dfms-grey-700);
 }
 
-/* Submit button — visually hidden, Enter key triggers submission */
+
 #changelist-search .dfms-search-submit,
 .dfms-search-submit {
   position: absolute !important;
@@ -2048,7 +2017,7 @@ input[type="checkbox"] {
   pointer-events: none !important;
 }
 
-/* Result count */
+
 .dfms-search-count {
   font-size: 12px;
   color: var(--dfms-grey-500);
@@ -2065,7 +2034,7 @@ input[type="checkbox"] {
   text-decoration: underline;
 }
 
-/* Help text */
+
 .dfms-search-help {
   font-size: 12px;
   color: var(--dfms-grey-500);
@@ -2073,7 +2042,7 @@ input[type="checkbox"] {
   padding: 0 4px;
 }
 
-/* ── Dark mode ── */
+
 [data-theme="dark"] #toolbar {
   background: var(--dfms-grey-100) !important;
   border-color: var(--dfms-grey-200) !important;
@@ -2104,7 +2073,7 @@ input[type="checkbox"] {
   caret-color: var(--dfms-grey-900) !important;
 }
 
-/* Dark mode autofill — all form controls (login, auth, admin forms). */
+
 [data-theme="dark"] input:-webkit-autofill,
 [data-theme="dark"] input:-webkit-autofill:hover,
 [data-theme="dark"] input:-webkit-autofill:focus,
@@ -2153,7 +2122,7 @@ input[type="checkbox"] {
   color: var(--dfms-grey-500);
 }
 
-/* ─── Change List — Filters sidebar ──────────────────────────────────────── */
+
 
 #changelist-filter {
   background: #fff;
@@ -2230,7 +2199,7 @@ input[type="checkbox"] {
   color: var(--dfms-grey-900);
 }
 
-/* ─── Change List — Actions bar (no-JS fallback, hidden when toolbar active) */
+
 
 .actions {
   display: flex;
@@ -2244,7 +2213,7 @@ input[type="checkbox"] {
   flex-wrap: wrap;
 }
 
-/* Style the bulk-action select */
+
 .actions select {
   height: 32px !important;
   padding: 0 8px !important;
@@ -2256,7 +2225,7 @@ input[type="checkbox"] {
   min-width: 180px;
 }
 
-/* "Go" button */
+
 .actions button[name="index"],
 .actions .button {
   height: 32px !important;
@@ -2294,7 +2263,7 @@ input[type="checkbox"] {
   color: var(--dfms-grey-700) !important;
 }
 
-/* Compact inline action in custom / changelist table rows (not page-header dfms-btn-add) */
+
 .dfms-table-action {
   display: inline-flex;
   align-items: center;
@@ -2326,7 +2295,7 @@ input[type="checkbox"] {
   color: var(--dfms-primary);
 }
 
-/* ─── Row actions ─────────────────────────────────────────────────────────── */
+
 
 td.dfms-row-actions {
   width: 44px;
@@ -2369,7 +2338,7 @@ tr:hover .dfms-row-menu-btn {
   color: var(--dfms-grey-500);
 }
 
-/* Row dropdown panel */
+
 .dfms-row-dropdown {
   position: fixed;
   z-index: 500;
@@ -2457,7 +2426,7 @@ tr:hover .dfms-row-menu-btn {
   background: var(--dfms-grey-200);
 }
 
-/* ─── Selection toolbar ───────────────────────────────────────────────────── */
+
 
 .dfms-selection-toolbar {
   display: flex;
@@ -2470,7 +2439,7 @@ tr:hover .dfms-row-menu-btn {
   border: 1px solid var(--dfms-grey-200);
   border-bottom: none;
   flex-wrap: wrap;
-  /* Animate in */
+  
   animation: dfms-toolbar-in 0.15s ease;
 }
 
@@ -2524,7 +2493,7 @@ tr:hover .dfms-row-menu-btn {
   flex-wrap: wrap;
 }
 
-/* Action buttons inside the selection toolbar */
+
 .dfms-toolbar-action-btn {
   display: inline-flex;
   align-items: center;
@@ -2619,7 +2588,7 @@ tr:hover .dfms-row-menu-btn {
   border-color: rgba(255,255,255,.35);
 }
 
-/* ─── Forms ───────────────────────────────────────────────────────────────── */
+
 
 .form-row {
   border-bottom: 1px solid var(--dfms-grey-100);
@@ -2651,8 +2620,7 @@ textarea {
   height: 34px;
 }
 
-/* Auth/onboarding (.auth-input): global input[type=…] above beats .auth-input from
-   dfms.css on blur — keep filled values readable in dark mode. */
+
 body.auth-body .auth-input,
 body.auth-body input.auth-input {
   background: var(--dfms-grey-100) !important;
@@ -2672,9 +2640,7 @@ body.auth-body .auth-input-group .auth-toggle {
   color: var(--dfms-grey-500) !important;
 }
 
-/* Native date/time picker chrome must follow DFMS theme, not OS prefers-color-scheme.
-   `color-scheme: light dark` (or OS-dark while data-theme=light) paints a light calendar
-   icon on a white field — icon looks "missing" in light mode. */
+
 input[type="date"],
 input[type="datetime-local"],
 input[type="time"] {
@@ -2731,23 +2697,21 @@ textarea:focus {
   margin-top: 4px;
 }
 
-/* Field labels */
+
 label {
   font-size: 13px;
   font-weight: 500;
   color: var(--dfms-grey-700);
 }
 
-/* Required asterisk on the field label only (not RadioSelect option labels).
-   Use label.required — NOT ".required label", which also matches option labels
-   inside a required form-row. */
+
 label.required::after {
   content: ' *';
   color: var(--dfms-danger);
   font-weight: 700;
 }
 
-/* Kill Django's .aligned label spacer and any ::before/::after on option labels */
+
 .radiolist label::after,
 .radiolist label::before,
 form .aligned .radiolist label::after,
@@ -2765,7 +2729,7 @@ form .aligned .radiolist label:not(.vCheckboxLabel)::after,
   background: none !important;
 }
 
-/* RadioSelect: one custom circle (avoids native double-draw from padded inputs) */
+
 form .aligned .radiolist,
 .field-invite_channel .radiolist {
   display: flex;
@@ -2842,14 +2806,14 @@ form .aligned .radiolist input[type="radio"]:focus-visible,
   box-shadow: none !important;
 }
 
-/* Readonly values */
+
 .readonly {
   color: var(--dfms-grey-800);
   padding: 8px 0;
   display: inline-block;
 }
 
-/* Calculated Goods Pickup Date still uses the same input box as the other dates. */
+
 .field-goods_pickup_date input[readonly] {
   background: var(--dfms-input-bg);
   color: var(--dfms-grey-900);
@@ -2880,7 +2844,7 @@ form .aligned .radiolist input[type="radio"]:focus-visible,
   color: var(--dfms-grey-700);
 }
 
-/* LD-01 load/unload add form — point queue row selection (ld_queue_select.js) */
+
 .ld-queue-hint {
   margin: 0 0 0.5rem;
 }
@@ -2905,7 +2869,7 @@ form .aligned .radiolist input[type="radio"]:focus-visible,
   outline-offset: -2px;
 }
 
-/* LD-01 change form — mandatory completion reminder after start */
+
 .ld-completion-required-banner {
   margin: 0 0 1rem;
   padding: 0.75rem 1rem;
@@ -2934,7 +2898,7 @@ form .aligned .radiolist input[type="radio"]:focus-visible,
   margin: 0.2rem 0;
 }
 
-/* Fieldset sections */
+
 fieldset {
   border: 1px solid var(--dfms-grey-200);
   border-radius: var(--dfms-radius-md);
@@ -2984,12 +2948,12 @@ fieldset.collapse h2 a {
   letter-spacing: 0;
 }
 
-/* Date / Time widgets */
+
 .datetimeshortcuts a {
   color: var(--dfms-primary);
 }
 
-/* ─── Buttons ─────────────────────────────────────────────────────────────── */
+
 
 .button,
 input[type="submit"],
@@ -3032,13 +2996,13 @@ input[type="submit"]:focus {
   outline-offset: 2px;
 }
 
-/* Secondary / default button */
+
 .button.default,
 input[type="submit"].default {
   background: var(--dfms-primary);
 }
 
-/* Danger / delete buttons */
+
 .deletelink,
 .button.danger,
 .submit-row a.deletelink {
@@ -3061,7 +3025,7 @@ input[type="submit"].default {
   color: #fff !important;
 }
 
-/* Save row */
+
 .submit-row {
   background: var(--dfms-grey-50);
   border-top: 1px solid var(--dfms-grey-200);
@@ -3071,25 +3035,25 @@ input[type="submit"].default {
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
-  /* Sticky footer — stays visible while scrolling long forms */
+  
   position: sticky;
   bottom: 0;
   z-index: 20;
   box-shadow: 0 -2px 8px rgba(0,0,0,.06);
 }
 
-/* Delete — far left */
+
 .submit-row a.deletelink {
   margin-right: auto;
   order: -1;
 }
 
-/* Cancel — secondary style, sits before Save */
+
 .submit-row .dfms-btn-cancel {
   margin-left: auto;
 }
 
-/* Save button — compact, matches design system */
+
 .submit-row .dfms-btn-save,
 input[type="submit"].dfms-btn-save {
   height: 34px !important;
@@ -3116,7 +3080,7 @@ input[type="submit"].dfms-btn-save:focus {
   box-shadow: none !important;
 }
 
-/* ── Port Shipment — Save as Draft (inherits secondary style) ── */
+
 .submit-row button.dfms-btn-draft {
   background: #fff;
   border-color: var(--dfms-border-color);
@@ -3144,7 +3108,7 @@ input[type="submit"].dfms-btn-save:focus {
   border-color: var(--dfms-primary) !important;
 }
 
-/* ── Port Shipment — Submit Shipment (inherits primary save style) ── */
+
 .submit-row button.dfms-btn-submit-shipment {
   background: var(--dfms-primary) !important;
   border-color: var(--dfms-primary) !important;
@@ -3166,7 +3130,7 @@ input[type="submit"].dfms-btn-save:focus {
   box-shadow: none !important;
 }
 
-/* ── DM Approval action buttons ── */
+
 .dfms-btn-approve,
 .dfms-btn-reject,
 .dfms-btn-modify,
@@ -3190,7 +3154,7 @@ input[type="submit"].dfms-btn-save:focus {
   transition: border-color 0.15s, background 0.15s, color 0.15s;
 }
 
-/* Approve — solid filled green (primary positive action) */
+
 .dfms-btn-approve,
 .submit-row .dfms-btn-approve {
   background: #16a34a !important;
@@ -3207,7 +3171,7 @@ input[type="submit"].dfms-btn-save:focus {
   box-shadow: none !important;
 }
 
-/* Approve with Modifications — neutral outlined */
+
 .dfms-btn-modify,
 .submit-row .dfms-btn-modify {
   background: transparent !important;
@@ -3225,7 +3189,7 @@ input[type="submit"].dfms-btn-save:focus {
   box-shadow: none !important;
 }
 
-/* Reject — solid danger (filled red) */
+
 .dfms-btn-reject,
 .submit-row .dfms-btn-reject {
   background: #dc2626 !important;
@@ -3249,7 +3213,7 @@ input[type="submit"].dfms-btn-save:focus {
   color: inherit;
 }
 
-/* Dark mode */
+
 [data-theme="dark"] .dfms-btn-approve,
 [data-theme="dark"] .submit-row .dfms-btn-approve {
   background: #16a34a !important;
@@ -3278,7 +3242,7 @@ input[type="submit"].dfms-btn-save:focus {
   background: #b91c1c !important;
 }
 
-/* ── DM Actions label inside submit-row ── */
+
 .dfms-dm-actions__label {
   font-size: 11px;
   font-weight: 700;
@@ -3287,7 +3251,7 @@ input[type="submit"].dfms-btn-save:focus {
   color: var(--body-quiet-color);
 }
 
-/* ── Port Shipment — locked hint ── */
+
 .dfms-ps-locked-hint {
   display: inline-flex;
   align-items: center;
@@ -3310,7 +3274,7 @@ input[type="submit"].dfms-btn-save:focus {
   box-shadow: 0 -2px 8px rgba(0,0,0,.2);
 }
 
-/* Object tools (history, view on site links) */
+
 ul.object-tools {
   margin: 0 0 8px 0;
   padding: 0;
@@ -3349,7 +3313,7 @@ ul.object-tools a.addlink:hover {
   background: var(--dfms-primary-hover);
 }
 
-/* ─── Status Badges (tenant subscription) ─────────────────────────────────── */
+
 
 .dfms-badge {
   display: inline-flex;
@@ -3397,8 +3361,8 @@ ul.object-tools a.addlink:hover {
   border: 1px solid var(--dfms-grey-300);
 }
 
-/* ─── PR / TR Workflow Status Badges ───────────────────────────────────────── */
-/* PR statuses */
+
+
 .dfms-badge--draft {
   background: var(--dfms-grey-100);
   color: var(--dfms-grey-600);
@@ -3429,7 +3393,7 @@ ul.object-tools a.addlink:hover {
   color: var(--dfms-danger);
   border: 1px solid rgba(192,57,43,.25);
 }
-/* TR-only statuses */
+
 .dfms-badge--pending-approval {
   background: var(--dfms-warning-bg);
   color: var(--dfms-warning);
@@ -3460,7 +3424,7 @@ ul.object-tools a.addlink:hover {
   color: var(--dfms-warning);
   border: 1px solid rgba(217,119,6,.25);
 }
-/* TO yard sub-states */
+
 .dfms-badge--info {
   background: var(--dfms-info-bg);
   color: var(--dfms-info);
@@ -3504,7 +3468,7 @@ ul.object-tools a.addlink:hover {
   color: #7DD3FC;
   border: 1px solid rgba(56, 189, 248, 0.4);
 }
-/* Urgency badges */
+
 .dfms-badge--urgency-normal {
   background: var(--dfms-grey-100);
   color: var(--dfms-grey-600);
@@ -3521,7 +3485,7 @@ ul.object-tools a.addlink:hover {
   border: 1px solid rgba(192,57,43,.25);
 }
 
-/* ─── Trip / Workflow Status Colors (13 states) ────────────────────────────── */
+
 
 .status-pending          { background: #FEF3C7; color: #92400E; }
 .status-assigned         { background: #DBEAFE; color: #1E40AF; }
@@ -3537,7 +3501,7 @@ ul.object-tools a.addlink:hover {
 .status-on-hold          { background: #F3F4F6; color: #374151; }
 .status-cancelled        { background: #FEE2E2; color: #C0392B; }
 
-/* ─── Messages / Alerts ───────────────────────────────────────────────────── */
+
 
 ul.messagelist {
   margin: 0;
@@ -3574,7 +3538,7 @@ ul.messagelist li.error {
   border-left: 4px solid var(--dfms-danger);
 }
 
-/* ─── Login Page ──────────────────────────────────────────────────────────── */
+
 
 body.login {
   background: var(--dfms-grey-50);
@@ -3663,7 +3627,7 @@ body.login .login-logo .login-subtitle {
   margin: 0;
 }
 
-/* Optilogist lockup (O + wordmark) — theme-aware light/dark swap */
+
 .dfms-brand-lockup {
   display: inline-flex;
   align-items: center;
@@ -3712,7 +3676,7 @@ body.login input[type="password"] {
   color: var(--dfms-grey-900) !important;
 }
 
-/* Generic password field wrapper (admin + portal-login pages) */
+
 .dfms-password-wrap {
   position: relative;
   width: 100%;
@@ -3720,10 +3684,10 @@ body.login input[type="password"] {
 
 .dfms-password-wrap input[type="password"],
 .dfms-password-wrap input[type="text"] {
-  padding-right: 40px !important; /* reserve space for suffix icon */
+  padding-right: 40px !important; 
 }
 
-/* Hide Edge/IE native reveal so only our custom eye toggle shows */
+
 .dfms-password-wrap input[type="password"]::-ms-reveal,
 .dfms-password-wrap input[type="password"]::-ms-clear {
   display: none;
@@ -3770,7 +3734,7 @@ body.login input[type="password"] {
 
 .dfms-password-wrap--toggle-flush input[type="password"],
 .dfms-password-wrap--toggle-flush input[type="text"] {
-  padding-right: 2px !important; /* only reserve the icon width */
+  padding-right: 2px !important; 
 }
 
 .dfms-password-toggle:hover {
@@ -3803,7 +3767,7 @@ body.login #content-main a {
   font-size: 13px;
 }
 
-/* ─── Dashboard ────────────────────────────────────────────────────────────── */
+
 
 .dfms-welcome-banner {
   background: linear-gradient(135deg, var(--dfms-primary-dark) 0%, #1E2A5E 100%);
@@ -3854,9 +3818,9 @@ body.login #content-main a {
   color: #fff;
 }
 
-/* ─── Dashboard — stat cards & charts ────────────────────────────────────── */
 
-/* Override Django's hardcoded .dashboard #content { width: 600px } */
+
+
 .dashboard #content {
   width: auto !important;
   max-width: 100% !important;
@@ -3867,14 +3831,14 @@ body.login #content-main a {
   float: none !important;
 }
 
-/* Stat card grid */
+
 .dfms-stat-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
   gap: 14px;
 }
 
-/* Individual stat card */
+
 .dfms-stat-card {
   background: #fff;
   border: 1px solid var(--dfms-grey-200);
@@ -3890,7 +3854,7 @@ body.login #content-main a {
   box-shadow: var(--dfms-shadow-sm);
 }
 
-/* Icon circle */
+
 .dfms-stat-card__icon {
   width: 40px;
   height: 40px;
@@ -3907,7 +3871,7 @@ body.login #content-main a {
 .dfms-stat-card__icon--warning  { background: #fef3c7; color: #b45309; }
 .dfms-stat-card__icon--danger   { background: #fee2e2; color: #dc2626; }
 
-/* Value + label */
+
 .dfms-stat-card__body {
   min-width: 0;
 }
@@ -3929,7 +3893,7 @@ body.login #content-main a {
   text-overflow: ellipsis;
 }
 
-/* Accent variants — left border colour */
+
 .dfms-stat-card--success { border-left: 3px solid #22c55e; }
 .dfms-stat-card--warning { border-left: 3px solid #f59e0b; }
 .dfms-stat-card--danger  { border-left: 3px solid #ef4444; }
@@ -3937,7 +3901,7 @@ body.login #content-main a {
 .dfms-stat-card--info    { border-left: 3px solid #0ea5e9; }
 .dfms-stat-card--muted   { border-left: 3px solid var(--dfms-grey-300); }
 
-/* Clickable stat card (role dashboard widgets) */
+
 .dfms-stat-card--link {
   color: inherit;
   display: flex;
@@ -3949,13 +3913,13 @@ body.login #content-main a {
   border-color: var(--dfms-primary);
 }
 
-/* Empty-state value (zero count) */
+
 .dfms-stat-card__value--empty {
   font-size: 14px;
   color: var(--dfms-grey-400);
 }
 
-/* icon colours for extra variants */
+
 .dfms-stat-card__icon--info    { background: #e0f2fe; color: #0369a1; }
 .dfms-stat-card__icon--muted   { background: var(--dfms-grey-100); color: var(--dfms-grey-500); }
 
@@ -3963,7 +3927,7 @@ body.login #content-main a {
   box-shadow: 0 4px 12px rgba(0,0,0,.4);
 }
 
-/* Chart row */
+
 .dfms-chart-row {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -3995,7 +3959,7 @@ body.login #content-main a {
   justify-content: center;
 }
 
-/* Quick access section label */
+
 .dfms-dashboard-section-label {
   font-size: 11px;
   font-weight: 600;
@@ -4007,7 +3971,7 @@ body.login #content-main a {
   margin-bottom: 8px;
 }
 
-/* ── Dark mode ── */
+
 [data-theme="dark"] .dfms-stat-card {
   background: var(--dfms-grey-100);
   border-color: var(--dfms-grey-200);
@@ -4042,7 +4006,7 @@ body.login #content-main a {
   border-color: var(--dfms-grey-200);
 }
 
-/* ─── Section Block (used for Recent Activity on dashboard) ──────────────── */
+
 
 .dfms-section-block {
   background: #fff;
@@ -4071,7 +4035,7 @@ body.login #content-main a {
   color: var(--dfms-grey-600);
 }
 
-/* Activity list inside a section block */
+
 .dfms-activity-list {
   list-style: none;
   margin: 0;
@@ -4142,7 +4106,7 @@ a.dfms-activity-list__obj:hover {
   flex-shrink: 0;
 }
 
-/* Dark mode */
+
 [data-theme="dark"] .dfms-section-block {
   background: var(--dfms-grey-100);
   border-color: var(--dfms-grey-200);
@@ -4169,9 +4133,9 @@ a.dfms-activity-list__obj:hover {
   color: var(--dfms-grey-500);
 }
 
-/* ─── Misc / Utilities ────────────────────────────────────────────────────── */
 
-/* Inline action links in changelist */
+
+
 .field-__str__ a,
 .changelink,
 .inlinechangelink {
@@ -4179,7 +4143,7 @@ a.dfms-activity-list__obj:hover {
   font-weight: 500;
 }
 
-/* Inline add links */
+
 .add-row a,
 .inlineaddlink {
   color: var(--dfms-primary);
@@ -4187,17 +4151,14 @@ a.dfms-activity-list__obj:hover {
   font-weight: 500;
 }
 
-/* Calendar / clock popup shell — calendarbox look is fully owned below */
+
 .clockbox {
   border: 1px solid var(--dfms-grey-200);
   border-radius: var(--dfms-radius-md);
   box-shadow: var(--dfms-shadow-md);
 }
 
-/* Related object action icons (+ / edit / x / eye).
-   Django already emits <img src="{% static 'admin/img/icon-*.svg' %}"> (S3 URL
-   in staging). Do not hide those images or remask via url("/static/...") —
-   /static/ hits the app origin and 404s when files live only on S3. */
+
 .related-widget-wrapper {
   display: inline-flex;
   align-items: center;
@@ -4234,21 +4195,21 @@ a.dfms-activity-list__obj:hover {
   background: var(--dfms-grey-200);
 }
 
-/* Caption / count labels */
+
 .table-caption-row,
 p.paginator {
   font-size: 13px;
   color: var(--dfms-grey-500);
 }
 
-/* ─── Responsive tweaks ────────────────────────────────────────────────────── */
+
 
 @media (max-width: 767px) {
   #content {
     padding: 16px;
   }
 
-  /* Changelist top actions (Import / Export / Add): stack cleanly on mobile. */
+  
   .change-list .dfms-page-header {
     align-items: stretch;
     gap: 10px;
@@ -4282,7 +4243,7 @@ p.paginator {
     box-sizing: border-box;
   }
 
-  /* Mobile forms: keep controls tappable and prevent cramped fields. */
+  
   body.add-form .aligned .form-row input[type="text"],
   body.add-form .aligned .form-row input[type="email"],
   body.add-form .aligned .form-row input[type="password"],
@@ -4317,7 +4278,7 @@ p.paginator {
     box-sizing: border-box;
   }
 
-  /* Keep labels/help/errors aligned with inset form controls. */
+  
   body.add-form .aligned .form-row label,
   body.change-form .aligned .form-row label,
   body.add-form .aligned .form-row .help,
@@ -4327,7 +4288,7 @@ p.paginator {
     margin-left: 6px;
   }
 
-  /* Align checkbox controls with the same left inset on mobile forms. */
+  
   body.add-form .aligned .form-row input[type="checkbox"],
   body.change-form .aligned .form-row input[type="checkbox"] {
     margin-left: 6px;
@@ -4357,7 +4318,7 @@ p.paginator {
     gap: 10px;
   }
 
-  /* Mobile submit actions: full-width and consistent touch targets. */
+  
   .submit-row input[type="submit"],
   .submit-row button,
   .submit-row a,
@@ -4370,21 +4331,17 @@ p.paginator {
     justify-content: center;
   }
 
-  /* Cancel button uses auto margin on desktop; reset for mobile stacking. */
+  
   .submit-row .dfms-btn-cancel {
     margin-left: 0;
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   DFMS Modern Sidebar
-   Design spec: 11-design-system/02-components/navigation.md
-   240px expanded / 64px icon-only collapsed
-   ═══════════════════════════════════════════════════════════════════════════ */
 
-/* ─── Layout (supplementary) ──────────────────────────────────────────────── */
 
-/* The fixed sidebar takes no space in the normal flow, so .content fills all of .main */
+
+
+
 .main > .content {
   flex: 1 1 auto;
   min-width: 0;
@@ -4397,29 +4354,29 @@ p.paginator {
   width: auto !important;
 }
 
-/* Hide Django's default recent-actions module & empty sidebar wrapper */
+
 #content-related #recent-actions-module,
 #content-related:empty {
   display: none !important;
 }
 
-/* Ensure empty sidebar doesn't reserve space */
+
 .dashboard #content-related {
   display: none;
 }
 
-/* Hide Django's default sidebar toggle button */
+
 .toggle-nav-sidebar,
 #toggle-nav-sidebar {
   display: none !important;
 }
 
-/* Hide Django's own #nav-sidebar so only ours renders */
+
 .main > #nav-sidebar {
   display: none !important;
 }
 
-/* ─── Sidebar Panel ───────────────────────────────────────────────────────── */
+
 
 .dfms-nav-sidebar {
   width: var(--sidebar-w);
@@ -4430,16 +4387,15 @@ p.paginator {
   flex-direction: column;
   overflow-x: hidden;
   overflow-y: hidden;
-  /* No transition by default — JS adds .dfms-nav-sidebar--ready after load
-     so the initial paint is instant (no flash), transitions only after that */
+  
 }
 
-/* Transitions enabled only after JS has initialised */
+
 .dfms-nav-sidebar.dfms-nav-sidebar--ready {
   transition: width 0.22s ease, min-width 0.22s ease;
 }
 
-/* Collapsed state */
+
 .dfms-nav-sidebar.dfms-nav-sidebar--collapsed {
   width: var(--sidebar-w-collapsed);
   min-width: var(--sidebar-w-collapsed);
@@ -4450,11 +4406,7 @@ p.paginator {
   border-color: var(--dfms-grey-200);
 }
 
-/* ─── Sidebar Toggle ──────────────────────────────────────────────────────────
-   The toggle button (.dfms-content-toggle) lives in .dfms-content-topbar,
-   at the top of the content area — not in the brand header.
-   No in-sidebar toggle button is rendered.
-   ─────────────────────────────────────────────────────────────────────────── */
+
 
 .dfms-dropdown-meta--poi {
   color: var(--dfms-primary-dark);
@@ -4484,7 +4436,7 @@ p.paginator {
   border-color: rgba(217, 119, 6, 0.35);
 }
 
-/* Working site select inside profile dropdown */
+
 .dfms-dropdown-poi {
   padding: 4px 0;
 }
@@ -4588,7 +4540,7 @@ p.paginator {
   border-color: var(--dfms-grey-400);
 }
 
-/* ─── Search / Filter ─────────────────────────────────────────────────────── */
+
 
 .dfms-nav-search {
   padding: 12px 12px 8px;
@@ -4642,7 +4594,7 @@ p.paginator {
   color: var(--dfms-grey-900);
 }
 
-/* ─── Scrollable body ─────────────────────────────────────────────────────── */
+
 
 .dfms-nav-body {
   flex: 1 1 auto;
@@ -4670,13 +4622,13 @@ p.paginator {
   background: var(--dfms-grey-500);
 }
 
-/* ─── App Group ───────────────────────────────────────────────────────────── */
+
 
 .dfms-nav-group {
   margin-bottom: 1px;
 }
 
-/* Group header button */
+
 .dfms-nav-group-header {
   display: flex;
   align-items: center;
@@ -4742,12 +4694,12 @@ p.paginator {
   flex-shrink: 0;
 }
 
-/* Rotate chevron when group is collapsed */
+
 .dfms-nav-group-header[aria-expanded="false"] .dfms-nav-group-chevron {
   transform: rotate(-90deg);
 }
 
-/* ─── Model Items ─────────────────────────────────────────────────────────── */
+
 
 .dfms-nav-items {
   list-style: none;
@@ -4759,13 +4711,13 @@ p.paginator {
   opacity: 1;
 }
 
-/* Collapsed group */
+
 .dfms-nav-items--hidden {
   max-height: 0 !important;
   opacity: 0;
 }
 
-/* In icon-only sidebar, show items as tooltips (handled via title attr) */
+
 .dfms-nav-sidebar--collapsed .dfms-nav-items {
   max-height: 0 !important;
   opacity: 0;
@@ -4776,15 +4728,14 @@ p.paginator {
   margin: 0 6px 1px;
 }
 
-/* Match parent group header color. Include :link/:visited so Django admin
-   default link colors (purple/blue) do not win on specificity. */
+
 .dfms-nav-link,
 .dfms-nav-link:link,
 .dfms-nav-link:visited {
   display: flex;
   align-items: center;
   gap: 8px;
-  /* left pad: 12px group-margin + 16px icon-width + 8px gap = 36px visual indent */
+  
   padding: 0 10px 0 32px;
   height: 32px;
   font-size: 13px;
@@ -4815,7 +4766,7 @@ p.paginator {
   font-weight: 500;
 }
 
-/* Subtle left accent bar on active item — uses box-shadow so no padding shift */
+
 .dfms-nav-item--active .dfms-nav-link::before,
 .dfms-nav-link[aria-current="page"]::before {
   content: '';
@@ -4834,7 +4785,7 @@ p.paginator {
   pointer-events: none;
 }
 
-/* Replace dot icon with a thin dash — less visual noise */
+
 .dfms-nav-item-dot {
   display: none;
 }
@@ -4846,7 +4797,7 @@ p.paginator {
   line-height: 1;
 }
 
-/* ─── Sidebar Footer ──────────────────────────────────────────────────────── */
+
 
 .dfms-nav-footer {
   border-top: 1px solid var(--dfms-grey-200);
@@ -4872,16 +4823,16 @@ p.paginator {
   white-space: nowrap;
 }
 
-/* ─── Collapsed icon-only mode ────────────────────────────────────────────── */
 
-/* Group headers become 64px-wide centred icon buttons */
+
+
 .dfms-nav-sidebar--collapsed .dfms-nav-group-header {
   justify-content: center;
   padding: 0;
   height: 44px;
   width: var(--sidebar-w-collapsed);
   min-width: var(--sidebar-w-collapsed);
-  overflow: visible;   /* let nothing clip the icon */
+  overflow: visible;   
   gap: 0;
 }
 
@@ -4905,13 +4856,13 @@ p.paginator {
   color: var(--dfms-primary);
 }
 
-/* Hide label and chevron in collapsed mode (width:0 alone can still affect layout) */
+
 .dfms-nav-sidebar--collapsed .dfms-nav-group-label,
 .dfms-nav-sidebar--collapsed .dfms-nav-group-chevron {
   display: none;
 }
 
-/* ─── Filter: hide non-matching items ─────────────────────────────────────── */
+
 
 .dfms-nav-item--hidden {
   display: none;
@@ -4921,15 +4872,15 @@ p.paginator {
   display: none;
 }
 
-/* ─── Adjust content area when sidebar is present ────────────────────────── */
 
-/* Override Django's default content float/width so it sits next to sidebar */
+
+
 #content-main {
   float: none !important;
   width: auto !important;
 }
 
-/* ─── Dark mode sidebar ───────────────────────────────────────────────────── */
+
 
 [data-theme="dark"] .dfms-nav-footer {
   border-color: var(--dfms-grey-200);
@@ -4939,10 +4890,10 @@ p.paginator {
   background: transparent;
 }
 
-/* ─── Responsive: hide sidebar on small screens ───────────────────────────── */
+
 
 @media (max-width: 767px) {
-  /* On mobile sidebar slides over content — no margin offset needed */
+  
   #header,
   .main {
     margin-left: 0 !important;
@@ -4971,14 +4922,9 @@ p.paginator {
   }
 }
 
-/* ─── PR / TR Line Item Inline — wide table fix ──────────────────────────── */
 
-/*
- * The PRLineItemInline and TRLineItemInline tables have many columns and
- * overflow their container when Django Admin constrains the content area.
- * Allow horizontal scroll on the fieldset wrapper and let each column
- * breathe with a minimum width so text is never cropped.
- */
+
+
 
 #line_items-group .tabular.inline-related,
 #tr_line_items-group .tabular.inline-related,
@@ -5020,7 +4966,7 @@ p.paginator {
   min-width: max-content;
 }
 
-/* Gate on-demand: .module { overflow:hidden } clips wide line tables — scroll the wrapper */
+
 #gate-on-demand-lines {
   max-width: 100%;
 }
@@ -5036,7 +4982,7 @@ p.paginator {
   min-width: max-content;
 }
 
-/* Column min-widths so content isn't truncated */
+
 #line_items-group table,
 #tr_line_items-group table {
   table-layout: auto;
@@ -5062,21 +5008,21 @@ p.paginator {
   height: 100%;
 }
 
-/* Force all cells in a row to share the same height */
+
 #line_items-group table tr,
 #tr_line_items-group table tr,
 #gate-on-demand-lines table tr {
   display: table-row;
 }
 
-/* Hide the hidden empty form template row used by Django inline JS */
+
 #line_items-group table tr.empty-form,
 #tr_line_items-group table tr.empty-form,
 #gate-on-demand-lines table tr.empty-form {
   display: none !important;
 }
 
-/* Hide the object __str__ label column in inline rows */
+
 #line_items-group .original,
 #line_items-group td.original,
 #tr_line_items-group .original,
@@ -5088,7 +5034,7 @@ p.paginator {
   display: none !important;
 }
 
-/* Center the inline-deletelink in line item rows */
+
 [id^="line_items-"] > td.delete,
 [id^="tr_line_items-"] > td.delete,
 #gate-on-demand-lines td.delete {
@@ -5116,7 +5062,7 @@ p.paginator {
   justify-content: center !important;
 }
 
-/* Left-align "Add another" link in line item inlines */
+
 #line_items-group > div > fieldset > table > tbody > tr.add-row > td,
 #tr_line_items-group > div > fieldset > table > tbody > tr.add-row > td,
 #gate-on-demand-lines table > tbody > tr.add-row > td {
@@ -5124,7 +5070,7 @@ p.paginator {
 }
 
 
-/* Inputs and selects fill cell height uniformly */
+
 #line_items-group table td input,
 #line_items-group table td select,
 #line_items-group table td .select2-container,
@@ -5138,7 +5084,7 @@ p.paginator {
   vertical-align: middle;
 }
 
-/* Readonly <p> tags align with input height */
+
 #line_items-group table td p.readonly,
 #tr_line_items-group table td p.readonly {
   margin: 0;
@@ -5149,34 +5095,34 @@ p.paginator {
   text-overflow: ellipsis;
 }
 
-/* Product searchable dropdown — room for [code] name — category — subcategory */
+
 #line_items-group .select2-container {
   min-width: 220px;
   max-width: 360px;
 }
 
-/* Readonly text fields — prevent over-shrinking */
+
 #line_items-group .readonly,
 #tr_line_items-group .readonly {
   min-width: 80px;
   display: inline-block;
 }
 
-/* Numeric input columns — keep compact */
+
 #line_items-group input[name$="-product_quantity"],
 #line_items-group input[name$="-weight_per_unit"],
 #tr_line_items-group input[name$="-quantity"] {
   width: 90px;
 }
 
-/* UOM select */
+
 #line_items-group select[name$="-unit_of_measure"] {
   width: 100px;
 }
 
-/* ─── Date / Time picker icons — Bootstrap Icons, styled to match sidebar nav icons ── */
 
-/* Remove Django's SVG background images from the span elements */
+
+
 .datetimeshortcuts .date-icon,
 .datetimeshortcuts .clock-icon {
   background-image: none !important;
@@ -5189,7 +5135,7 @@ p.paginator {
   justify-content: center !important;
 }
 
-/* Inject Bootstrap Icon via ::before on the span */
+
 .datetimeshortcuts .date-icon::before,
 .datetimeshortcuts .clock-icon::before {
   font-family: "bootstrap-icons" !important;
@@ -5204,17 +5150,17 @@ p.paginator {
   transition: color 0.12s;
 }
 
-/* Calendar — bi-calendar3 */
+
 .datetimeshortcuts .date-icon::before {
   content: "\f214" !important;
 }
 
-/* Clock — bi-clock */
+
 .datetimeshortcuts .clock-icon::before {
   content: "\f293" !important;
 }
 
-/* Hover: match sidebar active/hover colour */
+
 .datetimeshortcuts a:hover .date-icon::before,
 .datetimeshortcuts a:focus .date-icon::before,
 .datetimeshortcuts a:hover .clock-icon::before,
@@ -5223,16 +5169,12 @@ p.paginator {
   background-position: unset !important;
 }
 
-/* ─── Hide Django's default clock popup (replaced by DFMS material picker) ─── */
+
 .clockbox {
   display: none !important;
 }
 
-/* ════════════════════════════════════════════════════════════════════════════
-   DFMS date calendar — light card matching the product date-picker reference
-   Do NOT set display here: Django toggles inline display none/block. An
-   !important display would pin the popup open and break click-outside dismiss.
-   ════════════════════════════════════════════════════════════════════════════ */
+
 
 .calendarbox,
 .calendarbox.module {
@@ -5253,7 +5195,7 @@ p.paginator {
   color: #111827 !important;
 }
 
-/* ── Header: outlined chevron buttons + dark month label ── */
+
 .calendarbox > div:first-child {
   background: transparent !important;
   display: flex !important;
@@ -5303,7 +5245,7 @@ p.paginator {
   pointer-events: none !important;
 }
 
-/* ── Grid — open white field, no hairlines between days ── */
+
 .calendarbox .calendar {
   padding: 0 !important;
   background: transparent !important;
@@ -5391,7 +5333,7 @@ p.paginator {
   color: #111827 !important;
 }
 
-/* Past days — muted so they read as already gone (UAT color cue) */
+
 .calendarbox .calendar td.past a {
   color: #9CA3AF !important;
 }
@@ -5402,7 +5344,7 @@ p.paginator {
   color: #6B7280 !important;
 }
 
-/* Adjacent month days (visual only) */
+
 .calendarbox .calendar td.nonday {
   opacity: 1 !important;
   background: transparent !important;
@@ -5413,7 +5355,7 @@ p.paginator {
   pointer-events: none !important;
 }
 
-/* Today — soft gray circle + dash under the number */
+
 .calendarbox .calendar td.today a {
   background: #F3F4F6 !important;
   border-radius: 50% !important;
@@ -5433,7 +5375,7 @@ p.paginator {
   border-radius: 1px !important;
 }
 
-/* Selected — solid blue rounded square */
+
 .calendarbox .calendar td.selected a,
 .calendarbox .calendar td.selected a:hover,
 .calendarbox .calendar td.selected a:focus {
@@ -5448,13 +5390,13 @@ p.paginator {
   display: none !important;
 }
 
-/* Reference card has no shortcut / cancel footer */
+
 .calendarbox .calendar-shortcuts,
 .calendarbox .calendar-cancel {
   display: none !important;
 }
 
-/* ─── DFMS Material Time Picker ─── */
+
 #dfms-tp-overlay {
   display: none;
   position: fixed;
@@ -5476,7 +5418,7 @@ p.paginator {
   font-family: var(--dfms-font-sans, Inter, sans-serif);
 }
 
-/* Header */
+
 .dfms-tp-header {
   background: var(--dfms-primary, #5B65DC);
   padding: 16px 20px 12px;
@@ -5505,7 +5447,7 @@ p.paginator {
   gap: 2px;
 }
 
-/* AM / PM toggle */
+
 .dfms-tp-ampm {
   display: flex;
   flex-direction: column;
@@ -5562,7 +5504,7 @@ p.paginator {
   line-height: 1;
 }
 
-/* Clock face */
+
 .dfms-tp-clock {
   padding: 16px 20px;
   display: flex;
@@ -5596,7 +5538,7 @@ p.paginator {
   bottom: 50%;
   left: 50%;
   width: 2px;
-  height: 72px; /* fallback before JS measures */
+  height: 72px; 
   margin-left: -1px;
   transform-origin: bottom center;
   background: var(--dfms-primary, #5B65DC);
@@ -5605,7 +5547,7 @@ p.paginator {
   transition: transform 0.2s cubic-bezier(.4,0,.2,1);
 }
 
-/* Tip dot at the top of the hand */
+
 .dfms-tp-hand::after {
   content: '';
   position: absolute;
@@ -5652,7 +5594,7 @@ p.paginator {
   color: #fff;
 }
 
-/* Footer */
+
 .dfms-tp-footer {
   display: flex;
   justify-content: flex-end;
@@ -5690,7 +5632,7 @@ p.paginator {
   background: var(--dfms-primary-hover, #4A53C4);
 }
 
-/* ── Select2 autocomplete — match admin input field style ── */
+
 .select2-container .select2-selection--multiple {
   background: var(--dfms-input-bg, #181b2e) !important;
   border: 1px solid var(--dfms-border, #2d3148) !important;
@@ -5761,37 +5703,25 @@ p.paginator {
   outline: none !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   DFMS Trips (driver) — Enhanced Mobile Responsive Styles
-   ═══════════════════════════════════════════════════════════════════════════
-   
-   These styles ensure the Django Admin is fully usable on mobile devices,
-   especially for driver-facing operations where field staff access the system
-   via smartphones and tablets.
-   
-   Breakpoints:
-   - Mobile:  ≤ 640px  (portrait phones, common mobile devices)
-   - Tablet:  641-768px (landscape phones, small tablets)
-   - Desktop: > 768px   (standard admin layout)
-   ═══════════════════════════════════════════════════════════════════════════ */
 
-/* ─── Mobile Viewport: ≤ 640px ────────────────────────────────────────────── */
+
+
 
 @media (max-width: 640px) {
-  /* ══ Layout & Spacing ══ */
   
-  /* Reduce padding on main content area */
+  
+  
   #content {
     padding: 12px !important;
   }
   
-  /* Module/fieldset spacing */
+  
   .module,
   fieldset {
     margin-bottom: 1rem;
   }
   
-  /* ══ Typography ══ */
+  
   
   body {
     font-size: 14px;
@@ -5813,7 +5743,7 @@ p.paginator {
     margin-bottom: 0.5rem;
   }
   
-  /* ══ Breadcrumbs ══ */
+  
   
   .breadcrumbs,
   .dfms-breadcrumbs {
@@ -5821,7 +5751,7 @@ p.paginator {
     font-size: 0.8125rem;
   }
   
-  /* ══ Page Headers ══ */
+  
   
   .dfms-page-header {
     flex-direction: column;
@@ -5841,9 +5771,9 @@ p.paginator {
     width: 100%;
   }
   
-  /* ══ Buttons & Touch Targets ══ */
   
-  /* All buttons should meet 44×44px iOS/Android guidelines */
+  
+  
   .dfms-btn,
   .dfms-btn-add,
   .dfms-btn-save,
@@ -5866,7 +5796,7 @@ p.paginator {
     box-sizing: border-box;
   }
   
-  /* Full-width buttons in headers/toolbars */
+  
   .dfms-page-header__actions .dfms-btn,
   .dfms-page-header__actions .dfms-btn-add,
   .dfms-page-header__actions .dfms-btn-secondary,
@@ -5876,10 +5806,10 @@ p.paginator {
     width: 100%;
   }
   
-  /* Submit row buttons stack vertically */
+  
   .submit-row {
     display: flex;
-    flex-direction: column-reverse; /* Primary action at top */
+    flex-direction: column-reverse; 
     gap: 0.625rem;
     padding: 1rem 12px;
   }
@@ -5891,9 +5821,9 @@ p.paginator {
     margin: 0;
   }
   
-  /* ══ Forms & Inputs ══ */
   
-  /* All form inputs touch-friendly */
+  
+  
   input[type="text"],
   input[type="email"],
   input[type="password"],
@@ -5908,7 +5838,7 @@ p.paginator {
   .vTextField,
   .vLargeTextField {
     min-height: 44px;
-    font-size: 1rem; /* Prevent iOS zoom on focus */
+    font-size: 1rem; 
     padding: 0.625rem 0.875rem;
     border-radius: var(--dfms-radius-sm, 4px);
     width: 100%;
@@ -5920,7 +5850,7 @@ p.paginator {
     min-height: 100px;
   }
   
-  /* Form row labels */
+  
   .form-row label {
     font-size: 0.8125rem;
     font-weight: 600;
@@ -5928,12 +5858,12 @@ p.paginator {
     display: block;
   }
   
-  /* Form row spacing */
+  
   .form-row {
     margin-bottom: 1.125rem;
   }
   
-  /* Help text */
+  
   .help,
   .helptext {
     font-size: 0.8125rem;
@@ -5941,41 +5871,41 @@ p.paginator {
     margin-top: 0.375rem;
   }
   
-  /* ══ Tables ══ */
   
-  /* For simple tables, maintain table layout but allow scroll */
+  
+  
   #result_list {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Driver changelist scrolls inside .dfms-driver-changelist-scroll .results */
+  
   body.model-drivertransportorder.change-list .dfms-driver-changelist-scroll .results {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     max-width: 100%;
   }
   
-  /* Ensure table doesn't shrink below readable size */
+  
   #result_list table {
     min-width: 100%;
   }
   
-  /* Table cells minimum padding for touch */
+  
   #result_list th,
   #result_list td {
     padding: 0.625rem 0.5rem;
     font-size: 0.875rem;
   }
   
-  /* Action checkboxes larger touch target */
+  
   #result_list input[type="checkbox"] {
     width: 20px;
     height: 20px;
     cursor: pointer;
   }
   
-  /* ══ Badges & Status Indicators ══ */
+  
   
   .dfms-badge {
     font-size: 0.75rem;
@@ -5983,21 +5913,21 @@ p.paginator {
     white-space: nowrap;
   }
   
-  /* ══ Modals & Overlays ══ */
   
-  /* Django's delete confirmation, etc. */
+  
+  
   .deleteconfirm {
     padding: 1rem;
   }
   
-  /* ══ Messages ══ */
+  
   
   .messagelist li {
     padding: 0.875rem 1rem;
     font-size: 0.9375rem;
   }
   
-  /* ══ Fieldsets ══ */
+  
   
   fieldset.module {
     padding: 1rem;
@@ -6008,22 +5938,22 @@ p.paginator {
     margin-bottom: 0.75rem;
   }
   
-  /* Description text under fieldset headers */
+  
   fieldset .description {
     font-size: 0.8125rem;
     margin-bottom: 0.75rem;
     line-height: 1.5;
   }
   
-  /* ══ Navigation Sidebar ══ */
   
-  /* Ensure sidebar is fully accessible on mobile */
+  
+  
   .dfms-nav-sidebar {
     width: var(--sidebar-w) !important;
-    max-width: 85vw; /* Don't cover entire screen */
+    max-width: 85vw; 
   }
   
-  /* Nav links — keep desktop density; don't inflate submenu row height */
+  
   .dfms-nav-group-header {
     min-height: 40px;
     height: auto;
@@ -6050,7 +5980,7 @@ p.paginator {
     color: var(--dfms-primary);
   }
   
-  /* ══ Filters (changelist sidebar) ══ */
+  
   
   #changelist-filter {
     padding: 1rem;
@@ -6074,7 +6004,7 @@ p.paginator {
     align-items: center;
   }
   
-  /* ══ Search ══ */
+  
   
   #searchbar {
     width: 100%;
@@ -6091,7 +6021,7 @@ p.paginator {
     font-size: 1rem;
   }
   
-  /* ══ Pagination ══ */
+  
   
   .paginator {
     display: flex;
@@ -6110,9 +6040,9 @@ p.paginator {
     padding: 0.5rem;
   }
   
-  /* ══ Date/Time Pickers ══ */
   
-  /* Ensure native pickers are accessible */
+  
+  
   .datetimeshortcuts {
     display: flex;
     align-items: center;
@@ -6128,9 +6058,9 @@ p.paginator {
     justify-content: center;
   }
   
-  /* ══ Inline Formsets ══ */
   
-  /* Stack inline forms vertically */
+  
+  
   .inline-related {
     margin-bottom: 1rem;
   }
@@ -6140,7 +6070,7 @@ p.paginator {
     padding: 0.75rem;
   }
   
-  /* Tabular inlines: horizontal scroll */
+  
   .tabular.inline-related {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -6150,7 +6080,7 @@ p.paginator {
     min-width: 600px;
   }
   
-  /* ══ Autocomplete (Select2) ══ */
+  
   
   .select2-container {
     font-size: 1rem;
@@ -6160,7 +6090,7 @@ p.paginator {
     min-height: 44px !important;
   }
   
-  /* ══ User Tools Dropdown ══ */
+  
   
   .dfms-user-dropdown {
     right: 0;
@@ -6168,7 +6098,7 @@ p.paginator {
     max-width: 320px;
   }
   
-  /* ══ Topbar ══ */
+  
   
   #header {
     padding: 0 12px;
@@ -6181,7 +6111,7 @@ p.paginator {
     font-size: 24px;
   }
   
-  /* ══ Readonly Fields ══ */
+  
   
   .readonly {
     font-size: 0.9375rem;
@@ -6192,15 +6122,15 @@ p.paginator {
   }
 }
 
-/* ─── Tablet Viewport: 641px - 768px ──────────────────────────────────────── */
+
 
 @media (min-width: 641px) and (max-width: 768px) {
-  /* Moderate spacing adjustments */
+  
   #content {
     padding: 16px !important;
   }
   
-  /* Buttons can be slightly smaller but still touch-friendly */
+  
   .dfms-btn,
   button,
   input[type="submit"],
@@ -6208,7 +6138,7 @@ p.paginator {
     min-height: 42px;
   }
   
-  /* Form inputs */
+  
   input[type="text"],
   input[type="email"],
   input[type="password"],
@@ -6219,14 +6149,14 @@ p.paginator {
     font-size: 0.9375rem;
   }
   
-  /* Two-column button layout where appropriate */
+  
   .dfms-page-header__actions {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
   }
   
-  /* Submit row can stay horizontal with spacing */
+  
   .submit-row {
     flex-direction: row;
     justify-content: flex-end;
@@ -6241,24 +6171,24 @@ p.paginator {
   }
 }
 
-/* ─── Wide Tablet & Small Desktop: 769px - 1024px ─────────────────────────── */
+
 
 @media (min-width: 769px) and (max-width: 1024px) {
-  /* Slight content area adjustment for optimal reading width */
+  
   #content {
     padding: 20px;
   }
   
-  /* Ensure tables don't overflow */
+  
   #result_list {
     overflow-x: auto;
   }
 }
 
-/* ─── Mobile Landscape Optimization ───────────────────────────────────────── */
+
 
 @media (max-width: 896px) and (orientation: landscape) {
-  /* Reduce vertical spacing in landscape */
+  
   .module,
   fieldset {
     margin-bottom: 0.75rem;
@@ -6268,12 +6198,12 @@ p.paginator {
     margin-bottom: 0.875rem;
   }
   
-  /* Compact header */
+  
   .dfms-page-header {
     padding: 0.5rem 0;
   }
   
-  /* Shorter buttons vertically */
+  
   .dfms-btn,
   button,
   input[type="submit"] {
@@ -6283,7 +6213,7 @@ p.paginator {
   }
 }
 
-/* ─── Entity summary card (TR / Gate TO context) ─────────────────────────── */
+
 
 .to-tr-header {
   background: var(--darkened-bg);
@@ -6332,7 +6262,7 @@ p.paginator {
   font-weight: 500;
 }
 
-/* Gate-in add: placeholder until TO selected */
+
 .gate-to-summary-placeholder {
   display: flex;
   align-items: flex-start;
@@ -6370,7 +6300,7 @@ p.paginator {
   display: none !important;
 }
 
-/* Gate visit card — enhanced when visible */
+
 .gate-to-summary.to-tr-header--populated {
   border-left: 3px solid var(--dfms-primary);
   box-shadow: 0 2px 8px color-mix(in srgb, var(--dfms-primary) 10%, transparent);
@@ -6432,10 +6362,10 @@ p.paginator {
   color: #fcd34d;
 }
 
-/* ─── Print Styles ────────────────────────────────────────────────────────── */
+
 
 @media print {
-  /* Hide navigation, controls, actions when printing */
+  
   .dfms-nav-sidebar,
   #header,
   .breadcrumbs,
@@ -6446,7 +6376,7 @@ p.paginator {
     display: none !important;
   }
   
-  /* Ensure content uses full page width */
+  
   #content {
     padding: 0 !important;
     margin: 0 !important;
@@ -6456,16 +6386,16 @@ p.paginator {
     margin-left: 0 !important;
   }
   
-  /* Tables fit to page */
+  
   #result_list table {
     width: 100%;
     font-size: 10pt;
   }
 }
 
-/* ═══ End Mobile Responsive Styles ═══ */
 
-/* ─── QC Checkpoint v3 (QC Queue + Add QC) ─────────────────────────────── */
+
+
 
 .qc-queue-help {
   margin: 0 0 1rem;
@@ -6542,7 +6472,7 @@ p.paginator {
   margin-bottom: 1rem;
 }
 
-/* .module { overflow:hidden } clips wide sample table — allow scroll wrapper to work */
+
 .qc-add-qc-page .qc-samples-fieldset {
   overflow: visible;
   padding-bottom: 16px;

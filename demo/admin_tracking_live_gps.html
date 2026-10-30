@@ -4,11 +4,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
-<link rel="stylesheet" href="static/demo/demo-shim.css?v=mv5a1jhl">
-<script src="static/demo/api-data.js?v=mv5a1jhl"></script>
-<script src="static/demo/demo-shim.js?v=mv5a1jhl"></script>
-<script src="static/demo/master-seed.js?v=mv5a1jhl"></script>
-<script src="static/demo/master-crud.js?v=mv5a1jhl"></script>
+<link rel="stylesheet" href="static/demo/demo-shim.css?v=mock2">
+<script src="static/demo/api-data.js?v=mock2"></script>
+<script src="static/demo/demo-shim.js?v=mock2"></script>
+<script src="static/demo/master-seed.js?v=mock2"></script>
+<script src="static/demo/master-crud.js?v=mock2"></script>
 <title>Live GPS</title>
 <link rel="stylesheet" href="static/admin/css/base.css">
 
@@ -43,7 +43,7 @@
     var t = localStorage.getItem('dfms-admin-theme');
     if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', t);
-    // Keep native date/time picker icons visible: match DFMS theme, not OS preference alone.
+
     document.documentElement.style.colorScheme = t === 'dark' ? 'dark' : 'light';
 
     var collapsed = localStorage.getItem('dfms-sidebar-collapsed') === 'true';
@@ -78,7 +78,7 @@
 <link rel="stylesheet" href="static/tracking/css/live-gps-markers.css">
 <link rel="stylesheet" href="static/tracking/css/live-gps-modals.css">
 <link rel="stylesheet" href="static/tracking/css/live-gps-dock.css">
-<script id="live-gps-config" type="application/json">{"truckMarkerUrl": "static/tracking/truck_marker.png?v=1", "refreshIntervalSeconds": 10, "i18n": {"actions": "Actions", "address": "Address", "angle": "Angle", "close": "Close", "close_follow": "Close follow", "collapse_chart": "Collapse chart", "command_failed": "Command failed.", "command_sent": "Command sent", "custom_command_sent": "Custom command sent", "destination": "Destination", "details": "Details", "open_transport_order": "Open transport order", "open_to": "Open TO", "transport_order": "Transport order", "origin_depot": "Origin depot", "drag_to_move": "Drag to move", "drive": "Drive", "drive_end": "Drive end", "drive_start": "Drive start", "driver": "Driver", "duration": "Duration", "engine_hours": "Engine hours", "engine_resume_command_sent": "Engine resume command sent", "engine_stop_command_sent": "Engine stop command sent", "expand_chart": "Expand chart", "failed_to_load": "Failed to load", "failed_to_load_history": "Failed to load history.", "follow": "Follow", "follow_vehicle": "Follow vehicle", "recenter_follow": "Recenter \u0026 follow", "fr": "Fr", "geofence": "Geofence", "inside_geofence": "Inside Geofence", "geofence_inside": "Inside", "geofence_entered": "Entered geofence", "geofence_exited": "Exited geofence", "hide_details": "Hide details", "hide_vehicle_list": "Hide vehicle list", "last_hour": "Last hour", "loading": "Loading\u2026", "loading_address": "Loading address\u2026", "mo": "Mo", "model": "Model", "network_error": "Network error", "network_error_while_sending_command": "Network error while sending command.", "no_active_trips_with_gps_data": "No active trips with GPS data.", "no_fleet_vehicles": "No fleet vehicles.", "no_trip": "No active trip", "no_trip_order": "No trip order", "trip": "Trip", "trip_status": "Trip status", "to_status": "TO status", "no_active_to": "No active TO", "filter_status": "Filter by TO status", "filter_vehicle_status": "Filter by vehicle status", "vehicle_status": "Vehicle status", "filter_status_all": "All statuses", "filter_all": "All", "clear_filters": "Clear filters", "no_map_position": "No GPS position", "no_gt06_devices_available": "No GT06 devices available", "no_history_for_this_period": "No history for this period.", "no_tos_in_period": "No transport orders for this vehicle in the selected period.", "no_history_in_period": "No trips or no active TO periods in the selected range.", "no_gps_for_to": "No GPS data for this transport order in the selected period.", "no_gps_for_no_active_to": "No GPS data for this no active TO period.", "no_active_to_period": "No active TO", "no_active_to_periods_found_one": "1 no active TO period", "no_active_to_periods_found_many": "{n} no active TO periods", "no_active_to_movement_hint": "Vehicle movement tracked", "timeline_found": "{trips} trips, {idle} no active TO periods", "back_to_timeline": "Back to timeline", "transport_orders": "Transport orders", "back_to_to_list": "Back to transport orders", "select_to_for_history": "Select a transport order and date, then Show history.", "to_number": "TO number", "no_signal": "no signal", "no_recent_signal": "No recent signal", "no_vehicles_match_your_search": "No vehicles match your search.", "outside_geofence": "Outside geofence", "overspeed": "Overspeed", "open_in_maps": "Open in maps", "parked": "Parked", "parking_end": "Parking end", "parking_start": "Parking start", "pause": "Pause", "plate": "Plate", "play": "Play", "position": "Position", "protocol": "Protocol", "route_length": "Route length", "sa": "Sa", "see_more": "See more", "select_date": "Select date", "range_from": "From", "range_to": "To", "show_history": "Show history", "trips_found_one": "1 trip found", "trips_found_many": "{n} trips found", "points_short": "pts", "send_command": "Send command", "sending_command_to_device": "Sending command to device\u2026", "show_details": "Show details", "show_history_last_hour": "Show history last hour", "show_history_today": "Show history today", "show_history_yesterday": "Show history yesterday", "show_to": "Show TO", "show_vehicle": "Show vehicle", "vehicle_planning": "Vehicle Planning", "show_vehicle_list": "Show vehicle list", "source": "Source", "speed": "Speed", "speed_limit": "Speed limit", "stale_feed": "stale feed", "stop_duration": "Stop duration", "stop_end": "Stop end", "stop_start": "Stop start", "stopped": "Stopped", "su": "Su", "th": "Th", "time": "Time", "today": "Today", "top_speed": "Top speed", "trip_end": "Trip end", "trip_start": "Trip start", "tu": "Tu", "unassigned": "Unassigned", "updated": "Updated", "we": "We", "yesterday": "Yesterday"}, "urls": {"liveMap": "/api/v1/tracking/live-map/", "geofenceEvents": "/api/v1/tracking/geofence-events/", "deviceCommand": "/api/v1/tracking/device-command/", "historySummary": "/api/v1/tracking/vehicle-history-summary/", "vehicleHistory": "/api/v1/tracking/vehicle-history/", "vehicleToHistory": "/api/v1/tracking/vehicle-to-history/", "vehicleIdleSummary": "/api/v1/tracking/vehicle-idle-summary/", "vehicleIdleHistory": "/api/v1/tracking/vehicle-idle-history/", "adminTransportOrderChange": "/admin/transport/transportorder/{id}/change/", "adminVehicleChange": "/admin/master_data/vehicle/{id}/change/", "adminVehiclePlanning": "/admin/transport/vehicle-planning/{id}/"}}</script>
+<script id="live-gps-config" type="application/json">{"truckMarkerUrl": "static/tracking/truck_marker.png?v=1", "refreshIntervalSeconds": 10, "i18n": {"actions": "Actions", "address": "Address", "angle": "Angle", "close": "Close", "close_follow": "Close follow", "collapse_chart": "Collapse chart", "command_failed": "Command failed.", "command_sent": "Command sent", "custom_command_sent": "Custom command sent", "destination": "Destination", "details": "Details", "open_transport_order": "Open transport order", "open_to": "Open TO", "transport_order": "Transport order", "origin_depot": "Origin depot", "drag_to_move": "Drag to move", "drive": "Drive", "drive_end": "Drive end", "drive_start": "Drive start", "driver": "Driver", "duration": "Duration", "engine_hours": "Engine hours", "engine_resume_command_sent": "Engine resume command sent", "engine_stop_command_sent": "Engine stop command sent", "expand_chart": "Expand chart", "failed_to_load": "Failed to load", "failed_to_load_history": "Failed to load history.", "follow": "Follow", "follow_vehicle": "Follow vehicle", "recenter_follow": "Recenter \u0026 follow", "fr": "Fr", "geofence": "Geofence", "inside_geofence": "Inside Geofence", "geofence_inside": "Inside", "geofence_entered": "Entered geofence", "geofence_exited": "Exited geofence", "hide_details": "Hide details", "hide_vehicle_list": "Hide vehicle list", "last_hour": "Last hour", "loading": "Loading\u2026", "loading_address": "Loading address\u2026", "mo": "Mo", "model": "Model", "network_error": "Network error", "network_error_while_sending_command": "Network error while sending command.", "no_active_trips_with_gps_data": "No active trips with GPS data.", "no_fleet_vehicles": "No fleet vehicles.", "no_trip": "No active trip", "no_trip_order": "No trip order", "trip": "Trip", "trip_status": "Trip status", "to_status": "TO status", "no_active_to": "No active TO", "filter_status": "Filter by TO status", "filter_vehicle_status": "Filter by vehicle status", "vehicle_status": "Vehicle status", "filter_status_all": "All statuses", "filter_all": "All", "clear_filters": "Clear filters", "no_map_position": "No GPS position", "no_gt06_devices_available": "No GT06 devices available", "no_history_for_this_period": "No history for this period.", "no_tos_in_period": "No transport orders for this vehicle in the selected period.", "no_history_in_period": "No trips or no active TO periods in the selected range.", "no_gps_for_to": "No GPS data for this transport order in the selected period.", "no_gps_for_no_active_to": "No GPS data for this no active TO period.", "no_active_to_period": "No active TO", "no_active_to_periods_found_one": "1 no active TO period", "no_active_to_periods_found_many": "{n} no active TO periods", "no_active_to_movement_hint": "Vehicle movement tracked", "timeline_found": "{trips} trips, {idle} no active TO periods", "back_to_timeline": "Back to timeline", "transport_orders": "Transport orders", "back_to_to_list": "Back to transport orders", "select_to_for_history": "Select a transport order and date, then Show history.", "to_number": "TO number", "no_signal": "no signal", "no_recent_signal": "No recent signal", "no_vehicles_match_your_search": "No vehicles match your search.", "outside_geofence": "Outside geofence", "overspeed": "Overspeed", "open_in_maps": "Open in maps", "parked": "Parked", "parking_end": "Parking end", "parking_start": "Parking start", "pause": "Pause", "plate": "Plate", "play": "Play", "position": "Position", "protocol": "Protocol", "route_length": "Route length", "sa": "Sa", "see_more": "See more", "select_date": "Select date", "range_from": "From", "range_to": "To", "show_history": "Show history", "trips_found_one": "1 trip found", "trips_found_many": "{n} trips found", "points_short": "pts", "send_command": "Send command", "sending_command_to_device": "Sending command to device\u2026", "show_details": "Show details", "show_history_last_hour": "Show history last hour", "show_history_today": "Show history today", "show_history_yesterday": "Show history yesterday", "show_to": "Show TO", "show_vehicle": "Show vehicle", "vehicle_planning": "Vehicle Planning", "show_vehicle_list": "Show vehicle list", "source": "Source", "speed": "Speed", "speed_limit": "Speed limit", "stale_feed": "stale feed", "stop_duration": "Stop duration", "stop_end": "Stop end", "stop_start": "Stop start", "stopped": "Stopped", "su": "Su", "th": "Th", "time": "Time", "today": "Today", "top_speed": "Top speed", "trip_end": "Trip end", "trip_start": "Trip start", "tu": "Tu", "unassigned": "Unassigned", "updated": "Updated", "we": "We", "yesterday": "Yesterday"}, "urls": {"liveMap": "/demo-data/live-map/", "geofenceEvents": "/demo-data/geofence-events/", "deviceCommand": "/demo-data/device-command/", "historySummary": "/demo-data/vehicle-history-summary/", "vehicleHistory": "/demo-data/vehicle-history/", "vehicleToHistory": "/demo-data/vehicle-to-history/", "vehicleIdleSummary": "/demo-data/vehicle-idle-summary/", "vehicleIdleHistory": "/demo-data/vehicle-idle-history/", "adminTransportOrderChange": "#", "adminVehicleChange": "#", "adminVehiclePlanning": "#"}}</script>
 <script>
   window.LIVE_GPS_CONFIG = JSON.parse(document.getElementById('live-gps-config').textContent);
 </script>
@@ -94,11 +94,11 @@
 <body class=""
   data-admin-utc-offset="21600">
 <a href="#content-start" class="skip-to-content-link">Skip to main content</a>
-<!-- Container -->
+
 <div id="container">
 
     
-    <!-- Header -->
+    
     
       <header id="header">
         <div id="branding">
@@ -214,7 +214,7 @@
     class="dfms-dropdown-poi__form"
   >
     <input type="hidden" name="csrfmiddlewaretoken" value="demo">
-    <input type="hidden" name="next" value="/admin/tracking/live-gps/">
+    <input type="hidden" name="next" value="">
 
     <div class="dfms-dropdown-poi__field">
       <label for="dfms-poi-select" class="dfms-dropdown-poi__label">
@@ -329,7 +329,7 @@
             if (token && input) input.value = token;
           });
         })();
-        </script>
+</script>
 
       </div>
     </div>
@@ -341,7 +341,7 @@
         
       </header>
     
-    <!-- END Header -->
+    
     
     
 
@@ -1110,7 +1110,7 @@
         
           
         
-        <!-- Content -->
+        
         <div id="content" class="colM">
           
           
@@ -1558,19 +1558,19 @@
           
           <br class="clear">
         </div>
-        <!-- END Content -->
+        
         <div id="footer"></div>
       </main>
     </div>
 </div>
-<!-- END Container -->
 
-<!-- SVGs -->
+
+
 <svg xmlns="http://www.w3.org/2000/svg" class="base-svgs">
   <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"/></symbol>
   <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"/></symbol>
   <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></symbol>
 </svg>
-<!-- END SVGs -->
+
 </body>
 </html>

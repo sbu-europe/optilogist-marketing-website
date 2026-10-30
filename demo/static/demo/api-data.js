@@ -1,5 +1,5 @@
 window.DEMO_API = {
- "/api/v1/tracking/live-map/": {
+ "/demo-data/live-map/": {
   "success": true,
   "refreshed_at": "2026-10-08T12:17:01.951831+00:00",
   "refresh_interval_seconds": 10,
@@ -8075,15 +8075,10 @@ window.DEMO_API = {
    }
   ]
  },
- "/api/v1/auth/portal-token/": {
-  "success": true,
-  "token": "demo-token",
-  "access": "demo-token"
- },
- "/admin/master_data/dealer/ajax/geo-areas/": {
+ "/demo-data/dealer-areas/": {
   "villages": []
  },
- "/admin/master_data/product/ajax/categories/": [
+ "/demo-data/categories/": [
   {
    "id": "0b18cbd6-2749-4d0c-9aa9-d483668d7d02",
    "label": "Maize (CAT-0004)"
@@ -8097,16 +8092,16 @@ window.DEMO_API = {
    "label": "RM (RM)"
   }
  ],
- "/admin/master_data/product/ajax/subcategories/": [
+ "/demo-data/subcategories/": [
   {
    "id": "8fd32a5a-36a2-4178-b656-922ee343ecd7",
    "label": "RM (RM)"
   }
  ],
- "/admin/master_data/supplier/ajax/geo-areas/": {
+ "/demo-data/supplier-areas/": {
   "villages": []
  },
- "/admin/requisitions/poi-stock/:id/": {
+ "/demo-data/site-stock/:id/": {
   "poi_id": "521b59c5-95cc-433d-9fc0-71658c3c17de",
   "poi_name": "Bhola Hub",
   "poi_type": "breeder",
@@ -8115,7 +8110,7 @@ window.DEMO_API = {
   "free_capacity_mt": 100.625,
   "last_updated": "2026-08-19T13:55:14.579249+00:00"
  },
- "/admin/requisitions/product-detail/:id/": {
+ "/demo-data/product-detail/:id/": {
   "product_item_code": "ITEM-0001",
   "product_name": "Broiler Starter Feed 25kg",
   "product_category": "Maize",

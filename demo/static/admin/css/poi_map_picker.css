@@ -1,6 +1,6 @@
-/* POI admin — merged Address & Location section + map picker modal */
 
-/* ─── Address & Location fieldset layout ─────────────────────────────────── */
+
+
 
 fieldset.poi-address-location > h2 {
   display: flex;
@@ -45,7 +45,7 @@ fieldset.poi-address-location .description {
   gap: 12px;
 }
 
-/* ─── Normalized field stacks (label above control) ──────────────────────── */
+
 
 fieldset.poi-address-location .form-row,
 fieldset.poi-address-location .poi-location-field {
@@ -164,7 +164,7 @@ fieldset.poi-address-location .poi-location-field .errorlist li {
   background: var(--hairline-color, var(--dfms-grey-200, #e5e7eb));
 }
 
-/* ─── Inline map preview ─────────────────────────────────────────────────── */
+
 
 .poi-location-map-preview {
   position: relative;
@@ -357,7 +357,7 @@ fieldset.poi-address-location .poi-location-field .errorlist li {
   }
 }
 
-/* ─── Map picker modal ───────────────────────────────────────────────────── */
+
 
 .poi-map-modal {
   position: fixed;
@@ -587,7 +587,7 @@ fieldset.poi-address-location .poi-location-field .errorlist li {
   border: none !important;
 }
 
-/* Match Live GPS POI pin (live-gps-markers.css .live-gps-poi-pin--poi) */
+
 .poi-map-poi-pin {
   display: flex;
   flex-direction: column;
@@ -660,7 +660,7 @@ fieldset.poi-address-location .poi-location-field .errorlist li {
   color: var(--body-fg, #f3f4f6);
 }
 
-/* Searchable address dropdowns. Width follows the selected name in party_area_dropdowns.js. */
+
 .field-region .select2-container,
 .field-district .select2-container,
 .field-upazila .select2-container,
@@ -722,10 +722,10 @@ fieldset.poi-address-location .poi-location-field .errorlist li {
   outline: none;
 }
 
-/* Site POI control matches the other 20em text inputs on this form. */
+
 .field-site_pois .related-widget-wrapper,
 .field-site_pois .select2-container {
-  /* 14px matches the text inputs, so 20em is the same width as Ward No and Village. */
+  
   font-size: 14px;
   width: 20em !important;
   max-width: 100%;

@@ -1,8 +1,4 @@
-/* TUM-06 — Roles checklist (InviteUserForm / UserAdminForm)
-   Django 5's CheckboxSelectMultiple renders <div id="id_role"><div>...
-   </div>...</div> (no <ul>/<li>). Two-column grid for unchecked roles.
-   A checked local role spans the full row; its Select2 chips stack
-   underneath the checkbox (not beside it, not inside the <label>). */
+
 
 .field-role #id_role {
   display: grid;
@@ -29,9 +25,7 @@
   display: none !important;
 }
 
-/* Django renders poi_role_* as fieldset rows; hide until JS moves them
-   under the matching role checkbox. After the move they are no longer
-   direct children of .aligned. */
+
 .aligned > .form-row[class*="field-poi_role_"] {
   display: none !important;
 }
@@ -44,8 +38,7 @@
   cursor: pointer;
 }
 
-/* Reset Django .aligned / .flex-container so the nested Sites picker
-   is a full-width block under the role name, not a side-by-side gutter. */
+
 .field-role #id_role > div.dfms-role-has-sites .form-row,
 .aligned .field-role #id_role > div.dfms-role-has-sites .form-row,
 body.change-form .aligned .field-role #id_role > div.dfms-role-has-sites .form-row {

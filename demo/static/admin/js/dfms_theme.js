@@ -1,12 +1,4 @@
-/**
- * DFMS Admin — Theme Toggle
- *
- * Switches between light and dark themes by toggling [data-theme="dark"]
- * on <html>. Persists preference in localStorage. Respects OS
- * prefers-color-scheme on first visit.
- *
- * Design token reference: 11-design-system/01-foundation/colors.md
- */
+
 
 (function () {
   const STORAGE_KEY = 'dfms-admin-theme';
@@ -54,12 +46,9 @@
     applyTheme(current === DARK ? LIGHT : DARK);
   }
 
-  // Theme already applied by the inline script in base_site.html before first paint.
-  // Sync color-scheme + toggle icon (in case inline script and JS get out of sync).
   document.documentElement.style.colorScheme = getActiveTheme() === DARK ? DARK : LIGHT;
   updateToggleButton(getActiveTheme());
 
-  // Wire up button once DOM is ready
   document.addEventListener('DOMContentLoaded', function () {
     const btn = document.getElementById('dfms-theme-toggle');
     if (btn) {
@@ -68,7 +57,6 @@
     }
   });
 
-  // Keep in sync if another tab changes the theme
   window.addEventListener('storage', function (e) {
     if (e.key === STORAGE_KEY && e.newValue && e.newValue !== document.documentElement.getAttribute('data-theme')) {
       document.documentElement.setAttribute('data-theme', e.newValue);

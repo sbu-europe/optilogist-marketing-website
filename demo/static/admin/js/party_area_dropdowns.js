@@ -1,7 +1,5 @@
-/**
- * Cascade Division -> District -> Upazila -> Village from the local admin list.
- * Villages load from the selected upazila (DPHE geo list).
- */
+
+
 (function () {
   "use strict";
 

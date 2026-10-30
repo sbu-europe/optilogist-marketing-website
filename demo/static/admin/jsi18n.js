@@ -4,14 +4,9 @@
   const globals = this;
   const django = globals.django || (globals.django = {});
 
-  
   django.pluralidx = function(count) { return (count == 1) ? 0 : 1; };
-  
-
-  /* gettext library */
 
   django.catalog = django.catalog || {};
-  
 
   if (!django.jsi18n_initialized) {
     django.gettext = function(msgid) {
@@ -57,9 +52,6 @@
         return fmt.replace(/%s/g, function(match){return String(obj.shift())});
       }
     };
-
-
-    /* formatting library */
 
     django.formats = {
     "DATETIME_FORMAT": "N j, Y, P",
@@ -114,7 +106,6 @@
       }
     };
 
-    /* add to global namespace */
     globals.pluralidx = django.pluralidx;
     globals.gettext = django.gettext;
     globals.ngettext = django.ngettext;

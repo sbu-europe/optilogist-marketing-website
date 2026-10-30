@@ -1,4 +1,4 @@
-/* Live GPS — history tab, cards, bottom chart. Requires live-gps-tokens.css */
+
 
 .live-gps-objects--collapsed .live-gps-objects__list, .live-gps-objects--collapsed .live-gps-objects__toolbar, .live-gps-objects--collapsed .live-gps-objects__search, .live-gps-objects--collapsed .live-gps-history-modal {
   display: none !important;
@@ -169,7 +169,7 @@
   font-weight: 500;
 }
 
-/* History device picker — icon card + TO status pill */
+
 .live-gps-history-device-field {
   position: relative;
 }
@@ -746,7 +746,7 @@
 }
 
 .live-gps-history.is-collapsed .live-gps-history__body {
-  /* Keep seekbar in the collapsed pill; hide chart/controls only. */
+  
   display: contents;
 }
 
@@ -1306,7 +1306,7 @@
   outline-offset: 1px;
 }
 
-/* Text pill — set color explicitly in base state (beat Django admin a:link). */
+
 a.live-gps-history-open-to,
 a.live-gps-history-open-to:link,
 a.live-gps-history-open-to:visited {
@@ -1615,7 +1615,7 @@ a.live-gps-history-open-to.is-hidden {
   color: #a8a29e;
 }
 
-/* Legacy idle row selectors — retained for cached markup */
+
 .live-gps-history-idle-row {
   display: block;
   width: 100%;
@@ -1832,7 +1832,7 @@ a.live-gps-history-open-to.is-hidden {
   border-top: 8px solid var(--lg-history-pin-color, #2563eb);
 }
 
-/* Numbered activity pins — solid teardrop, white digit centered in the head. */
+
 .live-gps-history-pin--numbered .live-gps-history-pin__bubble {
   border: none;
   box-shadow: none;
@@ -1855,7 +1855,7 @@ a.live-gps-history-open-to.is-hidden {
   max-height: 280px;
 }
 
-/* Dark mode — reinforce history surfaces against admin/light leftovers */
+
 html.live-gps-active[data-theme="dark"] .live-gps-history-modal__field select,
 html.live-gps-active[data-theme="dark"] .live-gps-history-modal__field input,
 html.live-gps-active[data-theme="dark"] .live-gps-history-device-field__trigger,

@@ -1,6 +1,5 @@
-/*global SelectBox, interpolate*/
-// Handles related-objects functionality: lookup link for raw_id_fields
-// and Add Another links.
+
+
 'use strict';
 {
     const $ = django.jQuery;
@@ -11,7 +10,7 @@
         relatedWindows.forEach(function(win) {
             if(!win.closed) {
                 win.dismissChildPopups();
-                win.close();    
+                win.close();
             }
         });
     }
@@ -19,7 +18,7 @@
     function setPopupIndex() {
         if(document.getElementsByName("_popup").length > 0) {
             const index = window.name.lastIndexOf("__") + 2;
-            popupIndex = parseInt(window.name.substring(index));   
+            popupIndex = parseInt(window.name.substring(index));
         } else {
             popupIndex = 0;
         }
@@ -88,15 +87,11 @@
     }
 
     function updateRelatedSelectsOptions(currentSelect, win, objId, newRepr, newId) {
-        // After create/edit a model from the options next to the current
-        // select (+ or :pencil:) update ForeignKey PK of the rest of selects
-        // in the page.
 
         const path = win.location.pathname;
-        // Extract the model from the popup url '.../<model>/add/' or
-        // '.../<model>/<id>/change/' depending the action (add or change).
+
         const modelName = path.split('/')[path.split('/').length - (objId ? 4 : 3)];
-        // Exclude autocomplete selects.
+
         const selectsRelated = document.querySelectorAll(`[data-model-ref="${modelName}"] select:not(.admin-autocomplete)`);
 
         selectsRelated.forEach(function(select) {
@@ -132,7 +127,7 @@
                     elem.value = newId;
                 }
             }
-            // Trigger a change event to update related links if required.
+
             $(elem).trigger('change');
         } else {
             const toId = name + "_to";
@@ -159,8 +154,7 @@
         }).trigger('change');
         updateRelatedSelectsOptions(selects[0], win, objId, newRepr, newId);
         selects.next().find('.select2-selection__rendered').each(function() {
-            // The element can have a clear button as a child.
-            // Use the lastChild to modify only the displayed value.
+
             this.lastChild.textContent = newRepr;
             this.title = newRepr;
         });
@@ -196,7 +190,6 @@
     window.dismissDeleteRelatedObjectPopup = dismissDeleteRelatedObjectPopup;
     window.dismissChildPopups = dismissChildPopups;
 
-    // Kept for backward compatibility
     window.showAddAnotherPopup = showRelatedObjectPopup;
     window.dismissAddAnotherPopup = dismissAddRelatedObjectPopup;
 

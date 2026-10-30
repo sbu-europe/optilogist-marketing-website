@@ -1,6 +1,4 @@
-/* InviteUserAdmin — Invitation via radios
-   Native radios + Django's padded `input` defaults double-draw a circle.
-   Force a single custom control on this page. */
+
 
 .field-invite_channel .radiolist,
 #id_invite_channel {
@@ -31,7 +29,7 @@
   cursor: pointer;
 }
 
-/* Django adds an empty ::after spacer on .aligned labels — kill it here */
+
 .field-invite_channel .radiolist label::before,
 .field-invite_channel .radiolist label::after,
 #id_invite_channel label::before,
@@ -75,7 +73,7 @@
   background-color: transparent !important;
 }
 
-/* Page loads with Email focused (label for= first option) — kill the fat focus halo */
+
 .field-invite_channel input[type="radio"]:focus,
 .field-invite_channel input[type="radio"]:focus-visible,
 #id_invite_channel input[type="radio"]:focus,

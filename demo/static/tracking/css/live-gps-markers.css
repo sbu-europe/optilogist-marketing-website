@@ -1,4 +1,4 @@
-/* Live GPS — map markers, clusters, POI pins. Requires live-gps-tokens.css */
+
 
 .leaflet-div-icon.live-gps-history-arrow {
   background: transparent !important;
@@ -39,7 +39,7 @@
   border: none !important;
 }
 
-/* Fixed box sized for max zoom scale; pin tip anchored at bottom center. */
+
 .live-gps-poi-marker {
   position: relative;
   width: 54px;
@@ -282,7 +282,7 @@
   letter-spacing: -0.01em;
 }
 
-/* Dark mode — marker labels use opaque panel tokens (map basemap stays light OSM). */
+
 [data-theme="dark"] .live-gps-marker__label {
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
   -webkit-backdrop-filter: none;

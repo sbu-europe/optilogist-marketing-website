@@ -1,17 +1,5 @@
-// Live demo — Master Data and Users & Access (users, drivers) CRUD kept in the browser session.
-//
-// Data lives in sessionStorage (this tab, this demo session). It starts from DEMO_MASTER_SEED (the sanitised
-// demo dataset), survives page navigation, and is wiped by "Exit demo" or by closing the tab. Nothing is sent
-// to any server. The pages are the real QA screens; this script fills them from the store and handles saves.
-//
-//   Lists      admin_<app>_<model>.html     rows rendered from the store; bulk actions; brand inline edit
-//   Add        md_<model>_add.html          real Add form; Save creates a record
-//   Edit       md_<model>_change.html#<id>  real Edit form filled from the store; Save updates it
-//   Delete     md_<model>_delete.html#<ids> real confirmation page; blocked like QA when the record is in use
-//   Users      Add = md_user_add.html (real "Invite user" form); no delete (QA forbids it): Deactivate user ->
-//              md_user_suspend.html#<ids>, Reactivate user -> md_user_change.html#<id>/activate
-//   Drivers    Add also creates the driver's user account (status Invited); deactivate via "Is active"
-//   Elsewhere  dropdowns that list master records, lookup APIs, Live GPS, dashboard counts, Vehicle Planning
+
+
 (function () {
   "use strict";
   var SEED = window.DEMO_MASTER_SEED;
@@ -19,7 +7,6 @@
 
   var KEY = "optilogist-demo-master-data", FLASH = "optilogist-demo-flash";
 
-  // ---------- Entity rules (labels, uniqueness, delete dependencies) ----------
   function poiName(id) { var r = get("poi", id); return r ? (r.fields.name || r.label) : ""; }
   function poiLabel(id) { var r = get("poi", id); return r ? r.fields.name + " (" + r.fields.poi_code + ")" : ""; }
   function catLabel(id) { var r = get("productcategory", id); return r ? r.fields.category_name + " (" + r.fields.category_code + ")" : ""; }
@@ -43,8 +30,7 @@
       label: function (f) { return f.sub_category_name + " (" + f.sub_category_code + ")"; }, code: function (f) { return f.sub_category_code; }, unique: ["sub_category_code"] },
     product: { verbose: "product", plural: "products", title: "Products", label: function (f) { return "[" + f.product_item_code + "] " + f.product_name; },
       code: function (f) { return f.product_item_code; }, unique: ["product_sku_code", "product_item_code"] },
-    // Users & Access. QA returns 403 for deleting users/drivers: users are deactivated (suspended) instead,
-    // drivers via their "Is active" box. Users are created through the "Invite user" form.
+
     user: { verbose: "user", plural: "users", title: "Users", noDelete: true, addFormId: "invitationtoken_form",
       aliases: { invitee_first_name: "first_name", invitee_last_name: "last_name", otp_type: "two_fa_setting" },
       label: function (f) { return fullName(f) + " <" + (f.email || f.phone_number || "None") + ">"; }, code: function (f) { return f.employee_id; },
@@ -54,7 +40,7 @@
       unique: ["contact_number", "driving_license_number", "national_id_number", "employee_id"] }
   };
   function fullName(f) { return ((f.first_name || "") + " " + (f.last_name || "")).trim(); }
-  // Records in other Master Data entities that point at a record (QA refuses to delete those).
+
   var DEPENDENTS = {
     poi: [["loadingunloadingpoint", "poi", "loading/unloading points"], ["dealer", "site_pois", "dealers"], ["supplier", "site_pois", "suppliers"]],
     brand: [["vehicle", "brand", "vehicles"]],
@@ -62,7 +48,6 @@
     productsubcategory: [["product", "sub_category", "products"]]
   };
 
-  // ---------- Store ----------
   var store;
   function load() {
     if (store) return store;
@@ -79,7 +64,6 @@
   function active(model) { return all(model).filter(function (r) { return r.fields.is_active !== false && r.status !== "Suspended"; }); }
   function uuid() { return (crypto.randomUUID && crypto.randomUUID()) || "d" + Date.now().toString(16) + Math.random().toString(16).slice(2); }
 
-  // ---------- Small helpers ----------
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function toast(m) { if (window.demoToast) window.demoToast(m); }
   function icon(on) { return '<img src="static/admin/img/icon-' + (on ? "yes" : "no") + '.svg" alt="' + (on ? "True" : "False") + '">'; }
@@ -100,9 +84,6 @@
   }
   function labelOf(model, rec) { try { var l = E[model].label(rec.fields); return /undefined/.test(l) ? rec.label : l; } catch (e) { return rec.label; } }
 
-  // ---------- Reading a form into a record ----------
-  // Fields the demo stores. Formset fields contain "-" (handled separately), except the per-role site pickers
-  // (poi_role_<role id>). File uploads aren't kept.
   function skipField(el, reading) {
     return /^(csrfmiddlewaretoken|_save|_reinvite|next)$/.test(el.name) || (el.name.indexOf("-") >= 0 && !/^poi_role_/.test(el.name)) ||
       el.type === "hidden" || el.type === "submit" || el.type === "file" || (reading && el.disabled);
@@ -121,13 +102,13 @@
         if (el.value && el.selectedIndex >= 0) labels[el.name] = el.options[el.selectedIndex].textContent.trim(); else delete labels[el.name];
       }
     });
-    // Add forms can name a field differently from the edit form (Invite: invitee_first_name -> first_name)
+
     var al = (E[model] || {}).aliases || {};
     Object.keys(al).forEach(function (from) {
       if (from in fields) { fields[al[from]] = fields[from]; delete fields[from]; }
       if (from in labels) { labels[al[from]] = labels[from]; delete labels[from]; }
     });
-    // A phone box that still holds only the "+880" prefix is empty
+
     ["phone_number", "contact_number"].forEach(function (k) { if (fields[k] === "+880") fields[k] = ""; });
     return rec;
   }
@@ -161,7 +142,7 @@
       }
       el.value = has && v != null ? v : "";
     });
-    // Read-only rows on the edit page (e.g. fields that are set only when a record is added)
+
     form.querySelectorAll(".form-row").forEach(function (row) {
       var col = (row.className.match(/field-([a-z0-9_]+)/) || [])[1], ro = row.querySelector(".readonly");
       if (!col || !ro) return;
@@ -172,7 +153,6 @@
     });
   }
 
-  // ---------- Validation (Django-style messages) ----------
   function fieldLabel(form, name) {
     var l = form.querySelector('label[for="id_' + name + '"]');
     return l ? l.textContent.replace(/[*:]/g, "").trim() : name.replace(/_/g, " ");
@@ -192,7 +172,7 @@
     });
     note.scrollIntoView({ block: "center" });
   }
-  // The form's own name for a stored field (Invite form: first_name is "invitee_first_name")
+
   function formName(model, key) {
     var al = (E[model] || {}).aliases || {};
     for (var k in al) if (al[k] === key) return k;
@@ -225,7 +205,7 @@
       if (F.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(F.email)) err(formName(model, "email"), "Enter a valid email address.");
       if (F.contact_number && !BD_MOBILE.test(F.contact_number)) err("contact_number", "Enter a valid BD mobile number in E.164 format (e.g. +8801700100022).");
       ["license_expiry_date", "license_renewal_date"].forEach(function (k) { if (F[k] && !validDate(F[k])) err(k, "Enter a valid date."); });
-      // A new driver also creates their user account, so the account's email / employee id must be free too
+
       var own = F.user || null;
       uniq("user", "email", own, formName(model, "email")); uniq("user", "employee_id", own); uniq("user", "phone_number", own, "contact_number", "contact_number");
     }
@@ -234,16 +214,14 @@
   function validDate(s) { var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s), d = m && new Date(+m[1], m[2] - 1, +m[3]); return !!(d && d.getMonth() === m[2] - 1 && d.getDate() === +m[3]); }
   function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 
-  // ---------- Users & Access display helpers (same markup / wording as the QA lists) ----------
   var ROLES = SEED.roles || [];
   function roleName(id) { var r = ROLES.filter(function (x) { return x[0] === id; })[0]; return r ? r[1] : ""; }
-  // Users list "Role" column: the user's role names in the form's (alphabetical) order, plus roles the
-  // Invite form doesn't offer (e.g. Driver) that came with the record
+
   function roleText(rec) {
     var ids = rec.fields.role || [];
     var names = ROLES.filter(function (r) { return ids.indexOf(r[0]) >= 0; }).map(function (r) { return r[1]; });
     (rec.extraRoles || []).forEach(function (n) { if (names.indexOf(n) < 0) names.push(n); });
-    if (!names.length && !ids.length && rec.roleText) return rec.roleText; // seed rows whose edit page wasn't captured
+    if (!names.length && !ids.length && rec.roleText) return rec.roleText;
     return names.join(", ");
   }
   var BADGE = { Invited: ["trial", "bi-clock-fill"], Active: ["active", "bi-check-circle-fill"], Suspended: ["suspended", "bi-x-octagon-fill"] };
@@ -251,7 +229,7 @@
     var b = BADGE[st] || BADGE.Active;
     return '<span class="dfms-badge dfms-badge--' + b[0] + '"><i class="bi ' + b[1] + '" style="font-size:10px;"></i>' + esc(st) + "</span>";
   }
-  // Django's default date format: "Aug. 24, 2056", "May 3, 2030", "Sept. 1, 2030"
+
   var MON = ["Jan.", "Feb.", "March", "April", "May", "June", "July", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."];
   function djangoDate(s) { var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || ""); return m ? MON[m[2] - 1] + " " + (+m[3]) + ", " + m[1] : s; }
   function djangoNow() {
@@ -260,12 +238,11 @@
     if (h === 0 && !mi) t = "midnight"; else if (h === 12 && !mi) t = "noon"; else t += " " + ap;
     return MON[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear() + ", " + t;
   }
-  // The signed-in demo account, as shown in the header
+
   function me() { var n = document.querySelector(".dfms-user-name"); return (n ? n.textContent.trim() : "Demo Admin") + " <admin@example.com>"; }
   function linkedDriver(userId) { return all("driver").filter(function (d) { return d.fields.user === userId; })[0] || null; }
   function contactOf(f) { return f.email || f.phone_number || ""; }
 
-  // ---------- List cells for created/edited records ----------
   function cellHtml(model, rec, col) {
     var f = rec.fields, L = rec.labels || {};
     switch (model + "." + col) {
@@ -283,7 +260,7 @@
       case "productsubcategory.category": return esc(catLabel(f.category) || L.category || "-");
       case "product.category": return esc(catLabel(f.category) || L.category || "-");
       case "product.product_type": return esc(L.product_type || "-");
-      case "brand.is_active": return null; // inline-editable checkbox, rendered by renderList
+      case "brand.is_active": return null;
       case "user.name_col": case "driver.driver_full_name": return esc(fullName(f));
       case "user.employee_id_col": case "driver.employee_id_display": return esc(f.employee_id || "—");
       case "user.email_or_phone": return f.email ? "Email · " + esc(f.email) : f.phone_number ? "Phone · " + esc(f.phone_number) : "—";
@@ -300,7 +277,6 @@
     return v == null || v === "" ? "-" : esc(v);
   }
 
-  // ---------- Lists ----------
   function renderList(model) {
     var cfg = SEED.entities[model], tbody = document.querySelector("#result_list tbody");
     if (!tbody) return;
@@ -317,7 +293,7 @@
       });
       return html + "</tr>";
     }).join("");
-    // Counts: everything is on one page in the demo
+
     var n = rows.length, word = n === 1 ? E[model].verbose : E[model].plural;
     var pag = document.querySelector("p.paginator");
     if (pag) {
@@ -335,7 +311,7 @@
   function handleListSubmit(model, form, submitter) {
     var action = (form.querySelector('select[name="action"]') || {}).value || "";
     var ids = [].map.call(form.querySelectorAll("input.action-select:checked"), function (c) { return c.value; });
-    // Brand list: inline "Active" checkboxes + Save
+
     if (!action && submitter && submitter.name === "_save" || (!action && form.querySelector('input[name^="form-"][name$="-is_active"]') && !ids.length)) {
       var changed = 0;
       form.querySelectorAll('input[name$="-id"][name^="form-"]').forEach(function (h) {
@@ -348,7 +324,7 @@
     }
     if (!action) return true;
     if (!ids.length) { flash("warning", "Items must be selected in order to perform actions on them. No items have been changed."); location.reload(); return true; }
-    // Users: QA's account actions. Deactivation goes through its confirmation page (type, reason, remarks).
+
     if (model === "user") {
       var picked = ids.map(function (id) { return get("user", id); }).filter(Boolean);
       if (action === "deactivate_selected_accounts") { location.href = "md_user_suspend.html#" + ids.join(","); return true; }
@@ -380,7 +356,6 @@
     return true;
   }
 
-  // ---------- Add / Edit ----------
   function setTitleBits(model, oldLabel, newLabel) {
     if (!oldLabel || !newLabel) return;
     document.title = document.title.split(oldLabel).join(newLabel);
@@ -405,10 +380,10 @@
       }
       var rec = get(model, id);
       if (!rec) { flash("warning", cap(E[model].verbose) + " with ID “" + esc(id) + "” doesn’t exist. Perhaps it was deleted?"); location.replace(listFile(model)); return; }
-      // "Reactivate user" (QA: /admin/users/user/<id>/activate/) -> reactivate, then show the user
+
       if (model === "user" && /\/activate\/?$/.test(hash)) {
         if (rec.status === "Suspended") { reactivate(rec); save(); flash("success", "The user “" + esc(labelOf("user", rec)) + "” was reactivated."); }
-        history.replaceState(null, "", "#" + id); location.reload(); return; // same page, new hash: reload to show it
+        history.replaceState(null, "", "#" + id); location.reload(); return;
       }
       var tpl = get(model, m.templateId);
       setTitleBits(model, tpl ? labelOf(model, tpl) : null, labelOf(model, rec));
@@ -422,16 +397,13 @@
     showFlash();
   }
 
-  // ---------- Users & Access: account status ----------
   function suspend(rec, type, reason, remarks) {
     if (rec.status !== "Suspended") rec.statusBeforeSuspend = rec.status || "Active";
     rec.status = "Suspended"; rec.deactivation = { type: type, reason: reason, remarks: remarks }; rec.dirty = true;
   }
-  // Back to what the account was before (an invited user who never signed in is still "Invited")
+
   function reactivate(rec) { rec.status = rec.statusBeforeSuspend || (rec.lastActive ? "Active" : "Invited"); delete rec.deactivation; rec.dirty = true; }
 
-  // User edit page: the account buttons QA shows for the user's status
-  //   Reinvite — not active yet; Deactivate user — not suspended; Reactivate user — suspended
   function initUserControls(form, rec) {
     var deact = form.querySelector('.submit-row a.deletelink'), bar = deact ? deact.parentNode : form.querySelector(".submit-row div div");
     if (!bar) return;
@@ -447,7 +419,7 @@
       bar.insertBefore(a, deact ? deact.nextSibling : null);
     }
   }
-  // Driver edit page: the linked user account and audit rows
+
   function initDriverReadonly(form, rec) {
     var ro = rec.readonly || {}, u = rec.fields.user && get("user", rec.fields.user);
     var cell = function (col) { var r = form.querySelector(".form-row.field-" + col + " .readonly"); return r; };
@@ -461,12 +433,11 @@
       el.innerHTML = ro[k + "_id"] ? '<a href="' + changeUrl("user", ro[k + "_id"]) + '">' + esc(who ? labelOf("user", who) : ro[k]) + "</a>" : esc(ro[k]);
     });
     ["created_at", "updated_at"].forEach(function (k) { var el = cell(k); if (el && ro[k]) el.textContent = ro[k]; });
-    // "To deactivate this driver … go to the Users list": open the driver's own account when we have it
+
     var go = document.querySelector(".dfms-driver-account-hint a");
     if (go) { go.removeAttribute("data-demo-missing"); go.setAttribute("href", u ? changeUrl("user", u.id) : listFile("user")); }
   }
 
-  // "Deactivate selected users" confirmation page (md_user_suspend.html#<id>[,<id>…])
   function initSuspend(m) {
     var ids = decodeURIComponent(location.hash.slice(1)).split(",").filter(Boolean);
     var recs = ids.map(function (id) { return get("user", id); }).filter(Boolean);
@@ -494,7 +465,6 @@
     return true;
   }
 
-  // Product category edit page lists its sub-categories inline (real formset markup)
   function initSubcategoryInline(form, cat) {
     var total = form.querySelector('[name="sub_categories-TOTAL_FORMS"]'), initial = form.querySelector('[name="sub_categories-INITIAL_FORMS"]');
     if (!total) return;
@@ -538,7 +508,7 @@
     var model = m.model, isAdd = m.mode === "add";
     var id = isAdd ? uuid() : decodeURIComponent(location.hash.slice(1));
     var current = isAdd ? null : get(model, id);
-    // "Reinvite" on a user's edit page resends the invitation; it doesn't save the form
+
     if (model === "user" && submitter && submitter.name === "_reinvite" && current) {
       flash("success", "Invitation re-sent to " + esc(contactOf(current.fields) || fullName(current.fields)) + ".");
       location.reload(); return true;
@@ -565,7 +535,6 @@
     return true;
   }
 
-  // Department follows the roles (as on QA): learnt from the sample users that have a single role
   function departmentFor(roleIds) {
     var map = {};
     SEED.entities.user.records.forEach(function (r) { var ids = r.fields.role || []; if (ids.length === 1 && r.fields.department) map[ids[0]] = r.fields.department; });
@@ -581,7 +550,7 @@
       if (!f.two_fa_setting) { f.two_fa_setting = "none"; rec.labels.two_fa_setting = "None"; }
     }
     var dep = departmentFor(f.role || []); if (dep) f.department = dep;
-    // A driver's name, employee id and contact live on their user account
+
     var d = linkedDriver(rec.id);
     if (d) {
       d.fields.first_name = f.first_name; d.fields.last_name = f.last_name; d.fields.employee_id = f.employee_id;
@@ -594,7 +563,7 @@
     ro.updated_by = me(); ro.updated_by_id = ""; ro.updated_at = now;
     if (isAdd) {
       ro.created_by = ro.updated_by; ro.created_by_id = ""; ro.created_at = now; rec.state = "Available";
-      // "Creates the tenant User with Driver role and Operations department" (Add driver form)
+
       var u = { id: uuid(), dirty: true, status: "Invited", lastActive: "", extraRoles: ["Driver"],
         fields: { first_name: f.first_name, last_name: f.last_name, employee_id: f.employee_id, email: f.email || "", phone_number: f.contact_number || "",
           role: [], department: "Operations", two_fa_setting: "none" }, labels: { two_fa_setting: "None" } };
@@ -607,7 +576,6 @@
     }
   }
 
-  // ---------- Delete ----------
   function blockedBy(model, rec) {
     if (!rec) return null;
     var hits = (DEPENDENTS[model] || []).map(function (d) {
@@ -627,14 +595,14 @@
     var model = m.model, ids = decodeURIComponent(location.hash.slice(1)).split(",").filter(Boolean);
     var recs = ids.map(function (id) { return get(model, id); }).filter(Boolean);
     if (!recs.length) { location.replace(listFile(model)); return; }
-    // Same rule as QA: records in use can't be deleted -> back to the record with an error
+
     for (var i = 0; i < recs.length; i++) {
       var why = blockedBy(model, recs[i]);
       if (why) { flash("error", esc(why)); location.replace(recs.length === 1 ? changeUrl(model, recs[0].id) : listFile(model)); return; }
     }
     var V = E[model], content = document.getElementById("content-main") || document.getElementById("content");
     var labels = recs.map(function (r) { return labelOf(model, r); });
-    // Breadcrumbs (the page may be borrowed from another entity)
+
     var bc = document.querySelector(".breadcrumbs");
     if (bc) bc.innerHTML = '<a href="admin.html">Home</a> › ' + (model === "helper" ? "Users" : "Master Data") + ' › <a href="' + listFile(model) + '">' + esc(V.title) + "</a> › " +
       (recs.length === 1 ? '<a href="' + changeUrl(model, recs[0].id) + '">' + esc(labels[0]) + "</a> › Delete" : "Delete multiple objects");
@@ -666,8 +634,6 @@
     return true;
   }
 
-  // ---------- Keep other screens in step with the session's master data ----------
-  // Any dropdown whose options are master records (detected by their ids) is rebuilt from the store.
   function optionText(model, rec, sample) {
     var f = rec.fields, base;
     switch (model) {
@@ -687,7 +653,7 @@
       if (sel.closest(".empty-form")) return;
       var opts = [].slice.call(sel.options), hit = opts.filter(function (o) { return idToModel[o.value]; })[0];
       if (!hit) return;
-      // Autocomplete pickers (drivers on transport orders / leave) hold only the chosen option; their search is answered below
+
       if (sel.classList.contains("admin-autocomplete")) { opts.forEach(function (o) { var r = idToModel[o.value] && get(idToModel[o.value], o.value); if (r) o.textContent = labelOf(idToModel[o.value], r); }); return; }
       var model = idToModel[hit.value], sample = hit.textContent.trim(), keep = sel.multiple ? [].map.call(sel.selectedOptions, function (o) { return o.value; }) : [sel.value];
       var placeholders = opts.filter(function (o) { return !o.value; });
@@ -698,7 +664,7 @@
       recs.forEach(function (r) { var o = new Option(optionText(model, r, sample), r.id); o.selected = keep.indexOf(r.id) >= 0; sel.add(o); });
       if (!sel.multiple) sel.value = keep[0] && get(model, keep[0]) ? keep[0] : (placeholders[0] ? "" : sel.value);
     });
-    // Product dropdowns on requisition/transport forms use generated values; list the session's products instead.
+
     document.querySelectorAll('select[name$="-product"], select[name="product"]').forEach(function (sel) {
       if (sel.closest(".empty-form") && !/__prefix__/.test(sel.name)) return;
       var keepText = sel.selectedIndex >= 0 ? sel.options[sel.selectedIndex].textContent : "";
@@ -712,32 +678,28 @@
     });
   }
 
-  // Lookup APIs used by forms (product category/sub-category dropdowns, product autofill, POI stock)
   var H = window.DEMO_API_HANDLERS = window.DEMO_API_HANDLERS || [];
-  H.push({ match: /\/admin\/master_data\/product\/ajax\/categories\/$/, fn: function (u) {
+  H.push({ match: /\/demo-data\/categories\/$/, fn: function (u) {
     var t = u.searchParams.get("product_type");
     return active("productcategory").filter(function (c) { var pt = (c.labels || {}).product_type || c.fields.product_type; return !t || pt === t || String(pt).replace(/\s/g, "") === t; })
       .map(function (c) { return { id: c.id, label: catLabel(c.id) }; });
   } });
-  H.push({ match: /\/admin\/master_data\/product\/ajax\/subcategories\/$/, fn: function (u) {
+  H.push({ match: /\/demo-data\/subcategories\/$/, fn: function (u) {
     var c = u.searchParams.get("category_id");
     return active("productsubcategory").filter(function (s) { return s.fields.category === c; }).map(function (s) { return { id: s.id, label: optionText("productsubcategory", s) }; });
   } });
-  H.push({ match: /\/admin\/requisitions\/product-detail\/[0-9a-f-]+\/$/, fn: function (u, path) {
-    var p = get("product", path.split("/")[4]); if (!p) return null;
+  H.push({ match: /\/demo-data\/product-detail\/[0-9a-f-]+\/$/, fn: function (u, path) {
+    var p = get("product", path.split("/")[3]); if (!p) return null;
     var f = p.fields;
     return { product_item_code: f.product_item_code || "", product_name: f.product_name, product_category: (catLabel(f.category) || "").replace(/ \([^)]*\)$/, ""),
       product_sub_category: ((p.labels || {}).sub_category || "").replace(/ \([^)]*\)$/, ""), type_of_packing: f.standard_pack_size || "", weight_per_unit: f.weight_per_unit || "", unit_of_measure: (p.labels || {}).unit_of_measure || f.unit_of_measure || "" };
   } });
-  H.push({ match: /\/admin\/requisitions\/poi-stock\/[0-9a-f-]+\/$/, fn: function (u, path, fallback) {
-    var r = get("poi", path.split("/")[4]); if (!r) return null;
+  H.push({ match: /\/demo-data\/site-stock\/[0-9a-f-]+\/$/, fn: function (u, path, fallback) {
+    var r = get("poi", path.split("/")[3]); if (!r) return null;
     var cap = parseFloat(r.fields.storage_capacity_mt) || 0, cur = parseFloat(r.fields.current_stock_mt || (r.readonly || {}).current_stock_mt) || (fallback ? fallback.current_stock_mt : 0) || 0;
     return { poi_id: r.id, poi_name: r.fields.name, poi_type: r.fields.poi_type, storage_capacity_mt: cap, current_stock_mt: cur, free_capacity_mt: +(cap - cur).toFixed(3), last_updated: new Date().toISOString() };
   } });
-  // ---------- Live GPS demo fleet: trucks driving real roads between sites ----------
-  // Plan and roads come from api-data.js (__demo_fleet, built by build.js/routes.js). Positions are a pure function
-  // of the clock, so every refresh moves each truck on along its road and every viewer sees the same scene.
-  // Each truck loops: stop at the origin site -> drive -> stop at the destination -> drive back.
+
   var FLEET = (window.DEMO_API || {}).__demo_fleet;
   var fleetGeo = {};
   function haversine(a, b) {
@@ -745,13 +707,13 @@
     var h = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(a[0] * r) * Math.cos(b[0] * r) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
     return 12742000 * Math.asin(Math.sqrt(h));
   }
-  function routeGeo(id) { // cumulative distance along the road, computed once
+  function routeGeo(id) {
     if (fleetGeo[id]) return fleetGeo[id];
     var pts = FLEET.routes[id].pts, cum = [0];
     for (var i = 1; i < pts.length; i++) cum.push(cum[i - 1] + haversine(pts[i - 1], pts[i]));
     return (fleetGeo[id] = { pts: pts, cum: cum, len: cum[cum.length - 1] });
   }
-  function pointAt(g, d) { // position d metres along the road, and the index of the point just behind it
+  function pointAt(g, d) {
     d = Math.max(0, Math.min(g.len, d));
     var lo = 0, hi = g.cum.length - 1;
     while (hi - lo > 1) { var mid = (lo + hi) >> 1; if (g.cum[mid] <= d) lo = mid; else hi = mid; }
@@ -768,29 +730,29 @@
   function driveDemoFleet(data, now) {
     if (!FLEET) return;
     var byId = {}; data.vehicles.forEach(function (v) { byId[v.vehicle_id] = v; });
-    // Drivers of this session, one per moving truck (more trucks than drivers -> "Unassigned", as on QA)
+
     var drivers = active("driver").map(function (d) { return fullName(d.fields); }), nextDriver = 0;
     var stamp = new Date(now).toISOString();
     FLEET.trucks.forEach(function (t) {
       var v = byId[t.vehicle], rec = get("vehicle", t.vehicle);
-      if (!v || !rec || rec.fields.is_active === false) return; // removed or deactivated in this session: no signal
+      if (!v || !rec || rec.fields.is_active === false) return;
       var base = { has_position: true, connection_status: "online", staleness_minutes: 0, position_source: "gps", recorded_at: stamp, received_at: stamp, last_update_at: stamp,
         device_id: v.device_id || t.device || "", tail_color: "#22c55e" };
       var parkAt = t.park || (rec.operationalStatus === "Under Maintenance" && FLEET.routes[t.route].from);
-      if (parkAt) { // parked inside its site (a truck marked Under Maintenance stays at its origin)
+      if (parkAt) {
         var s = (data.pois || []).filter(function (x) { return x.id === parkAt; })[0] || siteRef(parkAt);
-        var since = (now / 1000) % 5400; // parked for up to 90 minutes, then the clock starts again
+        var since = (now / 1000) % 5400;
         Object.assign(v, base, { latitude: +s.latitude || v.latitude, longitude: +s.longitude || v.longitude, speed_kmh: 0, speed: "0", heading_degrees: 0, movement_status: "parked",
           stop_duration_seconds: Math.round(since), stop_duration_label: durationLabel(since), inside_pois: [siteRef(parkAt)].filter(Boolean), inside_geofence: true,
           trail: [], tail: [], origin_poi: null, destination_poi: null, planned_route: null });
         return;
       }
       var g = routeGeo(t.route), cycle = 2 * (t.drive + t.dwell);
-      var c = ((now / 1000) / cycle + t.offset) % 1 * cycle; // seconds into this truck's cycle
-      var outbound = c < t.drive + t.dwell, leg = outbound ? c : c - t.drive - t.dwell; // stop first, then drive
+      var c = ((now / 1000) / cycle + t.offset) % 1 * cycle;
+      var outbound = c < t.drive + t.dwell, leg = outbound ? c : c - t.drive - t.dwell;
       var from = outbound ? FLEET.routes[t.route].from : FLEET.routes[t.route].to, to = outbound ? FLEET.routes[t.route].to : FLEET.routes[t.route].from;
       var driver = nextDriver < drivers.length ? drivers[nextDriver++] : "";
-      if (leg < t.dwell) { // stopped at the site it is about to leave: idle for a minute, then parked
+      if (leg < t.dwell) {
         var here = pointAt(g, outbound ? 0 : g.len).p;
         Object.assign(v, base, { latitude: here[0], longitude: here[1], speed_kmh: 0, speed: "0", heading_degrees: v.heading_degrees || 0, movement_status: leg < 60 ? "idle" : "parked",
           stop_duration_seconds: Math.round(leg), stop_duration_label: durationLabel(leg), inside_pois: [siteRef(from)].filter(Boolean), inside_geofence: true,
@@ -799,7 +761,7 @@
       }
       var f = (leg - t.dwell) / t.drive, d = outbound ? f * g.len : (1 - f) * g.len, at = pointAt(g, d);
       var ahead = pointAt(g, outbound ? d + 150 : d - 150).p;
-      // trail: the last ~3 km of road behind the truck; planned route: the road still ahead
+
       var trail = [], k, i;
       if (outbound) { for (k = Math.max(0, at.i - 25); k <= at.i; k++) trail.push(g.pts[k]); }
       else { for (k = Math.min(g.pts.length - 1, at.i + 26); k > at.i; k--) trail.push(g.pts[k]); }
@@ -807,7 +769,7 @@
       var plan = [at.p];
       if (outbound) { for (i = at.i + 1; i < g.pts.length; i += 3) plan.push(g.pts[i]); plan.push(g.pts[g.pts.length - 1]); }
       else { for (i = at.i; i >= 0; i -= 3) plan.push(g.pts[i]); plan.push(g.pts[0]); }
-      var speed = Math.round(42 + 12 * Math.sin(now / 47000 + t.offset * 10)); // 30-54 kph, gently varying
+      var speed = Math.round(42 + 12 * Math.sin(now / 47000 + t.offset * 10));
       Object.assign(v, base, { latitude: +at.p[0].toFixed(6), longitude: +at.p[1].toFixed(6), speed_kmh: speed, speed: String(speed), heading_degrees: Math.round(bearing(at.p, ahead)), movement_status: "moving",
         stop_duration_seconds: 0, stop_duration_label: "0s", inside_pois: [], inside_geofence: false, driver_name: driver,
         origin_poi: siteRef(from), destination_poi: siteRef(to), trail: trail, tail: trail, planned_route: plan });
@@ -815,12 +777,11 @@
     data.map_vehicle_count = data.vehicles.filter(function (v) { return v.has_position; }).length;
   }
 
-  // Live GPS: sites and vehicles come from the session
-  H.push({ match: /\/api\/v1\/tracking\/live-map\/$/, fn: function (u, path, base) {
+  H.push({ match: /\/demo-data\/live-map\/$/, fn: function (u, path, base) {
     if (!base) return null;
     var data = JSON.parse(JSON.stringify(base)), byId = {};
     data.vehicles.forEach(function (v) { byId[v.vehicle_id] = v; });
-    // QA's order for records it already had; ones added in this session go after them
+
     var inOrder = function (list, baseList, idKey, nameKey) {
       var pos = {}; baseList.forEach(function (x, i) { pos[x[idKey]] = i; });
       return list.sort(function (a, b) {
@@ -828,7 +789,7 @@
         return pa - pb || String(a[nameKey]).localeCompare(String(b[nameKey]));
       });
     };
-    // Like QA: every vehicle, inactive ones too (they count in "Fleet (n)")
+
     data.vehicles = all("vehicle").map(function (r) {
       var v = byId[r.id] || { vehicle_id: r.id, has_position: false, latitude: null, longitude: null, trail: [], connection_status: "signal_lost", movement_status: "offline", operational_status: "no_active_to", operational_status_label: "No Active TO", to_status: "no_to", to_status_label: "No active TO", driver_name: "", stop_duration_seconds: 0, is_active: true };
       v.registration_number = v.vehicle_plate = r.fields.registration_number;
@@ -839,7 +800,7 @@
       return v;
     });
     inOrder(data.vehicles, base.vehicles, "vehicle_id", "registration_number");
-    // Sites: from the session; coordinates/geofence fall back to QA's for sites whose edit page wasn't captured
+
     var basePoi = {}; (base.pois || []).forEach(function (x) { basePoi[x.id] = x; });
     data.pois = active("poi").map(function (p) {
       var f = p.fields, q = basePoi[p.id] || {}, has = f.latitude !== undefined && f.latitude !== "" && f.longitude !== undefined && f.longitude !== "";
@@ -849,13 +810,12 @@
     }).filter(function (x) { return x.latitude != null && x.longitude != null && !isNaN(x.latitude) && !isNaN(x.longitude); });
     inOrder(data.pois, base.pois || [], "id", "name");
     driveDemoFleet(data, Date.now());
-    data.refreshed_at = new Date().toISOString(); // "Updated <time>": the moment of this refresh, as on QA
+    data.refreshed_at = new Date().toISOString();
     data.vehicle_count = data.vehicles.length; data.map_vehicle_count = data.vehicles.filter(function (v) { return v.has_position; }).length;
     return data;
   } });
 
-  // Django admin autocomplete (Select2) for driver fields elsewhere: active drivers of this session
-  H.push({ match: /^\/admin\/autocomplete\/$/, fn: function (u) {
+  H.push({ match: /^\/demo-data\/lookup\/$/, fn: function (u) {
     if (u.searchParams.get("field_name") !== "driver") return null;
     var term = (u.searchParams.get("term") || "").toLowerCase();
     var res = active("driver").map(function (d) { return { id: d.id, text: labelOf("driver", d) }; }).filter(function (o) { return !term || o.text.toLowerCase().indexOf(term) >= 0; });
@@ -895,8 +855,6 @@
     document.querySelectorAll("p, span, div").forEach(function (el) { if (el.children.length === 0 && /^\s*\d+ vehicles?\s*$/.test(el.textContent)) el.textContent = el.textContent.replace(/\d+ vehicles?/, vehicles.length + (vehicles.length === 1 ? " vehicle" : " vehicles")); });
   }
 
-  // The sidebar highlights the menu item whose link the URL starts with (/admin/master_data/brand/add/ ->
-  // Vehicle Brands). Demo CRUD pages have flat file names, so mark the entity's list link ourselves.
   function activateSidebar(model) {
     var a = [].filter.call(document.querySelectorAll("a.dfms-nav-link"), function (x) { return x.getAttribute("href") === listFile(model); })[0];
     if (!a) return;
@@ -907,12 +865,10 @@
     if (btn && btn.getAttribute("aria-expanded") !== "true") btn.click();
   }
 
-  // ---------- Wiring ----------
   var M = meta();
   var listModel = null;
   Object.keys(SEED.entities).forEach(function (m) { if (location.pathname.split("/").pop() === SEED.entities[m].list) listModel = m; });
 
-  // Old per-record master pages (linked from older bookmarks/logs) -> the CRUD edit page
   var legacy = location.pathname.split("/").pop().match(/^admin_(master_data|users)_([a-z]+)_([0-9a-f_]{36})_(change|delete)\.html$/);
   if (legacy && E[legacy[2]] && !M) { location.replace("md_" + legacy[2] + "_" + legacy[4] + ".html#" + legacy[3].replace(/_/g, "-")); return; }
 
@@ -930,10 +886,10 @@
     syncSelects();
     updateDashboard();
     updateVehiclePlanning();
-    // Category -> sub-category on the product form: re-filter after the user picks a category
+
     var cat = document.querySelector('select[name="category"]');
     if (cat && M && M.model === "product") cat.addEventListener("change", function () { setTimeout(syncSelects, 0); });
   });
-  // After the app's own sidebar script has run (it initialises on DOMContentLoaded)
+
   window.addEventListener("load", function () { if (M && E[M.model]) activateSidebar(M.model); });
 })();

@@ -1,5 +1,5 @@
-// Generic password visibility toggle (suffix icon).
-// Works for any button with: .dfms-password-toggle[data-target="input_id"]
+
+
 (function () {
   function setIcon(btn, visible) {
     var icon = btn.querySelector("i.bi");

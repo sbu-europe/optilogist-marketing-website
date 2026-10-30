@@ -4,11 +4,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
-<link rel="stylesheet" href="static/demo/demo-shim.css?v=mv5a1jhl">
-<script src="static/demo/api-data.js?v=mv5a1jhl"></script>
-<script src="static/demo/demo-shim.js?v=mv5a1jhl"></script>
-<script src="static/demo/master-seed.js?v=mv5a1jhl"></script>
-<script src="static/demo/master-crud.js?v=mv5a1jhl"></script>
+<link rel="stylesheet" href="static/demo/demo-shim.css?v=mock2">
+<script src="static/demo/api-data.js?v=mock2"></script>
+<script src="static/demo/demo-shim.js?v=mock2"></script>
+<script src="static/demo/master-seed.js?v=mock2"></script>
+<script src="static/demo/master-crud.js?v=mock2"></script>
 <title>Change vehicle | Demo Agro Ltd Admin</title>
 <link rel="stylesheet" href="static/admin/css/base.css">
 
@@ -43,7 +43,7 @@
     var t = localStorage.getItem('dfms-admin-theme');
     if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', t);
-    // Keep native date/time picker icons visible: match DFMS theme, not OS preference alone.
+
     document.documentElement.style.colorScheme = t === 'dark' ? 'dark' : 'light';
 
     var collapsed = localStorage.getItem('dfms-sidebar-collapsed') === 'true';
@@ -99,11 +99,11 @@
 <body class=" app-master_data model-vehicle change-form"
   data-admin-utc-offset="21600">
 <a href="#content-start" class="skip-to-content-link">Skip to main content</a>
-<!-- Container -->
+
 <div id="container">
 
     
-    <!-- Header -->
+    
     
       <header id="header">
         <div id="branding">
@@ -219,7 +219,7 @@
     class="dfms-dropdown-poi__form"
   >
     <input type="hidden" name="csrfmiddlewaretoken" value="demo">
-    <input type="hidden" name="next" value="/admin/master_data/vehicle/a7467d17-379b-405c-808e-6deaa382c9c0/change/">
+    <input type="hidden" name="next" value="">
 
     <div class="dfms-dropdown-poi__field">
       <label for="dfms-poi-select" class="dfms-dropdown-poi__label">
@@ -334,7 +334,7 @@
             if (token && input) input.value = token;
           });
         })();
-        </script>
+</script>
 
       </div>
     </div>
@@ -346,7 +346,7 @@
         
       </header>
     
-    <!-- END Header -->
+    
     
     
 
@@ -1115,7 +1115,7 @@
         
           
         
-        <!-- Content -->
+        
         <div id="content" class="colM">
           
   
@@ -1386,7 +1386,7 @@
                                 <label for="id_brand">Brand:</label>
                                 
                                     <div class="related-widget-wrapper" data-model-ref="brand">
-    <select name="brand" id="id_brand" class="admin-autocomplete" data-ajax--cache="true" data-ajax--delay="250" data-ajax--type="GET" data-ajax--url="/admin/autocomplete/" data-app-label="master_data" data-model-name="vehicle" data-field-name="brand" data-theme="admin-autocomplete" data-allow-clear="true" data-placeholder="" lang="en">
+    <select name="brand" id="id_brand" class="admin-autocomplete" data-ajax--cache="true" data-ajax--delay="250" data-ajax--type="GET" data-ajax--url="/demo-data/lookup/" data-app-label="master_data" data-model-name="vehicle" data-field-name="brand" data-theme="admin-autocomplete" data-allow-clear="true" data-placeholder="" lang="en">
   <option value=""></option>
 
   <option value="fde92e38-2ef5-4bd4-9d1d-22121aee87de" selected>TATA</option>
@@ -1394,16 +1394,16 @@
 </select>
     
         <a class="related-widget-wrapper-link change-related" id="change_id_brand"
-            data-href-template="/admin/master_data/brand/__fk__/change/?_to_field=id&amp;_popup=1"
+            data-href-template="#__fk__"
             data-popup="yes"
             title="Change selected brand"><img src="static/admin/img/icon-changelink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link add-related" id="add_id_brand"
             data-popup="yes"
             href="md_brand_add.html"
             title="Add another brand"><img src="static/admin/img/icon-addlink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link delete-related" id="delete_id_brand"
-            data-href-template="/admin/master_data/brand/__fk__/delete/?_to_field=id&amp;_popup=1"
+            data-href-template="#__fk__"
             data-popup="yes"
             title="Delete selected brand"><img src="static/admin/img/icon-deletelink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link view-related" id="view_id_brand"
-             data-href-template="/admin/master_data/brand/__fk__/change/?_to_field=id"
+             data-href-template="#__fk__"
              title="View selected brand"><img src="static/admin/img/icon-viewlink.svg" alt="" width="20" height="20"></a>
     
 </div>
@@ -1772,19 +1772,19 @@ Older van pending fitness renewal</textarea>
           
           <br class="clear">
         </div>
-        <!-- END Content -->
+        
         <div id="footer"></div>
       </main>
     </div>
 </div>
-<!-- END Container -->
 
-<!-- SVGs -->
+
+
 <svg xmlns="http://www.w3.org/2000/svg" class="base-svgs">
   <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"/></symbol>
   <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"/></symbol>
   <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></symbol>
 </svg>
-<!-- END SVGs -->
+
 </body>
 </html>

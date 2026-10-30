@@ -1,4 +1,4 @@
-/* Live GPS — fleet list and tabs. Requires live-gps-tokens.css */
+
 
 .live-gps-bi {
   display: inline-flex;
@@ -414,7 +414,7 @@
   background: rgba(100, 116, 139, 0.85);
 }
 
-/* ── Vehicle cards (fleet list) ─────────────────────────────────────────── */
+
 
 .live-gps-obj {
   display: flex;
@@ -525,7 +525,7 @@
   max-width: 52%;
 }
 
-/* V2 vehicle operational_status pills (filter menu + fleet list) */
+
 .live-gps-op-status--no-active-to {
   color: #a16207;
   background: rgba(234, 179, 8, 0.22);
@@ -551,7 +551,7 @@
   background: rgba(100, 116, 139, 0.18);
 }
 
-/* V1 legacy vehicle keys (retained for cached markup) */
+
 .live-gps-op-status--available {
   color: #a16207;
   background: rgba(234, 179, 8, 0.22);
@@ -572,7 +572,7 @@
   background: rgba(234, 179, 8, 0.22);
 }
 
-/* TO lifecycle pill colors */
+
 .live-gps-to-pill {
   display: inline-flex;
   align-items: center;
@@ -648,7 +648,7 @@
   margin-top: 1px;
 }
 
-/* Filter menu pills (unchanged TO keys) */
+
 .live-gps-op-status {
   display: inline-flex;
   align-items: center;
@@ -664,7 +664,7 @@
   flex-shrink: 0;
 }
 
-/* TO lifecycle filter pill colors */
+
 .live-gps-op-status--created,
 .live-gps-op-status--under-planning,
 .live-gps-op-status--assigned {
@@ -795,7 +795,7 @@
   color: var(--lg-ink);
 }
 
-/* Dark mode — fleet panel, pills, chrome */
+
 html.live-gps-active[data-theme="dark"] .live-gps-obj__reg {
   color: var(--lg-ink);
 }
@@ -868,7 +868,7 @@ html.live-gps-active[data-theme="dark"] .live-gps-tab.is-active {
   max-width: 58%;
 }
 
-/* Vehicle operational status pills */
+
 [data-theme="dark"] .live-gps-op-status--no-active-to,
 [data-theme="dark"] .live-gps-op-status--available,
 [data-theme="dark"] .live-gps-op-status--idle,
@@ -932,7 +932,7 @@ html.live-gps-active[data-theme="dark"] .live-gps-tab.is-active {
   background: rgba(136, 19, 55, 0.42);
 }
 
-/* TO lifecycle pills */
+
 [data-theme="dark"] .live-gps-to-pill--dispatch {
   color: #c7d2fe;
   background: rgba(67, 56, 202, 0.42);
@@ -948,7 +948,7 @@ html.live-gps-active[data-theme="dark"] .live-gps-tab.is-active {
   background: rgba(120, 53, 15, 0.42);
 }
 
-/* Dock panel movement dot (unchanged) */
+
 .live-gps-obj__dot--parked, .live-gps-obj__dot--offline {
   background: var(--lg-red);
 }

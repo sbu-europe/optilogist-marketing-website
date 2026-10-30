@@ -1,11 +1,9 @@
-/**
- * Live POI stock & capacity panel — PR (destination) and TR create (source/destination).
- * Panel element: .dfms-poi-stock-panel with data-poi-select-name and data-incoming-mode.
- */
+
+
 (function () {
   'use strict';
 
-  var STOCK_URL_BASE = '/admin/requisitions/poi-stock/';
+  var STOCK_URL_BASE = '/demo-data/site-stock/';
   var GLOBAL_BOUND = false;
 
   function getPanels() {

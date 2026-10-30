@@ -1,8 +1,6 @@
-/*
-    DJANGO Admin styles
-*/
 
-/* VARIABLE DEFINITIONS */
+
+
 html[data-theme="light"],
 :root {
     --primary: #79aec8;
@@ -37,8 +35,8 @@ html[data-theme="light"],
     --message-warning-bg: #ffc;
     --message-error-bg: #ffefef;
 
-    --darkened-bg: #f8f8f8; /* A bit darker than --body-bg */
-    --selected-bg: #e4e4e4; /* E.g. selected table cells */
+    --darkened-bg: #f8f8f8; 
+    --selected-bg: #e4e4e4; 
     --selected-row: #ffc;
 
     --button-fg: #fff;
@@ -99,7 +97,7 @@ body {
     background: var(--body-bg);
 }
 
-/* LINKS */
+
 
 a:link, a:visited {
     color: var(--link-fg);
@@ -128,7 +126,7 @@ a.section:focus, a.section:hover {
     text-decoration: underline;
 }
 
-/* GLOBAL DEFAULTS */
+
 
 p, ol, ul, dl {
     margin: .2em 0 .8em 0;
@@ -253,7 +251,7 @@ hr {
     line-height: 1px;
 }
 
-/* TEXT STYLES & MODIFIERS */
+
 
 .small {
     font-size: 0.6875rem;
@@ -297,7 +295,7 @@ p img, h1 img, h2 img, h3 img, h4 img, td img {
     display: none !important;
 }
 
-/* TABLES */
+
 
 table {
     border-collapse: collapse;
@@ -352,7 +350,7 @@ tr:nth-child(odd) + .row-form-errors .errorlist {
     background: var(--darkened-bg);
 }
 
-/* SORTABLE TABLES */
+
 
 thead th {
     padding: 5px 10px;
@@ -464,7 +462,7 @@ table thead th.sorted .sortoptions a.descending:hover {
     background-position: 0 -70px;
 }
 
-/* FORM DEFAULTS */
+
 
 input, textarea, select, .form-row p, form .button {
     margin: 2px 0;
@@ -503,12 +501,12 @@ select {
 }
 
 select[multiple] {
-    /* Allow HTML size attribute to override the height in the rule above. */
+    
     height: auto;
     min-height: 150px;
 }
 
-/* FORM BUTTONS */
+
 
 .button, input[type=submit], input[type=button], .submit-row input, a.button {
     background: var(--button-bg);
@@ -553,7 +551,7 @@ input[type=button][disabled].default {
 }
 
 
-/* MODULES */
+
 
 .module {
     border: none;
@@ -599,7 +597,7 @@ input[type=button][disabled].default {
     border-collapse: collapse;
 }
 
-/* MESSAGES & ERRORS */
+
 
 ul.messagelist {
     padding: 0;
@@ -695,7 +693,7 @@ td ul.errorlist + input, td ul.errorlist + select, td ul.errorlist + textarea {
     padding: 5px 0 0 12px;
 }
 
-/* BREADCRUMBS */
+
 
 div.breadcrumbs {
     background: var(--breadcrumbs-bg);
@@ -713,7 +711,7 @@ div.breadcrumbs a:focus, div.breadcrumbs a:hover {
     color: var(--breadcrumbs-fg);
 }
 
-/* ACTION ICONS */
+
 
 .viewlink, .inlineviewlink {
     padding-left: 16px;
@@ -741,15 +739,15 @@ div.breadcrumbs a:focus, div.breadcrumbs a:hover {
 }
 
 a.deletelink:link, a.deletelink:visited {
-    color: #CC3434; /* XXX Probably unused? */
+    color: #CC3434; 
 }
 
 a.deletelink:focus, a.deletelink:hover {
-    color: #993333; /* XXX Probably unused? */
+    color: #993333; 
     text-decoration: none;
 }
 
-/* OBJECT TOOLS */
+
 
 .object-tools {
     font-size: 0.625rem;
@@ -805,7 +803,7 @@ a.deletelink:focus, a.deletelink:hover {
     background-image: url(../img/tooltag-add.svg);
 }
 
-/* OBJECT HISTORY */
+
 
 #change-history table {
     width: 100%;
@@ -822,7 +820,7 @@ a.deletelink:focus, a.deletelink:hover {
     overflow: hidden;
 }
 
-/* PAGE STRUCTURE */
+
 
 #container {
     position: relative;
@@ -883,7 +881,7 @@ a.deletelink:focus, a.deletelink:hover {
     padding: 10px;
 }
 
-/* COLUMN TYPES */
+
 
 .colMS {
     margin-right: 300px;
@@ -907,7 +905,7 @@ a.deletelink:focus, a.deletelink:hover {
     width: auto;
 }
 
-/* HEADER */
+
 
 #header {
     width: auto;
@@ -996,7 +994,7 @@ a.deletelink:focus, a.deletelink:hover {
     margin-bottom: 1px;
 }
 
-/* SIDEBAR */
+
 
 #content-related {
     background: var(--darkened-bg);
@@ -1072,7 +1070,7 @@ a.deletelink:focus, a.deletelink:hover {
     background: var(--close-button-hover-bg);
 }
 
-/* POPUP */
+
 .popup #content {
     padding: 20px;
 }
@@ -1085,7 +1083,7 @@ a.deletelink:focus, a.deletelink:hover {
     padding: 10px 20px;
 }
 
-/* PAGINATOR */
+
 
 .paginator {
     display: flex;

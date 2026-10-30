@@ -1,7 +1,5 @@
-/**
- * DFMS Admin — POI form: merged Address & Location section, inline map preview,
- * map picker modal, geofence preview, and reverse geocoded address.
- */
+
+
 (function () {
   'use strict';
 
@@ -13,7 +11,7 @@
   var PREVIEW_SYNC_MS = 250;
   var NOMINATIM_URL = 'https://nominatim.openstreetmap.org/reverse';
   var NOMINATIM_SEARCH_URL = 'https://nominatim.openstreetmap.org/search';
-  /** Match Live GPS default POI geofence (`poiGeofenceCircleStyle`). */
+
   var GEOFENCE_COLOR = '#0a84ff';
   var GEOFENCE_FILL_OPACITY = 0.1;
   var GEOFENCE_WEIGHT = 1.5;
@@ -36,7 +34,6 @@
   var previewSyncTimer = null;
   var LOCATION_HINT = 'Click to open map picker · drag pin to set location';
 
-  /** Draft state inside the modal (not written to the form until Apply). */
   var draft = {
     lat: null,
     lng: null,
@@ -744,10 +741,6 @@
     label.textContent = text;
   }
 
-  /**
-   * Rebuild Django aligned form-row markup into label-above-control stacks so
-   * the address / city / country / geofence grid matches the design mockup.
-   */
   function normalizeLocationFieldRow(row, options) {
     options = options || {};
     if (!row || row.dataset.poiFieldNormalized) return row;

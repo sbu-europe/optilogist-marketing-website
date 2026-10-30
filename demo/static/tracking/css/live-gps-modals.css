@@ -1,4 +1,4 @@
-/* Live GPS — menus, modals, follow panel, popups. Requires live-gps-tokens.css */
+
 
 .live-gps-obj-menu {
   position: fixed;
@@ -1034,7 +1034,7 @@
   color: var(--lg-ink);
 }
 
-/* Dark mode — menus, modals, popups */
+
 [data-theme="dark"] .live-gps-obj-menu__item:disabled,
 [data-theme="dark"] .live-gps-obj-menu__item--disabled {
   color: var(--lg-ink-3);

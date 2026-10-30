@@ -4,11 +4,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
-<link rel="stylesheet" href="static/demo/demo-shim.css?v=mv5a1jhl">
-<script src="static/demo/api-data.js?v=mv5a1jhl"></script>
-<script src="static/demo/demo-shim.js?v=mv5a1jhl"></script>
-<script src="static/demo/master-seed.js?v=mv5a1jhl"></script>
-<script src="static/demo/master-crud.js?v=mv5a1jhl"></script>
+<link rel="stylesheet" href="static/demo/demo-shim.css?v=mock2">
+<script src="static/demo/api-data.js?v=mock2"></script>
+<script src="static/demo/demo-shim.js?v=mock2"></script>
+<script src="static/demo/master-seed.js?v=mock2"></script>
+<script src="static/demo/master-crud.js?v=mock2"></script>
 <title>Change user | Demo Agro Ltd Admin</title>
 <link rel="stylesheet" href="static/admin/css/base.css">
 
@@ -43,7 +43,7 @@
     var t = localStorage.getItem('dfms-admin-theme');
     if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', t);
-    // Keep native date/time picker icons visible: match DFMS theme, not OS preference alone.
+
     document.documentElement.style.colorScheme = t === 'dark' ? 'dark' : 'light';
 
     var collapsed = localStorage.getItem('dfms-sidebar-collapsed') === 'true';
@@ -89,9 +89,7 @@
 (function () {
   var roleMap = {"425f510c-1779-43e4-bc8f-108a37ae290d": {"id": "425f510c-1779-43e4-bc8f-108a37ae290d", "role_code": "tenant_admin", "role_name": "Tenant Admin", "department": "administration", "department_label": "Administration (tenant admin)"}, "850e5173-e3ca-4788-b8f6-78dd24f9ecf7": {"id": "850e5173-e3ca-4788-b8f6-78dd24f9ecf7", "role_code": "depot_officer", "role_name": "Depot Officer", "department": "depot_feed_mill_commercial", "department_label": "Depot / Feed Mill / Commercial"}, "5388bc76-ddec-4404-9b45-61c1bcf301f7": {"id": "5388bc76-ddec-4404-9b45-61c1bcf301f7", "role_code": "feed_mill_officer", "role_name": "Feed Mill Officer", "department": "depot_feed_mill_commercial", "department_label": "Depot / Feed Mill / Commercial"}, "7fedf88e-6a7d-47d6-ae0d-b44e5fbf09cc": {"id": "7fedf88e-6a7d-47d6-ae0d-b44e5fbf09cc", "role_code": "poi_admin", "role_name": "POI-Admin", "department": "operations", "department_label": "Operations"}, "498b46a5-cb93-4551-bb40-8fc5a30659c8": {"id": "498b46a5-cb93-4551-bb40-8fc5a30659c8", "role_code": "commercial_officer", "role_name": "Commercial Officer", "department": "depot_feed_mill_commercial", "department_label": "Depot / Feed Mill / Commercial"}, "02a82909-1580-4c99-98dc-6a66d4485f30": {"id": "02a82909-1580-4c99-98dc-6a66d4485f30", "role_code": "procurement_officer", "role_name": "Procurement Officer", "department": "procurement", "department_label": "Procurement"}, "35116a94-3758-4be6-8016-2e33b9419760": {"id": "35116a94-3758-4be6-8016-2e33b9419760", "role_code": "distribution_officer", "role_name": "Distribution Officer (DO)", "department": "distribution", "department_label": "Distribution"}, "9b007b66-055e-49f6-be0b-ad617b3ea19c": {"id": "9b007b66-055e-49f6-be0b-ad617b3ea19c", "role_code": "distribution_manager", "role_name": "Distribution Manager (DM)", "department": "distribution", "department_label": "Distribution"}, "82e35454-9122-436f-8483-9776dd4f9294": {"id": "82e35454-9122-436f-8483-9776dd4f9294", "role_code": "transport_planner", "role_name": "Transport Planner (TP)", "department": "transport", "department_label": "Transport"}, "9c7d923b-fddd-4920-9973-e692e82599a2": {"id": "9c7d923b-fddd-4920-9973-e692e82599a2", "role_code": "tdo_vendor_fleet", "role_name": "Transport Distribution Officer (TDO) \u2013 Vendor Fleet", "department": "transport", "department_label": "Transport"}, "fe344cb5-1fa5-4aa8-92a1-870b5adf8ec1": {"id": "fe344cb5-1fa5-4aa8-92a1-870b5adf8ec1", "role_code": "command_center_officer", "role_name": "Command Center Officer", "department": "operations", "department_label": "Operations"}, "5d47cdc7-fd64-4f1d-b743-f8c103d8c1c2": {"id": "5d47cdc7-fd64-4f1d-b743-f8c103d8c1c2", "role_code": "gateman", "role_name": "Gateman", "department": "gate_operations", "department_label": "Gate Operations"}, "b65aa882-1e05-433b-af31-30b90f4a0142": {"id": "b65aa882-1e05-433b-af31-30b90f4a0142", "role_code": "scaling_operator", "role_name": "Scaling Operator", "department": "scaling_weight", "department_label": "Scaling / Weight"}, "33ce46f3-4240-466d-b506-3f7c4179d10e": {"id": "33ce46f3-4240-466d-b506-3f7c4179d10e", "role_code": "loading_personnel", "role_name": "Loading Personnel", "department": "operations", "department_label": "Operations"}, "0c9bc89c-8e42-41e3-b9b4-9cbba625e83c": {"id": "0c9bc89c-8e42-41e3-b9b4-9cbba625e83c", "role_code": "unloading_personnel", "role_name": "Unloading Personnel", "department": "operations", "department_label": "Operations"}, "31211600-8777-4731-b3fe-7fc00cad2be9": {"id": "31211600-8777-4731-b3fe-7fc00cad2be9", "role_code": "qc_inspector_physical", "role_name": "QC Inspector \u2013 Physical", "department": "qa_qc", "department_label": "QA / QC"}, "16db9cd5-9263-4abc-acba-60ed80b4c8d1": {"id": "16db9cd5-9263-4abc-acba-60ed80b4c8d1", "role_code": "qa_lab_technician", "role_name": "QA Lab Technician", "department": "qa_qc", "department_label": "QA / QC"}, "e366c0c7-4fe2-483a-b3f1-55456682797e": {"id": "e366c0c7-4fe2-483a-b3f1-55456682797e", "role_code": "driver_supervisor", "role_name": "Driver Supervisor", "department": "operations", "department_label": "Operations"}, "2e855839-31e1-47a4-86e6-6f4fe6adc3a9": {"id": "2e855839-31e1-47a4-86e6-6f4fe6adc3a9", "role_code": "account_officer", "role_name": "Account Officer", "department": "costing_finance", "department_label": "Costing & Finance"}};
   var poiScopedRoles = ["command_center_officer", "depot_officer", "feed_mill_officer", "gateman", "loading_personnel", "poi_admin", "qc_inspector_physical", "scaling_operator", "unloading_personnel"];
-  // roleId -> "id_poi_role_<roleId>" for every POI-scoped role in the
-  // catalog (AC-5). Each dropdown is moved inline next to its role's
-  // checkbox and only shown once that checkbox is checked.
+
   var poiRoleFieldMap = {"fe344cb5-1fa5-4aa8-92a1-870b5adf8ec1": "id_poi_role_fe344cb5-1fa5-4aa8-92a1-870b5adf8ec1", "850e5173-e3ca-4788-b8f6-78dd24f9ecf7": "id_poi_role_850e5173-e3ca-4788-b8f6-78dd24f9ecf7", "5388bc76-ddec-4404-9b45-61c1bcf301f7": "id_poi_role_5388bc76-ddec-4404-9b45-61c1bcf301f7", "5d47cdc7-fd64-4f1d-b743-f8c103d8c1c2": "id_poi_role_5d47cdc7-fd64-4f1d-b743-f8c103d8c1c2", "33ce46f3-4240-466d-b506-3f7c4179d10e": "id_poi_role_33ce46f3-4240-466d-b506-3f7c4179d10e", "7fedf88e-6a7d-47d6-ae0d-b44e5fbf09cc": "id_poi_role_7fedf88e-6a7d-47d6-ae0d-b44e5fbf09cc", "31211600-8777-4731-b3fe-7fc00cad2be9": "id_poi_role_31211600-8777-4731-b3fe-7fc00cad2be9", "b65aa882-1e05-433b-af31-30b90f4a0142": "id_poi_role_b65aa882-1e05-433b-af31-30b90f4a0142", "0c9bc89c-8e42-41e3-b9b4-9cbba625e83c": "id_poi_role_0c9bc89c-8e42-41e3-b9b4-9cbba625e83c"};
   function fieldRow(el) {
     if (!el) return null;
@@ -103,8 +101,7 @@
   function selectedRoleIds() {
     return roleCheckboxes().filter(function (cb) { return cb.checked; }).map(function (cb) { return cb.value; });
   }
-  // Grid cell for a role checkbox. Django 5 has no <li> — parent of the
-  // input is the <label>, so walk up to #id_role > div, not the label.
+
   function roleCell(rid) {
     var checkbox = document.querySelector('input[name="role"][value="' + rid + '"]');
     if (!checkbox) return null;
@@ -116,9 +113,7 @@
     }
     return checkbox.closest("li") || checkbox.parentNode;
   }
-  // AC-5: move each role's Site (POI) field under that role's checkbox cell,
-  // stacked below the label — never inside the <label> (that overlaps the
-  // other grid column).
+
   function inlinePoiFields() {
     Object.keys(poiRoleFieldMap).forEach(function (rid) {
       var field = document.getElementById(poiRoleFieldMap[rid]);
@@ -169,7 +164,7 @@
         fallbackNeeded = true;
       }
     });
-    // Hide per-role fields for roles no longer selected.
+
     Object.keys(poiRoleFieldMap).forEach(function (rid) {
       if (selectedIds.indexOf(rid) !== -1) return;
       var field = document.getElementById(poiRoleFieldMap[rid]);
@@ -216,11 +211,11 @@
 <body class=" app-users model-user change-form"
   data-admin-utc-offset="21600">
 <a href="#content-start" class="skip-to-content-link">Skip to main content</a>
-<!-- Container -->
+
 <div id="container">
 
     
-    <!-- Header -->
+    
     
       <header id="header">
         <div id="branding">
@@ -336,7 +331,7 @@
     class="dfms-dropdown-poi__form"
   >
     <input type="hidden" name="csrfmiddlewaretoken" value="demo">
-    <input type="hidden" name="next" value="/admin/users/user/c333fd72-1a76-4a57-a130-6976b6563d75/change/">
+    <input type="hidden" name="next" value="">
 
     <div class="dfms-dropdown-poi__field">
       <label for="dfms-poi-select" class="dfms-dropdown-poi__label">
@@ -451,7 +446,7 @@
             if (token && input) input.value = token;
           });
         })();
-        </script>
+</script>
 
       </div>
     </div>
@@ -463,7 +458,7 @@
         
       </header>
     
-    <!-- END Header -->
+    
     
     
 
@@ -1232,7 +1227,7 @@
         
           
         
-        <!-- Content -->
+        
         <div id="content" class="colM">
           
   
@@ -2045,19 +2040,19 @@
           
           <br class="clear">
         </div>
-        <!-- END Content -->
+        
         <div id="footer"></div>
       </main>
     </div>
 </div>
-<!-- END Container -->
 
-<!-- SVGs -->
+
+
 <svg xmlns="http://www.w3.org/2000/svg" class="base-svgs">
   <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"/></symbol>
   <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"/></symbol>
   <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></symbol>
 </svg>
-<!-- END SVGs -->
+
 </body>
 </html>

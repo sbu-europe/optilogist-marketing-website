@@ -1,4 +1,4 @@
-/* Live GPS — bottom dock panel. Requires live-gps-tokens.css */
+
 
 .live-gps-dock-wrap {
   --dock-edge-x: 12px;
@@ -229,7 +229,7 @@
   .live-gps-objects { width: 260px; }
 }
 
-/* Dark mode — dock details */
+
 [data-theme="dark"] .live-gps-panel__eye {
   color: var(--lg-ink-3);
 }

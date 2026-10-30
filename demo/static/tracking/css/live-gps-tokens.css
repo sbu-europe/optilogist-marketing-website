@@ -1,4 +1,4 @@
-/* Live GPS design tokens, shared surfaces, and motion. Load first. */
+
 
 html.live-gps-active {
   --lg-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Inter", "Helvetica Neue", Arial, sans-serif;
@@ -38,7 +38,7 @@ html.live-gps-active {
   --lg-seek-rail: #e2e8f0;
 }
 
-/* Admin dark theme — Live GPS surfaces inherit these tokens. */
+
 html.live-gps-active[data-theme="dark"] {
   --lg-accent: #3b82f6;
   --lg-accent-strong: #60a5fa;
@@ -49,7 +49,7 @@ html.live-gps-active[data-theme="dark"] {
   --lg-green: #4ade80;
   --lg-amber: #fbbf24;
   --lg-red: #f87171;
-  /* Opaque panels — frosted white glass + light ink = unreadable in dark mode. */
+  
   --lg-surface: #161929;
   --lg-surface-strong: #1c2034;
   --lg-surface-border: rgba(255, 255, 255, 0.12);
@@ -89,7 +89,7 @@ html.live-gps-active[data-theme="dark"] {
   color: var(--lg-ink);
 }
 
-/* Hard override: do not keep light glass panels when admin is dark. */
+
 html.live-gps-active[data-theme="dark"] .live-gps-objects,
 html.live-gps-active[data-theme="dark"] .live-gps-history,
 html.live-gps-active[data-theme="dark"] .live-gps-follow,

@@ -1,9 +1,5 @@
-/* TUM-06 — Select2 chips on Site (POI) multi-selects (invite + per-role edit).
 
-   Do not include select2.full.js in ModelAdmin.Media extrahead: admin jQuery
-   is initialized at the bottom of the page, so a head load fails with
-   "jQuery was not found". Lazy-load after django.jQuery exists.
-*/
+
 (function () {
   function $jq() {
     return window.django && django.jQuery;

@@ -32,16 +32,12 @@ window.LiveGpsApp = (function () {
   const DEFAULT_CENTER = [23.8103, 90.4125];
   const DEFAULT_ZOOM = 12;
   const VEHICLE_ZOOM = 15;
-  /** Screen distance (px) under which vehicle markers merge into a count circle. */
+
   const CLUSTER_RADIUS_PX = 60;
   const CLUSTER_ZOOM_SHRINK_START = 11;
-  /** At this zoom and above, markers never cluster (popups always reachable). */
+
   const CLUSTER_ZOOM_FULL_SPLIT = 16;
   const CLUSTER_ICON_SIZE = 52;
-
-
-
-
 
   let map = null;
   let markers = {};
@@ -49,7 +45,7 @@ window.LiveGpsApp = (function () {
   let trails = {};
   let plannedRoutes = {};
   let mapInitialFitDone = false;
-  /** After Objects-list selection, block poll/resize from refitting the map. */
+
   let mapViewLocked = false;
   let markerLayoutTimer = null;
   let dockPanelsVisible = false;
@@ -62,45 +58,42 @@ window.LiveGpsApp = (function () {
   const lastPositionByTrip = {};
   let vehicles = [];
   let mapPois = [];
-  /** @type {ReturnType<typeof createFleetStatusFilter>|null} */
+
   let toStatusFilter = null;
-  /** @type {ReturnType<typeof createFleetStatusFilter>|null} */
+
   let vehicleStatusFilter = null;
-  /** TO status filter values hidden from the dropdown (vehicles may still appear in the fleet list). */
+
   const TO_STATUS_FILTER_EXCLUDED = new Set(['under_maintenance', 'bill_disbursed']);
-  /** Vehicle status values hidden from filter + fleet pills (none in V2). */
+
   const VEHICLE_STATUS_UI_HIDDEN = new Set([]);
-  /** Vehicle statuses hidden only from the vehicle-status filter dropdown. */
+
   const VEHICLE_STATUS_FILTER_EXCLUDED = new Set(['inactive']);
-  /**
-   * Vehicle statuses hidden from the fleet list + map by default. They stay
-   * selectable in the vehicle-status filter; picking one reveals its vehicles.
-   */
+
   const VEHICLE_STATUS_HIDDEN_BY_DEFAULT = new Set(['inactive']);
   let objectsSearchQuery = '';
   let refreshTimer = null;
   let selectedVehicleId = null;
   let openPopupVehicleId = null;
-  /** Which map surface owns the open popup: ``main`` or ``follow``. */
+
   let openPopupSurface = null;
-  /** Suppress a second autoPan right after openPopup (dock/layout settle). */
+
   let vehiclePopupOpenedAt = 0;
   const addressCache = {};
   const addressPending = {};
   const lastAddressByTrip = {};
   let objMenuVehicleId = null;
   let historyTripId = null;
-  /** Vehicle under history detail focus (TO or idle) — drives map isolation + playback marker. */
+
   let historyFocusVehicleId = null;
   let historyRange = null;
   let historyPoints = [];
   let historyOverspeedEvents = [];
   let historyOverspeedLimitKmh = null;
-  /** Canvas hit targets for overspeed dots on the speed chart (rebuilt each draw). */
+
   let historyOverspeedHitTargets = [];
-  /** Overspeed event id whose map popup was opened by chart-dot hover; cleared on leave. */
+
   let historyChartOverspeedHoverId = null;
-  /** Debounces chart-hover-triggered overspeed popups so fast mouse movement over dense dots doesn't thrash. */
+
   let historyOverspeedHoverDebounceTimer = null;
   let historyPlayTimer = null;
   let historyPlaySpeed = 1;
@@ -109,34 +102,34 @@ window.LiveGpsApp = (function () {
   let historyPlayIndex = 0;
   let historyCursorX = null;
   let historyChartLayout = null;
-  /** Auto-pan map to playback marker while history plays. */
+
   let historyMapFollowActive = false;
   let historyMapFollowUserSuspended = false;
   let historyMapProgrammaticPan = false;
   let historyMapFollowControl = null;
   let historyMapFollowBtn = null;
   let historyMapProgrammaticPanTimer = null;
-  /** EMA-smoothed heading used only for the follow look-ahead pan offset (null until established). */
+
   let historyFollowBearing = null;
-  /** Screen-space distance the pan target is pushed ahead of the vehicle, in its direction of travel. */
+
   const HISTORY_FOLLOW_LOOKAHEAD_PX = 100;
-  /** Weight given to each new bearing sample when smoothing (0-1, higher = snappier). */
+
   const HISTORY_FOLLOW_BEARING_SMOOTHING = 0.3;
-  /** Chart wrap drag-to-pan state (Pointer Events). */
+
   let historyChartDragging = false;
   let historyChartDragPointerId = null;
   let historyChartDragStartX = 0;
   let historyChartDragLastX = 0;
   let historyChartDragStartScroll = 0;
   let historyChartDragDistance = 0;
-  /** When true, playback auto-scroll follow is paused so manual pan is not overridden. */
+
   let historyChartFollowSuspended = false;
   let historyChartFollowResumeTimer = null;
   const HISTORY_CHART_DRAG_CLICK_THRESHOLD_PX = 5;
   const HISTORY_CHART_FOLLOW_RESUME_MS = 3000;
-  /** Zoom 1.0 = readable baseline: this many CSS px between consecutive samples. */
+
   const HISTORY_CHART_TARGET_PX_PER_POINT = 8;
-  /** Hard cap: never stretch consecutive samples farther apart than this. */
+
   const HISTORY_CHART_MAX_PX_PER_POINT = 48;
   const HISTORY_CHART_ZOOM_STEP = 1.5;
   const HISTORY_CHART_LABEL_MIN_PX = 90;
@@ -149,7 +142,7 @@ window.LiveGpsApp = (function () {
   let historyArrowLayer = null;
   let historyRegistration = '';
   let historySummaryEvents = [];
-  /** Activity types shown on left cards only — not as numbered map pins. */
+
   const HISTORY_ACTIVITY_CARD_ONLY_TYPES = new Set([
     'drive',
     'stopped',
@@ -192,18 +185,18 @@ window.LiveGpsApp = (function () {
     overspeed: '#dc2626',
   };
   const HISTORY_CAL_WEEKDAYS = [CONFIG.i18n.mo, CONFIG.i18n.tu, CONFIG.i18n.we, CONFIG.i18n.th, CONFIG.i18n.fr, CONFIG.i18n.sa, CONFIG.i18n.su];
-  /** Target spacing between history path direction arrows (meters). */
+
   const HISTORY_ARROW_SPACING_M = 70;
-  /** Hard cap so long trips do not flood Leaflet with markers. */
+
   const HISTORY_ARROW_MAX = 400;
-  /** Match an overspeed event to a nearby arrow for popup/hover (meters). */
+
   const HISTORY_ARROW_OVERSPEED_MATCH_M = 90;
-  /** Debounce delay before a chart-hover opens an overspeed popup (ms). */
+
   const HISTORY_OVERSPEED_HOVER_DEBOUNCE_MS = 70;
-  /** History path stroke: thicker when zoomed out so region views stay readable. */
+
   const HISTORY_PATH_WEIGHT_MIN = 4;
   const HISTORY_PATH_WEIGHT_MAX = 12;
-  /** @type {Record<string, {panel: HTMLElement, map: L.Map, marker: L.Marker|null, trailLine: L.Polyline|null, mapReady: boolean}>} */
+
   const followPanels = {};
   let followPanelZ = 611;
   const FOLLOW_ZOOM = 17;
@@ -212,13 +205,12 @@ window.LiveGpsApp = (function () {
   const FOLLOW_LABEL_H = 18;
 
   const TRUCK_MARKER_URL = CONFIG.truckMarkerUrl;
-  /** truck_marker.png cab faces left; +90° aligns GPS heading 0 with north. */
+
   const TRUCK_HEADING_OFFSET = 90;
   const TRUCK_W = 140;
   const TRUCK_H = 66;
   const LABEL_H = 22;
 
-  /** px between popup tip and truck roof; 0 = tip meets truck top. */
   const POPUP_TIP_GAP = 0;
   const POPUP_OFFSET_Y = -(TRUCK_H / 2 + POPUP_TIP_GAP);
 
@@ -362,8 +354,7 @@ window.LiveGpsApp = (function () {
   function shouldShowOperationalOnTripRow(v) {
     if (!isVehicleStatusUiVisible(v) || !hasActiveTo(v)) return false;
     const opKey = vehicleOperationalStatusKey(v);
-    // Show vehicle operational badge alongside TO status when assigned (scheduled)
-    // or executing (in_transit). Backend persists these; primary row shows TO status.
+
     return opKey === 'scheduled' || opKey === 'in_transit';
   }
 
@@ -422,10 +413,6 @@ window.LiveGpsApp = (function () {
     return CONFIG.i18n.no_trip;
   }
 
-  /**
-   * A vehicle is "in-flight" when it is still running a trip: it has a trackable
-   * trip, or its transport order is in an in-progress (driving/at-site) status.
-   */
   function isInFlightVehicle(v) {
     if (!v) return false;
     if (v.trip_id) return true;
@@ -436,9 +423,7 @@ window.LiveGpsApp = (function () {
     let list = vehiclesMatchingSearch(vehicles);
     if (toStatusFilter) list = toStatusFilter.applyMatching(list);
     if (vehicleStatusFilter) list = vehicleStatusFilter.applyMatching(list);
-    // Hide default-hidden statuses (e.g. inactive) unless the user has explicitly
-    // selected them in the vehicle-status filter, OR the vehicle is still in-flight
-    // (a vehicle deactivated mid-trip stays visible until its trip ends).
+
     list = list.filter(function(v) {
       const key = vehicleOperationalStatusKey(v);
       if (!VEHICLE_STATUS_HIDDEN_BY_DEFAULT.has(key)) return true;
@@ -500,7 +485,6 @@ window.LiveGpsApp = (function () {
     closeButton: false,
   };
 
-  /** Visible map area — measure real overlay DOM rects for Leaflet autoPan padding. */
   function mapOverlayPadding() {
     const mapEl = document.getElementById('live-gps-map');
     const pad = { top: 16, right: 56, bottom: 16, left: 16 };
@@ -601,7 +585,6 @@ window.LiveGpsApp = (function () {
     return list;
   }
 
-  /** Leaflet autoPan only — padding from real overlays; no custom offset (avoids conflict). */
   function applyVehiclePopupAutoPan(marker) {
     const popup = marker?.getPopup();
     if (!popup) return;
@@ -621,16 +604,6 @@ window.LiveGpsApp = (function () {
     popup.options.autoPanPaddingBottomRight = padBottomRight;
   }
 
-  /**
-   * History popups (overspeed arrows, event markers) are ~280px tall
-   * (title + rows + scrollable body), so most of the map's vertical space
-   * doesn't have room above a marker to fit one without panning. Panning
-   * on every passive hover feels like the map is constantly jumping, so
-   * autoPan is only enabled for a deliberate click/focus (`enabled=true`);
-   * hover just opens in place, same overlay-aware padding as vehicle
-   * popups when it is enabled. Recomputed right before each open since
-   * panel visibility can change between opens.
-   */
   function setHistoryPopupAutoPan(marker, enabled) {
     const popup = marker?.getPopup();
     if (!popup) return;
@@ -644,7 +617,6 @@ window.LiveGpsApp = (function () {
     popup.options.autoPanPaddingBottomRight = L.point(pad.right, pad.bottom);
   }
 
-  /** Resize / taller content — refresh padding then one Leaflet adjustPan. */
   function refitVehiclePopup(marker, options) {
     if (!marker?._liveGpsVehicleId || !marker.isPopupOpen()) return;
     const force = !!(options && options.force);
@@ -734,8 +706,6 @@ window.LiveGpsApp = (function () {
     if (v && marker && marker.isPopupOpen()) patchOpenPopup(marker, v);
   }
 
-
-
   function movementDotClass(v) {
     const m = v.movement_status || 'offline';
     return 'live-gps-obj__dot--' + m;
@@ -746,13 +716,10 @@ window.LiveGpsApp = (function () {
     return 'live-gps-marker__truck-wrap--' + m;
   }
 
-  /** GPS heading 0° = north; truck PNG faces left until offset applied. */
   function truckRotation(heading) {
     const h = heading == null || heading === '' ? 0 : Number(heading);
     return (h + TRUCK_HEADING_OFFSET) % 360;
   }
-
-
 
   function headingFromTrail(trail) {
     if (!trail || trail.length < 2) return null;
@@ -761,7 +728,6 @@ window.LiveGpsApp = (function () {
     return bearingDegrees(a[0], a[1], b[0], b[1]);
   }
 
-  /** Prefer direction of recent movement over raw GT06 course (often wrong above 255°). */
   function resolveMarkerHeading(v) {
     const fromTrail = headingFromTrail(v.trail);
     if (fromTrail != null) {
@@ -788,15 +754,11 @@ window.LiveGpsApp = (function () {
     return v.heading_degrees;
   }
 
-
-
   function connectionHint(v) {
     if (v.connection_status === 'stale') return ' (' + CONFIG.i18n.stale_feed + ')';
     if (v.connection_status === 'signal_lost') return ' (' + CONFIG.i18n.no_signal + ')';
     return '';
   }
-
-
 
   function positionText(v) {
     if (!hasMapPosition(v)) return CONFIG.i18n.no_map_position;
@@ -965,7 +927,6 @@ window.LiveGpsApp = (function () {
       });
   }
 
-  /** Same reverse-geocoding cache as the vehicle popup, keyed by lat/lng — History popups have no vehicle id. */
   function historyAddressCacheKey(lat, lng) {
     return 'hist:' + Number(lat).toFixed(5) + ':' + Number(lng).toFixed(5);
   }
@@ -1014,7 +975,6 @@ window.LiveGpsApp = (function () {
       });
   }
 
-  /** Capture-phase delegation — works even when Leaflet blocks bubbling on the popup. */
   function initPopupActionDelegation() {
     document.addEventListener('click', (e) => {
       const target = e.target instanceof Element ? e.target : e.target?.parentElement;
@@ -1057,7 +1017,6 @@ window.LiveGpsApp = (function () {
     }, true);
   }
 
-  /** Block map from receiving popup clicks (close popup / steal focus). */
   function bindPopupInteractions(marker) {
     const popup = marker.getPopup();
     const el = popup?.getElement();
@@ -1148,7 +1107,6 @@ window.LiveGpsApp = (function () {
     return !!(m && map && map.hasLayer(m));
   }
 
-  /** Fleet list: fly to vehicle. Marker popup: keep vehicle on screen, only pan if clipped. */
   function ensureMapViewForVehiclePopup(v, done) {
     if (!v || !map || !hasMapPosition(v)) {
       if (done) done();
@@ -1269,7 +1227,6 @@ window.LiveGpsApp = (function () {
     );
   }
 
-  /** Spread markers that share identical GPS so clusters can split and popups stay reachable. */
   function markerDisplayLatLng(v) {
     const peers = colocatedVehiclePeers(v);
     if (!map || peers.length <= 1) return [v.latitude, v.longitude];
@@ -1403,16 +1360,10 @@ window.LiveGpsApp = (function () {
     });
   }
 
-  /**
-   * Pen effect: the truck drives first and the trail is painted behind it.
-   * trailRoutes holds each vehicle's latest trail from the API (it ends at the
-   * newest GPS point); the polyline only shows the part the marker has already
-   * driven, so the line never runs ahead of the truck.
-   */
   const trailRoutes = {};
-  /** Latest planned route per vehicle; it starts at the newest GPS point. */
+
   const plannedAhead = {};
-  /** Marker further than this from its trail is treated as off the road. */
+
   const TRAIL_SNAP_M = 60;
 
   function routeWithDistances(trail) {
@@ -1422,7 +1373,6 @@ window.LiveGpsApp = (function () {
     return { pts, cum, len: cum[cum.length - 1] };
   }
 
-  /** Distance (m) along the route of the point nearest to latlng, and how far latlng is from the route. */
   function projectOnRoute(route, latlng) {
     let best = { s: 0, off: Infinity };
     for (let i = 1; i < route.pts.length; i++) {
@@ -1442,7 +1392,6 @@ window.LiveGpsApp = (function () {
     return best;
   }
 
-  /** Position s metres along the route, and the index of the last route point behind it. */
   function pointOnRoute(route, s) {
     const d = Math.max(0, Math.min(route.len, s));
     let i = 0;
@@ -1454,7 +1403,6 @@ window.LiveGpsApp = (function () {
     return { pos: L.latLng(a.lat + (b.lat - a.lat) * t, a.lng + (b.lng - a.lng) * t), i };
   }
 
-  /** Draw the trail up to s metres along the route (ending exactly at pos); the planned route picks up from there. */
   function drawTrailTo(tripId, s, pos) {
     const line = trails[tripId];
     const route = trailRoutes[tripId];
@@ -1469,7 +1417,6 @@ window.LiveGpsApp = (function () {
     }
   }
 
-  /** Cut the trail at the marker's position so nothing is drawn ahead of it. */
   function syncTrailTipToMarker(tripId, latlng) {
     const line = trails[tripId];
     if (!line) return;
@@ -1500,8 +1447,7 @@ window.LiveGpsApp = (function () {
       if (key) syncTrailTipToMarker(key, to);
       return;
     }
-    // Drive along the road: when the new point ends the trail and the marker is on it,
-    // move by distance along the trail and paint the line behind the truck as it goes.
+
     const route = key ? trailRoutes[key] : null;
     if (route && route.len > 0 && to.distanceTo(route.pts[route.pts.length - 1]) < 1) {
       const proj = projectOnRoute(route, from);
@@ -1704,8 +1650,7 @@ window.LiveGpsApp = (function () {
           }).addTo(map);
         }
         trails[vehicleKey(v)].bringToBack();
-        // The new trail already reaches the newest GPS point; show only the part
-        // behind the marker; the marker's drive paints the rest.
+
         const m = markers[vehicleKey(v)];
         if (m && map.hasLayer(m)) syncTrailTipToMarker(vehicleKey(v), m.getLatLng());
       } else if (trails[vehicleKey(v)]) {
@@ -1722,8 +1667,6 @@ window.LiveGpsApp = (function () {
       }
     });
   }
-
-
 
   const OSM_TILE_URL = (location.protocol === 'file:' ? 'https://tile.openstreetmap.de/{z}/{x}/{y}.png' : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
   const OSM_TILE_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' + (location.protocol === 'file:' ? ' · Tiles: openstreetmap.de' : '');
@@ -1744,7 +1687,7 @@ window.LiveGpsApp = (function () {
       mapInstance.removeLayer(mapInstance._lgBaseLayer);
       mapInstance._lgBaseLayer = null;
     }
-    // Always use light OSM tiles — dark theme applies to UI chrome only, not the basemap.
+
     const layer = createLightTileLayer();
     layer.addTo(mapInstance);
     if (typeof layer.bringToBack === 'function') layer.bringToBack();
@@ -1770,7 +1713,7 @@ window.LiveGpsApp = (function () {
   }
 
   function onAdminThemeChange() {
-    // Basemap stays light OSM; only canvas chart needs an explicit redraw.
+
     if (historyPoints.length || document.getElementById('live-gps-history-canvas')) {
       drawHistoryChart(historyCursorX);
     }
@@ -1794,7 +1737,7 @@ window.LiveGpsApp = (function () {
 
   function initMap() {
     const el = document.getElementById('live-gps-map');
-    // Zoom control top-right (under the status chip) — top-left is occupied by the fleet list.
+
     map = L.map(el, { zoomControl: false, preferCanvas: false });
     L.control.zoom({ position: 'topright' }).addTo(map);
     setMapBasemap(map);
@@ -1831,7 +1774,6 @@ window.LiveGpsApp = (function () {
     return !!selectedVehicle() && !isHistoryChartExpanded();
   }
 
-  /* Lift the vehicle dock above the bottom history chart/seekbar (12px gap). */
   function applyDockClearance() {
     const dockWrap = document.getElementById('live-gps-dock-wrap');
     if (!dockWrap || !dockWrap.classList.contains('is-visible')) {
@@ -1854,8 +1796,6 @@ window.LiveGpsApp = (function () {
     ) + 'px';
   }
 
-  /* Keeps the Fleet/History panel clear of the bottom chart and vehicle dock;
-     the panel body scrolls instead of being covered. */
   function applyObjectsPanelClearance() {
     const objects = document.getElementById('live-gps-objects');
     if (!objects || objects.classList.contains('live-gps-objects--view-hidden')) return;
@@ -1916,8 +1856,6 @@ window.LiveGpsApp = (function () {
     objectsClearanceRaf = requestAnimationFrame(step);
   }
 
-  /* Smooth mode tracks the history panel as it animates; sync mode follows
-     resize/entry animations without easing the fleet panel behind. */
   function updateObjectsPanelMaxHeight(opts) {
     const smooth = !!(opts && opts.smooth);
     applyPanelClearance();
@@ -2298,10 +2236,6 @@ window.LiveGpsApp = (function () {
   let commandModalTripId = null;
   let commandModalBusy = false;
 
-
-
-
-
   function commandableVehicles() {
     return vehicles.filter(function(v) {
       return v.protocol === 'GT06' && v.device_id;
@@ -2629,7 +2563,7 @@ window.LiveGpsApp = (function () {
 
   function createFleetStatusFilter(config) {
     let options = [];
-    /** @type {Set<string>|null} */
+
     let active = null;
     const excluded = config.excluded || new Set();
     const checkboxAttr = config.checkboxAttr;
@@ -2942,7 +2876,6 @@ window.LiveGpsApp = (function () {
     map.fitBounds(bounds.pad(0.15), { maxZoom: 14 });
   }
 
-  /* ---------- map POI markers: type-specific Material icon pins ---------- */
   const poiMarkers = {};
   const poiGeofenceCircles = {};
   let poiPinZoomHooked = false;
@@ -3209,7 +3142,7 @@ window.LiveGpsApp = (function () {
     const lat = Number(point.latitude);
     const lng = Number(point.longitude);
     if (!Number.isFinite(lat) || !Number.isFinite(lng)) return false;
-    // Null Island only — no hemisphere assumption (AU / BR / ZA / AR are valid).
+
     if (Math.abs(lat) < 1e-5 && Math.abs(lng) < 1e-5) return false;
     if (lat < -90 || lat > 90 || lng < -180 || lng > 180) return false;
     return true;
@@ -3530,7 +3463,6 @@ window.LiveGpsApp = (function () {
     return HISTORY_EVENT_PIN_COLORS[type] || '#2563eb';
   }
 
-  /** Per-type sequence for drive / stopped / parked activity cards (left panel). */
   function historyActivitySeqByEventId(events) {
     const seq = { drive: 0, stopped: 0, parked: 0 };
     const byId = {};
@@ -3773,11 +3705,6 @@ window.LiveGpsApp = (function () {
       });
     });
 
-    // Idle windows have no lifecycle trip_start/trip_end events — bookend the
-    // path with first/last GPS. TO detail already gets those from the summary
-    // (lifecycle boundary); a second GPS fallback used a different event_id and
-    // often landed further along the route when the true start point was
-    // excluded by the effective_from window.
     if (isIdleDetail && historyPoints.length) {
       const first = historyPoints.find(historyPointHasCoords);
       const last = [...historyPoints].reverse().find(historyPointHasCoords);
@@ -3823,8 +3750,7 @@ window.LiveGpsApp = (function () {
 
   function historyPathWeightsForZoom(zoom) {
     const z = Number.isFinite(zoom) ? zoom : (map ? map.getZoom() : 12);
-    // Zoomed out (low z) → thicker screen-pixel stroke; street zoom → thinner.
-    // Anchor: ~z8 → ~11px, z12 → ~7px, z16 → ~4px.
+
     const path = Math.max(
       HISTORY_PATH_WEIGHT_MIN,
       Math.min(HISTORY_PATH_WEIGHT_MAX, Math.round(19 - z)),
@@ -3869,11 +3795,11 @@ window.LiveGpsApp = (function () {
       mapViewLocked = true;
       const bounds = L.latLngBounds(latlngs);
       map.fitBounds(bounds.pad(0.1), { maxZoom: 16, animate: false });
-      // fitBounds may change zoom — re-sync weights to the final level.
+
       syncHistoryPathLineWeights();
     }
     renderHistoryMarkers();
-    // Arrows after pins so overspeed popup anchors register into historyLeafletMarkersByEventId.
+
     if (latlngs.length >= 2) {
       historyArrowLayer = buildHistoryArrowLayer().addTo(map);
     }
@@ -3891,7 +3817,6 @@ window.LiveGpsApp = (function () {
     const markerKey = historyPlaybackMarkerKey();
     if (!markerKey) return;
 
-    // Legacy markers were keyed by trip_id before fleet-wide vehicle_id keys.
     if (historyTripId && historyTripId !== markerKey && markers[historyTripId]) {
       hideVehicleMarker(historyTripId);
       delete markers[historyTripId];
@@ -3941,7 +3866,6 @@ window.LiveGpsApp = (function () {
     return Math.max(0, Math.round(overlap));
   }
 
-  /** Bearing strictly between the previous and current playback point (null if no previous point, or stationary/identical). */
   function historyImmediateBearingAt(index) {
     if (index <= 0) return null;
     const a = historyPoints[index - 1];
@@ -3950,7 +3874,6 @@ window.LiveGpsApp = (function () {
     return bearingDegrees(Number(a.latitude), Number(a.longitude), Number(b.latitude), Number(b.longitude));
   }
 
-  /** Blends a new bearing sample into a previous one via unit-vector averaging (wraps correctly through 0/360). */
   function smoothBearing(prevBearing, rawBearing, weight) {
     const prevRad = prevBearing * Math.PI / 180;
     const rawRad = rawBearing * Math.PI / 180;
@@ -3959,11 +3882,6 @@ window.LiveGpsApp = (function () {
     return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
   }
 
-  /**
-   * Updates and returns the smoothed follow bearing for this tick. Called every tick
-   * (even while follow is suspended) so smoothing stays continuous. Reuses the last
-   * valid bearing when the vehicle is stationary, rather than snapping to a default.
-   */
   function updateHistoryFollowBearing(index) {
     const raw = historyImmediateBearingAt(index);
     if (raw == null) return historyFollowBearing;
@@ -3973,11 +3891,6 @@ window.LiveGpsApp = (function () {
     return historyFollowBearing;
   }
 
-  /**
-   * Shifts the pan target ahead of the vehicle in its direction of travel (screen space),
-   * so the vehicle itself renders behind center with more upcoming path visible. Falls
-   * back to the plain latlng (no offset) until a bearing has been established.
-   */
   function historyFollowLookaheadLatLng(latlng, bearing) {
     if (!map || !latlng || bearing == null) return latlng;
     const point = map.latLngToContainerPoint(L.latLng(latlng));
@@ -3989,18 +3902,13 @@ window.LiveGpsApp = (function () {
     return map.containerPointToLatLng(shifted);
   }
 
-  /**
-   * Pan so the vehicle sits in the upper portion of the *visible* map
-   * (history chart covers the bottom). Positive Y shifts the follow target
-   * south of the vehicle so it renders above screen center.
-   */
   function historyMapFollowAnchorLatLng(latlng) {
     if (!map || !latlng) return latlng;
     const size = map.getSize();
     if (!size || !size.y) return latlng;
     const occlusion = historyMapFollowBottomOcclusionPx();
     const visibleH = Math.max(80, size.y - occlusion);
-    // ~32% down the unobscured map — upper third, like the legacy provider.
+
     const desiredY = occlusion > 0 ? visibleH * 0.32 : size.y * 0.42;
     const centerY = size.y / 2;
     const offsetY = centerY - desiredY;
@@ -4076,7 +3984,7 @@ window.LiveGpsApp = (function () {
     L.DomEvent.preventDefault(e);
     L.DomEvent.stopPropagation(e);
     if (!historyPoints.length) return;
-    // Recenter + re-enable follow works while playing, paused, or stopped.
+
     enableHistoryMapFollow({ pan: true });
   }
 
@@ -4101,7 +4009,6 @@ window.LiveGpsApp = (function () {
     historyMapFollowControl.addTo(map);
   }
 
-  /* Play buttons show a pause glyph while the playback timer runs. */
   function syncHistoryPlayButtons() {
     const playing = !!historyPlayTimer;
     ['live-gps-history-play', 'live-gps-history-play-compact'].forEach((id) => {
@@ -4143,7 +4050,6 @@ window.LiveGpsApp = (function () {
       + ' ' + padN(d.getHours()) + ':' + padN(d.getMinutes()) + ':' + padN(d.getSeconds());
   }
 
-  /** Seek bar labels and collapsed readout — always includes seconds. */
   function formatHistorySeekTime(iso) {
     if (!iso) return '—';
     const d = new Date(iso);
@@ -4247,8 +4153,6 @@ window.LiveGpsApp = (function () {
     );
   }
 
-  /* Clicking a timeline card seeks the playback marker to that event, so
-     the user sees exactly where the vehicle stopped/started on the map. */
   function jumpToHistoryEvent(card) {
     const eventId = card.dataset.eventId;
     if (!eventId || !historyPoints.length) return;
@@ -4299,11 +4203,6 @@ window.LiveGpsApp = (function () {
     historyChartOverspeedHoverId = null;
   }
 
-  /**
-   * Show the overspeed popup for a chart dot / arrow. Debounced by default so
-   * fast mouse movement across dense dots doesn't thrash the map with
-   * open/close/pan cycles; pass { immediate: true } for a real click.
-   */
   function jumpToOverspeedEvent(ev, opts) {
     const options = opts || {};
     if (!ev) return;
@@ -4399,9 +4298,9 @@ window.LiveGpsApp = (function () {
     const padRight = 12;
     const viewportPlotW = Math.max(0, (viewportWidth || 0) - padLeft - padRight);
     const basePlotW = historyChartBasePlotWidth(viewportPlotW);
-    // Floor: content never narrower than the viewport (may be > 1 for short trips).
+
     const minZoom = basePlotW > 0 ? (viewportPlotW / basePlotW) : 1;
-    // Cap: adjacent samples stretch at most MAX_PX_PER_POINT (zoom 1 = TARGET px/point).
+
     const maxZoom = Math.max(
       minZoom,
       Math.min(HISTORY_CHART_MAX_PX_PER_POINT / HISTORY_CHART_TARGET_PX_PER_POINT, 64)
@@ -4410,7 +4309,7 @@ window.LiveGpsApp = (function () {
   }
 
   function computeHistoryChartDefaultZoom(viewportWidth) {
-    // Prefer zoom 1.0 (TARGET px/point); clamp into [min, max] for this trip/viewport.
+
     const { minZoom, maxZoom } = historyChartZoomLimits(viewportWidth);
     return Math.max(minZoom, Math.min(maxZoom, 1));
   }
@@ -4435,10 +4334,6 @@ window.LiveGpsApp = (function () {
     syncHistoryChartZoomButtons();
   }
 
-  /**
-   * @param {number} nextZoom
-   * @param {{ anchorRatio?: number, anchorClientX?: number }} [opts]
-   */
   function setHistoryChartZoom(nextZoom, opts) {
     const options = opts || {};
     const wrap = document.getElementById('live-gps-history-chart-wrap');
@@ -4494,7 +4389,7 @@ window.LiveGpsApp = (function () {
   }
 
   function buildHistoryChartLayout(viewportWidth, height) {
-    // Room for time labels below the plot — HTML seekbar sits in its own row under the canvas.
+
     const pad = { top: 16, right: 12, bottom: 38, left: 40 };
     const pointCount = historyPoints.length;
     const viewportPlotW = Math.max(0, viewportWidth - pad.left - pad.right);
@@ -4673,7 +4568,7 @@ window.LiveGpsApp = (function () {
     const theme = historyChartTheme();
     const accent = theme.accent;
     const accentSoft = theme.accentSoft;
-    // Sit labels clearly under the axis, inside pad.bottom (not against the seek row).
+
     const labelY = baseY + 8;
 
     ctx.fillStyle = theme.plotBg;
@@ -4776,7 +4671,6 @@ window.LiveGpsApp = (function () {
     const nx = historyXAt(nearest, layout);
     const ny = historyYAt(values[nearest], layout);
 
-    // Vertical playhead on the speed chart (HTML seekbar below is the scrub control).
     ctx.strokeStyle = theme.overspeed;
     ctx.globalAlpha = 0.9;
     ctx.lineWidth = 1.5;
@@ -4818,8 +4712,7 @@ window.LiveGpsApp = (function () {
   function startHistoryPlayback() {
     stopHistoryPlayback();
     if (!historyPoints.length) return;
-    // Resume mid-track (e.g. after pausing or jumping to an event);
-    // restart from the beginning once the end is reached.
+
     if (historyPlayIndex >= historyPoints.length - 1) {
       setHistoryPositionByIndex(0);
     }
@@ -4832,7 +4725,6 @@ window.LiveGpsApp = (function () {
     syncHistoryPlayButtons();
   }
 
-  /* Play button doubles as pause while playback is running. */
   function toggleHistoryPlayback() {
     if (historyPlayTimer) {
       stopHistoryPlayback();
@@ -4841,10 +4733,9 @@ window.LiveGpsApp = (function () {
     }
   }
 
-  /* Stop = pause and rewind, so the next play starts from the beginning. */
   function resetHistoryPlayback() {
     stopHistoryPlayback();
-    // Fresh Stop clears a user suspend so the next Play auto-follows again.
+
     historyMapFollowUserSuspended = false;
     historyMapFollowActive = false;
     historyFollowBearing = null;
@@ -4983,7 +4874,7 @@ window.LiveGpsApp = (function () {
       historySeekScrubbing = true;
       seekPointerId = e.pointerId;
       track.classList.add('is-scrubbing');
-      try { track.setPointerCapture(e.pointerId); } catch (_) { /* ignore */ }
+      try { track.setPointerCapture(e.pointerId); } catch (_) {  }
       stopHistoryPlayback();
       scrubSeek(e.clientX);
     }
@@ -4999,7 +4890,7 @@ window.LiveGpsApp = (function () {
       if (!historySeekScrubbing) return;
       if (e && seekPointerId != null && e.pointerId !== seekPointerId) return;
       if (e && track.hasPointerCapture(e.pointerId)) {
-        try { track.releasePointerCapture(e.pointerId); } catch (_) { /* ignore */ }
+        try { track.releasePointerCapture(e.pointerId); } catch (_) {  }
       }
       historySeekScrubbing = false;
       seekPointerId = null;
@@ -5218,7 +5109,6 @@ window.LiveGpsApp = (function () {
     updateHistoryRangeBoxes();
   }
 
-  /* Highlight the matching quick-range pill (null clears all, e.g. custom date). */
   function setHistoryPresetActive(rangeKey) {
     document.querySelectorAll('#live-gps-history-presets .live-gps-history-preset').forEach((btn) => {
       btn.classList.toggle('is-active', btn.dataset.range === rangeKey);
@@ -5536,7 +5426,6 @@ window.LiveGpsApp = (function () {
     });
   }
 
-  /* Swaps the Fleet panel between its two tab views: 'fleet' and 'history'. */
   function setObjectsTab(view) {
     const showHistory = view === 'history';
     if (toStatusFilter) toStatusFilter.closeMenu();
@@ -5918,7 +5807,7 @@ window.LiveGpsApp = (function () {
 
   function mergeHistoryActivities(geoActivities, summaryEvents) {
     const merged = geoActivities.concat(summaryEvents || []);
-    // Oldest first so Drive #1 is the earliest activity in the window.
+
     merged.sort(function (a, b) {
       const ta = new Date(a.event_at || a.started_at || a.ended_at || 0).getTime();
       const tb = new Date(b.event_at || b.started_at || b.ended_at || 0).getTime();
@@ -7045,7 +6934,7 @@ window.LiveGpsApp = (function () {
   }
 
   function initFollowPanelDrag() {
-    /* Panels bind drag on create — stack starts empty. */
+
   }
 
   function initHistoryPanel() {
@@ -7176,7 +7065,7 @@ window.LiveGpsApp = (function () {
         'liveGpsDockCollapsed',
         panel.classList.contains('live-gps-panel--collapsed') ? '1' : '0'
       );
-    } catch (e) { /* ignore */ }
+    } catch (e) {  }
     syncDockPanelState();
   }
 
@@ -7199,7 +7088,7 @@ window.LiveGpsApp = (function () {
   function saveObjectsPanelPosition(left, top) {
     try {
       localStorage.setItem('liveGpsObjectsPos', JSON.stringify({ left, top }));
-    } catch (e) { /* ignore */ }
+    } catch (e) {  }
   }
 
   function clampObjectsPanelPosition(left, top) {
@@ -7343,7 +7232,7 @@ window.LiveGpsApp = (function () {
       if (localStorage.getItem('liveGpsObjectsCollapsed') === '1') {
         panel.classList.add('live-gps-objects--collapsed');
       }
-    } catch (e) { /* ignore */ }
+    } catch (e) {  }
 
     toggle.addEventListener('click', () => {
       panel.classList.toggle('live-gps-objects--collapsed');
@@ -7352,7 +7241,7 @@ window.LiveGpsApp = (function () {
           'liveGpsObjectsCollapsed',
           panel.classList.contains('live-gps-objects--collapsed') ? '1' : '0'
         );
-      } catch (e) { /* ignore */ }
+      } catch (e) {  }
       syncObjectsPanelState();
     });
     restoreObjectsPanelPosition();
@@ -7370,7 +7259,7 @@ window.LiveGpsApp = (function () {
         if (localStorage.getItem('liveGpsDockCollapsed') === '1') {
           panel.classList.add('live-gps-panel--collapsed');
         }
-      } catch (e) { /* ignore */ }
+      } catch (e) {  }
     }
 
     if (panelCollapseBtn) {
@@ -7398,15 +7287,13 @@ window.LiveGpsApp = (function () {
     initObjectsPanel();
     initFollowPanelDrag();
     initHistoryPanel();
-    // Chart panel height settles asynchronously (canvas redraws, collapse) —
-    // track it so the Fleet/History panel keeps its 12px clearance.
+
     const chartPanel = document.getElementById('live-gps-history');
     if (chartPanel) {
       if (window.ResizeObserver) {
         new ResizeObserver(() => updateObjectsPanelMaxHeight()).observe(chartPanel);
       }
-      // The panel animates in (lg-card-in transform) and transitions sizes —
-      // rects measured mid-animation are off, so recompute once it settles.
+
       chartPanel.addEventListener('transitionend', () => updateObjectsPanelMaxHeight());
       chartPanel.addEventListener('animationend', () => updateObjectsPanelMaxHeight());
     }

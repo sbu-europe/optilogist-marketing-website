@@ -1,4 +1,4 @@
-/* CHANGELISTS */
+
 
 #changelist {
     display: flex;
@@ -50,7 +50,7 @@
     overflow: hidden;
 }
 
-/* CHANGELIST TABLES */
+
 
 #changelist table thead th {
     padding: 0;
@@ -71,7 +71,7 @@
     color: var(--body-quiet-color);
 }
 
-/* TOOLBAR */
+
 
 #toolbar {
     padding: 8px 10px;
@@ -129,7 +129,7 @@
     word-break: break-word;
 }
 
-/* FILTER COLUMN */
+
 
 #changelist-filter {
     flex: 0 0 240px;
@@ -222,7 +222,7 @@
     border-bottom: 1px solid var(--hairline-color);
 }
 
-/* DATE DRILLDOWN */
+
 
 .change-list .toplinks {
     display: flex;
@@ -245,7 +245,7 @@
     color: var(--link-hover-color);
 }
 
-/* ACTIONS */
+
 
 .filtered .actions {
     border-right: none;
@@ -256,8 +256,7 @@
     vertical-align: baseline;
 }
 
-/* Once the :has() pseudo-class is supported by all browsers, the tr.selected
-   selector and the JS adding the class can be removed. */
+
 #changelist tbody tr.selected {
     background-color: var(--selected-row);
 }

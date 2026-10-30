@@ -1,7 +1,4 @@
-/**
- * Driver Operations (DM-01) — mobile-responsive admin UI.
- * Scoped to driver-facing transport models; loaded via ModelAdmin.Media.
- */
+
 
 .dfms-btn-touch-target {
   min-height: 44px;
@@ -12,7 +9,7 @@
   box-sizing: border-box;
 }
 
-/* ─── Tab bar (changelist) ─────────────────────────────────────────────────── */
+
 
 .driver-tabs {
   display: flex;
@@ -27,7 +24,7 @@
   text-align: center;
 }
 
-/* ─── Detail sections (change form) ────────────────────────────────────────── */
+
 
 .driver-detail-section {
   margin: 1.25rem 0;
@@ -113,16 +110,16 @@
   color: var(--dfms-grey-900, #f9fafb);
 }
 
-/* ─── Mobile & tablet (≤ 767px) ─────────────────────────────────────────────── */
+
 
 @media (max-width: 767px) {
-  /* Prevent horizontal page scroll */
+  
   body.model-drivertransportorder #content,
   body.model-proofofdelivery #content {
     overflow-x: hidden;
   }
 
-  /* Changelist: tabs stack full-width */
+  
   .driver-tabs {
     flex-direction: column;
   }
@@ -135,7 +132,7 @@
     justify-content: center;
   }
 
-  /* Hide redundant filter sidebar (tabs cover execution status) */
+  
   body.model-drivertransportorder.change-list #changelist-filter {
     display: none;
   }
@@ -144,14 +141,14 @@
     margin-right: 0;
   }
 
-  /* Hide bulk-selection UI on driver list */
+  
   body.model-drivertransportorder.change-list #dfms-selection-toolbar,
   body.model-drivertransportorder.change-list .action-checkbox-column,
   body.model-drivertransportorder.change-list td.action-checkbox {
     display: none !important;
   }
 
-  /* Scroll hint (hidden on desktop) */
+  
   .dfms-driver-table-scroll-hint {
     display: flex;
     align-items: center;
@@ -170,7 +167,7 @@
     border-color: var(--dfms-grey-200, #1e2340);
   }
 
-  /* Horizontally scrollable table inside the changelist (not the whole page) */
+  
   body.model-drivertransportorder.change-list .dfms-driver-changelist-scroll .results {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -216,7 +213,7 @@
     display: none;
   }
 
-  /* Sticky TO number while scrolling columns */
+  
   body.model-drivertransportorder.change-list .dfms-driver-changelist-scroll #result_list th.field-to_number,
   body.model-drivertransportorder.change-list .dfms-driver-changelist-scroll #result_list td.field-to_number {
     position: sticky;
@@ -255,7 +252,7 @@
     background: var(--dfms-grey-200, #1e2340);
   }
 
-  /* Change form: stack aligned field rows */
+  
   body.model-drivertransportorder.change-form fieldset .form-row {
     display: flex;
     flex-direction: column;
@@ -306,7 +303,7 @@
     justify-content: center;
   }
 
-  /* Detail sections */
+  
   .driver-detail-section {
     margin: 1rem 0;
     padding: 0.875rem;
@@ -347,7 +344,7 @@
     font-weight: 600;
   }
 
-  /* POD block sits outside fieldsets */
+  
   body.model-drivertransportorder.change-form .driver-detail-section--pod {
     max-width: none !important;
     margin-left: 0;
@@ -355,14 +352,14 @@
   }
 }
 
-/* Hide scroll hint on desktop */
+
 @media (min-width: 768px) {
   .dfms-driver-table-scroll-hint {
     display: none;
   }
 }
 
-/* ─── Tablet (768px – 1024px): scrollable table fallback for POD list ─────── */
+
 
 @media (min-width: 768px) and (max-width: 1024px) {
   body.model-proofofdelivery.change-list .results {

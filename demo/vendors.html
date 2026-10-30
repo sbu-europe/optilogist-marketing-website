@@ -4,11 +4,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
-<link rel="stylesheet" href="static/demo/demo-shim.css?v=mv5a1jhl">
-<script src="static/demo/api-data.js?v=mv5a1jhl"></script>
-<script src="static/demo/demo-shim.js?v=mv5a1jhl"></script>
-<script src="static/demo/master-seed.js?v=mv5a1jhl"></script>
-<script src="static/demo/master-crud.js?v=mv5a1jhl"></script>
+<link rel="stylesheet" href="static/demo/demo-shim.css?v=mock2">
+<script src="static/demo/api-data.js?v=mock2"></script>
+<script src="static/demo/demo-shim.js?v=mock2"></script>
+<script src="static/demo/master-seed.js?v=mock2"></script>
+<script src="static/demo/master-crud.js?v=mock2"></script>
 <title>Vendors</title>
 <link rel="stylesheet" href="static/admin/css/base.css">
 
@@ -43,7 +43,7 @@
     var t = localStorage.getItem('dfms-admin-theme');
     if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', t);
-    // Keep native date/time picker icons visible: match DFMS theme, not OS preference alone.
+
     document.documentElement.style.colorScheme = t === 'dark' ? 'dark' : 'light';
 
     var collapsed = localStorage.getItem('dfms-sidebar-collapsed') === 'true';
@@ -68,7 +68,6 @@
 
 
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-<script src="static/js/portal_auth.js"></script>
 <style>
   .vm-vendors { max-width: none; width: 100%; }
   .vm-vendors__lead {
@@ -456,11 +455,11 @@
 <body class=""
   data-admin-utc-offset="21600">
 <a href="#content-start" class="skip-to-content-link">Skip to main content</a>
-<!-- Container -->
+
 <div id="container">
 
     
-    <!-- Header -->
+    
     
       <header id="header">
         <div id="branding">
@@ -691,7 +690,7 @@
             if (token && input) input.value = token;
           });
         })();
-        </script>
+</script>
 
       </div>
     </div>
@@ -703,7 +702,7 @@
         
       </header>
     
-    <!-- END Header -->
+    
     
     
 
@@ -1472,7 +1471,7 @@
         
           
         
-        <!-- Content -->
+        
         <div id="content" class="colM">
           
   
@@ -2091,7 +2090,7 @@ function vendorsPage() {
     totalCount: 6,
     totalPages: 1,
     rows: [
-      
+
       {
         id: 'e1dbc12f\u002D1841\u002D4d81\u002D8590\u002D78949d1b7f92',
         vendor_code: 'VND\u002D20260821\u002DP6KCKP',
@@ -2105,7 +2104,7 @@ function vendorsPage() {
         vendor_type: 'contractual',
         requested_at: '2026\u002D08\u002D21T08:51:15.084285+00:00',
       },
-      
+
       {
         id: 'a612b387\u002D9b95\u002D471d\u002Da57f\u002D5694e531aa5a',
         vendor_code: 'VND\u002D20260821\u002DKBH62O',
@@ -2119,7 +2118,7 @@ function vendorsPage() {
         vendor_type: 'non_contractual',
         requested_at: '2026\u002D08\u002D21T08:42:12.924487+00:00',
       },
-      
+
       {
         id: '39713577\u002Dcb63\u002D4caf\u002Dbad5\u002D4a7b1e1851ff',
         vendor_code: 'VND\u002D20260820\u002DTTCISN',
@@ -2133,7 +2132,7 @@ function vendorsPage() {
         vendor_type: 'non_contractual',
         requested_at: '2026\u002D08\u002D20T15:24:02.453875+00:00',
       },
-      
+
       {
         id: '1c326e76\u002De710\u002D488b\u002Db076\u002Dde5ca22a66b3',
         vendor_code: 'VND\u002D20260819\u002D82OOYJ',
@@ -2147,7 +2146,7 @@ function vendorsPage() {
         vendor_type: 'non_contractual',
         requested_at: '2026\u002D08\u002D19T13:38:51.364467+00:00',
       },
-      
+
       {
         id: 'c1f770ea\u002D1ef2\u002D449e\u002D83f5\u002D75067256351b',
         vendor_code: 'VND\u002D20260819\u002DY2KNW5',
@@ -2161,7 +2160,7 @@ function vendorsPage() {
         vendor_type: 'contractual',
         requested_at: '2026\u002D08\u002D19T12:54:20.027636+00:00',
       },
-      
+
       {
         id: 'e58ff4d5\u002D54c7\u002D4c37\u002Da978\u002D30f0765ca1a4',
         vendor_code: 'VND\u002D20260818\u002DSA1JZE',
@@ -2175,7 +2174,7 @@ function vendorsPage() {
         vendor_type: 'contractual',
         requested_at: '2026\u002D08\u002D18T15:29:40.513662+00:00',
       }
-      
+
     ],
     loaded: true,
     selected: null,
@@ -2195,23 +2194,16 @@ function vendorsPage() {
       address: '',
     },
 
-    fetchOpts() {
-      return typeof dfmsFetchOptions === 'function' ? dfmsFetchOptions() : { credentials: 'same-origin' };
+    fetchOpts(extra) {
+      return Object.assign({ credentials: 'same-origin', headers: { Accept: 'application/json', 'Content-Type': 'application/json' } }, extra || {});
     },
 
     apiFetch(url, extra) {
-      if (typeof dfmsAuthenticatedFetch === 'function') {
-        return dfmsAuthenticatedFetch(url, extra);
-      }
       return fetch(url, this.fetchOpts(extra));
     },
 
     async handleAuthFailure(res) {
-      if (res.status !== 401) return false;
-      localStorage.removeItem('dfms_access');
-      localStorage.removeItem('dfms_refresh');
-      window.location.href = '/admin/login/?next=' + encodeURIComponent(window.location.pathname + window.location.search);
-      return true;
+      return false;
     },
 
     apiErrorDetail(data) {
@@ -2537,7 +2529,7 @@ function vendorsPage() {
         ? 'Approved as Contractual'
         : 'Approved as Non-Contractual';
       await this.runBulk(
-        '/api/v1/tenant/vendors/join-requests/bulk-approve/',
+        '/demo-data/vendors/join-requests/bulk-approve/',
         { ids: this.selectedIds, vendor_type: vendorType },
         label
       );
@@ -2566,7 +2558,7 @@ function vendorsPage() {
       }
       if (!window.confirm('Suspend ' + this.selectedIds.length + ' vendor(s) for this tenant?')) return;
       await this.runBulk(
-        '/api/v1/tenant/vendors/bulk-suspend/',
+        '/demo-data/vendors/bulk-suspend/',
         { ids: this.selectedIds },
         'Suspended'
       );
@@ -2579,20 +2571,14 @@ function vendorsPage() {
       }
       if (!window.confirm('Reactivate ' + this.selectedIds.length + ' vendor(s) for this tenant?')) return;
       await this.runBulk(
-        '/api/v1/tenant/vendors/bulk-reactivate/',
+        '/demo-data/vendors/bulk-reactivate/',
         { ids: this.selectedIds },
         'Reactivated'
       );
     },
 
     async init() {
-      if (typeof dfmsEnsurePortalJwt === 'function') {
-        const authed = await dfmsEnsurePortalJwt();
-        if (!authed) {
-          window.location.href = '/admin/login/?next=' + encodeURIComponent(window.location.pathname + window.location.search);
-          return;
-        }
-      }
+      await new Promise((resolve) => setTimeout(resolve));
       const tbody = document.getElementById('vm-vendors-tbody');
       if (tbody) {
         tbody.addEventListener('click', (evt) => {
@@ -2682,7 +2668,7 @@ function vendorsPage() {
     },
 
     listUrl() {
-      const url = new URL('/api/v1/tenant/vendors/', window.location.origin);
+      const url = new URL('/demo-data/vendors/', window.location.origin);
       if (this.statusFilter && this.statusFilter !== 'all') {
         url.searchParams.set('status', this.statusFilter);
       } else {
@@ -2785,7 +2771,7 @@ function vendorsPage() {
       this.error = '';
       this.success = '';
       this.loading = true;
-      const res = await this.apiFetch('/api/v1/tenant/vendors/join-requests/' + id + '/approve/', {
+      const res = await this.apiFetch('/demo-data/vendors/join-requests/' + id + '/approve/', {
         method: 'POST',
         body: JSON.stringify({ vendor_type: vendorType }),
       });
@@ -2818,7 +2804,7 @@ function vendorsPage() {
         this.rejectOpen = false;
         this.rejectBulk = false;
         await this.runBulk(
-          '/api/v1/tenant/vendors/join-requests/bulk-reject/',
+          '/demo-data/vendors/join-requests/bulk-reject/',
           { ids: this.selectedIds, remarks: remarks },
           'Rejected'
         );
@@ -2826,7 +2812,7 @@ function vendorsPage() {
       }
       this.error = '';
       this.loading = true;
-      const res = await this.apiFetch('/api/v1/tenant/vendors/join-requests/' + this.selected.id + '/reject/', {
+      const res = await this.apiFetch('/demo-data/vendors/join-requests/' + this.selected.id + '/reject/', {
         method: 'POST',
         body: JSON.stringify({ remarks: remarks }),
       });
@@ -2866,7 +2852,7 @@ function vendorsPage() {
       this.vendorLoaded = false;
       this.vendorDocuments = [];
       try {
-        const res = await this.apiFetch('/api/v1/tenant/vendors/' + row.id + '/');
+        const res = await this.apiFetch('/demo-data/vendors/' + row.id + '/');
         if (await this.handleAuthFailure(res)) return;
         if (!res.ok) {
           const d = await res.json().catch(() => ({}));
@@ -2894,7 +2880,7 @@ function vendorsPage() {
       this.error = '';
       this.success = '';
       this.loading = true;
-      const res = await this.apiFetch('/api/v1/tenant/vendors/' + this.selected.id + '/suspend/', {
+      const res = await this.apiFetch('/demo-data/vendors/' + this.selected.id + '/suspend/', {
         method: 'POST',
       });
       this.loading = false;
@@ -2915,7 +2901,7 @@ function vendorsPage() {
       this.error = '';
       this.success = '';
       this.loading = true;
-      const res = await this.apiFetch('/api/v1/tenant/vendors/' + this.selected.id + '/reactivate/', {
+      const res = await this.apiFetch('/demo-data/vendors/' + this.selected.id + '/reactivate/', {
         method: 'POST',
       });
       this.loading = false;
@@ -2946,7 +2932,7 @@ function vendorsPage() {
         }
       };
 
-      const res = await this.apiFetch('/api/v1/tenant/vendors/' + this.selected.id + '/', {
+      const res = await this.apiFetch('/demo-data/vendors/' + this.selected.id + '/', {
         method: 'PATCH',
         body: JSON.stringify(payload),
       });
@@ -2967,19 +2953,19 @@ function vendorsPage() {
           
           <br class="clear">
         </div>
-        <!-- END Content -->
+        
         <div id="footer"></div>
       </main>
     </div>
 </div>
-<!-- END Container -->
 
-<!-- SVGs -->
+
+
 <svg xmlns="http://www.w3.org/2000/svg" class="base-svgs">
   <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"/></symbol>
   <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"/></symbol>
   <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></symbol>
 </svg>
-<!-- END SVGs -->
+
 </body>
 </html>
