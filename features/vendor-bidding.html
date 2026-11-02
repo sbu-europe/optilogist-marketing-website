@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" data-title-bn="ভেন্ডর বিডিং | Optilogist">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vendor Bidding | Optilogist</title>
+  <meta name="description" content="Hire vendor trucks with Optilogist: approve vendors, give orders to contract vendors or open them for bids, compare bids from the vendor app and award each order.">
+  <link rel="icon" href="../favicon.ico?v=2" sizes="32x32">
+  <link rel="icon" href="../static/img/brand/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../static/img/brand/apple-touch-icon.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="../static/js/theme.js"></script>
+  <link rel="stylesheet" href="../static/css/base.css">
+  <link rel="stylesheet" href="../static/css/landing.css">
+  <link rel="stylesheet" href="../static/css/feature.css">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <a href="../index.html#faq" data-i18n="top.help">Help Center</a>
+      <a href="../index.html#contact" data-i18n="top.contact">Contact Us</a>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="brand" href="../index.html">
+        <img class="brand__mark brand__mark--light" src="../static/img/brand/mark-light.svg" alt="" width="32" height="32">
+        <img class="brand__mark brand__mark--dark" src="../static/img/brand/mark-dark.svg" alt="" width="32" height="32">
+        Optilogist
+      </a>
+      <button class="nav__toggle" aria-expanded="false" aria-controls="nav-menu" data-i18n="nav.menu">Menu</button>
+      <nav id="nav-menu" class="nav__menu" aria-label="Main">
+        <div class="nav__links">
+          <a href="../index.html#platform" data-i18n="nav.platform">Platform</a>
+          <div class="nav__dd">
+            <button type="button" class="link nav__ddbtn is-current" aria-expanded="false" aria-controls="mega-features"><span data-i18n="nav.features">Features</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="mega" id="mega-features" hidden>
+              <div class="mega__card">
+                <div class="mega__body">
+                  <div>
+                    <div class="mega__head"><span class="mega__label" data-i18n="mega.features">Features</span><a class="mega__all" href="../index.html#platform"><span data-i18n="mega.all">View all</span> <span class="arrow">&rarr;</span></a></div>
+                    <ul class="mega__grid">
+                <li><a href="../features/requisitions.html"><b data-i18n="ft.req">Requisitions</b><span data-i18n="ft.req.d">Raise finished-goods and port shipment requests</span></a></li>
+                <li><a href="../features/transport-requests.html"><b data-i18n="ft.tr">Transport Requests</b><span data-i18n="ft.tr.d">Split demand by source and get it approved</span></a></li>
+                <li><a href="../features/transport-orders.html"><b data-i18n="ft.to">Transport Orders</b><span data-i18n="ft.to.d">Plan each load on your own fleet or a vendor's</span></a></li>
+                <li><a href="../features/fleet-drivers.html"><b data-i18n="ft.fleet">Fleet &amp; Drivers</b><span data-i18n="ft.fleet.d">Vehicle status, checklists, attendance and leave</span></a></li>
+                <li><a href="../features/vendor-bidding.html" aria-current="page"><b data-i18n="ft.vendor">Vendor Bidding</b><span data-i18n="ft.vendor.d">Assign contract vendors or run timed bids</span></a></li>
+                <li><a href="../index.html#yard"><b data-i18n="ft.gate">Gate &amp; Weighbridge</b><span data-i18n="ft.gate.d">Gate-in, scale-in, queue tokens and gate-out</span></a></li>
+                <li><a href="../index.html#yard"><b data-i18n="ft.cc">Command Center &amp; Loading</b><span data-i18n="ft.cc.d">Assign bays and record load and unload times</span></a></li>
+                <li><a href="../index.html#yard"><b data-i18n="ft.qc">Quality Control</b><span data-i18n="ft.qc.d">Sample, decide and resample before unloading</span></a></li>
+                <li><a href="../index.html#track"><b data-i18n="ft.gps">Live GPS &amp; Geofencing</b><span data-i18n="ft.gps.d">Live map, site arrivals and dwell time</span></a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div class="mega__head"><span class="mega__label" data-i18n="mega.explore">Explore</span></div>
+                    <ul class="mega__links">
+                <li><a href="../index.html#platform"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M7.5 6H15a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h7.5"/></svg><span data-i18n="foot.l1">How it works</span></a></li>
+                <li><a href="../index.html#roles"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5a6.5 6.5 0 0 1 3.5 5.5"/></svg><span data-i18n="roles.eyebrow">Built for every team</span></a></li>
+                <li><a href="../index.html#vendors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18h2"/></svg><span data-i18n="apps.2t">Vendor app</span></a></li>
+                <li><a href="../demo/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5l5.5 3.5-5.5 3.5z"/></svg><span data-i18n="cta.demo">Live Demo</span></a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="mega__foot"><a href="../index.html#faq" data-i18n="top.help">Help Center</a><span>|</span><a href="../index.html#contact" data-i18n="top.contact">Contact Us</a><span>|</span><a href="../index.html#plans" data-i18n="nav.plans">Plans</a></div>
+              </div>
+            </div>
+          </div>
+          <a href="../index.html#roles" data-i18n="nav.solutions">Solutions</a>
+          <a href="../index.html#vendors" data-i18n="nav.vendors">For Vendors</a>
+          <a href="../index.html#plans" data-i18n="nav.plans">Plans</a>
+        </div>
+        <div class="nav__actions">
+          <button type="button" class="theme-toggle" id="theme-toggle" title="Switch theme" aria-label="Switch theme">
+            <svg class="icon-moon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286"/></svg>
+            <svg class="icon-sun" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/></svg>
+          </button>
+          <div class="lang" role="group" aria-label="Language">
+            <button type="button" data-lang="en" aria-pressed="true">EN</button>
+            <button type="button" data-lang="bn" aria-pressed="false">বাংলা</button>
+          </div>
+          <button type="button" class="link js-login" data-i18n="nav.login">Log in</button>
+          <a class="btn btn--primary btn--sm" href="../demo/index.html" data-i18n="cta.demo">Live Demo</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- 1. HERO -->
+    <section class="fhero">
+      <div class="container">
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="../index.html" data-i18n="tq.home">Home</a></li>
+            <li><a href="../index.html#platform" data-i18n="nav.features">Features</a></li>
+            <li><span aria-current="page" data-i18n="ft.vendor">Vendor Bidding</span></li>
+          </ol>
+        </nav>
+        <div class="fhero__grid">
+          <div>
+            <p class="eyebrow" data-i18n="vb.eyebrow">Vendor Bidding</p>
+            <h1 data-i18n="vb.title">Get competitive rates from approved vendors</h1>
+            <p class="fhero__lead" data-i18n="vb.lead">When an order is planned on vendor fleet, the Transport Distribution Officer gives it to a contract vendor at the agreed rate or opens it for bids. Approved vendors bid from the vendor app within a set window, and you compare the bids and award each order to one vendor.</p>
+            <div class="actions">
+              <a class="btn btn--primary" href="../demo/index.html"><span data-i18n="cta.demo">Live Demo</span> <span class="arrow">&rarr;</span></a>
+              <button type="button" class="btn btn--ghost js-login" data-i18n="cta.login">Log in to your workspace</button>
+            </div>
+            <div class="fhero__roles" aria-label="Used by">
+              <span data-i18n="vb.r.tdo">Transport Distribution Officer (Vendor Fleet)</span><span data-i18n="r.vendor">Vendor</span><span data-i18n="vb.r.admin">Admin</span>
+            </div>
+          </div>
+
+          <div class="window" aria-label="Example comparison of vendor bids for one transport order">
+            <div class="window__bar"><i></i><i></i><i></i><span data-i18n="vb.w.title">Bid evaluation</span></div>
+            <div class="window__body">
+              <div class="window__head"><b class="mono">TO-20261014-0031</b><span class="tag tag--warn" data-i18n="vb.s.closed">Bidding window closed</span></div>
+              <div class="kv">
+                <div><small data-i18n="vb.k.count">Vehicles</small><b>1</b></div>
+                <div><small data-i18n="vb.k.type">Vehicle type</small><b data-i18n="vb.k.typev">Covered Truck</b></div>
+                <div><small data-i18n="vb.k.cap">Capacity</small><b>6.5 MT</b></div>
+              </div>
+              <table class="lines">
+                <thead><tr><th data-i18n="vb.t.vendor">Vendor</th><th data-i18n="vb.t.submitted">Submitted</th><th class="num" data-i18n="vb.t.cost">Proposed cost (BDT)</th></tr></thead>
+                <tbody>
+                  <tr><td data-i18n="vb.v1">Teesta Movers</td><td data-i18n="vb.t.d1">15 Oct · 11:20</td><td class="num">18,500</td></tr>
+                  <tr><td data-i18n="vb.v2">Rupsha Freight</td><td data-i18n="vb.t.d2">15 Oct · 14:05</td><td class="num">19,200</td></tr>
+                  <tr><td data-i18n="vb.v3">Shapla Haulage</td><td data-i18n="vb.t.d3">15 Oct · 16:48</td><td class="num">21,000</td></tr>
+                </tbody>
+                <tfoot><tr><td colspan="2" data-i18n="vb.t.total">Bids received</td><td class="num">3</td></tr></tfoot>
+              </table>
+              <div class="window__actions"><span class="is-danger" data-i18n="vb.a.cancel">Cancel bid</span><span class="is-ok" data-i18n="vb.a.award">Award</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. HIGHLIGHTS -->
+    <section class="section section--gray fhl">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="tq.hl.eyebrow">What you get</p>
+          <h2 data-i18n="vb.hl.title">A fair, recorded way to hire vendor trucks</h2>
+        </div>
+        <div class="grid grid--3">
+          <article class="tile">
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3h5v5"/><path d="M21 3l-7 7"/><path d="M8 21H3v-5"/><path d="M3 21l7-7"/></svg></div>
+            <h3 data-i18n="vb.hl.1t">Contract or bid, per order</h3>
+            <p data-i18n="vb.hl.1d">Give an order to a contract vendor at the agreed rate, or open it for bids when no contract applies.</p>
+          </article>
+          <article class="tile">
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5"/><path d="M9 2h6"/></svg></div>
+            <h3 data-i18n="vb.hl.2t">A set bidding window</h3>
+            <p data-i18n="vb.hl.2d">Every bid has an open and a close time. Bidding closes on its own at the deadline, and late bids aren't accepted.</p>
+          </article>
+          <article class="tile">
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 14l2 2 4-4"/></svg></div>
+            <h3 data-i18n="vb.hl.3t">Every award on record</h3>
+            <p data-i18n="vb.hl.3d">Who published, who bid and who awarded the order is kept with the time of each step.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. DETAIL ROWS -->
+    <section class="section">
+      <div class="container frows">
+
+        <div class="frow">
+          <div>
+            <p class="eyebrow" data-i18n="vb.d1.eyebrow">Vendors</p>
+            <h2 data-i18n="vb.d1.title">Work only with vendors you've approved</h2>
+            <p data-i18n="vb.d1.lead">Vendors register in the vendor app and ask to join your workspace.</p>
+            <ul class="checks">
+              <li data-i18n="vb.d1.1">Vendors sign up with their company details and upload their trade licence, BIN and TIN</li>
+              <li data-i18n="vb.d1.2">Admins review each join request and approve it, or reject it with remarks</li>
+              <li data-i18n="vb.d1.3">On approval, the admin sets the vendor as Contractual (fixed rate) or Non-Contractual (bidding)</li>
+              <li data-i18n="vb.d1.4">Vendors see your orders and bids only after approval; planning teams can view the vendor list</li>
+            </ul>
+          </div>
+          <div class="media">
+            <div class="mini">
+              <div class="mini__title"><span data-i18n="vb.m1.title">Vendors</span><span class="muted" data-i18n="vb.m1.count">3 vendors</span></div>
+              <div class="mini__row"><span data-i18n="vb.v1">Teesta Movers</span><span class="tag tag--info" data-i18n="vb.s.contract">Contractual</span></div>
+              <div class="mini__row"><span data-i18n="vb.v2">Rupsha Freight</span><span class="tag tag--ok" data-i18n="vb.s.noncontract">Non-Contractual</span></div>
+              <div class="mini__row"><span data-i18n="vb.v4">Dhaleshwari Carriers</span><span class="tag tag--warn" data-i18n="vb.s.requested">Requested</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="frow frow--flip">
+          <div>
+            <p class="eyebrow" data-i18n="vb.d2.eyebrow">Publish</p>
+            <h2 data-i18n="vb.d2.title">Open orders for bids in a few steps</h2>
+            <p data-i18n="vb.d2.lead">The Transport Distribution Officer (Vendor Fleet) publishes a bid for one transport order, or for several from the same transport request.</p>
+            <ul class="checks">
+              <li data-i18n="vb.d2.1">Set the number of vehicles, vehicle type and capacity you need</li>
+              <li data-i18n="vb.d2.2">Add an optional reference rate as a guide for vendors; it isn't binding</li>
+              <li data-i18n="vb.d2.3">Choose when bidding opens and closes, and move the window later if plans change</li>
+              <li data-i18n="vb.d2.4">Follow every bid in Bids management, and cancel one with a reason if it's no longer needed</li>
+            </ul>
+          </div>
+          <div class="media">
+            <div class="mini">
+              <div class="mini__title"><span data-i18n="vb.m2.title">Bids management</span><span class="muted" data-i18n="tq.m2.today">Today</span></div>
+              <div class="mini__row"><span class="mono">BID-…-K7Q2M9TA</span><span class="tag tag--warn" data-i18n="vb.s.closedshort">Closed</span></div>
+              <div class="mini__row"><span class="mono">BID-…-P4D8W2NE</span><span class="tag tag--ok" data-i18n="vb.s.open">Open</span></div>
+              <div class="mini__row"><span class="mono">BID-…-R6H3C5LV</span><span class="tag tag--info" data-i18n="vb.s.scheduled">Scheduled</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="frow">
+          <div>
+            <p class="eyebrow" data-i18n="vb.d3.eyebrow">Vendor app</p>
+            <h2 data-i18n="vb.d3.title">Vendors bid from their phone</h2>
+            <p data-i18n="vb.d3.lead">Approved non-contractual vendors see open bids in the vendor app.</p>
+            <ul class="checks">
+              <li data-i18n="vb.d3.1">See the route, load, vehicle needs and closing time for each bid</li>
+              <li data-i18n="vb.d3.2">Submit a rate and the number of vehicles they can provide</li>
+              <li data-i18n="vb.d3.3">Each bid is time-stamped when it's submitted and can't be changed afterwards</li>
+              <li data-i18n="vb.d3.4">Follow their bids as Open, Submitted or Won</li>
+            </ul>
+          </div>
+          <div class="media">
+            <div class="mini">
+              <div class="mini__title"><span data-i18n="vb.m3.title">My bids</span><span class="muted" data-i18n="vb.v2">Rupsha Freight</span></div>
+              <div class="mini__row"><span>TO-…-0035 · <span data-i18n="vb.m3.c1">closes 16 Oct</span></span><span class="tag tag--info" data-i18n="vb.s.open">Open</span></div>
+              <div class="mini__row"><span>TO-…-0031</span><span class="tag tag--warn" data-i18n="vb.s.submitted">Submitted</span></div>
+              <div class="mini__row"><span>TO-…-0028</span><span class="tag tag--ok" data-i18n="vb.s.won">Won</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="frow frow--flip">
+          <div>
+            <p class="eyebrow" data-i18n="vb.d4.eyebrow">Award</p>
+            <h2 data-i18n="vb.d4.title">Compare bids and award the order</h2>
+            <p data-i18n="vb.d4.lead">Once bidding closes, the officer compares the bids for each transport order.</p>
+            <ul class="checks">
+              <li data-i18n="vb.d4.1">See each vendor's proposed cost and submission time side by side</li>
+              <li data-i18n="vb.d4.2">Award one vendor per transport order; on a bid for several orders, each order is awarded on its own</li>
+              <li data-i18n="vb.d4.3">The winning vendor adds the truck, driver and helper details before the trip starts</li>
+              <li data-i18n="vb.d4.4">The order then moves on to dispatch, and the vendor follows it in the vendor app</li>
+            </ul>
+          </div>
+          <div class="media">
+            <div class="mini">
+              <div class="mini__title"><span class="mono">TO-20261014-0031</span><span class="tag tag--ok" data-i18n="vb.s.awarded">Awarded</span></div>
+              <div class="mini__row"><span data-i18n="vb.v1">Teesta Movers</span><span class="tag tag--ok" data-i18n="vb.s.winner">Winner</span></div>
+              <div class="mini__row"><span data-i18n="vb.v2">Rupsha Freight</span><span class="tag tag--alert" data-i18n="vb.s.lost">Not awarded</span></div>
+              <div class="mini__row"><span data-i18n="vb.v3">Shapla Haulage</span><span class="tag tag--alert" data-i18n="vb.s.lost">Not awarded</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. WHO USES IT -->
+    <section class="section section--gray">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="tq.who.eyebrow">Who uses it</p>
+          <h2 data-i18n="tq.who.title">Each team sees its own part</h2>
+        </div>
+        <div class="grid grid--3">
+          <article class="tile">
+            <h3 data-i18n="vb.who.1t">Vendor fleet team</h3>
+            <p data-i18n="vb.who.1d">Assigns contract vendors, publishes bids, compares them and awards each order.</p>
+          </article>
+          <article class="tile">
+            <h3 data-i18n="vb.who.2t">Vendors</h3>
+            <p data-i18n="vb.who.2d">Join your workspace, bid from the vendor app and add the truck and driver for every order they win.</p>
+          </article>
+          <article class="tile">
+            <h3 data-i18n="vb.who.3t">Admins</h3>
+            <p data-i18n="vb.who.3d">Approve or reject vendor join requests and set each vendor as contractual or bidding.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. RELATED FEATURES -->
+    <section class="section related">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="tq.rel.eyebrow">Keep exploring</p>
+          <h2 data-i18n="tq.rel.title">Before and after this step</h2>
+        </div>
+        <div class="grid grid--3">
+          <a class="tile" href="transport-orders.html">
+            <h3 data-i18n="ft.to">Transport Orders</h3>
+            <p data-i18n="ft.to.d">Plan each load on your own fleet or a vendor's</p>
+            <span class="btn-text"><span data-i18n="cta.explore">Explore</span> <span class="arrow">&rarr;</span></span>
+          </a>
+          <a class="tile" href="fleet-drivers.html">
+            <h3 data-i18n="ft.fleet">Fleet &amp; Drivers</h3>
+            <p data-i18n="ft.fleet.d">Vehicle status, checklists, attendance and leave</p>
+            <span class="btn-text"><span data-i18n="cta.explore">Explore</span> <span class="arrow">&rarr;</span></span>
+          </a>
+          <a class="tile" href="../index.html#track">
+            <h3 data-i18n="ft.gps">Live GPS &amp; Geofencing</h3>
+            <p data-i18n="ft.gps.d">Live map, site arrivals and dwell time</p>
+            <span class="btn-text"><span data-i18n="cta.explore">Explore</span> <span class="arrow">&rarr;</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. FINAL CTA -->
+    <section id="contact" class="cta">
+      <div class="container">
+        <p class="eyebrow" data-i18n="cta.eyebrow">Ready to get started?</p>
+        <h2 data-i18n="cta.title">Put every load on one record</h2>
+        <p class="muted" data-i18n="cta.lead">Open the live demo and follow a load from requisition to gate-out. No sign-up needed.</p>
+        <div class="actions" style="margin-top:2rem">
+          <a class="btn btn--primary" href="../demo/index.html"><span data-i18n="cta.demo">Live Demo</span> <span class="arrow">&rarr;</span></a>
+          <button type="button" class="btn btn--ghost js-login" data-i18n="nav.login">Log in</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__about">
+          <a class="brand" href="../index.html">
+            <img class="brand__mark brand__mark--light" src="../static/img/brand/mark-light.svg" alt="" width="32" height="32">
+            <img class="brand__mark brand__mark--dark" src="../static/img/brand/mark-dark.svg" alt="" width="32" height="32">
+            Optilogist
+          </a>
+          <p data-i18n="foot.about">Distribution and fleet management for multi-site supply chains.</p>
+        </div>
+        <div>
+          <h3 data-i18n="nav.platform">Platform</h3>
+          <ul>
+            <li><a href="../index.html#platform" data-i18n="foot.l1">How it works</a></li>
+            <li><a href="../index.html#plan" data-i18n="foot.l2">Requisition &amp; planning</a></li>
+            <li><a href="../index.html#fleet" data-i18n="foot.l3">Own &amp; vendor fleet</a></li>
+            <li><a href="../index.html#yard" data-i18n="foot.l4">Yard &amp; QC</a></li>
+            <li><a href="../index.html#track" data-i18n="foot.l5">Live GPS</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="nav.solutions">Solutions</h3>
+          <ul>
+            <li><a href="../index.html#roles" data-i18n="roles.t2">Distribution &amp; Procurement</a></li>
+            <li><a href="../index.html#roles" data-i18n="roles.t3">Transport</a></li>
+            <li><a href="../index.html#roles" data-i18n="roles.t4">Yard &amp; QC</a></li>
+            <li><a href="../index.html#roles" data-i18n="roles.t5">Fleet &amp; Drivers</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="nav.vendors">For Vendors</h3>
+          <ul>
+            <li><a href="../index.html#vendors" data-i18n="ven.cta">Join as a vendor</a></li>
+            <li><a href="../index.html#vendors" data-i18n="apps.2t">Vendor app</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="foot.company">Company</h3>
+          <ul>
+            <li><a href="../index.html#plans" data-i18n="nav.plans">Plans</a></li>
+            <li><a href="../index.html#faq" data-i18n="top.help">Help Center</a></li>
+            <li><a href="../index.html#contact" data-i18n="top.contact">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; <span id="year"></span> Optilogist</span>
+        <span><a href="#" data-i18n="foot.privacy">Privacy</a><a href="#" data-i18n="foot.terms">Terms</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WORKSPACE LOGIN DIALOG -->
+  <dialog id="login-dialog" aria-labelledby="login-title">
+    <form method="dialog" id="login-form">
+      <button class="dialog__close" value="cancel" aria-label="Close" formnovalidate>&times;</button>
+      <h2 id="login-title" data-i18n="login.title">Log in to your workspace</h2>
+      <p class="muted" data-i18n="login.lead">Every organization has its own Optilogist address.</p>
+      <label for="workspace" style="font-weight:600;font-size:.9rem" data-i18n="login.label">Workspace name</label>
+      <div class="field">
+        <input id="workspace" name="workspace" autocomplete="organization" required pattern="[A-Za-z0-9-]+" placeholder="yourcompany" data-i18n-ph="login.ph">
+        <span class="js-domain"></span>
+      </div>
+      <button class="btn btn--primary" style="width:100%" value="go" data-i18n="login.go">Continue</button>
+      <p class="dialog__note" data-i18n="login.note">Got an invite? Use the link in your email or SMS to set your password first.</p>
+    </form>
+  </dialog>
+
+  <script src="../static/js/landing-i18n-bn.js"></script>
+  <script src="../static/js/feature-vendor-bidding-bn.js"></script>
+  <script src="../static/js/landing.js"></script>
+</body>
+</html>
