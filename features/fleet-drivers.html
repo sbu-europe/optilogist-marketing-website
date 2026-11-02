@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" data-title-bn="ফ্লিট ও ড্রাইভার | Optilogist">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fleet &amp; Drivers | Optilogist</title>
+  <meta name="description" content="Manage your fleet and drivers in Optilogist: register vehicles, check them before dispatch, return them from maintenance safely, and keep driver attendance and leave up to date.">
+  <link rel="icon" href="../favicon.ico?v=2" sizes="32x32">
+  <link rel="icon" href="../static/img/brand/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../static/img/brand/apple-touch-icon.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="../static/js/theme.js"></script>
+  <link rel="stylesheet" href="../static/css/base.css">
+  <link rel="stylesheet" href="../static/css/landing.css">
+  <link rel="stylesheet" href="../static/css/feature.css">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <a href="../index.html#faq" data-i18n="top.help">Help Center</a>
+      <a href="../index.html#contact" data-i18n="top.contact">Contact Us</a>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="brand" href="../index.html">
+        <img class="brand__mark brand__mark--light" src="../static/img/brand/mark-light.svg" alt="" width="32" height="32">
+        <img class="brand__mark brand__mark--dark" src="../static/img/brand/mark-dark.svg" alt="" width="32" height="32">
+        Optilogist
+      </a>
+      <button class="nav__toggle" aria-expanded="false" aria-controls="nav-menu" data-i18n="nav.menu">Menu</button>
+      <nav id="nav-menu" class="nav__menu" aria-label="Main">
+        <div class="nav__links">
+          <a href="../index.html#platform" data-i18n="nav.platform">Platform</a>
+          <div class="nav__dd">
+            <button type="button" class="link nav__ddbtn is-current" aria-expanded="false" aria-controls="mega-features"><span data-i18n="nav.features">Features</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="mega" id="mega-features" hidden>
+              <div class="mega__card">
+                <div class="mega__body">
+                  <div>
+                    <div class="mega__head"><span class="mega__label" data-i18n="mega.features">Features</span><a class="mega__all" href="../index.html#platform"><span data-i18n="mega.all">View all</span> <span class="arrow">&rarr;</span></a></div>
+                    <ul class="mega__grid">
+                <li><a href="../features/requisitions.html"><b data-i18n="ft.req">Requisitions</b><span data-i18n="ft.req.d">Raise finished-goods and port shipment requests</span></a></li>
+                <li><a href="../features/transport-requests.html"><b data-i18n="ft.tr">Transport Requests</b><span data-i18n="ft.tr.d">Split demand by source and get it approved</span></a></li>
+                <li><a href="../features/transport-orders.html"><b data-i18n="ft.to">Transport Orders</b><span data-i18n="ft.to.d">Plan each load on your own fleet or a vendor's</span></a></li>
+                <li><a href="../features/fleet-drivers.html" aria-current="page"><b data-i18n="ft.fleet">Fleet &amp; Drivers</b><span data-i18n="ft.fleet.d">Vehicle status, checklists, attendance and leave</span></a></li>
+                <li><a href="../index.html#fleet"><b data-i18n="ft.vendor">Vendor Bidding</b><span data-i18n="ft.vendor.d">Assign contract vendors or run timed bids</span></a></li>
+                <li><a href="../index.html#yard"><b data-i18n="ft.gate">Gate &amp; Weighbridge</b><span data-i18n="ft.gate.d">Gate-in, scale-in, queue tokens and gate-out</span></a></li>
+                <li><a href="../index.html#yard"><b data-i18n="ft.cc">Command Center &amp; Loading</b><span data-i18n="ft.cc.d">Assign bays and record load and unload times</span></a></li>
+                <li><a href="../index.html#yard"><b data-i18n="ft.qc">Quality Control</b><span data-i18n="ft.qc.d">Sample, decide and resample before unloading</span></a></li>
+                <li><a href="../index.html#track"><b data-i18n="ft.gps">Live GPS &amp; Geofencing</b><span data-i18n="ft.gps.d">Live map, site arrivals and dwell time</span></a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div class="mega__head"><span class="mega__label" data-i18n="mega.explore">Explore</span></div>
+                    <ul class="mega__links">
+                <li><a href="../index.html#platform"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M7.5 6H15a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h7.5"/></svg><span data-i18n="foot.l1">How it works</span></a></li>
+                <li><a href="../index.html#roles"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5a6.5 6.5 0 0 1 3.5 5.5"/></svg><span data-i18n="roles.eyebrow">Built for every team</span></a></li>
+                <li><a href="../index.html#vendors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18h2"/></svg><span data-i18n="apps.2t">Vendor app</span></a></li>
+                <li><a href="../demo/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5l5.5 3.5-5.5 3.5z"/></svg><span data-i18n="cta.demo">Live Demo</span></a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="mega__foot"><a href="../index.html#faq" data-i18n="top.help">Help Center</a><span>|</span><a href="../index.html#contact" data-i18n="top.contact">Contact Us</a><span>|</span><a href="../index.html#plans" data-i18n="nav.plans">Plans</a></div>
+              </div>
+            </div>
+          </div>
+          <a href="../index.html#roles" data-i18n="nav.solutions">Solutions</a>
+          <a href="../index.html#vendors" data-i18n="nav.vendors">For Vendors</a>
+          <a href="../index.html#plans" data-i18n="nav.plans">Plans</a>
+        </div>
+        <div class="nav__actions">
+          <button type="button" class="theme-toggle" id="theme-toggle" title="Switch theme" aria-label="Switch theme">
+            <svg class="icon-moon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286"/></svg>
+            <svg class="icon-sun" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/></svg>
+          </button>
+          <div class="lang" role="group" aria-label="Language">
+            <button type="button" data-lang="en" aria-pressed="true">EN</button>
+            <button type="button" data-lang="bn" aria-pressed="false">বাংলা</button>
+          </div>
+          <button type="button" class="link js-login" data-i18n="nav.login">Log in</button>
+          <a class="btn btn--primary btn--sm" href="../demo/index.html" data-i18n="cta.demo">Live Demo</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- 1. HERO -->
+    <section class="fhero">
+      <div class="container">
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="../index.html" data-i18n="tq.home">Home</a></li>
+            <li><a href="../index.html#platform" data-i18n="nav.features">Features</a></li>
+            <li><span aria-current="page" data-i18n="ft.fleet">Fleet &amp; Drivers</span></li>
+          </ol>
+        </nav>
+        <div class="fhero__grid">
+          <div>
+            <p class="eyebrow" data-i18n="fd.eyebrow">Fleet &amp; Drivers</p>
+            <h1 data-i18n="fd.title">Know which trucks and drivers are ready to go</h1>
+            <p class="fhero__lead" data-i18n="fd.lead">Keep every vehicle, driver and helper on one record. Driver Supervisors check vehicles before dispatch, send faulty ones to maintenance and keep attendance and leave up to date, so planners only see trucks and drivers that can actually run.</p>
+            <div class="actions">
+              <a class="btn btn--primary" href="../demo/index.html"><span data-i18n="cta.demo">Live Demo</span> <span class="arrow">&rarr;</span></a>
+              <button type="button" class="btn btn--ghost js-login" data-i18n="cta.login">Log in to your workspace</button>
+            </div>
+            <div class="fhero__roles" aria-label="Used by">
+              <span data-i18n="fd.r.admin">Admin</span><span data-i18n="fd.r.ds">Driver Supervisor</span><span data-i18n="r.tp">Transport Planner</span>
+            </div>
+          </div>
+
+          <div class="window" aria-label="Example vehicle inspection before dispatch">
+            <div class="window__bar"><i></i><i></i><i></i><span data-i18n="fd.w.title">Vehicle inspection</span></div>
+            <div class="window__body">
+              <div class="window__head"><b class="mono">TO-20261014-0032</b><span class="tag tag--warn" data-i18n="fd.s.awaiting">Awaiting dispatch</span></div>
+              <div class="kv">
+                <div><small data-i18n="fd.k.vehicle">Vehicle</small><b class="mono">DM-TA 14-8821</b></div>
+                <div><small data-i18n="fd.k.driver">Driver</small><b data-i18n="demo.driver">Karim</b></div>
+                <div><small data-i18n="fd.k.type">Type</small><b data-i18n="fd.k.typev">Covered Truck</b></div>
+              </div>
+              <table class="lines">
+                <thead><tr><th data-i18n="fd.t.section">Checklist section</th><th data-i18n="fd.t.remarks">Remarks</th><th class="num" data-i18n="fd.t.result">Result</th></tr></thead>
+                <tbody>
+                  <tr><td data-i18n="fd.c.engine">Engine</td><td>&mdash;</td><td class="num"><span class="tag tag--ok" data-i18n="fd.c.ok">OK</span></td></tr>
+                  <tr><td data-i18n="fd.c.clutch">Clutch</td><td>&mdash;</td><td class="num"><span class="tag tag--ok" data-i18n="fd.c.ok">OK</span></td></tr>
+                  <tr><td data-i18n="fd.c.gear">Gear box</td><td>&mdash;</td><td class="num"><span class="tag tag--ok" data-i18n="fd.c.ok">OK</span></td></tr>
+                  <tr><td data-i18n="fd.c.electric">Electric</td><td data-i18n="fd.c.electricr">Lights and horn checked</td><td class="num"><span class="tag tag--ok" data-i18n="fd.c.ok">OK</span></td></tr>
+                </tbody>
+                <tfoot><tr><td colspan="2" data-i18n="fd.t.total">Sections checked</td><td class="num" data-i18n="fd.t.totalv">7 of 7</td></tr></tfoot>
+              </table>
+              <div class="window__actions"><span data-i18n="fd.a.skip">Skip checklist</span><span class="is-danger" data-i18n="fd.a.notok">Vehicle not OK</span><span class="is-ok" data-i18n="fd.a.ok">Vehicle OK</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. HIGHLIGHTS -->
+    <section class="section section--gray fhl">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="tq.hl.eyebrow">What you get</p>
+          <h2 data-i18n="fd.hl.title">A fleet you can plan on</h2>
+        </div>
+        <div class="grid grid--3">
+          <article class="tile">
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7h11v9H2z"/><path d="M13 10h4l3 3v3h-7"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></div>
+            <h3 data-i18n="fd.hl.1t">One record per vehicle</h3>
+            <p data-i18n="fd.hl.1d">Registration, capacity, documents and GPS device in one place, with no duplicate registration or chassis numbers.</p>
+          </article>
+          <article class="tile">
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v2h6V3"/><path d="M9 12l2 2 4-4"/></svg></div>
+            <h3 data-i18n="fd.hl.2t">Checked before dispatch</h3>
+            <p data-i18n="fd.hl.2d">Run the daily checklist or skip it. A vehicle that fails goes to maintenance and its order goes back to planning.</p>
+          </article>
+          <article class="tile">
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 11l2 2 4-4"/></svg></div>
+            <h3 data-i18n="fd.hl.3t">Only available drivers offered</h3>
+            <p data-i18n="fd.hl.3d">Drivers on leave or already on an order are kept out of new assignments automatically.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. DETAIL ROWS -->
+    <section class="section">
+      <div class="container frows">
+
+        <div class="frow">
+          <div>
+            <p class="eyebrow" data-i18n="fd.d1.eyebrow">Vehicles</p>
+            <h2 data-i18n="fd.d1.title">Register every vehicle once</h2>
+            <p data-i18n="fd.d1.lead">Admins keep the whole fleet on one list that planners and supervisors work from.</p>
+            <ul class="checks">
+              <li data-i18n="fd.d1.1">Registration number in the Bangladesh format, chassis number, type, body, fuel, capacity and wheels</li>
+              <li data-i18n="fd.d1.2">Brand from your own brand list, plus model, GPS device and SIM number</li>
+              <li data-i18n="fd.d1.3">Fitness certificate and insurance expiry dates on every vehicle</li>
+              <li data-i18n="fd.d1.4">Add vehicles one by one or by CSV upload, then search and filter by type, brand, status or site</li>
+            </ul>
+          </div>
+          <div class="media">
+            <div class="mini">
+              <div class="mini__title"><span data-i18n="fd.m1.title">Own fleet</span><span class="muted" data-i18n="fd.m1.count">3 vehicles</span></div>
+              <div class="mini__row"><span class="mono">DM-TA 14-8821</span><span class="tag tag--info" data-i18n="fd.s.scheduled">Scheduled</span></div>
+              <div class="mini__row"><span class="mono">DM-TA 11-2201</span><span class="tag tag--ok" data-i18n="fd.s.noorder">No active order</span></div>
+              <div class="mini__row"><span class="mono">DM-THA 15-3345</span><span class="tag tag--alert" data-i18n="fd.s.maint">Under maintenance</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="frow frow--flip">
+          <div>
+            <p class="eyebrow" data-i18n="fd.d2.eyebrow">Dispatch check</p>
+            <h2 data-i18n="fd.d2.title">Check the vehicle before it leaves</h2>
+            <p data-i18n="fd.d2.lead">Once an own-fleet order has its vehicle, driver and schedule, it reaches the Driver Supervisor's dispatch queue.</p>
+            <ul class="checks">
+              <li data-i18n="fd.d2.1">Skip the checklist, or run the daily checklist across seven sections from engine to cabin</li>
+              <li data-i18n="fd.d2.2">Score each item OK, Issue or N/A, with remarks</li>
+              <li data-i18n="fd.d2.3">Vehicle OK releases the order for dispatch</li>
+              <li data-i18n="fd.d2.4">Vehicle not OK sends the vehicle to maintenance and the order back to the planner for a new vehicle and crew</li>
+            </ul>
+          </div>
+          <div class="media">
+            <div class="mini">
+              <div class="mini__title"><span data-i18n="fd.m2.title">Dispatch checks</span><span class="muted" data-i18n="tq.m2.today">Today</span></div>
+              <div class="mini__row"><span>TO-…-0032 · DM-TA 14-8821</span><span class="tag tag--ok" data-i18n="fd.a.ok">Vehicle OK</span></div>
+              <div class="mini__row"><span>TO-…-0036 · DM-TA 11-2201</span><span class="tag tag--info" data-i18n="fd.s.skipped">Checklist skipped</span></div>
+              <div class="mini__row"><span>TO-…-0037 · DM-THA 15-3345</span><span class="tag tag--alert" data-i18n="fd.a.notok">Vehicle not OK</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="frow">
+          <div>
+            <p class="eyebrow" data-i18n="fd.d3.eyebrow">Maintenance</p>
+            <h2 data-i18n="fd.d3.title">Bring vehicles back into service safely</h2>
+            <p data-i18n="fd.d3.lead">Vehicles that fail inspection wait in the supervisor's maintenance queue.</p>
+            <ul class="checks">
+              <li data-i18n="fd.d3.1">See each vehicle's registration, the date it was flagged and its last inspection</li>
+              <li data-i18n="fd.d3.2">Re-inspect with the same checklist once repairs are done</li>
+              <li data-i18n="fd.d3.3">A pass makes the vehicle available for new orders; a fail keeps it in maintenance with a reason</li>
+              <li data-i18n="fd.d3.4">Vehicles under maintenance never appear when orders are being assigned</li>
+            </ul>
+          </div>
+          <div class="media">
+            <div class="mini">
+              <div class="mini__title"><span data-i18n="fd.s.maint">Under maintenance</span><span class="muted" data-i18n="fd.m3.count">2 vehicles</span></div>
+              <div class="mini__row"><span><span class="mono">DM-THA 15-3345</span> · <span data-i18n="fd.m3.d1">since 14 Oct</span></span><span class="tag tag--warn" data-i18n="fd.s.reinspect">Re-inspection in progress</span></div>
+              <div class="mini__row"><span><span class="mono">DM-TA 09-4410</span> · <span data-i18n="fd.m3.d2">since 12 Oct</span></span><span class="tag tag--ok" data-i18n="fd.s.done">Maintenance completed</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="frow frow--flip">
+          <div>
+            <p class="eyebrow" data-i18n="fd.d4.eyebrow">Drivers &amp; helpers</p>
+            <h2 data-i18n="fd.d4.title">Keep drivers, attendance and leave in one place</h2>
+            <p data-i18n="fd.d4.lead">Drivers and helpers have their own profiles, and the Driver Supervisor keeps their availability up to date.</p>
+            <ul class="checks">
+              <li data-i18n="fd.d4.1">Driver profiles with license number, type and expiry, plus experience, biodata and medical documents</li>
+              <li data-i18n="fd.d4.2">Each driver gets a user account to see their own orders; helpers are added with their contact and references</li>
+              <li data-i18n="fd.d4.3">Record daily attendance with entry and exit times; working hours are calculated and flagged above your daily limit</li>
+              <li data-i18n="fd.d4.4">Leave sets the driver to On leave, and they can't be put on an order during it</li>
+            </ul>
+          </div>
+          <div class="media">
+            <div class="mini">
+              <div class="mini__title"><span data-i18n="fd.m4.title">Drivers</span><span class="muted" data-i18n="tq.m2.today">Today</span></div>
+              <div class="mini__row"><span data-i18n="demo.driver">Karim</span><span class="tag tag--ok" data-i18n="fd.s.available">Available</span></div>
+              <div class="mini__row"><span data-i18n="fd.m4.n2">Rafiq</span><span class="tag tag--info" data-i18n="fd.s.exec">On execution</span></div>
+              <div class="mini__row"><span><span data-i18n="fd.m4.n3">Selim</span> · <span data-i18n="fd.m4.until">until 18 Oct</span></span><span class="tag tag--warn" data-i18n="fd.s.leave">On leave</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. WHO USES IT -->
+    <section class="section section--gray">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="tq.who.eyebrow">Who uses it</p>
+          <h2 data-i18n="tq.who.title">Each team sees its own part</h2>
+        </div>
+        <div class="grid grid--3">
+          <article class="tile">
+            <h3 data-i18n="fd.who.1t">Admins</h3>
+            <p data-i18n="fd.who.1d">Register vehicles, brands, drivers and helpers, one at a time or by CSV upload.</p>
+          </article>
+          <article class="tile">
+            <h3 data-i18n="fd.who.2t">Driver Supervisors</h3>
+            <p data-i18n="fd.who.2d">Check vehicles before dispatch, clear them after maintenance and record attendance and leave.</p>
+          </article>
+          <article class="tile">
+            <h3 data-i18n="tq.who.3t">Transport planning</h3>
+            <p data-i18n="fd.who.3d">Sees only the vehicles and drivers that are free when putting crews on orders.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. RELATED FEATURES -->
+    <section class="section related">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="tq.rel.eyebrow">Keep exploring</p>
+          <h2 data-i18n="tq.rel.title">Before and after this step</h2>
+        </div>
+        <div class="grid grid--3">
+          <a class="tile" href="transport-orders.html">
+            <h3 data-i18n="ft.to">Transport Orders</h3>
+            <p data-i18n="ft.to.d">Plan each load on your own fleet or a vendor's</p>
+            <span class="btn-text"><span data-i18n="cta.explore">Explore</span> <span class="arrow">&rarr;</span></span>
+          </a>
+          <a class="tile" href="../index.html#fleet">
+            <h3 data-i18n="ft.vendor">Vendor Bidding</h3>
+            <p data-i18n="ft.vendor.d">Assign contract vendors or run timed bids</p>
+            <span class="btn-text"><span data-i18n="cta.explore">Explore</span> <span class="arrow">&rarr;</span></span>
+          </a>
+          <a class="tile" href="../index.html#track">
+            <h3 data-i18n="ft.gps">Live GPS &amp; Geofencing</h3>
+            <p data-i18n="ft.gps.d">Live map, site arrivals and dwell time</p>
+            <span class="btn-text"><span data-i18n="cta.explore">Explore</span> <span class="arrow">&rarr;</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. FINAL CTA -->
+    <section id="contact" class="cta">
+      <div class="container">
+        <p class="eyebrow" data-i18n="cta.eyebrow">Ready to get started?</p>
+        <h2 data-i18n="cta.title">Put every load on one record</h2>
+        <p class="muted" data-i18n="cta.lead">Open the live demo and follow a load from requisition to gate-out. No sign-up needed.</p>
+        <div class="actions" style="margin-top:2rem">
+          <a class="btn btn--primary" href="../demo/index.html"><span data-i18n="cta.demo">Live Demo</span> <span class="arrow">&rarr;</span></a>
+          <button type="button" class="btn btn--ghost js-login" data-i18n="nav.login">Log in</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__about">
+          <a class="brand" href="../index.html">
+            <img class="brand__mark brand__mark--light" src="../static/img/brand/mark-light.svg" alt="" width="32" height="32">
+            <img class="brand__mark brand__mark--dark" src="../static/img/brand/mark-dark.svg" alt="" width="32" height="32">
+            Optilogist
+          </a>
+          <p data-i18n="foot.about">Distribution and fleet management for multi-site supply chains.</p>
+        </div>
+        <div>
+          <h3 data-i18n="nav.platform">Platform</h3>
+          <ul>
+            <li><a href="../index.html#platform" data-i18n="foot.l1">How it works</a></li>
+            <li><a href="../index.html#plan" data-i18n="foot.l2">Requisition &amp; planning</a></li>
+            <li><a href="../index.html#fleet" data-i18n="foot.l3">Own &amp; vendor fleet</a></li>
+            <li><a href="../index.html#yard" data-i18n="foot.l4">Yard &amp; QC</a></li>
+            <li><a href="../index.html#track" data-i18n="foot.l5">Live GPS</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="nav.solutions">Solutions</h3>
+          <ul>
+            <li><a href="../index.html#roles" data-i18n="roles.t2">Distribution &amp; Procurement</a></li>
+            <li><a href="../index.html#roles" data-i18n="roles.t3">Transport</a></li>
+            <li><a href="../index.html#roles" data-i18n="roles.t4">Yard &amp; QC</a></li>
+            <li><a href="../index.html#roles" data-i18n="roles.t5">Fleet &amp; Drivers</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="nav.vendors">For Vendors</h3>
+          <ul>
+            <li><a href="../index.html#vendors" data-i18n="ven.cta">Join as a vendor</a></li>
+            <li><a href="../index.html#vendors" data-i18n="apps.2t">Vendor app</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="foot.company">Company</h3>
+          <ul>
+            <li><a href="../index.html#plans" data-i18n="nav.plans">Plans</a></li>
+            <li><a href="../index.html#faq" data-i18n="top.help">Help Center</a></li>
+            <li><a href="../index.html#contact" data-i18n="top.contact">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; <span id="year"></span> Optilogist</span>
+        <span><a href="#" data-i18n="foot.privacy">Privacy</a><a href="#" data-i18n="foot.terms">Terms</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WORKSPACE LOGIN DIALOG -->
+  <dialog id="login-dialog" aria-labelledby="login-title">
+    <form method="dialog" id="login-form">
+      <button class="dialog__close" value="cancel" aria-label="Close" formnovalidate>&times;</button>
+      <h2 id="login-title" data-i18n="login.title">Log in to your workspace</h2>
+      <p class="muted" data-i18n="login.lead">Every organization has its own Optilogist address.</p>
+      <label for="workspace" style="font-weight:600;font-size:.9rem" data-i18n="login.label">Workspace name</label>
+      <div class="field">
+        <input id="workspace" name="workspace" autocomplete="organization" required pattern="[A-Za-z0-9-]+" placeholder="yourcompany" data-i18n-ph="login.ph">
+        <span class="js-domain"></span>
+      </div>
+      <button class="btn btn--primary" style="width:100%" value="go" data-i18n="login.go">Continue</button>
+      <p class="dialog__note" data-i18n="login.note">Got an invite? Use the link in your email or SMS to set your password first.</p>
+    </form>
+  </dialog>
+
+  <script src="../static/js/landing-i18n-bn.js"></script>
+  <script src="../static/js/feature-fleet-drivers-bn.js"></script>
+  <script src="../static/js/landing.js"></script>
+</body>
+</html>
