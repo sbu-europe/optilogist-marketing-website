@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en" data-title-bn="গেট ও ওয়েব্রিজ | Optilogist">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gate &amp; Weighbridge | Optilogist</title>
+  <meta name="description" content="Run the yard with Optilogist: gate trucks in against their transport order, record weighbridge weights, issue queue tokens and gate passes, and let trucks out only when their visit is complete.">
+  <link rel="icon" href="../favicon.ico?v=2" sizes="32x32">
+  <link rel="icon" href="../static/img/brand/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../static/img/brand/apple-touch-icon.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="../static/js/theme.js"></script>
+  <link rel="stylesheet" href="../static/css/base.css">
+  <link rel="stylesheet" href="../static/css/landing.css">
+  <link rel="stylesheet" href="../static/css/feature.css">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <a href="../index.html#faq" data-i18n="top.help">Help Center</a>
+      <a href="../index.html#contact" data-i18n="top.contact">Contact Us</a>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="brand" href="../index.html">
+        <img class="brand__mark brand__mark--light" src="../static/img/brand/mark-light.svg" alt="" width="32" height="32">
+        <img class="brand__mark brand__mark--dark" src="../static/img/brand/mark-dark.svg" alt="" width="32" height="32">
+        Optilogist
+      </a>
+      <button class="nav__toggle" aria-expanded="false" aria-controls="nav-menu" data-i18n="nav.menu">Menu</button>
+      <nav id="nav-menu" class="nav__menu" aria-label="Main">
+        <div class="nav__links">
+          <a href="../index.html#platform" data-i18n="nav.platform">Platform</a>
+          <div class="nav__dd">
+            <button type="button" class="link nav__ddbtn is-current" aria-expanded="false" aria-controls="mega-features"><span data-i18n="nav.features">Features</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="mega" id="mega-features" hidden>
+              <div class="mega__card">
+                <div class="mega__body">
+                  <div>
+                    <div class="mega__head"><span class="mega__label" data-i18n="mega.features">Features</span><a class="mega__all" href="../index.html#platform"><span data-i18n="mega.all">View all</span> <span class="arrow">&rarr;</span></a></div>
+                    <ul class="mega__grid">
+                <li><a href="../features/requisitions.html"><b data-i18n="ft.req">Requisitions</b><span data-i18n="ft.req.d">Raise finished-goods and port shipment requests</span></a></li>
+                <li><a href="../features/transport-requests.html"><b data-i18n="ft.tr">Transport Requests</b><span data-i18n="ft.tr.d">Split demand by source and get it approved</span></a></li>
+                <li><a href="../features/transport-orders.html"><b data-i18n="ft.to">Transport Orders</b><span data-i18n="ft.to.d">Plan each load on your own fleet or a vendor's</span></a></li>
+                <li><a href="../features/fleet-drivers.html"><b data-i18n="ft.fleet">Fleet &amp; Drivers</b><span data-i18n="ft.fleet.d">Vehicle status, checklists, attendance and leave</span></a></li>
+                <li><a href="../features/vendor-bidding.html"><b data-i18n="ft.vendor">Vendor Bidding</b><span data-i18n="ft.vendor.d">Assign contract vendors or run timed bids</span></a></li>
+                <li><a href="../features/gate-weighbridge.html" aria-current="page"><b data-i18n="ft.gate">Gate &amp; Weighbridge</b><span data-i18n="ft.gate.d">Gate-in, scale-in, queue tokens and gate-out</span></a></li>
+                <li><a href="../index.html#yard"><b data-i18n="ft.cc">Command Center &amp; Loading</b><span data-i18n="ft.cc.d">Assign bays and record load and unload times</span></a></li>
+                <li><a href="../index.html#yard"><b data-i18n="ft.qc">Quality Control</b><span data-i18n="ft.qc.d">Sample, decide and resample before unloading</span></a></li>
+                <li><a href="../index.html#track"><b data-i18n="ft.gps">Live GPS &amp; Geofencing</b><span data-i18n="ft.gps.d">Live map, site arrivals and dwell time</span></a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div class="mega__head"><span class="mega__label" data-i18n="mega.explore">Explore</span></div>
+                    <ul class="mega__links">
+                <li><a href="../index.html#platform"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M7.5 6H15a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h7.5"/></svg><span data-i18n="foot.l1">How it works</span></a></li>
+                <li><a href="../index.html#roles"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5a6.5 6.5 0 0 1 3.5 5.5"/></svg><span data-i18n="roles.eyebrow">Built for every team</span></a></li>
+                <li><a href="../index.html#vendors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18h2"/></svg><span data-i18n="apps.2t">Vendor app</span></a></li>
+                <li><a href="../demo/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5l5.5 3.5-5.5 3.5z"/></svg><span data-i18n="cta.demo">Live Demo</span></a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="mega__foot"><a href="../index.html#faq" data-i18n="top.help">Help Center</a><span>|</span><a href="../index.html#contact" data-i18n="top.contact">Contact Us</a><span>|</span><a href="../index.html#plans" data-i18n="nav.plans">Plans</a></div>
+              </div>
+            </div>
+          </div>
+          <a href="../index.html#roles" data-i18n="nav.solutions">Solutions</a>
+          <a href="../index.html#vendors" data-i18n="nav.vendors">For Vendors</a>
+          <a href="../index.html#plans" data-i18n="nav.plans">Plans</a>
+        </div>
+        <div class="nav__actions">
+          <button type="button" class="theme-toggle" id="theme-toggle" title="Switch theme" aria-label="Switch theme">
+            <svg class="icon-moon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286"/></svg>
+            <svg class="icon-sun" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/></svg>
+          </button>
+          <div class="lang" role="group" aria-label="Language">
+            <button type="button" data-lang="en" aria-pressed="true">EN</button>
+            <button type="button" data-lang="bn" aria-pressed="false">বাংলা</button>
+          </div>
+          <button type="button" class="link js-login" data-i18n="nav.login">Log in</button>
+          <a class="btn btn--primary btn--sm" href="../demo/index.html" data-i18n="cta.demo">Live Demo</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- 1. HERO -->
+    <section class="fhero">
+      <div class="container">
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="../index.html" data-i18n="tq.home">Home</a></li>
+            <li><a href="../index.html#platform" data-i18n="nav.features">Features</a></li>
+            <li><span aria-current="page" data-i18n="ft.gate">Gate &amp; Weighbridge</span></li>
+          </ol>
+        </nav>
+        <div class="fhero__grid">
+          <div>
+            <p class="eyebrow" data-i18n="gw.eyebrow">Gate &amp; Weighbridge</p>
+            <h1 data-i18n="gw.title">Check every truck in, weigh it, and let it out only when it's done</h1>
+            <p class="fhero__lead" data-i18n="gw.lead">Gatemen check trucks in against their transport order, and Scaling Operators record weights at the weighbridge. Each truck joins the Command Center queue the moment it's scaled in, and it can leave only once weighing and loading or unloading are complete.</p>
+            <div class="actions">
+              <a class="btn btn--primary" href="../demo/index.html"><span data-i18n="cta.demo">Live Demo</span> <span class="arrow">&rarr;</span></a>
+              <button type="button" class="btn btn--ghost js-login" data-i18n="cta.login">Log in to your workspace</button>
+            </div>
+            <div class="fhero__roles" aria-label="Used by">
+              <span data-i18n="r.gate">Gateman</span><span data-i18n="r.scale">Scaling Operator</span><span data-i18n="r.cc">Command Center Officer</span>
+            </div>
+          </div>
+
+          <div class="window" aria-label="Example gate-in against a transport order">
+            <div class="window__bar"><i></i><i></i><i></i><span data-i18n="gw.w.title">Vehicle Entry (Gate-In)</span></div>
+            <div class="window__body">
+              <div class="window__head"><b class="mono">TO-20261014-0032</b><span class="tag tag--info" data-i18n="gw.s.internal">Internal Transfer (TO/Challan)</span></div>
+              <div class="kv">
+                <div><small data-i18n="f.vehicle">Vehicle</small><b class="mono">DM-TA 14-8821</b></div>
+                <div><small data-i18n="gw.k.driver">Driver</small><b data-i18n="demo.driver">Karim</b></div>
+                <div><small data-i18n="gw.k.gate">Gate</small><b data-i18n="gw.src">Mymensingh Feed Mill</b></div>
+              </div>
+              <table class="lines">
+                <thead><tr><th data-i18n="tq.t.product">Product</th><th class="num" data-i18n="gw.t.qty">Quantity</th><th class="num" data-i18n="tq.t.weight">Weight</th></tr></thead>
+                <tbody>
+                  <tr><td><span data-i18n="m.layer">Layer Grower Feed</span><small class="mono">FG-LGF-50</small></td><td class="num" data-i18n="gw.t.q">120 bags</td><td class="num">6,000 kg</td></tr>
+                </tbody>
+                <tfoot><tr><td colspan="2" data-i18n="m.total">Total weight</td><td class="num">6.0 MT</td></tr></tfoot>
+              </table>
+              <div class="note">
+                <small data-i18n="gw.note.who">Gate-in</small>
+                <span data-i18n="gw.note.text">14 Oct · 10:02, recorded with the gateman's name</span>
+              </div>
+              <div class="window__actions"><span data-i18n="gw.a.cancel">Cancel</span><span class="is-ok" data-i18n="gw.a.save">Save gate-in</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. HIGHLIGHTS -->
+    <section class="section section--gray fhl">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="tq.hl.eyebrow">What you get</p>
+          <h2 data-i18n="gw.hl.title">A yard record you don't have to rewrite</h2>
+        </div>
+        <div class="grid grid--3">
+          <article class="tile">
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6"/><path d="M9 17h4"/></svg></div>
+            <h3 data-i18n="gw.hl.1t">Filled in from the order</h3>
+            <p data-i18n="gw.hl.1d">Pick the transport order and the vehicle, driver and products appear. Nothing is copied from paper.</p>
+          </article>
+          <article class="tile">
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3"/><path d="M5 6h14"/><path d="M5 6l-3 7a3 3 0 0 0 6 0z"/><path d="M19 6l-3 7a3 3 0 0 0 6 0z"/><path d="M12 6v14"/><path d="M8 20h8"/></svg></div>
+            <h3 data-i18n="gw.hl.2t">Weights in MT and kg</h3>
+            <p data-i18n="gw.hl.2d">Weighbridge readings are entered in kilograms, shown in both units, and net weight is worked out for you.</p>
+          </article>
+          <article class="tile">
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+            <h3 data-i18n="gw.hl.3t">No early exits</h3>
+            <p data-i18n="gw.hl.3d">A truck can't gate out until it has been weighed out and its loading or unloading is finished.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. DETAIL ROWS -->
+    <section class="section">
+      <div class="container frows">
+
+        <div class="frow">
+          <div>
+            <p class="eyebrow" data-i18n="gw.d1.eyebrow">Gate-in</p>
+            <h2 data-i18n="gw.d1.title">Check every truck in at the gate</h2>
+            <p data-i18n="gw.d1.lead">Gatemen record each arriving vehicle against the document it brings.</p>
+            <ul class="checks">
+              <li data-i18n="gw.d1.1">Pick a transport order and its vehicle, products, total weight and driver load automatically</li>
+              <li data-i18n="gw.d1.2">Record the document type: supplier PO, dealer DO, distributor, port or internal transfer</li>
+              <li data-i18n="gw.d1.3">Add the gate-in date and time and any remarks; a vehicle number is always required</li>
+              <li data-i18n="gw.d1.4">See every visit still on site under Active Visits, and past ones in Visit History</li>
+            </ul>
+          </div>
+          <div class="media">
+            <div class="mini">
+              <div class="mini__title"><span data-i18n="gw.m1.title">Active visits</span><span class="muted" data-i18n="tq.m2.today">Today</span></div>
+              <div class="mini__row"><span><span class="mono">DM-TA 14-8821</span> · 10:02</span><span class="tag tag--info" data-i18n="gw.s.active">Active</span></div>
+              <div class="mini__row"><span><span class="mono">DM-TA 11-2201</span> · 10:40</span><span class="tag tag--info" data-i18n="gw.s.active">Active</span></div>
+              <div class="mini__row"><span><span class="mono">DM-THA 13-6604</span> · 08:15</span><span class="tag tag--ok" data-i18n="gw.s.closed">Closed</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="frow frow--flip">
+          <div>
+            <p class="eyebrow" data-i18n="gw.d2.eyebrow">On-demand orders</p>
+            <h2 data-i18n="gw.d2.title">No order? Create one at the gate</h2>
+            <p data-i18n="gw.d2.lead">When a dealer or supplier truck arrives with only a DO or PO, the gateman creates its transport order on the spot.</p>
+            <ul class="checks">
+              <li data-i18n="gw.d2.1">Dealer trucks: DO number, dealer from your dealer list, finished goods, quantity, vehicle and driver</li>
+              <li data-i18n="gw.d2.2">Supplier trucks: PO number, supplier, raw material, quantity, vehicle and driver</li>
+              <li data-i18n="gw.d2.3">The new order gets its own number and moves straight on to weighing, loading or unloading, and gate-out</li>
+              <li data-i18n="gw.d2.4">Raw-material trucks go through quality control before they're unloaded</li>
+            </ul>
+          </div>
+          <div class="media">
+            <div class="mini">
+              <div class="mini__title"><span data-i18n="gw.m2.title">On-Demand TO</span><span class="muted" data-i18n="tq.m2.today">Today</span></div>
+              <div class="mini__row"><span data-i18n="gw.m2.r1">Dealer (DO)</span><span class="tag tag--ok" data-i18n="gw.s.fg">Finished Goods</span></div>
+              <div class="mini__row"><span data-i18n="gw.m2.r2">Supplier (PO)</span><span class="tag tag--warn" data-i18n="gw.s.rm">Raw Material</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="frow">
+          <div>
+            <p class="eyebrow" data-i18n="gw.d3.eyebrow">Scale-in</p>
+            <h2 data-i18n="gw.d3.title">Weigh in and join the queue</h2>
+            <p data-i18n="gw.d3.lead">Once a truck has gated in, the Scaling Operator records its first weight at the weighbridge.</p>
+            <ul class="checks">
+              <li data-i18n="gw.d3.1">Pick the transport order and enter the P.C. code from the yard's waiting slip</li>
+              <li data-i18n="gw.d3.2">Enter the weighbridge reading in kilograms, and mark it if the vehicle came in empty</li>
+              <li data-i18n="gw.d3.3">Print a queue slip with the P.C. code and a summary of the visit</li>
+              <li data-i18n="gw.d3.4">The truck gets a queue token and joins the Command Center queue in the same step</li>
+            </ul>
+          </div>
+          <div class="media">
+            <div class="mini">
+              <div class="mini__title"><span data-i18n="m.token">Queue token</span><span class="mono">PC-0457</span></div>
+              <div class="mini__row"><span data-i18n="f.vehicle">Vehicle</span><b class="mono">DM-TA 14-8821</b></div>
+              <div class="mini__row"><span data-i18n="m.scalein">Scale-in</span><b>7.4 MT (7,400 kg)</b></div>
+              <div class="mini__row"><span data-i18n="m.serial">Queue serial</span><b>#12</b></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="frow frow--flip">
+          <div>
+            <p class="eyebrow" data-i18n="gw.d4.eyebrow">Scale-out &amp; gate-out</p>
+            <h2 data-i18n="gw.d4.title">Weigh out, print the gate pass, close the visit</h2>
+            <p data-i18n="gw.d4.lead">After loading or unloading, the truck comes back to the weighbridge before it leaves.</p>
+            <ul class="checks">
+              <li data-i18n="gw.d4.1">Record the second weight; net weight is calculated from the two readings</li>
+              <li data-i18n="gw.d4.2">Print a gate pass with the vehicle, item, net weight and P.C. code</li>
+              <li data-i18n="gw.d4.3">Weights are locked once scale-out is saved</li>
+              <li data-i18n="gw.d4.4">Gate-out opens only after scale-out and finished loading or unloading, and for raw material only if QC hasn't failed</li>
+            </ul>
+          </div>
+          <div class="media">
+            <div class="mini">
+              <div class="mini__title"><span data-i18n="gw.m4.title">Gate pass</span><span class="mono">TO-…-0032</span></div>
+              <div class="mini__row"><span data-i18n="m.scalein">Scale-in</span><b>7.4 MT (7,400 kg)</b></div>
+              <div class="mini__row"><span data-i18n="gw.m4.out">Scale-out</span><b>13.4 MT (13,400 kg)</b></div>
+              <div class="mini__row"><span data-i18n="gw.m4.net">Net weight</span><b>6.0 MT (6,000 kg)</b></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. WHO USES IT -->
+    <section class="section section--gray">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="tq.who.eyebrow">Who uses it</p>
+          <h2 data-i18n="tq.who.title">Each team sees its own part</h2>
+        </div>
+        <div class="grid grid--3">
+          <article class="tile">
+            <h3 data-i18n="gw.who.1t">Gatemen</h3>
+            <p data-i18n="gw.who.1d">Check trucks in and out, and create orders on the spot for dealer and supplier trucks.</p>
+          </article>
+          <article class="tile">
+            <h3 data-i18n="gw.who.2t">Scaling Operators</h3>
+            <p data-i18n="gw.who.2d">Record scale-in and scale-out weights and print queue slips and gate passes.</p>
+          </article>
+          <article class="tile">
+            <h3 data-i18n="gw.who.3t">Command Center</h3>
+            <p data-i18n="gw.who.3d">Sees every scaled-in truck waiting at its site, ready to send to a bay.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. RELATED FEATURES -->
+    <section class="section related">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow" data-i18n="tq.rel.eyebrow">Keep exploring</p>
+          <h2 data-i18n="tq.rel.title">Before and after this step</h2>
+        </div>
+        <div class="grid grid--3">
+          <a class="tile" href="transport-orders.html">
+            <h3 data-i18n="ft.to">Transport Orders</h3>
+            <p data-i18n="ft.to.d">Plan each load on your own fleet or a vendor's</p>
+            <span class="btn-text"><span data-i18n="cta.explore">Explore</span> <span class="arrow">&rarr;</span></span>
+          </a>
+          <a class="tile" href="../index.html#yard">
+            <h3 data-i18n="ft.cc">Command Center &amp; Loading</h3>
+            <p data-i18n="ft.cc.d">Assign bays and record load and unload times</p>
+            <span class="btn-text"><span data-i18n="cta.explore">Explore</span> <span class="arrow">&rarr;</span></span>
+          </a>
+          <a class="tile" href="../index.html#yard">
+            <h3 data-i18n="ft.qc">Quality Control</h3>
+            <p data-i18n="ft.qc.d">Sample, decide and resample before unloading</p>
+            <span class="btn-text"><span data-i18n="cta.explore">Explore</span> <span class="arrow">&rarr;</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. FINAL CTA -->
+    <section id="contact" class="cta">
+      <div class="container">
+        <p class="eyebrow" data-i18n="cta.eyebrow">Ready to get started?</p>
+        <h2 data-i18n="cta.title">Put every load on one record</h2>
+        <p class="muted" data-i18n="cta.lead">Open the live demo and follow a load from requisition to gate-out. No sign-up needed.</p>
+        <div class="actions" style="margin-top:2rem">
+          <a class="btn btn--primary" href="../demo/index.html"><span data-i18n="cta.demo">Live Demo</span> <span class="arrow">&rarr;</span></a>
+          <button type="button" class="btn btn--ghost js-login" data-i18n="nav.login">Log in</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__about">
+          <a class="brand" href="../index.html">
+            <img class="brand__mark brand__mark--light" src="../static/img/brand/mark-light.svg" alt="" width="32" height="32">
+            <img class="brand__mark brand__mark--dark" src="../static/img/brand/mark-dark.svg" alt="" width="32" height="32">
+            Optilogist
+          </a>
+          <p data-i18n="foot.about">Distribution and fleet management for multi-site supply chains.</p>
+        </div>
+        <div>
+          <h3 data-i18n="nav.platform">Platform</h3>
+          <ul>
+            <li><a href="../index.html#platform" data-i18n="foot.l1">How it works</a></li>
+            <li><a href="../index.html#plan" data-i18n="foot.l2">Requisition &amp; planning</a></li>
+            <li><a href="../index.html#fleet" data-i18n="foot.l3">Own &amp; vendor fleet</a></li>
+            <li><a href="../index.html#yard" data-i18n="foot.l4">Yard &amp; QC</a></li>
+            <li><a href="../index.html#track" data-i18n="foot.l5">Live GPS</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="nav.solutions">Solutions</h3>
+          <ul>
+            <li><a href="../index.html#roles" data-i18n="roles.t2">Distribution &amp; Procurement</a></li>
+            <li><a href="../index.html#roles" data-i18n="roles.t3">Transport</a></li>
+            <li><a href="../index.html#roles" data-i18n="roles.t4">Yard &amp; QC</a></li>
+            <li><a href="../index.html#roles" data-i18n="roles.t5">Fleet &amp; Drivers</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="nav.vendors">For Vendors</h3>
+          <ul>
+            <li><a href="../index.html#vendors" data-i18n="ven.cta">Join as a vendor</a></li>
+            <li><a href="../index.html#vendors" data-i18n="apps.2t">Vendor app</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="foot.company">Company</h3>
+          <ul>
+            <li><a href="../index.html#plans" data-i18n="nav.plans">Plans</a></li>
+            <li><a href="../index.html#faq" data-i18n="top.help">Help Center</a></li>
+            <li><a href="../index.html#contact" data-i18n="top.contact">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; <span id="year"></span> Optilogist</span>
+        <span><a href="#" data-i18n="foot.privacy">Privacy</a><a href="#" data-i18n="foot.terms">Terms</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WORKSPACE LOGIN DIALOG -->
+  <dialog id="login-dialog" aria-labelledby="login-title">
+    <form method="dialog" id="login-form">
+      <button class="dialog__close" value="cancel" aria-label="Close" formnovalidate>&times;</button>
+      <h2 id="login-title" data-i18n="login.title">Log in to your workspace</h2>
+      <p class="muted" data-i18n="login.lead">Every organization has its own Optilogist address.</p>
+      <label for="workspace" style="font-weight:600;font-size:.9rem" data-i18n="login.label">Workspace name</label>
+      <div class="field">
+        <input id="workspace" name="workspace" autocomplete="organization" required pattern="[A-Za-z0-9-]+" placeholder="yourcompany" data-i18n-ph="login.ph">
+        <span class="js-domain"></span>
+      </div>
+      <button class="btn btn--primary" style="width:100%" value="go" data-i18n="login.go">Continue</button>
+      <p class="dialog__note" data-i18n="login.note">Got an invite? Use the link in your email or SMS to set your password first.</p>
+    </form>
+  </dialog>
+
+  <script src="../static/js/landing-i18n-bn.js"></script>
+  <script src="../static/js/feature-gate-weighbridge-bn.js"></script>
+  <script src="../static/js/landing.js"></script>
+</body>
+</html>
