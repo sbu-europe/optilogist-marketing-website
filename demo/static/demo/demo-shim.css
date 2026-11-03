@@ -5,7 +5,7 @@
 .demo-banner__btn:hover { background: #e7e9ff; }
 #demo-toast { position: fixed; left: 50%; bottom: 72px; transform: translate(-50%, 10px); z-index: 100001; max-width: min(520px, calc(100% - 24px)); padding: 10px 16px; border-radius: 10px; background: #111827; color: #fff; font: 500 14px/1.4 Inter, system-ui, sans-serif; box-shadow: 0 10px 30px rgba(0,0,0,.25); opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; }
 #demo-toast.is-on { opacity: 1; transform: translate(-50%, 0); }
-@media (max-width: 640px) { .demo-banner { font-size: 12px; gap: 8px; bottom: 10px; } }
+@media (max-width: 640px) { .demo-banner { font-size: 12px; gap: 0; bottom: 10px; padding: 4px; background: var(--ux-primary, #5B65DC); } .demo-banner > span { display: none; } }
 
 
 html.demo-site-set [data-demo-site-warning] { display: none !important; }

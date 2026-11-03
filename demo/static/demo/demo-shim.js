@@ -166,7 +166,7 @@
     var b = document.createElement("div");
     b.className = "demo-banner";
     b.innerHTML = '<span><b>Live demo</b> · Sample data. Master Data, user and driver changes last until you exit the demo.</span>' +
-      '<a class="demo-banner__btn" href="../index.html">Exit demo</a>';
+      '<a class="demo-banner__btn" href="../index.html">Exit Demo</a>';
     document.body.insertBefore(b, document.body.firstChild);
     document.body.classList.add("has-demo-banner");
 
